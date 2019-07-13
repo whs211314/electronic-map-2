@@ -170,7 +170,7 @@ export default {
       .item {
         width: 22%;
         &.active {
-          background: #098583;
+          background: #00b7b4;
         }
       }
     }
@@ -185,9 +185,10 @@ export default {
       height: 100%;
     }
     .monitor-table {
+      @include bgImage('../assets/images/tc-bg02.png');
       @include position(52, -500, 52, 2355);
-      background: #2C848B;
-      border-radius: 5px;
+      // background: #2C848B;
+      // border-radius: 5px;
       font-size: var(--fontSize-12);
       padding: 2%;
       table {

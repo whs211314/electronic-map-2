@@ -2,9 +2,9 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center" @click="chartClick">交易笔数/交易金额</div>
-        <div class="item flex-center" @click="gradeClick">开业时间/商户等级</div>
-        <div class="item flex-center"  @click="activityClick">培训/营销活动</div>
+        <div class="item flex-center" :class="isChart ? 'active':''" @click="chartClick">交易笔数/交易金额</div>
+        <div class="item flex-center" :class="isGrade ? 'active':''" @click="gradeClick">开业时间/商户等级</div>
+        <div class="item flex-center" :class="isActivity ? 'active':''" @click="activityClick">培训/营销活动</div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -415,7 +415,7 @@ export default {
       .item {
         width: 22%;
         &.active {
-          background: #098583;
+          background:#00b7b4;
         }
       }
     }
@@ -430,9 +430,8 @@ export default {
       height: 100%;
     }
     .monitor-table {
+      @include bgImage('../assets/images/tc-bg01.png');
       @include position(372, -500, 106, 2235);
-      background: #2C848B;
-      border-radius: 5px;
       font-size: var(--fontSize-12);
       padding: 2%;
       table {
