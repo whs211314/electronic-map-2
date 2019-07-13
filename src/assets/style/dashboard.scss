@@ -2,7 +2,7 @@
 
 .dashboard {
   color: $wihte;
-  @include bgImage('../../assets/images/bg.png');
+  @include bgImage('../../assets/images/bg03.png');
   .logo {
     @include position(34, 3282, 1020, 43);
     @include bgImage('../../assets/images/logo.png');
@@ -48,6 +48,9 @@
   }
   .show-middle {
     @include position(528, 3104, 400, 225);
+    .items-show {
+      height: 70%;
+    }
     .title-show {
       height: 16%;
     }
@@ -60,7 +63,10 @@
     }
   }
   .show-bottom {
-    @include position(832, 3104, 200, 225);
+    @include position(788, 3104, 200, 225);
+    .items-show {
+      height: 75%;
+    }
     .title-show {
       height: 24%;
     }
@@ -71,11 +77,12 @@
       height: 72%;
     }
     .item {
-      padding-top: calc(30% / 2.6);
+      padding-top: calc(35% / 2.6);
+      font-size: var(--fontSize-14);
     }
   }
   .show-right {
-    @include position(828, 2504, 197, 824);
+    @include position(788, 2504, 197, 824);
     .title-show {
       height: 24%;
     }
@@ -87,6 +94,7 @@
     }
     .item {
       padding-top: calc(30% / 2.6);
+      font-size: var(--fontSize-14);
     }
   }
   // 展示区域 END
@@ -113,6 +121,15 @@
   // 地图相关 START
   .map {
     @include position(94, 1474, 186, 1470);
+    .map-transform{
+      @include position(-180, -1056, -180, -1038);
+      @include bgImage('../../assets/images/dt-bg.png');
+      animation: rotation 60s linear infinite;
+    }
+    .map-bk {
+      @include position(0, -300, -170, -658);
+      @include bgImage('../../assets/images/bk.png');
+    }
   }
   .map-operation {
     @include position(1058, 1432, 28, 1426);
@@ -141,7 +158,7 @@
   .monitor-top-l {
     @include position(363, 932, 554, 2730);
     flex-wrap: wrap;
-    color: $blue;
+    color: $wihte;
     z-index: 3;
     // font-weight: bold;
     .item {
@@ -149,6 +166,7 @@
       width: 100%;
       height: 23%;
       font-size: var(--fontSize-12);
+      cursor: pointer;
       margin-bottom: 8%;
       &.active {
         color: $orange;
@@ -165,4 +183,9 @@
     @include position(762, 128, 198, 2735);
   }
   // 监控 END
+
+  @keyframes rotation {
+    from { transform: rotate(0) }
+    to { transform: rotate(360deg) }
+  }
 }

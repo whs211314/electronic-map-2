@@ -20,7 +20,7 @@
         <div class="txt">政务服务能力</div>
       </div>
       <div class="empty"></div>
-      <div class="items-show">
+      <div class="items-show" style="height:70%">
         <div class="item" v-for="(item, index) in services2" :key="index">
           <MButton type="2" :txt="item" />
         </div>
@@ -34,7 +34,7 @@
       <div class="empty"></div>
       <div class="items-show">
         <div class="item" v-for="(item, index) in services3" :key="index">
-          <MButton type="2" :txt="item" />
+          <MButton type="1" :txt="item" />
         </div>
       </div>
     </div>
@@ -60,6 +60,10 @@
     </div>
     <!-- 地图 -->
     <div class="map">
+      <div class="map-bk">
+      </div>
+      <div class="map-transform">
+      </div>
       <MChart />
     </div>
     <!-- 地图操作 -->
@@ -77,7 +81,7 @@
     </div>
     <!-- 监控按钮 active -->
     <div class="monitor-top-l items-monitor flex-center">
-      <div class="item flex-center" :key="index"
+      <div class="item flex-center" :key="index" :class="monitorIndex == index ? 'active':''"
         v-for="(item, index) in monitors" @click="monitorClick(index)">
         <div class="txt">{{item.type}}</div>
       </div>

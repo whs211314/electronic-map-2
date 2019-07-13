@@ -2,9 +2,9 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center" @click="chartClick">月交易量</div>
-        <div class="item flex-center" @click="gradeClick">全省交易量</div>
-        <div class="item flex-center"  @click="activityClick">交易种类分布</div>
+        <div class="item flex-center" :class="isChart ? 'active':''" @click="chartClick">月交易量</div>
+        <div class="item flex-center" :class="isGrade ? 'active':''" @click="gradeClick">全省交易量</div>
+        <div class="item flex-center" :class="isActivity ? 'active':''"  @click="activityClick">交易种类分布</div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -110,7 +110,7 @@ export default {
           {
             name: '交易笔数(笔)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '15%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -121,7 +121,7 @@ export default {
           {
             name: '交易金额(万元)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '15%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -209,7 +209,7 @@ export default {
           {
             name: '交易笔数(笔)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '15%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -220,7 +220,7 @@ export default {
           {
             name: '交易金额(万元)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '15%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -308,7 +308,7 @@ export default {
           {
             name: '交易笔数(笔)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '20%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -319,7 +319,7 @@ export default {
           {
             name: '交易金额(万元)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '20%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -356,7 +356,7 @@ export default {
       .item {
         width: 22%;
         &.active {
-          background: #098583;
+          background: #00b7b4;
         }
       }
     }

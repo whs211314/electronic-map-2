@@ -63,7 +63,7 @@ export default {
       .item {
         width: 20%;
         &.active {
-          background: #098583;
+          background: #00b7b4;
         }
       }
     }
