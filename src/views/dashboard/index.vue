@@ -64,13 +64,13 @@
       </div>
       <div class="map-transform">
       </div>
-      <!-- <ChartDeploy /> -->
-      <ChartDeal />
+      <ChartDeploy v-if="!isdeal"/>
+      <ChartDeal v-if="isdeal"/>
     </div>
     <!-- 地图操作 -->
     <div class="map-operation">
-      <div class="deal fl flex-center active"><div class="txt">交易地图</div></div>
-      <div class="deploy fr flex-center"><div class="txt">部署地图</div></div>
+      <div class="deal fl flex-center" :class="isdeal?'active':''" @click="dealClick"><div class="txt">交易地图</div></div>
+      <div class="deploy fr flex-center"  :class="isdeal?'':'active'" @click="deployClick"><div class="txt">部署地图</div></div>
     </div>
     <!-- 合作视图 -->
     <div class="teamview">
@@ -135,6 +135,7 @@ export default {
     return {
       activeIndex: -1, // 便民服务初始化索引
       monitorIndex: 0, // 监控按钮初始化索引
+      isdeal: true,
       services1: Array.from({ length: 9 }, () => ({ type: '现金业务', name: '我爱我家' })),
       services2: Array.from({ length: 9 }, () => '医院挂号'),
       services3: Array.from({ length: 6 }, () => '预约开户'),
@@ -155,6 +156,14 @@ export default {
     // 监控按钮弹窗
     monitorClick (index) {
       this.monitorIndex = index
+    },
+    // 交易地图
+    dealClick () {
+      this.isdeal = true
+    },
+    // 部署地图
+    deployClick () {
+      this.isdeal = false
     }
   }
 }
