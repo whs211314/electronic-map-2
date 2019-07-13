@@ -14,21 +14,13 @@
 
 <script>
 import echarts from 'echarts'
-import cityMap from '@/assets/js/map'
 
 export default {
   data () {
     return {
-      // 地图（第一级地图）的ID、Name、Json数据
-      chinaId: '430000',
-      chinaName: '湖南省',
       chinaJson: null,
-      // 记录父级ID、Name
-      mapStack: [],
-      parentId: null,
-      parentName: null,
-      // 地图实例
-      myChart: null
+      myChart: null,
+      currID: '430000'
     }
   },
   mounted () {
@@ -36,32 +28,21 @@ export default {
   },
   methods: {
     mapChart (divid) {
-      import(`../../public/map/${this.chinaId}.json`).then(mapJson => {
+      import(`../../public/map/${this.currID}.json`).then(mapJson => {
         this.chinaJson = mapJson
         this.myChart = echarts.init(document.getElementById(divid))
-        this.registerAndsetOption(this.myChart, this.chinaId, this.chinaName, mapJson, false)
-        this.parentId = this.chinaId
-        this.parentName = 'china'
+        this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         this.myChart.on('click', (param) => {
-          var cityId = cityMap[param.name]
-          if (cityId) {
+          if (this.currID !== param.data.id) {
+            this.currID = param.data.id
             // 代表有下级地图
-            import(`../../public/map/${cityId}.json`)
+            import(`../../public/map/${this.currID}.json`)
               .then(mapJson => {
-                this.registerAndsetOption(
-                  this.myChart,
-                  cityId,
-                  param.name,
-                  mapJson,
-                  true
-                )
+                this.registerAndsetOption(this.myChart, param.name, mapJson)
               })
           } else {
             // 没有下级地图，回到一级中国地图，并将mapStack清空
-            this.registerAndsetOption(this.myChart, this.chinaId, this.chinaName, this.chinaJson, false)
-            this.mapStack = []
-            this.parentId = this.chinaId
-            this.parentName = this.chinaName
+            this.registerAndsetOption(this.myChart, this.chinaName, this.chinaJson)
           }
         })
       })
@@ -69,12 +50,10 @@ export default {
     /**
      *
      * @param {*} myChart
-     * @param {*} id        省市县Id
      * @param {*} name      省市县名称
      * @param {*} mapJson   地图Json数据
-     * @param {*} flag      是否往mapStack里添加parentId，parentName
      */
-    registerAndsetOption (myChart, id, name, mapJson, flag) {
+    registerAndsetOption (myChart, name, mapJson) {
       echarts.registerMap(name, mapJson)
       myChart.setOption({
         series: [
@@ -102,22 +81,13 @@ export default {
           }
         ]
       })
-
-      if (flag) {
-        // 往mapStack里添加parentId，parentName,返回上一级使用
-        this.mapStack.push({
-          mapId: this.parentId,
-          mapName: this.parentName
-        })
-        this.parentId = this.id
-        this.parentName = this.name
-      }
     },
     initMapData (mapJson) {
       var mapData = []
       for (var i = 0; i < mapJson.features.length; i++) {
         mapData.push({
-          name: mapJson.features[i].properties.name
+          name: mapJson.features[i].properties.name,
+          id: mapJson.features[i].id
         })
       }
       return mapData
