@@ -60,9 +60,9 @@
     </div>
     <!-- 地图 -->
     <div class="map">
-      <div class="map-bk">
-      </div>
       <div class="map-transform">
+      </div>
+      <div class="map-bk">
       </div>
       <ChartDeploy v-if="!isdeal"/>
       <ChartDeal v-if="isdeal"/>

@@ -108,10 +108,11 @@ export default {
   }
   .css-accountNumber{
     input {
+      box-sizing: border-box;
       width: 20%;
       height: 8%;
       @include position(328, 1530, 776, 1517);
-      background-image: url(/img/input.7b439ff0.png);
+      background-image: url(../../assets/images/input.png);
       background-position: center center;
       opacity: 0.7;
       z-index: 1;
@@ -119,6 +120,7 @@ export default {
       font-size: var(--fontSize-18);
       border: #35a5e5 1px dotted;
       border-radius: 5px;
+      padding: 0 12px;
     }
     img {
       width: 6%;
@@ -129,10 +131,11 @@ export default {
   }
   .css-password{
     input {
+      box-sizing: border-box;
       width: 20%;
       height: 8%;
       @include position(480, 1530, 644, 1517);
-      background-image: url(/img/input.7b439ff0.png);
+      background-image: url(../../assets/images/input.png);
       background-position: center center;
       opacity: 0.7;
       z-index: 1;
@@ -140,6 +143,7 @@ export default {
       font-size: var(--fontSize-18);
       border: #35a5e5 1px dotted;
       border-radius: 5px;
+      padding: 0 12px;
     }
     img {
       width: 6%;
