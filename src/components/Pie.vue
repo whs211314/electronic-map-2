@@ -1,9 +1,7 @@
 <template>
   <div class="position-space">
     <div id="line01-chart"></div>
-    <span class="Total-trade">年度总交易笔数占比80%</span>
     <div id="line02-chart"></div>
-    <span class="service-points">服务点数量占比80%</span>
   </div>
 </template>
 
@@ -21,29 +19,34 @@ export default {
       let myChart1 = echarts.init(document.getElementById('line01-chart'))
       let myChart2 = echarts.init(document.getElementById('line02-chart'))
       let option1 = {
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b}: {c} ({d}%)'
+        title: {
+          subtext: '年度总交易笔数占比80%',
+          left: 'center',
+          bottom: '-12%',
+          subtextStyle: {
+            fontSize: '8px',
+            color: '#00FFF0'
+          }
         },
-        legend: {
+        tooltip: {
+          trigger: 'axis',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          showContent: false
         },
         series: [
           {
-            name: '年度总交易',
+            name: '',
             type: 'pie',
             radius: ['50%', '20%'],
-            avoidLabelOverlap: true,
+            center: ['50%', '50%'],
+            hoverAnimation: false,
             label: {
               normal: {
-                show: false,
-                position: 'center'
+                show: false
               },
               emphasis: {
                 show: true,
-                textStyle: {
-                  fontSize: '20px',
-                  fontWeight: 'bold'
-                }
+                position: 'center'
               }
             },
             labelLine: {
@@ -52,8 +55,8 @@ export default {
               }
             },
             data: [
-              { value: 335 },
-              { value: 20 }
+              { value: 75 },
+              { value: 25 }
             ],
             itemStyle: {
               emphasis: {
@@ -65,7 +68,7 @@ export default {
                 color: function (params) {
                   // 自定义颜色
                   var colorList = [
-                    '#FFA500', '#D2691E'
+                    '#FFA500', '#132C33'
                   ]
                   return colorList[params.dataIndex]
                 }
@@ -76,29 +79,34 @@ export default {
       }
       myChart1.setOption(option1, true)
       let option2 = {
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b}: {c} ({d}%)'
+        title: {
+          subtext: '服务点数量占比80%',
+          left: 'center',
+          bottom: '-12%',
+          subtextStyle: {
+            fontSize: '8px',
+            color: '#00FFF0'
+          }
         },
-        legend: {
+        tooltip: {
+          trigger: 'axis',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          showContent: false
         },
         series: [
           {
-            name: '年度总交易',
+            name: '',
             type: 'pie',
             radius: ['50%', '20%'],
-            avoidLabelOverlap: true,
+            center: ['50%', '50%'],
+            hoverAnimation: false,
             label: {
               normal: {
-                show: false,
-                position: 'center'
+                show: false
               },
               emphasis: {
                 show: true,
-                textStyle: {
-                  fontSize: '20px',
-                  fontWeight: 'bold'
-                }
+                position: 'center'
               }
             },
             labelLine: {
@@ -107,8 +115,8 @@ export default {
               }
             },
             data: [
-              { value: 335 },
-              { value: 20 }
+              { value: 75 },
+              { value: 25 }
             ],
             itemStyle: {
               emphasis: {
@@ -120,7 +128,7 @@ export default {
                 color: function (params) {
                   // 自定义颜色
                   var colorList = [
-                    '#FFA500', '#D2691E'
+                    '#FFA500', '#132C33'
                   ]
                   return colorList[params.dataIndex]
                 }
@@ -146,20 +154,10 @@ export default {
   left: -23%;
   top: -8%;
 }
-.Total-trade {
-  @include position(1038, 58, 18, 162);
-  font-size: 8px;
-  color: #00FFF0;
-}
 #line02-chart {
   height: 100%;
   position: relative;
   right: -27%;
   bottom: 108%;
-}
-.service-points {
-  @include position(1038, 58, 18, 2362);
-  font-size: 8px;
-  color: #00FFF0;
 }
 </style>
