@@ -1,0 +1,167 @@
+@import '../../assets/style/index.scss';
+
+.dashboard {
+  color: $wihte;
+  @include bgImage('../../assets/images/bg.png');
+  .logo {
+    @include position(34, 3282, 1020, 43);
+    @include bgImage('../../assets/images/logo.png');
+  }
+  // 展示区域 START
+  .title-show .txt {
+    font-size: var(--fontSize-12);
+    width: 100%;
+    padding-left: 6%;
+    font-weight: bold;
+  }
+  .items-show {
+    height: 80%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .item {
+      position: relative;
+      padding-left: 30%;
+      width: 0;
+      height: 0;
+      font-size: var(--fontSize-12);
+    }
+    .prompt-dialog {
+      @include position(-656, -7025, -3678, 3025);
+      @include bgImage('../../assets/images/cpm.png');
+      z-index: 2;
+      padding: 25% 0 10% 40%;
+    }
+  }
+  .show-top {
+    @include position(206, 3104, 678, 225);
+    .title-show {
+      height: 12%;
+    }
+    .empty {
+      height: 8%;
+    }
+    .item {
+      padding-top: calc(30% / 2.1);
+      font-size: var(--fontSize-14);
+    }
+  }
+  .show-middle {
+    @include position(528, 3104, 400, 225);
+    .title-show {
+      height: 16%;
+    }
+    .empty {
+      height: 4%;
+    }
+    .item {
+      padding-top: calc(30% / 2.6);
+    }
+  }
+  .show-bottom {
+    @include position(832, 3104, 200, 225);
+    .title-show {
+      height: 24%;
+    }
+    .empty {
+      height: 4%;
+    }
+    .items {
+      height: 72%;
+    }
+    .item {
+      padding-top: calc(30% / 2.6);
+    }
+  }
+  .show-right {
+    @include position(828, 2504, 197, 824);
+    .title-show {
+      height: 24%;
+    }
+    .empty {
+      height: 4%;
+    }
+    .items {
+      height: 70%;
+    }
+    .item {
+      padding-top: calc(30% / 2.6);
+    }
+  }
+  // 展示区域 END
+
+  // 饼图 START
+  .pie {
+    @include position(132, 2536, 852, 838);
+  }
+  // 饼图 END
+
+  // 交易信息区 START
+  .summary {
+    @include position(390, 2480, 430, 895);
+  }
+  // 交易信息区 NED
+
+  // 合作视图 STRAT
+  .teamview {
+    @include position(70, 1135, 164, 2435);
+    @include bgImage('../../assets/images/teamwork-bg.png');
+  }
+  // 合作视图 END
+
+  // 地图相关 START
+  .map {
+    @include position(94, 1474, 186, 1470);
+  }
+  .map-operation {
+    @include position(1058, 1432, 28, 1426);
+    font-weight: bold;
+    > div {
+      position: relative;
+      width: 40%;
+      height: 100%;
+      color: $blue;
+      font-size: var(--fontSize-18);
+      @include bgImage('../../assets/images/btn-3.png');
+    }
+    .active::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 25%;
+      bottom: 0;
+      left: 25%;
+      @include bgImage('../../assets/images/active.png');
+    }
+  }
+  // 地图相关 END
+
+  // 监控 START
+  .monitor-top-l {
+    @include position(363, 932, 554, 2730);
+    flex-wrap: wrap;
+    color: $blue;
+    z-index: 3;
+    // font-weight: bold;
+    .item {
+      @include bgImage('../../assets/images/goldenFrame.png');
+      width: 100%;
+      height: 23%;
+      font-size: var(--fontSize-12);
+      margin-bottom: 8%;
+      &.active {
+        color: $orange;
+      }
+    }
+  }
+  .monitor-top-r {
+    @include position(84, 128, 865, 2722);
+  }
+  .monitor-middle {
+    @include position(372, 128, 466, 2735);
+  }
+  .monitor-bottom {
+    @include position(762, 128, 198, 2735);
+  }
+  // 监控 END
+}

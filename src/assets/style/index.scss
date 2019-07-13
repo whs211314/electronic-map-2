@@ -1,0 +1,72 @@
+body {
+  --fontSize-8: 8px;
+  --fontSize-12: 12px;
+  --fontSize-13: 13px;
+  --fontSize-14: 14px;
+  --fontSize-16: 16px;
+  --fontSize-18: 18px;
+}
+@media screen and (min-width: 3000px) {
+  body {
+    --fontSize-8: 18px;
+    --fontSize-12: 20px;
+    --fontSize-13: 22px;
+    --fontSize-14: 24px;
+    --fontSize-16: 28px;
+    --fontSize-18: 30px;
+  }
+}
+
+$wihte: #fff;
+$grey: #D2FBFE;
+$blue: #00C6D9;
+$light-blue: #00FFF0;
+$yellow: #FFEA00;
+$orange: #E77641;
+
+@mixin position($top, $right, $bottom, $left) {
+  position: absolute;
+  top: $top/1200 * 100%;
+  right: $right/3840 * 100%;
+  bottom: $bottom/1200 * 100%;
+  left: $left/3840 * 100%;
+}
+
+@mixin bgImage($url) {
+  background-image: url($url);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.position-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+.position-space {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.tal {
+  text-align: left;
+}
+.tac {
+  text-align: center;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
