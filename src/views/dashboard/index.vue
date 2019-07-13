@@ -64,7 +64,8 @@
       </div>
       <div class="map-transform">
       </div>
-      <MChart />
+      <!-- <ChartDeploy /> -->
+      <ChartDeal />
     </div>
     <!-- 地图操作 -->
     <div class="map-operation">
@@ -125,10 +126,11 @@ import terminalMonitorChart from '@/components/terminalMonitorChart'
 import transactionMonitorChart from '@/components/transactionMonitorChart'
 import riskMonitorChart from '@/components/riskMonitorChart'
 import patrolMonitorChart from '@/components/patrolMonitorChart'
-import MChart from '@/components/MChart'
+import ChartDeploy from '@/components/ChartDeploy'
+import ChartDeal from '@/components/ChartDeal'
 
 export default {
-  components: { MButton, TeamView, MonitorDeal, Pie, DealInfo, RankService, serviceMonitorChart, terminalMonitorChart, transactionMonitorChart, riskMonitorChart, patrolMonitorChart, MChart },
+  components: { MButton, TeamView, MonitorDeal, Pie, DealInfo, RankService, serviceMonitorChart, terminalMonitorChart, transactionMonitorChart, riskMonitorChart, patrolMonitorChart, ChartDeploy, ChartDeal },
   data () {
     return {
       activeIndex: -1, // 便民服务初始化索引

@@ -4,9 +4,8 @@
 
 <style>
 #mapChart {
-  height: 100%;
   position: absolute;
-  top: 0%;
+  top: -10%;
   right: -10%;
   bottom: -10%;
   left: -10%;
@@ -60,10 +59,10 @@ export default {
     registerAndsetOption (myChart, name, mapJson) {
       echarts.registerMap(name, mapJson)
       myChart.setOption({
-        series: [{
-          type: 'map',
-          map: name,
-          normal: {
+        series: [
+          {
+            type: 'map',
+            map: name,
             label: {
               show: true,
               color: '#fff'
@@ -72,18 +71,18 @@ export default {
               areaColor: 'rgba(77,141,147,.4)',
               borderColor: '#1dc199',
               borderWidth: 1
-            }
-          },
-          emphasis: {
-            label: {
-              color: '#ff0'
             },
-            itemStyle: {
-              areaColor: 'rgba(77,141,147,.8)'
-            }
-          },
-          data: this.initMapData(mapJson)
-        }]
+            emphasis: {
+              label: {
+                color: '#ff0'
+              },
+              itemStyle: {
+                areaColor: 'rgba(77,141,147,.8)'
+              }
+            },
+            data: this.initMapData(mapJson)
+          }
+        ]
       })
     },
     initMapData (mapJson) {

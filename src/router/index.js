@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 import Login from '@/views/login'
 import Dashboard from '@/views/dashboard'
-import Test from '@/views/Test'
 
 Vue.use(Router)
 
@@ -22,9 +21,6 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
-    }, {
-      path: '/test',
-      component: Test
     }
   ]
 })
