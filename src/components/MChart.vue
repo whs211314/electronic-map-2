@@ -4,8 +4,9 @@
 
 <style>
 #mapChart {
+  height: 100%;
   position: absolute;
-  top: -10%;
+  top: 0%;
   right: -10%;
   bottom: -10%;
   left: -10%;

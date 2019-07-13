@@ -60,6 +60,10 @@
     </div>
     <!-- 地图 -->
     <div class="map">
+      <div class="map-bk">
+      </div>
+      <div class="map-transform">
+      </div>
       <MChart />
     </div>
     <!-- 地图操作 -->

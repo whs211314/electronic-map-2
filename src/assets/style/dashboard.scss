@@ -2,7 +2,7 @@
 
 .dashboard {
   color: $wihte;
-  @include bgImage('../../assets/images/bg.png');
+  @include bgImage('../../assets/images/bg03.png');
   .logo {
     @include position(34, 3282, 1020, 43);
     @include bgImage('../../assets/images/logo.png');
@@ -121,6 +121,15 @@
   // 地图相关 START
   .map {
     @include position(94, 1474, 186, 1470);
+    .map-transform{
+      @include position(-180, -1056, -180, -1038);
+      @include bgImage('../../assets/images/dt-bg.png');
+      animation: rotation 60s linear infinite;
+    }
+    .map-bk {
+      @include position(0, -300, -170, -658);
+      @include bgImage('../../assets/images/bk.png');
+    }
   }
   .map-operation {
     @include position(1058, 1432, 28, 1426);
@@ -174,4 +183,9 @@
     @include position(762, 128, 198, 2735);
   }
   // 监控 END
+
+  @keyframes rotation {
+    from { transform: rotate(0) }
+    to { transform: rotate(360deg) }
+  }
 }

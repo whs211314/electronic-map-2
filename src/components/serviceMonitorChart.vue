@@ -169,7 +169,7 @@ export default {
           {
             name: '交易笔数(笔)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '20%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -180,7 +180,7 @@ export default {
           {
             name: '交易金额(万元)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '20%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -268,7 +268,7 @@ export default {
           {
             name: '开业时间(年)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '20%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -279,7 +279,7 @@ export default {
           {
             name: '商户等级',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '20%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -367,7 +367,7 @@ export default {
           {
             name: '培训(次)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '20%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
@@ -378,7 +378,7 @@ export default {
           {
             name: '营销活动(次)',
             type: 'bar',
-            barWidth: '10%',
+            barWidth: '20%',
             itemStyle: { // 柱样式
               normal: {
                 barBorderRadius: [10, 10, 10, 10]
