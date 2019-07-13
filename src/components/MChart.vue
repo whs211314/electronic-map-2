@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     mapChart (divid) {
-      import(`../assets/map/${this.chinaId}.json`).then(mapJson => {
+      import(`../../public/map/${this.chinaId}.json`).then(mapJson => {
         this.chinaJson = mapJson
         this.myChart = echarts.init(document.getElementById(divid))
         this.registerAndsetOption(this.myChart, this.chinaId, this.chinaName, mapJson, false)
@@ -46,7 +46,7 @@ export default {
           var cityId = cityMap[param.name]
           if (cityId) {
             // 代表有下级地图
-            import(`../assets/map/${cityId}.json`)
+            import(`../../public/map/${cityId}.json`)
               .then(mapJson => {
                 this.registerAndsetOption(
                   this.myChart,
