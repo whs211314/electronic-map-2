@@ -70,6 +70,7 @@ export default {
             fontSize: 12
           }
         },
+        color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0'],
         series: [
           {
             name: '',
@@ -184,9 +185,9 @@ export default {
         }
         tbody{
           tr {
-            height: 50px;
             td {
               width: 21%;
+              padding: 10% 0;
               border: 1px solid #00C6D9;
             }
           }

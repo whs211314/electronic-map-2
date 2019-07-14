@@ -202,9 +202,9 @@ export default {
         }
         tbody{
           tr {
-            height: 40px;
             td {
               width: 21%;
+              padding: 8% 0;
               border: 1px solid #00C6D9;
             }
           }

@@ -22,7 +22,7 @@ export default {
         title: {
           subtext: '年度总交易笔数占比80%',
           left: 'center',
-          bottom: '-12%',
+          bottom: '0',
           subtextStyle: {
             fontSize: '8px',
             color: '#00FFF0'
@@ -82,7 +82,7 @@ export default {
         title: {
           subtext: '服务点数量占比80%',
           left: 'center',
-          bottom: '-12%',
+          bottom: '0',
           subtextStyle: {
             fontSize: '8px',
             color: '#00FFF0'

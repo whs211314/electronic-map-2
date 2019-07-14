@@ -1,6 +1,6 @@
 <template>
   <div class="rank-service position-space">
-    <div class="title flex-center"><div class="txt">服务点交易排名</div></div>
+    <div class="title flex-center"><div class="txt">综合排名TOP100</div></div>
     <div class="swiper">
       <swipe class="swipe"
         ref="swipe"
