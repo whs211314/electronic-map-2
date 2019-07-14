@@ -14,22 +14,7 @@
 
 <script>
 import echarts from 'echarts'
-var data = [
-  { name: '长沙市', value: [112.98, 28.19] },
-  { name: '邵阳市', value: [111.20, 27.10] },
-  { name: '娄底市', value: [111.50, 27.73] },
-  { name: '株洲市', value: [113.15, 27.43] },
-  { name: '湘潭市', value: [112.55, 27.82] },
-  { name: '衡阳市', value: [112.60, 26.90] },
-  { name: '岳阳市', value: [113.13, 28.99] },
-  { name: '常德市', value: [111.69, 29.04] },
-  { name: '张家界市', value: [110.47, 29.32] },
-  { name: '益阳市', value: [112.00, 28.57] },
-  { name: '郴州市', value: [113.03, 25.79] },
-  { name: '永州市', value: [111.60, 26.13] },
-  { name: '怀化市', value: [109.97, 27.55] },
-  { name: '湘西土家族苗族自治州', value: [109.73, 28.52] }
-]
+import coordinate from '@/assets/js/coordinate'
 
 export default {
   data () {
@@ -38,12 +23,23 @@ export default {
       myChart: null,
       currID: '430000',
       deep: 0,
-      timer: null,
-      serisePointer: {
+      timer: null
+    }
+  },
+  computed: {
+    currCoordinate () {
+      console.log(this.currID)
+      return coordinate[this.currID]
+    },
+    activePointer () {
+      return this.currCoordinate[Math.floor(Math.random() * this.currCoordinate.length)]
+    },
+    serisePointer () {
+      return {
         name: 'pointer',
         type: 'scatter',
         coordinateSystem: 'geo',
-        data: data,
+        data: this.currCoordinate,
         symbolSize: 10,
         animation: false,
         label: {
@@ -88,13 +84,14 @@ export default {
     },
     handleClick (param) {
       this.deep += 1
-      this.currID = param.region.id
       if (this.deep < 2) {
+        this.currID = param.region.id
         // 代表有下级地图
         import(`../../public/map/${this.currID}.json`).then(mapJson => {
           this.registerAndsetOption(this.myChart, param.name, mapJson)
         })
       } else {
+        this.currID = '430000'
         this.deep = 0
         // 没有下级地图，回到一级中国地图，并将mapStack清空
         this.registerAndsetOption(
@@ -134,7 +131,7 @@ export default {
           name: 'pointer-active',
           type: 'effectScatter',
           coordinateSystem: 'geo',
-          data: [data[Math.floor(Math.random() * data.length)]],
+          data: [this.activePointer],
           symbolSize: 10,
           showEffectOn: 'render',
           rippleEffect: {
