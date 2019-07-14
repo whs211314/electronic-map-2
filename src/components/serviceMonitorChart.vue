@@ -431,7 +431,7 @@ export default {
     }
     .monitor-table {
       @include bgImage('../assets/images/tc-bg01.png');
-      @include position(372, -500, 106, 2235);
+      @include position(302, -500, 156, 2235);
       font-size: var(--fontSize-12);
       padding: 2%;
       table {
