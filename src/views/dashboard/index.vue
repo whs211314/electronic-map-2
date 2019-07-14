@@ -56,7 +56,9 @@
     </div>
     <!-- 交易信息区 -->
     <div class="summary">
-      <DealInfo />
+      <DealInfo v-if="!internalNetwork"/>
+      <!-- 商户画像 -->
+      <merchantsPortrait  v-if="internalNetwork" />
     </div>
     <!-- 地图 -->
     <div class="map">
@@ -120,6 +122,7 @@ import TeamView from '@/components/TeamView'
 import MonitorDeal from '@/components/MonitorDeal'
 import Pie from '@/components/Pie'
 import DealInfo from '@/components/DealInfo'
+import merchantsPortrait from '@/components/merchantsPortrait'
 import RankService from '@/components/RankService'
 import serviceMonitorChart from '@/components/serviceMonitorChart'
 import terminalMonitorChart from '@/components/terminalMonitorChart'
@@ -130,9 +133,10 @@ import ChartDeploy from '@/components/ChartDeploy'
 import ChartDeal from '@/components/ChartDeal'
 
 export default {
-  components: { MButton, TeamView, MonitorDeal, Pie, DealInfo, RankService, serviceMonitorChart, terminalMonitorChart, transactionMonitorChart, riskMonitorChart, patrolMonitorChart, ChartDeploy, ChartDeal },
+  components: { MButton, TeamView, MonitorDeal, Pie, DealInfo, merchantsPortrait, RankService, serviceMonitorChart, terminalMonitorChart, transactionMonitorChart, riskMonitorChart, patrolMonitorChart, ChartDeploy, ChartDeal },
   data () {
     return {
+      internalNetwork: true, // 是否内部网点弹窗
       activeIndex: -1, // 便民服务初始化索引
       monitorIndex: 0, // 监控按钮初始化索引
       isdeal: true,
