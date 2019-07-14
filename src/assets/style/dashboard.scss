@@ -125,7 +125,7 @@
     .map-transform{
       @include position(-80, -1056, -180, -1038);
       @include bgImage('../../assets/images/dt-bg.png');
-      animation: rotation 60s linear infinite;
+      animation: rotation 200s linear infinite;
     }
     .map-bk {
       @include position(0, -300, -170, -658);

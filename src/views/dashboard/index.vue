@@ -154,7 +154,7 @@ export default {
   },
   data () {
     return {
-      internalNetwork: true, // 是否内部网点弹窗
+      internalNetwork: false, // 是否内部网点弹窗
       activeIndex: -1, // 便民服务初始化索引
       monitorIndex: 0, // 监控按钮初始化索引
       isdeal: true,
@@ -167,12 +167,12 @@ export default {
       teamviews: Array.from({ length: 10 }, () => '农产品进城'),
       monitors: [{ type: '服务点视图' }, { type: '异常终端视图' }, { type: '交易视图' }, { type: '风险预警' }, { type: '巡检' }],
       monitorDealList: [
-        { type: '存款', money: 1000, dealStatus: '成功', riskStatus: '异常', isChange: '是' },
-        { type: 'W打Q', money: 3232, dealStatus: '打多少', riskStatus: '正常', isChange: '否' },
-        { type: 'XSA', money: 43443, dealStatus: '超凡大师', riskStatus: '异常', isChange: '否' },
-        { type: '法法', money: 3131, dealStatus: '发的杀', riskStatus: '正常', isChange: '是' },
-        { type: '方式', money: 3232, dealStatus: '潇洒', riskStatus: '异常', isChange: '否' },
-        { type: '第三方', money: 2121, dealStatus: 'xQWERTY', riskStatus: '正常', isChange: '是' }
+        { type: '存款', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '2131', isStatus: '启用' },
+        { type: 'W打Q', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '331313', isStatus: '启用' },
+        { type: 'XSA', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '313131', isStatus: '启用' },
+        { type: '法法', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '313131', isStatus: '启用' },
+        { type: '方式', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '3113', isStatus: '启用' },
+        { type: '第三方', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '313131', isStatus: '启用' }
       ] // Array.from({ length: 5 }, () => ({ type: '存款', money: 1000, dealStatus: '成功', riskStatus: '正常', isChange: '是' }))
     }
   },
