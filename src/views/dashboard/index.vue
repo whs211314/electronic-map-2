@@ -66,8 +66,9 @@
       </div>
       <div class="map-bk">
       </div>
-      <ChartDeploy v-if="!isdeal"/>
+      <ChartDeploy @popup="handlePopup" v-if="!isdeal"/>
       <ChartDeal v-if="isdeal"/>
+      <MPopup v-show="popupVisible" :popup="popup" :visible.sync="popupVisible" />
     </div>
     <!-- 地图操作 -->
     <div class="map-operation">
@@ -131,15 +132,34 @@ import riskMonitorChart from '@/components/riskMonitorChart'
 import patrolMonitorChart from '@/components/patrolMonitorChart'
 import ChartDeploy from '@/components/ChartDeploy'
 import ChartDeal from '@/components/ChartDeal'
+import MPopup from '@/components/MPopup'
 
 export default {
-  components: { MButton, TeamView, MonitorDeal, Pie, DealInfo, merchantsPortrait, RankService, serviceMonitorChart, terminalMonitorChart, transactionMonitorChart, riskMonitorChart, patrolMonitorChart, ChartDeploy, ChartDeal },
+  components: {
+    MButton,
+    TeamView,
+    MonitorDeal,
+    Pie,
+    DealInfo,
+    merchantsPortrait,
+    RankService,
+    serviceMonitorChart,
+    terminalMonitorChart,
+    transactionMonitorChart,
+    riskMonitorChart,
+    patrolMonitorChart,
+    ChartDeploy,
+    ChartDeal,
+    MPopup
+  },
   data () {
     return {
       internalNetwork: true, // 是否内部网点弹窗
       activeIndex: -1, // 便民服务初始化索引
       monitorIndex: 0, // 监控按钮初始化索引
       isdeal: true,
+      popupVisible: false,
+      popup: {},
       services1: Array.from({ length: 9 }, () => ({ type: '现金业务', name: '我爱我家' })),
       services2: Array.from({ length: 9 }, () => '医院挂号'),
       services3: Array.from({ length: 6 }, () => '预约开户'),
@@ -175,6 +195,10 @@ export default {
     // 部署地图
     deployClick () {
       this.isdeal = false
+    },
+    handlePopup (popup) {
+      this.popupVisible = true
+      this.popup = popup
     }
   }
 }
