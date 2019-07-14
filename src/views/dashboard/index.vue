@@ -146,7 +146,14 @@ export default {
       services4: Array.from({ length: 6 }, () => '农产品进城'),
       teamviews: Array.from({ length: 10 }, () => '农产品进城'),
       monitors: [{ type: '服务点视图' }, { type: '异常终端视图' }, { type: '交易视图' }, { type: '风险预警' }, { type: '巡检' }],
-      monitorDealList: Array.from({ length: 5 }, () => ({ type: '存款', money: 1000, dealStatus: '成功', riskStatus: '正常', isChange: '是' }))
+      monitorDealList: [
+        { type: '存款', money: 1000, dealStatus: '成功', riskStatus: '异常', isChange: '是' },
+        { type: 'W打Q', money: 3232, dealStatus: '打多少', riskStatus: '正常', isChange: '否' },
+        { type: 'XSA', money: 43443, dealStatus: '超凡大师', riskStatus: '异常', isChange: '否' },
+        { type: '法法', money: 3131, dealStatus: '发的杀', riskStatus: '正常', isChange: '是' },
+        { type: '方式', money: 3232, dealStatus: '潇洒', riskStatus: '异常', isChange: '否' },
+        { type: '第三方', money: 2121, dealStatus: 'xQWERTY', riskStatus: '正常', isChange: '是' }
+      ] // Array.from({ length: 5 }, () => ({ type: '存款', money: 1000, dealStatus: '成功', riskStatus: '正常', isChange: '是' }))
     }
   },
   methods: {
