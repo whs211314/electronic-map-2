@@ -15,6 +15,11 @@
 <script>
 import echarts from 'echarts'
 import coordinate from '@/assets/js/coordinate'
+import map from '@/assets/js/map'
+
+function getRandom (len, start = 0) {
+  return Math.floor(Math.random() * len) + start
+}
 
 export default {
   data () {
@@ -28,11 +33,7 @@ export default {
   },
   computed: {
     currCoordinate () {
-      console.log(this.currID)
       return coordinate[this.currID]
-    },
-    activePointer () {
-      return this.currCoordinate[Math.floor(Math.random() * this.currCoordinate.length)]
     },
     serisePointer () {
       return {
@@ -83,9 +84,10 @@ export default {
       })
     },
     handleClick (param) {
+      this.handleActivePointer(0)
       this.deep += 1
       if (this.deep < 2) {
-        this.currID = param.region.id
+        this.currID = map[param.name]
         // 代表有下级地图
         import(`../../public/map/${this.currID}.json`).then(mapJson => {
           this.registerAndsetOption(this.myChart, param.name, mapJson)
@@ -116,22 +118,20 @@ export default {
       })
     },
     handleShake () {
-      this.pointerActive()
+      this.handleActivePointer()
       this.timer && clearInterval()
       this.timer = setInterval(() => {
-        this.pointerActive()
-      }, (8 + Math.random() * 5) * 1000)
+        this.handleActivePointer()
+      }, (getRandom(3, 1)) * 1000)
     },
-    pointerActive () {
-      // setTimeout(() => {
-      //   this.myChart.setOption({ series: [this.serisePointer] })
-      // }, (2 + Math.random() * 3) * 1000)
+    // 1 = 设置闪烁点 / 0 = 清除闪烁点
+    handleActivePointer (type = 1) {
       this.myChart.setOption({
         series: [this.serisePointer, {
           name: 'pointer-active',
           type: 'effectScatter',
           coordinateSystem: 'geo',
-          data: [this.activePointer],
+          data: type ? this.activePointers() : [],
           symbolSize: 10,
           showEffectOn: 'render',
           rippleEffect: {
@@ -184,21 +184,16 @@ export default {
             emphasis: {
               areaColor: 'rgba(77,141,147,.8)'
             }
-          },
-          regions: this.initMapData(mapJson)
+          }
         },
         series: [this.serisePointer]
       })
     },
-    initMapData (mapJson) {
-      var mapData = []
-      for (var i = 0; i < mapJson.features.length; i++) {
-        mapData.push({
-          name: mapJson.features[i].properties.name,
-          id: mapJson.features[i].id
-        })
-      }
-      return mapData
+    // 随机亮的个数为 1-5
+    activePointers () {
+      const random = getRandom(4, 1)
+      const copy = this.currCoordinate.concat()
+      return copy.sort(() => (0.5 - Math.random())).slice(0, random)
     }
   }
 }
