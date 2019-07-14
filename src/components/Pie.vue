@@ -24,7 +24,7 @@ export default {
           left: 'center',
           bottom: '0',
           subtextStyle: {
-            fontSize: '8px',
+            fontSize: '100%',
             color: '#00FFF0'
           }
         },
@@ -84,7 +84,7 @@ export default {
           left: 'center',
           bottom: '0',
           subtextStyle: {
-            fontSize: '8px',
+            fontSize: '100%',
             color: '#00FFF0'
           }
         },

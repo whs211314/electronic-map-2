@@ -5,7 +5,7 @@
     </div>
     <div class="empty"></div>
     <div class="header items">
-      <div class="item flex-center" :key="index"
+      <div class="item flex-center" :key="index" :class="index===1?'flex-2':''"
         v-for="(item, index) in headers">
         <div class="txt">{{item}}</div>
       </div>
@@ -15,10 +15,11 @@
           v-for="(item, index) in items">
         <div class="items">
           <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.type}}</div></div>
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.money}}元</div></div>
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.dealStatus}}</div></div>
+          <div class="item flex-center flex-2"><div :class="index === 2?txt01:txt">{{item.money}}</div></div>
           <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.riskStatus}}</div></div>
           <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.isChange}}</div></div>
+          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.Change}}</div></div>
+          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.isStatus}}</div></div>
         </div>
       </div>
     </div>
@@ -38,7 +39,7 @@ export default {
       animate: true,
       txt: 'txt',
       txt01: 'txt01',
-      headers: ['交易种类', '交易金额', '交易状态', '风险状态', '是否移机']
+      headers: ['地市', '金湘通服务点名称', '交易时间', '交易种类', '交易金额', '交易状态']
     }
   },
   created () {
@@ -61,7 +62,7 @@ export default {
 @import '../assets/style/index.scss';
 .monitor-deal {
   position: absolute;
-  font-size: var(--fontSize-12);
+  font-size: var(--fontSize-8);
   .title {
     height: 12%;
     line-height: 1;
@@ -76,6 +77,9 @@ export default {
     display: flex;
     .item {
       flex: 1;
+    }
+    .flex-2 {
+      flex: 2;
     }
   }
   .empty {

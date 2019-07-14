@@ -355,6 +355,7 @@ export default {
       justify-content: start;
       .item {
         width: 22%;
+        cursor: pointer;
         &.active {
           background: #00b7b4;
         }
