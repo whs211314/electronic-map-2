@@ -20,7 +20,8 @@ export default {
     return {
       chinaJson: null,
       myChart: null,
-      currID: '430000'
+      currID: '430000',
+      deep: 0
     }
   },
   mounted () {
@@ -33,13 +34,16 @@ export default {
         this.myChart = echarts.init(document.getElementById(divid))
         this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         this.myChart.on('click', param => {
-          if (this.currID !== param.data.id) {
-            this.currID = param.data.id
+          this.deep += 1
+          if (this.deep < 4) {
+            console.log(param)
+            this.currID = param.region.id
             // 代表有下级地图
             import(`../../public/map/${this.currID}.json`).then(mapJson => {
               this.registerAndsetOption(this.myChart, param.name, mapJson)
             })
           } else {
+            this.deep = 0
             // 没有下级地图，回到一级中国地图，并将mapStack清空
             this.registerAndsetOption(
               this.myChart,
@@ -59,30 +63,32 @@ export default {
     registerAndsetOption (myChart, name, mapJson) {
       echarts.registerMap(name, mapJson)
       myChart.setOption({
-        series: [
-          {
-            type: 'map',
-            map: name,
-            label: {
+        geo: {
+          show: true,
+          map: name,
+          label: {
+            normal: {
               show: true,
               color: '#fff'
             },
-            itemStyle: {
+            emphasis: {
+              show: true,
+              color: '#ff0',
+              shadowBlur: 10,
+              shadowColor: '#ff0'
+            }
+          },
+          itemStyle: {
+            normal: {
               areaColor: 'rgba(77,141,147,.4)',
-              borderColor: '#1dc199',
-              borderWidth: 1
+              borderColor: '#1dc199'
             },
             emphasis: {
-              label: {
-                color: '#ff0'
-              },
-              itemStyle: {
-                areaColor: 'rgba(77,141,147,.8)'
-              }
-            },
-            data: this.initMapData(mapJson)
-          }
-        ]
+              areaColor: 'rgba(77,141,147,.8)'
+            }
+          },
+          regions: this.initMapData(mapJson)
+        }
       })
     },
     initMapData (mapJson) {
