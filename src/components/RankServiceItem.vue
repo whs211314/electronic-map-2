@@ -2,11 +2,11 @@
 <div class="rank-service-item">
   <div class="content">
     <div class="left">
-      <div class="name flex-center"><div class="txt">金湘源</div></div>
-      <div class="rank flex-center"><div class="txt center">TOP {{rank}}</div></div>
+      <div class="name flex-center"><div class="txt">金湘通</div></div>
+      <div class="rank flex-center"><div class="txt center">NO {{rank}}</div></div>
     </div>
     <div class="right">
-      <div class="network flex-center"><div class="txt">金湘源服务网点1</div></div>
+      <div class="network flex-center"><div class="txt">金湘通服务网点1</div></div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">笔数</div></div>
         <div class="value fr flex-center"><div class="txt" style="color:#E77641;">3082万笔</div> </div>

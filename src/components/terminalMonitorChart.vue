@@ -2,7 +2,7 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center">异常终端占比/数量</div>
+        <div class="item active flex-center">异常终端数量/占比 总数量：10000 在全国占比：50%</div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -153,7 +153,7 @@ export default {
       @extend .flex-center;
       justify-content: start;
       .item {
-        width: 22%;
+        width: 60%;
         cursor: pointer;
         &.active {
           background: #00b7b4;
