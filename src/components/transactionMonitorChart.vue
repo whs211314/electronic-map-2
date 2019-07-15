@@ -74,12 +74,12 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            data: ['2018-08', '2018-09', '2018-10', '2018-11', '2018-12', '2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06', '2019-07'],
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
             },
-            axisLabel: { color: '#D2FBFE' }, // x轴字体颜色
+            axisLabel: { color: '#D2FBFE', interval: 0, rotate: 40 }, // x轴字体颜色
             axisLine: {
               lineStyle: { color: '#CAF7FF' } // x轴坐标轴颜色
             }
@@ -173,12 +173,12 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            data: ['长沙', '株洲', '湘潭', '衡阳', '邵阳', '岳阳', '常德', '张家', '益阳', '彬州', '永州', '怀化'],
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
             },
-            axisLabel: { color: '#D2FBFE' }, // x轴字体颜色
+            axisLabel: { color: '#D2FBFE', interval: 0, rotate: 40 }, // x轴字体颜色
             axisLine: {
               lineStyle: { color: '#CAF7FF' } // x轴坐标轴颜色
             }
@@ -277,7 +277,15 @@ export default {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
             },
-            axisLabel: { color: '#D2FBFE' }, // x轴字体颜色
+            axisLabel: { color: '#D2FBFE',
+              interval: 0,
+              formatter: function (value, index) {
+                if (index % 2 !== 0) {
+                  return '\n\n' + value
+                } else {
+                  return value
+                }
+              } }, // x轴字体颜色
             axisLine: {
               lineStyle: { color: '#CAF7FF' } // x轴坐标轴颜色
             }

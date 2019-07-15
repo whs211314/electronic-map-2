@@ -167,13 +167,13 @@ export default {
       teamviews: Array.from({ length: 10 }, () => '农产品进城'),
       monitors: [{ type: '服务点视图' }, { type: '异常终端视图' }, { type: '交易视图' }, { type: '风险预警' }, { type: '巡检' }],
       monitorDealList: [
-        { type: '存款', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '2131', isStatus: '启用' },
-        { type: 'W打Q', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '331313', isStatus: '启用' },
-        { type: 'XSA', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '313131', isStatus: '启用' },
-        { type: '法法', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '313131', isStatus: '启用' },
-        { type: '方式', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '3113', isStatus: '启用' },
-        { type: '第三方', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '313131', isStatus: '启用' }
-      ] // Array.from({ length: 5 }, () => ({ type: '存款', money: 1000, dealStatus: '成功', riskStatus: '正常', isChange: '是' }))
+        { type: '长治市', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '2131', isStatus: '启用' },
+        { type: '长沙市', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '331313', isStatus: '启用' },
+        { type: '永州市', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '313131', isStatus: '启用' },
+        { type: '怀化市', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '313131', isStatus: '启用' },
+        { type: '衡阳市', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '3113', isStatus: '启用' },
+        { type: '邵阳市', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '313131', isStatus: '启用' }
+      ]
     }
   },
   methods: {

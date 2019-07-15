@@ -133,7 +133,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['1月', '2月', '3月', '4月'],
+            data: ['一档', '二档', '三档', '四档'],
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -232,7 +232,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['1月', '2月', '3月', '4月'],
+            data: ['一档', '二档', '三档', '四档'],
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -331,7 +331,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['1月', '2月', '3月', '4月'],
+            data: ['一档', '二档', '三档', '四档'],
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
