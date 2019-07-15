@@ -1,5 +1,5 @@
 <template>
-  <div class="popup position-space" @click="$emit('update:visible', false)">
+  <div class="popup" @click="$emit('update:visible', false)">
     <div class="center" :style="{left:`${popup.x}px`,top:`${popup.y}px`}">
       <div class="item" :class="item.position"
         v-for="item in items" :key="item.id"
@@ -35,12 +35,18 @@ export default {
 <style scoped lang="scss">
 @import '../assets/style/index.scss';
 .popup {
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  bottom: -10%;
+  left: -10%;
   .center {
     position: absolute;
     width: 0;
     height: 0;
     padding: 18%;
     @include bgImage('../assets/images/popup-w.png');
+    transform: translate3d(-50%, -50%, 0);
   }
   .item {
     position: absolute;
@@ -51,6 +57,7 @@ export default {
     border-radius: 50%;
     border: 1px solid #00D7D4;
     font-size: var(--fontSize-12);
+    cursor: pointer;
     &:hover {
       color: #FC7D12;
       .icon {
@@ -80,7 +87,6 @@ export default {
       right: 24%;
       top: 8%;
       bottom: 40%;
-      cursor: pointer;
       &.fuwudian {
         @include bgImage('../assets/images/fuwudian.png');
       }

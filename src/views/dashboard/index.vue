@@ -68,7 +68,10 @@
       </div>
       <ChartDeploy @popup="handlePopup" v-if="!isdeal"/>
       <ChartDeal v-if="isdeal"/>
-      <MPopup v-show="popupVisible" :popup="popup" :visible.sync="popupVisible" />
+      <MPopup v-show="popupVisible"
+        :popup="popup"
+        :visible.sync="popupVisible"
+        @deployEvent="handleDeployEvent" />
     </div>
     <!-- 地图操作 -->
     <div class="map-operation">
@@ -199,6 +202,9 @@ export default {
     handlePopup (popup) {
       this.popupVisible = true
       this.popup = popup
+    },
+    handleDeployEvent (e) {
+      console.log(e)
     }
   }
 }

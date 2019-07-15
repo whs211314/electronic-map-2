@@ -1,19 +1,21 @@
 body {
-  --fontSize-8: 8px;
-  --fontSize-12: 12px;
-  --fontSize-13: 13px;
-  --fontSize-14: 14px;
-  --fontSize-16: 16px;
-  --fontSize-18: 18px;
+  --fontSize-8:8px;
+  --fontSize-12:12px;
+  --fontSize-13:13px;
+  --fontSize-14:14px;
+  --fontSize-16:16px;
+  --fontSize-18:18px;
+  --fontSize-map:12;
 }
 @media screen and (min-width: 3000px) {
   body {
-    --fontSize-8: 18px;
-    --fontSize-12: 20px;
-    --fontSize-13: 22px;
-    --fontSize-14: 24px;
-    --fontSize-16: 28px;
-    --fontSize-18: 30px;
+    --fontSize-8:18px;
+    --fontSize-12:20px;
+    --fontSize-13:22px;
+    --fontSize-14:24px;
+    --fontSize-16:28px;
+    --fontSize-18:30px;
+    --fontSize-map:20;
   }
 }
 

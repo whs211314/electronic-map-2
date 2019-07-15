@@ -14,6 +14,7 @@
 
 <script>
 import echarts from 'echarts'
+const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {
   data () {
@@ -35,7 +36,6 @@ export default {
         this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         this.myChart.on('click', param => {
           if (param.seriesType === 'scatter') {
-            console.log(param)
             this.$emit('popup', {
               x: param.event.offsetX,
               y: param.event.offsetY
@@ -83,7 +83,7 @@ export default {
           type: 'scatter',
           coordinateSystem: 'geo',
           data: [this.getMockCoordinate(mapJson)],
-          symbolSize: 10,
+          symbolSize: fontSize,
           animation: false,
           label: {
             normal: {
@@ -125,13 +125,17 @@ export default {
           label: {
             normal: {
               show: true,
-              color: '#fff'
+              color: '#fff',
+              fontSize,
+              fontWeight: 'bold'
             },
             emphasis: {
               show: true,
               color: '#ff0',
               shadowBlur: 10,
-              shadowColor: '#ff0'
+              shadowColor: '#ff0',
+              fontSize,
+              fontWeight: 'bold'
             }
           },
           itemStyle: {

@@ -20,6 +20,7 @@ import map from '@/assets/js/map'
 function getRandom (len, start = 0) {
   return Math.floor(Math.random() * len) + start
 }
+const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {
   data () {
@@ -127,6 +128,10 @@ export default {
     // 1 = 设置闪烁点 / 0 = 清除闪烁点
     handleActivePointer (type = 1) {
       this.myChart.setOption({
+        textStyle: {
+          fontSize,
+          fontWeight: 'bold'
+        },
         series: [this.serisePointer, {
           name: 'pointer-active',
           type: 'effectScatter',
@@ -185,6 +190,10 @@ export default {
               areaColor: 'rgba(77,141,147,.8)'
             }
           }
+        },
+        textStyle: {
+          fontSize,
+          fontWeight: 'bold'
         },
         series: [this.serisePointer]
       })
