@@ -33,6 +33,7 @@
 export default {
   data () {
     return {
+      animate: true,
       txt: 'txt',
       txt01: 'txt01',
       headers: ['地市', '金湘通服务点名称', '时间', '结果', '方式'],

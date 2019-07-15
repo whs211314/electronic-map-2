@@ -205,6 +205,7 @@ export default {
     },
     handleDeployEvent (e) {
       console.log(e)
+      this.internalNetwork = true
     }
   }
 }

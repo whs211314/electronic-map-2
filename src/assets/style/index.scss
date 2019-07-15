@@ -5,6 +5,7 @@ body {
   --fontSize-14:14px;
   --fontSize-16:16px;
   --fontSize-18:18px;
+  --fontSize-mapPie:10;
   --fontSize-map:12;
 }
 @media screen and (min-width: 3000px) {
@@ -15,6 +16,7 @@ body {
     --fontSize-14:24px;
     --fontSize-16:28px;
     --fontSize-18:30px;
+    --fontSize-mapPie:18;
     --fontSize-map:20;
   }
 }

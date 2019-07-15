@@ -7,7 +7,7 @@
 
 <script>
 import echarts from 'echarts'
-
+const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 export default {
   data () {
     return {
@@ -24,7 +24,7 @@ export default {
           left: 'center',
           bottom: '0',
           subtextStyle: {
-            fontSize: '100%',
+            fontSize: fontSize,
             color: '#00FFF0'
           }
         },
@@ -84,7 +84,7 @@ export default {
           left: 'center',
           bottom: '0',
           subtextStyle: {
-            fontSize: '100%',
+            fontSize: fontSize,
             color: '#00FFF0'
           }
         },
