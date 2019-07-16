@@ -179,6 +179,13 @@ export default {
       ]
     }
   },
+  watch: {
+    popupVisible (val) {
+      if (!val) {
+        this.internalNetwork = false
+      }
+    }
+  },
   methods: {
     // 便民服务弹窗
     showClick (index) {

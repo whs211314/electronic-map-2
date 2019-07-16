@@ -2,7 +2,7 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center">风险预警</div>
+        <div class="item active flex-center">风险预警  总数量：97 在全国占比：0.1%</div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -168,7 +168,7 @@ export default {
       @extend .flex-center;
       justify-content: start;
       .item {
-        width: 22%;
+        width: 46%;
         cursor: pointer;
         &.active {
           background: #00b7b4;
