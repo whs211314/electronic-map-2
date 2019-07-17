@@ -31,6 +31,7 @@ export default {
     mapChart (divid) {
       import(`../../public/map/${this.currID}.json`).then(mapJson => {
         this.chinaJson = mapJson
+        this.currJson = mapJson
         this.myChart = echarts.init(document.getElementById(divid))
         this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         this.myChart.on('click', param => {
@@ -45,21 +46,27 @@ export default {
           console.log(this.currID, id, name)
           if (id !== this.currID) {
             this.currID = id
+            // 点击到乡级地图
+            if (this.currID.split('_').length === 3) {
+              const townJson = {
+                type: 'FeatureCollection',
+                features: this.currJson.features.filter(e => e.id === this.currID)
+              }
+              this.$emit('goDown', { id, name })
+              this.registerAndsetOption(this.myChart, param.name, townJson)
+              this.setTownPointer(townJson)
+              return
+            }
             // 代表有下级地图
             import(`../../public/map/${this.currID}.json`).then(mapJson => {
+              this.currJson = mapJson
               this.$emit('goDown', { id, name })
               this.registerAndsetOption(this.myChart, param.name, mapJson)
-              if (id.split('_').length === 3 || id === name) {
-                this.setTownPointer(mapJson)
-              }
             })
           } else {
             // 没有下级地图，回到一级中国地图，并将mapStack清空
-            this.registerAndsetOption(
-              this.myChart,
-              this.chinaName,
-              this.chinaJson
-            )
+            this.registerAndsetOption(this.myChart, this.chinaName, this.chinaJson)
+            this.$emit('goDown', { id: '4300', name: '湖南省' })
           }
         })
       })

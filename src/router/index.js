@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Login from '@/views/login'
 import Dashboard from '@/views/dashboard'
+import Test from '@/components/ChartDeploy'
 
 Vue.use(Router)
 
@@ -12,7 +13,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/test'
     }, {
       path: '/login',
       name: 'login',
@@ -21,6 +22,9 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
+    }, {
+      path: '/test',
+      component: Test
     }
   ]
 })

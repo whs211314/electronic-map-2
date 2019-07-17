@@ -41,7 +41,7 @@ export default {
         coordinateSystem: 'geo',
         data: this.currCoordinate,
         symbolSize: 10,
-        animation: true,
+        animation: false,
         label: {
           normal: {
             formatter: '{b}',
@@ -83,8 +83,9 @@ export default {
       })
     },
     handleClick (param) {
+      if (param.seriesType === 'scatter') return
+      console.log('======', JSON.stringify(param.region))
       this.handleActivePointer(0)
-      console.log('======', param.region.id)
       if (param.region.id.split('_').length < 2) {
         this.currID = param.region.id
         // 代表有下级地图
