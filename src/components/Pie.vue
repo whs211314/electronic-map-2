@@ -7,11 +7,20 @@
 
 <script>
 import echarts from 'echarts'
+import * as api from '@/api'
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 export default {
+  props: {
+    // pieList: {
+    //   type: Object
+    // }
+  },
   data () {
     return {
-
+      pieList: {
+        taCountryYearCount: '',
+        taCountryCount: ''
+      } // 饼图数据
     }
   },
   methods: {
@@ -20,7 +29,7 @@ export default {
       let myChart2 = echarts.init(document.getElementById('line02-chart'))
       let option1 = {
         title: {
-          subtext: '年度总交易笔数占比80%',
+          subtext: '年度总交易笔数占比75%',
           left: 'center',
           bottom: '0',
           subtextStyle: {
@@ -80,7 +89,7 @@ export default {
       myChart1.setOption(option1, true)
       let option2 = {
         title: {
-          subtext: '服务点数量占比80%',
+          subtext: '服务点数量占比35%',
           left: 'center',
           bottom: '0',
           subtextStyle: {
@@ -115,8 +124,8 @@ export default {
               }
             },
             data: [
-              { value: 75 },
-              { value: 25 }
+              { value: 35 },
+              { value: 65 }
             ],
             itemStyle: {
               emphasis: {
@@ -140,8 +149,16 @@ export default {
       myChart2.setOption(option2, true)
     }
   },
+  created () {
+
+  },
   mounted () {
     this.chartInit()
+    api.getPieData().then(res => {
+      this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
+      this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
+      console.log(this.pieList)
+    })
   }
 }
 </script>

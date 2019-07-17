@@ -52,7 +52,7 @@
     </div>
     <!-- 饼图部分 -->
     <div class="pie">
-      <Pie />
+      <Pie :pieList= 'pieList'/>
     </div>
     <!-- 交易信息区 -->
     <div class="summary">
@@ -163,6 +163,10 @@ export default {
       popup: {},
       currJmpInfo: {}, // 当前服务点数据
       monitorPageNo: 1,
+      pieList: {
+        taCountryYearCount: '',
+        taCountryCount: ''
+      }, // 饼图数据
       sum: {
         number: 94673,
         number1: 13873,
@@ -217,7 +221,11 @@ export default {
     }
   },
   created () {
-    api.getPieData()
+    api.getPieData().then(res => {
+      this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
+      this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
+      console.log(this.pieList)
+    })
     this.monitorTask()
   },
   watch: {
