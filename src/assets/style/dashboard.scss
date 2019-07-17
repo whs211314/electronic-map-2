@@ -36,10 +36,10 @@
       font-size: var(--fontSize-12);
     }
     .prompt-dialog {
-      @include position(-656, -7025, -3678, 3025);
+      @include position(-656, -7525, -5278, 2825);
       @include bgImage('../../assets/images/cpm.png');
       z-index: 2;
-      padding: 25% 0 10% 40%;
+      padding: 25% 25% 10% 40%;
     }
   }
   .show-top {
