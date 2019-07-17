@@ -21,8 +21,9 @@
       </div>
       <div class="empty"></div>
       <div class="items-show" style="height:70%">
-        <div class="item" v-for="(item, index) in services2" :key="index">
-          <MButton type="2" :txt="item" />
+        <div class="item" v-for="(item, index) in services2" :key="index" @click="middleClick(index)">
+          <MButton type="2" :txt="item.type" />
+          <div v-show="middleIndex===index" class="prompt-dialog">{{item.name}}</div>
         </div>
       </div>
     </div>
@@ -33,8 +34,9 @@
       </div>
       <div class="empty"></div>
       <div class="items-show">
-        <div class="item" v-for="(item, index) in services3" :key="index">
-          <MButton type="1" :txt="item" />
+        <div class="item" v-for="(item, index) in services3" :key="index" @click="bottomClick(index)">
+          <MButton type="1" :txt="item.type" />
+          <div v-show="bottomIndex===index" class="prompt-dialog">{{item.name}}</div>
         </div>
       </div>
     </div>
@@ -45,8 +47,9 @@
       </div>
       <div class="empty"></div>
       <div class="items-show">
-        <div class="item" v-for="(item, index) in services4" :key="index">
-          <MButton type="2" :txt="item" />
+        <div class="item" v-for="(item, index) in services4" :key="index"  @click="rightClick(index)">
+          <MButton type="2" :txt="item.type" />
+          <div v-show="rightIndex===index" class="prompt-dialog">{{item.name}}</div>
         </div>
       </div>
     </div>
@@ -158,25 +161,52 @@ export default {
     return {
       internalNetwork: false, // 是否内部网点弹窗
       activeIndex: -1, // 便民服务初始化索引
+      middleIndex: -1, // 政务服务能力
+      bottomIndex: -1, // 实体经济服务
+      rightIndex: -1, // 扶贫能力展示
       monitorIndex: 0, // 监控按钮初始化索引
       isdeal: true,
       popupVisible: false,
       popup: {},
       currJmpInfo: {}, // 当前服务点数据
       services1: [
-        { type: '现金业务', name: '为银行卡持卡用户提供小额取现和小额存现服务，累计交易笔数为A，交易金额B，占总交易量C' },
-        { type: '贷款业务', name: '为乡镇客户提供贷款融资服务，直接帮扶带动贫困人口A万人，服务贫困人口B人，金融精准扶贫贷款余额C亿元' },
-        { type: '转账业务', name: '为银行卡持卡用户提供实时到帐转账服务，累计交易笔数为A，交易金额B，占总交易量 C' },
-        { type: '缴费业务', name: '为城乡居民提供水、电、气、话费等查询缴费服务，累计交易笔数为A，交易金额B，占总交易量 C' },
-        { type: '投资理财', name: '为乡镇客户提供建信人寿意外险、财产险、车险等保险购买服务，黄金等投资产品购买服务，累计交易A万人，服务贫困人口B人，金融精准扶贫贷款余额C亿元' },
-        { type: '快递业务', name: '为客户提供顺丰、圆通快递服务，累计服务A人' },
-        { type: '电商业务', name: '为客户提供电商线上产品线下服务，累计服务A人，消费金额B元' },
-        { type: '家电维修', name: '为客户提供家电维修预约服务，累计服务A人' },
-        { type: '通讯运营商', name: '为客户提供联通、移动号卡发放服务，累计服务A人' }
+        { type: '现金业务', name: '为银行卡持卡用户提供小额取现和小额存现服务，累计交易笔数为5632，交易金额3.2亿，占总交易量3%' },
+        { type: '贷款业务', name: '为乡镇客户提供贷款融资服务，直接帮扶带动贫困人口2.38万人，服务贫困人口138人，金融精准扶贫贷款余额115.09亿元' },
+        { type: '转账业务', name: '为银行卡持卡用户提供实时到帐转账服务，累计交易笔数为3232，交易金额3.4亿，占总交易量 3.6%' },
+        { type: '缴费业务', name: '为城乡居民提供水、电、气、话费等查询缴费服务，累计交易笔数为3267，交易金额7亿，占总交易量 6.6%' },
+        { type: '投资理财', name: '为乡镇客户提供建信人寿意外险、财产险、车险等保险购买服务，黄金等投资产品购买服务，累计交易2.38万人，服务贫困人口138人，金融精准扶贫贷款余额115.09亿元' },
+        { type: '快递业务', name: '为客户提供顺丰、圆通快递服务，累计服务1473人' },
+        { type: '电商业务', name: '为客户提供电商线上产品线下服务，累计服务6539人，消费金额876412.00元' },
+        { type: '家电维修', name: '为客户提供家电维修预约服务，累计服务1075人' },
+        { type: '通讯运营商', name: '为客户提供联通、移动号卡发放服务，累计服务1075人' }
       ],
-      services2: Array.from({ length: 9 }, () => '医院挂号'),
-      services3: Array.from({ length: 6 }, () => '预约开户'),
-      services4: Array.from({ length: 6 }, () => '农产品进城'),
+      services2: [
+        { type: '社保业务', name: '为客户提供养老保险查询和缴费服务，累计服务客户9.8万人，缴费金额5600万元' },
+        { type: '社保业务', name: '为客户提供医疗保险查询和缴费服务，累计服务客户18.6万人' },
+        { type: '交通违章', name: '为客户提供车辆的违章查询及缴费服务，累计服务客户8534人' },
+        { type: '医院挂号', name: '为客户提供电子健康卡的注册和医院远程预约挂号服务，累计服务客户670人' },
+        { type: '党费云', name: '为单位和党员提供党费缴纳服务，累计服务客户18745人，缴费金额342190元' },
+        { type: '公交充值', name: '为客户提供公交IC卡充值服务，累计服务客户18745人，缴费金额342190元' },
+        { type: '燃气充值', name: '为客户提供燃气IC卡充值服务，累计服务客户12405人，缴费金额856.00万元' },
+        { type: '有线电视', name: '为客户提供有线电视节目的定制购买服务，累计服务客户6380人，缴费金额1786.00万元' },
+        { type: '生育证办理', name: '为居民生育证等证件的在线办理和邮递服务服务，累计服务客户43人' }
+      ],
+      services3: [
+        { type: '惠懂你', name: '为小企业扫码注册、申请贷款等在线服务，累计惠懂你下载1.6万户' },
+        { type: '特色产业', name: '信贷资源向农业产业化龙头企业和新型农业生产经营主体倾斜，累计在贫困地区普惠金融贷款余额45.84亿元，累计扶持小微企业客户1000多户' },
+        { type: '预约开户', name: '为企业客户提供预约开户服务' },
+        { type: '对公客户存现', name: '为企业客户基于单位结算卡提供小额存现服务' },
+        { type: '对公客户取现', name: '为企业基于单位结算卡提供小额取现业务服务' },
+        { type: '对公客户转账', name: '为企业客户基于单位结算卡提供转账服务' }
+      ],
+      services4: [
+        { type: '扶贫贷款', name: '为乡镇客户提供贷款融资现服务，直接帮扶带动贫困人口2.38万人，服务贫困人口183人，金融精准扶贫贷款余额115.09亿元' },
+        { type: '定点扶贫', name: '建行扶贫村94个全覆盖，举办水稻种植、黑斑蛙养殖、土鸡养殖、特色水果种植等培训班3次，参训村民90余人次' },
+        { type: '金智惠民', name: '为村民提供惠民金融服务，培训内容包括讲授党课、农业政策、金融知识、养殖种植等，举办惠民培训80期，覆盖10623人次，定期举办“金融知识万里行”活动，金融服务下乡活动1521场' },
+        { type: '电商扶贫', name: '组织善融扶贫 爱心助力线上专题活动116场，销售扶贫商品7920件，扶贫销售额6.08亿元' },
+        { },
+        { }
+      ],
       teamviews: Array.from({ length: 10 }, () => '农产品进城'),
       monitors: [{ type: '服务点视图' }, { type: '异常终端视图' }, { type: '交易视图' }, { type: '风险预警' }, { type: '巡检' }],
       monitorDealList: [
@@ -206,6 +236,27 @@ export default {
       setTimeout(() => {
         this.activeIndex = -1
       }, 3000)
+    },
+    // 政务服务能力
+    middleClick (index) {
+      this.middleIndex = index
+      setTimeout(() => {
+        this.middleIndex = -1
+      }, 3000)
+    },
+    // 实体经济服务
+    bottomClick (index) {
+      this.bottomIndex = index
+      setTimeout(() => {
+        this.bottomIndex = -1
+      }, 3000)
+    },
+    // 扶贫能力展示
+    rightClick (index) {
+      this.rightIndex = index
+      // setTimeout(() => {
+      //   this.rightIndex = -1
+      // }, 3000)
     },
     // 监控按钮弹窗
     monitorClick (index) {

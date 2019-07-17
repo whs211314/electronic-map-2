@@ -34,6 +34,7 @@
       width: 0;
       height: 0;
       font-size: var(--fontSize-12);
+      cursor: pointer;
     }
     .prompt-dialog {
       @include position(-656, -7525, -5278, 2825);
@@ -69,6 +70,13 @@
     .item {
       padding-top: calc(30% / 2.6);
       font-size: var(--fontSize-14);
+      cursor: pointer;
+    }
+    .prompt-dialog {
+      @include position(-656, -7725, -5878, 2825);
+      @include bgImage('../../assets/images/cpm.png');
+      z-index: 2;
+      padding: 25% 25% 10% 40%;
     }
   }
   .show-bottom {
@@ -86,8 +94,16 @@
       height: 72%;
     }
     .item {
-      padding-top: calc(35% / 2.6);
-      font-size: var(--fontSize-14);
+      padding-top: calc(40% / 2.6);
+      font-size: var(--fontSize-12);
+      cursor: pointer;
+    }
+    .prompt-dialog {
+      // @include position(-4878, -7725, -656, 2825);
+      position: absolute;
+      @include bgImage('../../assets/images/cpm.png');
+      z-index: 2;
+      padding: 25% 25% 10% 40%;
     }
   }
   .show-right {
@@ -104,6 +120,12 @@
     .item {
       padding-top: calc(30% / 2.6);
       font-size: var(--fontSize-14);
+    }
+    .prompt-dialog {
+      @include position(-4878, -7725, -656, 2825);
+      @include bgImage('../../assets/images/cpm.png');
+      z-index: 2;
+      padding: 25% 25% 10% 40%;
     }
   }
   // 展示区域 END
