@@ -41,4 +41,7 @@ body {
     right: 0;
   }
 }
+.toasted {
+  font-weight: bold !important;
+}
 </style>
