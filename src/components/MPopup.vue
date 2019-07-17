@@ -36,10 +36,10 @@ export default {
 @import '../assets/style/index.scss';
 .popup {
   position: absolute;
-  top: -10%;
-  right: -10%;
-  bottom: -10%;
-  left: -10%;
+  top: -5%;
+  right: -5%;
+  bottom: -5%;
+  left: -5%;
   .center {
     position: absolute;
     width: 0;

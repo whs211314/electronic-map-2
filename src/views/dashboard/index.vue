@@ -61,11 +61,9 @@
       <merchantsPortrait  v-if="internalNetwork" />
     </div>
     <!-- 地图 -->
+    <div class="map-bk"></div>
+    <div class="map-transform"></div>
     <div class="map">
-      <div class="map-transform">
-      </div>
-      <div class="map-bk">
-      </div>
       <ChartDeploy @popup="handlePopup" @goDown="handleGoDown" v-if="!isdeal"/>
       <ChartDeal v-if="isdeal"/>
       <MPopup v-show="popupVisible"

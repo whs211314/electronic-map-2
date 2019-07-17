@@ -2,16 +2,6 @@
   <div id='mapChart'></div>
 </template>
 
-<style>
-#mapChart {
-  position: absolute;
-  top: -10%;
-  right: -10%;
-  bottom: -10%;
-  left: -10%;
-}
-</style>
-
 <script>
 import echarts from 'echarts'
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')

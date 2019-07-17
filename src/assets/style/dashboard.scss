@@ -1,5 +1,13 @@
 @import '../../assets/style/index.scss';
 
+#mapChart {
+  position: absolute;
+  top: -5%;
+  right: -5%;
+  bottom: -5%;
+  left: -5%;
+}
+
 .dashboard {
   color: $wihte;
   @include bgImage('../../assets/images/bg03.png');
@@ -120,22 +128,24 @@
   // 合作视图 END
 
   // 地图相关 START
+  .map-transform{
+    @include position(0, 1300, 0, 1300);
+    @include bgImage('../../assets/images/dt-bg.png');
+    animation: rotation 200s linear infinite;
+    z-index: 1;
+  }
+  .map-bk {
+    @include position(79, 1430, 40, 1349);
+    @include bgImage('../../assets/images/bk.png');
+    z-index: 2;
+  }
   .map {
     @include position(94, 1474, 186, 1470);
-    z-index: 10;
-    .map-transform{
-      @include position(-80, -1056, -180, -1038);
-      @include bgImage('../../assets/images/dt-bg.png');
-      animation: rotation 200s linear infinite;
-    }
-    .map-bk {
-      @include position(0, -300, -170, -658);
-      @include bgImage('../../assets/images/bk.png');
-    }
+    z-index: 4;
   }
   .map-operation {
     @include position(1058, 1432, 28, 1426);
-    z-index: 11;
+    z-index: 3;
     font-weight: bold;
     > div {
       position: relative;
