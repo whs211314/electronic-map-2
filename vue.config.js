@@ -1,8 +1,5 @@
 module.exports = {
-  // publicPath: '/'
-  output: {
-    publicPath: './'
-  },
+  publicPath: '/',
   devServer: {
     proxy: {
       '/february': {
