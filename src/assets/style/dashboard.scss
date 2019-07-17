@@ -122,6 +122,7 @@
   // 地图相关 START
   .map {
     @include position(94, 1474, 186, 1470);
+    z-index: 10;
     .map-transform{
       @include position(-80, -1056, -180, -1038);
       @include bgImage('../../assets/images/dt-bg.png');
@@ -134,6 +135,7 @@
   }
   .map-operation {
     @include position(1058, 1432, 28, 1426);
+    z-index: 11;
     font-weight: bold;
     > div {
       position: relative;

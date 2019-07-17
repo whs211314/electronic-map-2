@@ -15,7 +15,6 @@
 <script>
 import echarts from 'echarts'
 import coordinate from '@/assets/js/coordinate'
-import map from '@/assets/js/map'
 
 function getRandom (len, start = 0) {
   return Math.floor(Math.random() * len) + start
@@ -27,8 +26,7 @@ export default {
     return {
       chinaJson: null,
       myChart: null,
-      currID: '430000',
-      deep: 0,
+      currID: '4300',
       timer: null
     }
   },
@@ -43,7 +41,7 @@ export default {
         coordinateSystem: 'geo',
         data: this.currCoordinate,
         symbolSize: 10,
-        animation: false,
+        animation: true,
         label: {
           normal: {
             formatter: '{b}',
@@ -86,16 +84,15 @@ export default {
     },
     handleClick (param) {
       this.handleActivePointer(0)
-      this.deep += 1
-      if (this.deep < 2) {
-        this.currID = map[param.name]
+      console.log('======', param.region.id)
+      if (param.region.id.split('_').length < 2) {
+        this.currID = param.region.id
         // 代表有下级地图
         import(`../../public/map/${this.currID}.json`).then(mapJson => {
           this.registerAndsetOption(this.myChart, param.name, mapJson)
         })
       } else {
-        this.currID = '430000'
-        this.deep = 0
+        this.currID = '4300'
         // 没有下级地图，回到一级中国地图，并将mapStack清空
         this.registerAndsetOption(
           this.myChart,
@@ -189,7 +186,8 @@ export default {
             emphasis: {
               areaColor: 'rgba(77,141,147,.8)'
             }
-          }
+          },
+          regions: this.initMapData(mapJson)
         },
         textStyle: {
           fontSize,
@@ -203,6 +201,16 @@ export default {
       const random = getRandom(4, 1)
       const copy = this.currCoordinate.concat()
       return copy.sort(() => (0.5 - Math.random())).slice(0, random)
+    },
+    initMapData (mapJson) {
+      var mapData = []
+      for (var i = 0; i < mapJson.features.length; i++) {
+        mapData.push({
+          name: mapJson.features[i].properties.name,
+          id: mapJson.features[i].id
+        })
+      }
+      return mapData
     }
   }
 }

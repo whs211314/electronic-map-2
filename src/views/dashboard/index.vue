@@ -66,7 +66,7 @@
       </div>
       <div class="map-bk">
       </div>
-      <ChartDeploy @popup="handlePopup" v-if="!isdeal"/>
+      <ChartDeploy @popup="handlePopup" @goDown="handleGoDown" v-if="!isdeal"/>
       <ChartDeal v-if="isdeal"/>
       <MPopup v-show="popupVisible"
         :popup="popup"
@@ -213,6 +213,9 @@ export default {
     handleDeployEvent (e) {
       console.log(e)
       this.internalNetwork = true
+    },
+    handleGoDown (e) {
+      console.log(e)
     }
   }
 }
