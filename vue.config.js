@@ -2,13 +2,9 @@ module.exports = {
   publicPath: '/',
   devServer: {
     proxy: {
-      '/api': {
-        target: 'http://www.example.org',
-        changeOrigin: true,
-        ws: true,
-        pathRewrite: {
-          '^/api': ''
-        }
+      '/february': {
+        target: 'http://192.168.1.9',
+        changeOrigin: true
       }
     }
   },

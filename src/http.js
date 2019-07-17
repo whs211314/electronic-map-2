@@ -4,8 +4,8 @@ import vue from 'vue'
 
 axios.interceptors.response.use(
   response => {
-    if (response.status === 200) {
-      return Promise.resolve(response)
+    if (response.status === 200 && response.data.code === 0) {
+      return Promise.resolve(response.data)
     } else {
       return Promise.reject(response)
     }

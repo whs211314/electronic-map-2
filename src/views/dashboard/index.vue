@@ -134,6 +134,7 @@ import patrolMonitorChart from '@/components/patrolMonitorChart'
 import ChartDeploy from '@/components/ChartDeploy'
 import ChartDeal from '@/components/ChartDeal'
 import MPopup from '@/components/MPopup'
+import * as api from '@/api'
 
 export default {
   components: {
@@ -176,6 +177,9 @@ export default {
         { type: '邵阳市', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '313131', isStatus: '启用' }
       ]
     }
+  },
+  created () {
+    api.getPieData()
   },
   watch: {
     popupVisible (val) {
