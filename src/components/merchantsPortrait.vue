@@ -6,17 +6,16 @@
     <div class="right fr">
       <div class="item r1 extra">
         <div class="label"><div class="txt">服务点位置</div></div>
-        <div class="value orange">某某某位置</div>
+        <div class="value orange">{{(+data.jpmLat).toFixed(2)}}, {{(+data.jpmLon).toFixed(2)}}</div>
       </div>
       <div class="item r2">
         <div class="label"><div class="txt">经营范围</div></div>
-        <div class="value">某某范围~某某范围</div>
+        <!-- <div class="value">某某范围~某某范围</div> -->
       </div>
       <div class="item r3 extra">
         <div class="label"><div class="txt">业主基本信息</div></div>
-        <div class="value orange">基本信息1</div>
-        <div class="value orange">基本信息2</div>
-        <div class="value orange">基本信息3</div>
+        <div class="value orange">{{data.jpmOwnerName}}</div>
+        <!-- <div class="value orange">{{data.jpmCreateTime}}</div> -->
       </div>
     </div>
   </div>
@@ -24,6 +23,7 @@
 
 <script>
 export default {
+  props: ['data'],
   data () {
     return {
       isPicture: true

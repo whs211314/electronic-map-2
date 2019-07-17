@@ -58,7 +58,7 @@
     <div class="summary">
       <DealInfo v-if="!internalNetwork"/>
       <!-- 商户画像 -->
-      <merchantsPortrait  v-if="internalNetwork" />
+      <merchantsPortrait :data="currJmpInfo" v-if="internalNetwork" />
     </div>
     <!-- 地图 -->
     <div class="map-bk"></div>
@@ -162,6 +162,7 @@ export default {
       isdeal: true,
       popupVisible: false,
       popup: {},
+      currJmpInfo: {}, // 当前服务点数据
       services1: [
         { type: '现金业务', name: '为银行卡持卡用户提供小额取现和小额存现服务，累计交易笔数为A，交易金额B，占总交易量C' },
         { type: '贷款业务', name: '为乡镇客户提供贷款融资服务，直接帮扶带动贫困人口A万人，服务贫困人口B人，金融精准扶贫贷款余额C亿元' },
@@ -222,9 +223,9 @@ export default {
       this.popupVisible = true
       this.popup = popup
     },
-    handleDeployEvent (e) {
+    handleDeployEvent (data) {
       console.warn('--点击部署选项触发--')
-      console.info(JSON.stringify(e))
+      this.currJmpInfo = data
       this.internalNetwork = true
     },
     handleGoDown (e) {
