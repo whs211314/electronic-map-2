@@ -211,11 +211,13 @@ export default {
       this.popup = popup
     },
     handleDeployEvent (e) {
-      console.log(e)
+      console.warn('--点击部署选项触发--')
+      console.info(JSON.stringify(e))
       this.internalNetwork = true
     },
     handleGoDown (e) {
-      console.log(e)
+      console.warn('--部署地图下钻触发--')
+      console.info(JSON.stringify(e))
     }
   }
 }

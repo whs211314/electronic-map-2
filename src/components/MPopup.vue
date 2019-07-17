@@ -44,7 +44,7 @@ export default {
     position: absolute;
     width: 0;
     height: 0;
-    padding: 18%;
+    padding: 15%;
     @include bgImage('../assets/images/popup-w.png');
     transform: translate3d(-50%, -50%, 0);
   }
@@ -119,32 +119,32 @@ export default {
     &.top {
       top: 0;
       left: 50%;
-      transform: translate3d(-50%, -60%, 0);
+      transform: translate3d(-50%, -62%, 0);
     }
     &.bottom {
       bottom: 0;
       left: 50%;
-      transform: translate3d(-50%, 64%, 0);
+      transform: translate3d(-50%, 66%, 0);
     }
     &.top-l {
       top: 0;
       left: 0;
-      transform: translate3d(-42%, 12%, 0);
+      transform: translate3d(-44%, 10%, 0);
     }
     &.top-r {
       top: 0;
       right: 0;
-      transform: translate3d(40%, 12%, 0);
+      transform: translate3d(42%, 12%, 0);
     }
     &.bottom-l {
       bottom: 0;
       left: 0;
-      transform: translate3d(-42%, -10%, 0);
+      transform: translate3d(-44%, -8%, 0);
     }
     &.bottom-r {
       bottom: 0;
       right: 0;
-      transform: translate3d(40%, -8%, 0);
+      transform: translate3d(42%, -8%, 0);
     }
   }
 }
