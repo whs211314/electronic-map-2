@@ -10,8 +10,11 @@
 
 .dashboard {
   color: $wihte;
-  @include bgImage('../../assets/images/bg03.png');
   overflow: hidden;
+  .dashboard-bg {
+    @include bgImage('../../assets/images/bg03.png');
+    z-index: -2;
+  }
   .logo {
     @include position(34, 3282, 1020, 43);
     @include bgImage('../../assets/images/logo.png');
@@ -35,12 +38,6 @@
       height: 0;
       font-size: var(--fontSize-12);
       cursor: pointer;
-    }
-    .prompt-dialog {
-      @include position(-656, -7525, -5278, 2825);
-      @include bgImage('../../assets/images/cpm.png');
-      z-index: 2;
-      padding: 25% 25% 10% 40%;
     }
   }
   .show-top {
@@ -72,12 +69,6 @@
       font-size: var(--fontSize-14);
       cursor: pointer;
     }
-    .prompt-dialog {
-      @include position(-656, -7725, -5878, 2825);
-      @include bgImage('../../assets/images/cpm.png');
-      z-index: 2;
-      padding: 25% 25% 10% 40%;
-    }
   }
   .show-bottom {
     @include position(788, 3104, 200, 225);
@@ -98,13 +89,6 @@
       font-size: var(--fontSize-12);
       cursor: pointer;
     }
-    .prompt-dialog {
-      // @include position(-4878, -7725, -656, 2825);
-      position: absolute;
-      @include bgImage('../../assets/images/cpm.png');
-      z-index: 2;
-      padding: 25% 25% 10% 40%;
-    }
   }
   .show-right {
     @include position(788, 2504, 197, 824);
@@ -120,12 +104,6 @@
     .item {
       padding-top: calc(30% / 2.6);
       font-size: var(--fontSize-14);
-    }
-    .prompt-dialog {
-      @include position(-4878, -7725, -656, 2825);
-      @include bgImage('../../assets/images/cpm.png');
-      z-index: 2;
-      padding: 25% 25% 10% 40%;
     }
   }
   // 展示区域 END
@@ -154,7 +132,7 @@
     @include position(0, 1300, 0, 1300);
     @include bgImage('../../assets/images/dt-bg.png');
     animation: rotation 200s linear infinite;
-    z-index: 1;
+    z-index: -1;
   }
   .map-bk {
     @include position(79, 1430, 40, 1349);

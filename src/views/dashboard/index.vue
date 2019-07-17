@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard">
+    <div class="dashboard-bg position-space"></div>
     <div class="logo"></div>
     <!-- 便民服务 -->
     <div class="show-top">
@@ -8,9 +9,8 @@
       </div>
       <!-- <div class="empty"></div> -->
       <div class="items-show">
-        <div class="item" v-for="(item, index) in services1" :key="index" @click="showClick(index)">
-          <MButton type="1" :txt="item.type" />
-          <div v-show="activeIndex===index" class="prompt-dialog">{{item.name}}</div>
+        <div class="item" v-for="(item, index) in services1" :key="index">
+          <MButton type="1" :txt="item.type" :hasDialog="true" position="top" :dialogTxt="item.name" />
         </div>
       </div>
     </div>
@@ -21,9 +21,8 @@
       </div>
       <div class="empty"></div>
       <div class="items-show" style="height:70%">
-        <div class="item" v-for="(item, index) in services2" :key="index" @click="middleClick(index)">
-          <MButton type="2" :txt="item.type" />
-          <div v-show="middleIndex===index" class="prompt-dialog">{{item.name}}</div>
+        <div class="item" v-for="(item, index) in services2" :key="index">
+          <MButton type="2" :txt="item.type" :hasDialog="true" position="top" :dialogTxt="item.name" />
         </div>
       </div>
     </div>
@@ -34,9 +33,8 @@
       </div>
       <div class="empty"></div>
       <div class="items-show">
-        <div class="item" v-for="(item, index) in services3" :key="index" @click="bottomClick(index)">
-          <MButton type="1" :txt="item.type" />
-          <div v-show="bottomIndex===index" class="prompt-dialog">{{item.name}}</div>
+        <div class="item" v-for="(item, index) in services3" :key="index">
+          <MButton type="1" :txt="item.type" :hasDialog="true" position="bottom" :dialogTxt="item.name" />
         </div>
       </div>
     </div>
@@ -47,9 +45,8 @@
       </div>
       <div class="empty"></div>
       <div class="items-show">
-        <div class="item" v-for="(item, index) in services4" :key="index"  @click="rightClick(index)">
-          <MButton type="2" :txt="item.type" />
-          <div v-show="rightIndex===index" class="prompt-dialog">{{item.name}}</div>
+        <div class="item" v-for="(item, index) in services4" :key="index">
+          <MButton type="2" :txt="item.type" :hasDialog="true" position="bottom" :isLarge="true" :dialogTxt="item.name" />
         </div>
       </div>
     </div>
@@ -160,10 +157,6 @@ export default {
   data () {
     return {
       internalNetwork: false, // 是否内部网点弹窗
-      activeIndex: -1, // 便民服务初始化索引
-      middleIndex: -1, // 政务服务能力
-      bottomIndex: -1, // 实体经济服务
-      rightIndex: -1, // 扶贫能力展示
       monitorIndex: 0, // 监控按钮初始化索引
       isdeal: true,
       popupVisible: false,
@@ -230,34 +223,6 @@ export default {
     }
   },
   methods: {
-    // 便民服务弹窗
-    showClick (index) {
-      this.activeIndex = index
-      setTimeout(() => {
-        this.activeIndex = -1
-      }, 3000)
-    },
-    // 政务服务能力
-    middleClick (index) {
-      this.middleIndex = index
-      setTimeout(() => {
-        this.middleIndex = -1
-      }, 3000)
-    },
-    // 实体经济服务
-    bottomClick (index) {
-      this.bottomIndex = index
-      setTimeout(() => {
-        this.bottomIndex = -1
-      }, 3000)
-    },
-    // 扶贫能力展示
-    rightClick (index) {
-      this.rightIndex = index
-      // setTimeout(() => {
-      //   this.rightIndex = -1
-      // }, 3000)
-    },
     // 监控按钮弹窗
     monitorClick (index) {
       this.monitorIndex = index
