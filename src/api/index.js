@@ -8,3 +8,26 @@ export function getPieData () {
     })
   })
 }
+
+// 服务点详情
+export function getMchInfo ({ mchId }) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/mchInfo/getMchInfo', {
+      params: { mchId }
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
+
+// 乡镇下所有服务点
+export function getMchInfoList ({ allName }) {
+  const [cityName, areaName, streetName] = allName.split('_')
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/mchInfo/getMchInfoList', {
+      params: { cityName, areaName, streetName }
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}

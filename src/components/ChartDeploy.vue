@@ -4,6 +4,7 @@
 
 <script>
 import echarts from 'echarts'
+import * as api from '@/api'
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {
@@ -11,7 +12,8 @@ export default {
     return {
       chinaJson: null,
       myChart: null,
-      currID: '4300'
+      currID: '4300',
+      jpmData: []
     }
   },
   mounted () {
@@ -26,13 +28,15 @@ export default {
         this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         this.myChart.on('click', param => {
           if (param.seriesType === 'scatter') {
+            const data = this.jpmData.find(e => e.id === param.data.id)
             this.$emit('popup', {
               x: param.event.offsetX,
-              y: param.event.offsetY
+              y: param.event.offsetY,
+              data
             })
             return
           }
-          const { id, name } = param.region
+          const { id, name, allName } = param.region
           console.log(this.currID, id, name)
           if (id !== this.currID) {
             this.currID = id
@@ -42,15 +46,18 @@ export default {
                 type: 'FeatureCollection',
                 features: this.currJson.features.filter(e => e.id === this.currID)
               }
-              this.$emit('goDown', { id, name })
+              this.$emit('goDown', { id, name, allName })
               this.registerAndsetOption(this.myChart, param.name, townJson)
-              this.setTownPointer(townJson)
+              api.getMchInfoList({ allName }).then(res => {
+                this.jpmData = res.data
+                this.setTownPointer(townJson, res.data)
+              })
               return
             }
             // 代表有下级地图
             import(`../../public/map/${this.currID}.json`).then(mapJson => {
               this.currJson = mapJson
-              this.$emit('goDown', { id, name })
+              this.$emit('goDown', { id, name, allName })
               this.registerAndsetOption(this.myChart, param.name, mapJson)
             })
           } else {
@@ -61,32 +68,21 @@ export default {
         })
       })
     },
-    getMockCoordinate (mapJson) {
-      const len = mapJson.features.length
-      let x = 0
-      let y = 0
-      mapJson.features.forEach(e => {
-        x += e.properties.cp[0]
-        y += e.properties.cp[1]
-      })
-      const avgX = x / len
-      const avgY = y / len
-      console.log([avgX, avgY])
-      let ret = Array.from({ length: Math.floor(Math.random() * 5) + 2 }, (_, i) => {
-        let random1 = Math.random() * (Math.random() < 0.5 ? -1 : 1) * (Math.random() * 0.1)
-        let random2 = Math.random() * (Math.random() < 0.5 ? -1 : 1) * (Math.random() * 0.1)
-        return { name: `服务网点${i + 2}`, value: [avgX + random1, avgY + random2, 1] }
-      })
-      return [...ret, { name: `服务网点1`, value: [avgX, avgY] }]
+    // 服务点标点数据
+    getCoordinate (jpmData) {
+      return jpmData.map(e => ({
+        id: e.id,
+        value: [e.jpmLat, e.jpmLon]
+      }))
     },
     // 请求村级服务点数据
-    setTownPointer (mapJson) {
+    setTownPointer (mapJson, jpmData) {
       this.myChart.setOption({
         series: [{
           name: 'pointer',
           type: 'scatter',
           coordinateSystem: 'geo',
-          data: this.getMockCoordinate(mapJson),
+          data: this.getCoordinate(jpmData),
           symbolSize: fontSize,
           animation: false,
           label: {
@@ -160,7 +156,8 @@ export default {
       for (var i = 0; i < mapJson.features.length; i++) {
         mapData.push({
           name: mapJson.features[i].properties.name,
-          id: mapJson.features[i].id
+          id: mapJson.features[i].id,
+          allName: mapJson.features[i].allName
         })
       }
       return mapData

@@ -3,7 +3,7 @@
     <div class="center" :style="{left:`${popup.x}px`,top:`${popup.y}px`}">
       <div class="item" :class="item.position"
         v-for="item in items" :key="item.id"
-        @click.stop="$emit('deployEvent', item)">
+        @click.stop="$emit('deployEvent', popup.data)">
         <div class="icon" :class="item.icon"></div>
         <div class="label">{{item.label}}</div>
       </div>
