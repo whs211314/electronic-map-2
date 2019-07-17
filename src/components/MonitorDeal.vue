@@ -14,12 +14,12 @@
       <div class="row" :key="index"
           v-for="(item, index) in items">
         <div class="items">
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.type}}</div></div>
-          <div class="item flex-center flex-2"><div :class="index === 2?txt01:txt">{{item.money}}</div></div>
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.createTm}}</div></div>
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.isChange}}</div></div>
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.genproffinTxnamt}}</div></div>
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">正常</div></div>
+          <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.cityName}}</div></div>
+          <div class="item flex-center flex-2"><div :class="index === 2?txt:txt">{{item.streetName}}</div></div>
+          <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.txnDtTm}}</div></div>
+          <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.tradeName}}</div></div>
+          <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.genproffinTxnamt}}</div></div>
+          <div class="item flex-center"><div :class="index === 2?txt:txt">正常</div></div>
         </div>
       </div>
     </div>

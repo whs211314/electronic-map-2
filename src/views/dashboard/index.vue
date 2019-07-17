@@ -56,7 +56,7 @@
     </div>
     <!-- 交易信息区 -->
     <div class="summary">
-      <DealInfo v-if="!internalNetwork"/>
+      <DealInfo v-if="!internalNetwork" :sum='sum'/>
       <!-- 商户画像 -->
       <merchantsPortrait :data="currJmpInfo" v-if="internalNetwork" />
     </div>
@@ -163,6 +163,16 @@ export default {
       popup: {},
       currJmpInfo: {}, // 当前服务点数据
       monitorPageNo: 1,
+      sum: {
+        number: 94673,
+        number1: 13873,
+        number2: 6989,
+        number3: 5230,
+        number4: 6341,
+        number5: 135,
+        number6: 80,
+        number7: 9
+      },
       services1: [
         { type: '现金业务', name: '为银行卡持卡用户提供小额取现和小额存现服务，累计交易笔数为5632，交易金额3.2亿，占总交易量3%' },
         { type: '贷款业务', name: '为乡镇客户提供贷款融资服务，直接帮扶带动贫困人口2.38万人，服务贫困人口138人，金融精准扶贫贷款余额115.09亿元' },
@@ -251,13 +261,33 @@ export default {
         areaName: '',
         pageIndex: this.monitorPageNo
       }
+      if (e) {
+        this.sum.number = Math.floor(Math.random() * (8000 - 12000) + 12000)
+        this.sum.number1 = Math.floor(Math.random() * (1300 - 1600) + 1600)
+        this.sum.number2 = Math.floor(Math.random() * (1200 - 1400) + 1400)
+        this.sum.number3 = Math.floor(Math.random() * (130 - 320) + 320)
+        this.sum.number4 = Math.floor(Math.random() * (400 - 800) + 800)
+        this.sum.number5 = Math.floor(Math.random() * (38 - 52) + 52)
+        this.sum.number6 = Math.floor(Math.random() * (4 - 13) + 13)
+        this.sum.number7 = Math.floor(Math.random() * (5 - 7) + 7)
+      }
       if (e && e.allName.split('_').length > 1) {
         page.cityName = e.allName.split('_')[0]
         page.areaName = e.allName.split('_')[1]
         page.pageIndex = this.monitorPageNo
+        this.sum.number = Math.floor(Math.random() * (2000 - 5000) + 12000)
+        this.sum.number1 = Math.floor(Math.random() * (900 - 1000) + 1200)
+        this.sum.number2 = Math.floor(Math.random() * (300 - 400) + 700)
+        this.sum.number3 = Math.floor(Math.random() * (20 - 60) + 120)
+        this.sum.number4 = Math.floor(Math.random() * (80 - 90) + 400)
+        this.sum.number5 = Math.floor(Math.random() * (2 - 12) + 22)
+        this.sum.number6 = Math.floor(Math.random() * (1 - 3) + 8)
+        this.sum.number7 = Math.floor(Math.random() * (2 - 3) + 4)
       }
       api.getTransLog(page).then(res => {
-        this.monitorDealList = res.data
+        this.monitorDealList = res.data.map(item => Object.assign(item, {
+          txnDtTm: item.txnDtTm ? item.txnDtTm.split('T')[0] : ''
+        }))
         this.monitorPageNo += 1
       })
     },
@@ -268,6 +298,13 @@ export default {
       this.timer = setInterval(() => {
         this.MonitorDeal(e)
       }, 10 * 1000)
+    },
+    fromData (time) {
+      var dateee = new Date(time).toJSON()
+      console.log(dateee)
+      var date = new Date(+new Date(dateee)).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+
+      return date
     }
   }
 }
