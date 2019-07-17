@@ -74,7 +74,7 @@
     <!-- 地图操作 -->
     <div class="map-operation">
       <div class="deal fl flex-center" :class="isdeal?'active':''" @click="dealClick"><div class="txt">交易地图</div></div>
-      <div class="deploy fr flex-center"  :class="isdeal?'':'active'" @click="deployClick"><div class="txt">部署地图</div></div>
+      <div class="deploy fr flex-center"  :class="isdeal?'':'active'" @click="deployClick"><div class="txt">分布地图</div></div>
     </div>
     <!-- 合作视图 -->
     <div class="teamview">

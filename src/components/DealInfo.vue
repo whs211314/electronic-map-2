@@ -6,14 +6,6 @@
         <div class="value">5345 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">交易总金额</div></div>
-        <div class="value">456 万元</div>
-      </div>
-      <div class="item">
-        <div class="label"><div class="txt">总存款</div></div>
-        <div class="value">345677 万元</div>
-      </div>
-      <div class="item">
         <div class="label"><div class="txt">总金湘通发卡数量</div></div>
         <div class="value">6789 张</div>
       </div>
@@ -21,23 +13,27 @@
         <div class="label"><div class="txt">总金湘通卡存款</div></div>
         <div class="value">456 万元</div>
       </div>
+      <div class="item">
+        <div class="label"><div class="txt">手机银行签约客户款</div></div>
+        <div class="value">750 万元</div>
+      </div>
     </div>
     <div class="right fr">
-      <div class="item r1 extra">
-        <div class="label"><div class="txt">总湘金卡客户<br/>产品覆盖度占比数量</div></div>
-        <div class="value orange">80%</div>
+      <div class="item">
+        <div class="label"><div class="txt">行政区数量</div></div>
+        <div class="value">5345 个</div>
       </div>
-      <div class="item r2">
-        <div class="label"><div class="txt">同比增长</div></div>
-        <div class="value">3%</div>
+      <div class="item">
+        <div class="label"><div class="txt">金湘通发卡本年数量</div></div>
+        <div class="value orange">73 万张</div>
       </div>
-      <div class="item r3 extra">
-        <div class="label"><div class="txt">银行同步率<br/>总湘金卡手机</div></div>
-        <div class="value orange">80%</div>
+      <div class="item">
+        <div class="label"><div class="txt">金湘通卡存款本年增长</div></div>
+        <div class="value orange">20 亿元</div>
       </div>
-      <div class="item r4">
-        <div class="label"><div class="txt">同比增长</div></div>
-        <div class="value">3%</div>
+      <div class="item">
+        <div class="label"><div class="txt">同步率</div></div>
+        <div class="value orange">3 %</div>
       </div>
     </div>
   </div>
@@ -67,7 +63,7 @@ export default {
     height: 100%;
   }
   .item {
-    height: 20%;
+    height: 24%;
     .label {
       height: 30%;
     }

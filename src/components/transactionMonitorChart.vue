@@ -3,7 +3,7 @@
     <div class="title">
       <div class="tab">
         <div class="item flex-center" :class="isChart ? 'active':''" @click="chartClick">月交易量</div>
-        <div class="item flex-center" :class="isGrade ? 'active':''" @click="gradeClick">全省交易量</div>
+        <div class="item flex-center" :class="isGrade ? 'active':''" @click="gradeClick">地市交易</div>
         <div class="item flex-center" :class="isActivity ? 'active':''"  @click="activityClick">交易种类分布</div>
       </div>
     </div>

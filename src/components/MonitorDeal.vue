@@ -1,7 +1,7 @@
 <template>
   <div class="monitor-deal position-space">
     <div class="title flex-center">
-      <div class="txt">交易监控</div>
+      <div class="txt">实时监控</div>
     </div>
     <div class="empty"></div>
     <div class="header items">
