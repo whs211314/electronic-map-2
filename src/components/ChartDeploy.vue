@@ -48,7 +48,9 @@ export default {
               }
               this.$emit('goDown', { id, name, allName })
               this.registerAndsetOption(this.myChart, param.name, townJson)
+              // this.myChart.showLoading()
               api.getMchInfoList({ allName }).then(res => {
+                // this.myChart.hideLoading()
                 this.jpmData = res.data
                 this.setTownPointer(townJson, res.data)
               })
