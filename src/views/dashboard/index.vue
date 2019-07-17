@@ -80,7 +80,7 @@
     <div class="teamview">
       <TeamView :items="teamviews" />
     </div>
-    <!-- 交易监控 -->
+    <!-- 实时监控 -->
     <div class="monitor-top-r">
       <MonitorDeal :items="monitorDealList" />
     </div>
@@ -162,6 +162,7 @@ export default {
       popupVisible: false,
       popup: {},
       currJmpInfo: {}, // 当前服务点数据
+      monitorPageNo: 1,
       services1: [
         { type: '现金业务', name: '为银行卡持卡用户提供小额取现和小额存现服务，累计交易笔数为5632，交易金额3.2亿，占总交易量3%' },
         { type: '贷款业务', name: '为乡镇客户提供贷款融资服务，直接帮扶带动贫困人口2.38万人，服务贫困人口138人，金融精准扶贫贷款余额115.09亿元' },
@@ -202,18 +203,12 @@ export default {
       ],
       teamviews: Array.from({ length: 10 }, () => '农产品进城'),
       monitors: [{ type: '服务点视图' }, { type: '异常终端视图' }, { type: '交易视图' }, { type: '风险预警' }, { type: '巡检' }],
-      monitorDealList: [
-        { type: '长治市', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '2131', isStatus: '启用' },
-        { type: '长沙市', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '331313', isStatus: '启用' },
-        { type: '永州市', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '313131', isStatus: '启用' },
-        { type: '怀化市', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '313131', isStatus: '启用' },
-        { type: '衡阳市', money: '长沙市某某服务网点', riskStatus: '异常', isChange: '异常', Change: '3113', isStatus: '启用' },
-        { type: '邵阳市', money: '长沙市某某服务网点', riskStatus: '正常', isChange: '正常', Change: '313131', isStatus: '启用' }
-      ]
+      monitorDealList: []
     }
   },
   created () {
     api.getPieData()
+    this.monitorTask()
   },
   watch: {
     popupVisible (val) {
@@ -247,6 +242,32 @@ export default {
     handleGoDown (e) {
       console.warn('--部署地图下钻触发--')
       console.info(JSON.stringify(e))
+      // 事实监控
+      this.monitorTask(e)
+    },
+    MonitorDeal (e) {
+      let page = {
+        cityName: e ? e.name : '',
+        areaName: '',
+        pageIndex: this.monitorPageNo
+      }
+      if (e && e.allName.split('_').length > 1) {
+        page.cityName = e.allName.split('_')[0]
+        page.areaName = e.allName.split('_')[1]
+        page.pageIndex = this.monitorPageNo
+      }
+      api.getTransLog(page).then(res => {
+        this.monitorDealList = res.data
+        this.monitorPageNo += 1
+      })
+    },
+    monitorTask (e) {
+      this.monitorPageNo = 1
+      this.timer && clearInterval(this.timer)
+      this.MonitorDeal(e)
+      this.timer = setInterval(() => {
+        this.MonitorDeal(e)
+      }, 10 * 1000)
     }
   }
 }

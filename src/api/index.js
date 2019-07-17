@@ -31,3 +31,14 @@ export function getMchInfoList ({ allName }) {
     })
   })
 }
+
+// 事实监控
+export function getTransLog (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/translog/getTransLog', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
