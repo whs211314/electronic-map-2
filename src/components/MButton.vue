@@ -1,7 +1,11 @@
 <template>
-  <div class="m-button position-space" :class="btnCls" @click="handleClick">
+  <div class="m-button position-space" :class="btnCls"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave">
     <span class="txt position-center">{{txt}}</span>
-    <div class="prompt-dialog" :class="[position, isLarge?'large':'']" v-show="visible">{{dialogTxt}}</div>
+    <div class="prompt-dialog"
+      :class="[position, isLarge?'large':'']"
+      v-show="visible">{{dialogTxt}}</div>
   </div>
 </template>
 
@@ -31,16 +35,23 @@ export default {
   },
   computed: {
     btnCls () {
+      if (this.txt.length > 5) return `small btn-${this.type}`
       return `btn-${this.type}`
     }
   },
   methods: {
-    handleClick () {
-      if (!this.hasDialog) return
+    // handleClick () {
+    //   if (!this.hasDialog) return
+    //   this.visible = true
+    //   setTimeout(() => {
+    //     this.visible = false
+    //   }, 2 * 1000)
+    // }
+    handleMouseEnter () {
       this.visible = true
-      setTimeout(() => {
-        this.visible = false
-      }, 2 * 1000)
+    },
+    handleMouseLeave () {
+      this.visible = false
     }
   }
 }
@@ -54,15 +65,31 @@ export default {
   background-position: center center;
   background-repeat: no-repeat;
   font-weight: bold;
+  &.small {
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    transform: scale(.5);
+    transform-origin: center;
+    .txt {
+      font-size: var(--fontSize-20);
+    }
+    .prompt-dialog {
+      padding: var(--fontSize-16);
+      font-size: calc(var(--fontSize-12) * 2);
+    }
+  }
   .txt {
     word-break: keep-all;
+    font-size: var(--fontSize-12);
   }
   .prompt-dialog {
     position: absolute;
     left: 100%;
-    width: 140%;
+    width: 160%;
     height: 360%;
-    padding: calc(var(--fontSize-14) / 2);
+    padding: calc(var(--fontSize-16) / 2);
     background-image: url(../assets/images/cpm.png);
     background-size: 100% 100%;
     background-origin: border-box;

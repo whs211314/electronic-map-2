@@ -7,7 +7,7 @@
       <div class="title-show flex-center">
         <div class="txt">便民服务展示</div>
       </div>
-      <!-- <div class="empty"></div> -->
+      <div class="empty"></div>
       <div class="items-show">
         <div class="item" v-for="(item, index) in services1" :key="index">
           <MButton type="1" :txt="item.type" :hasDialog="true" position="top" :dialogTxt="item.name" />
@@ -33,7 +33,7 @@
       </div>
       <div class="empty"></div>
       <div class="items-show">
-        <div class="item" v-for="(item, index) in services3" :key="index">
+        <div class="item" v-for="(item, index) in services3" :key="index" :style="{zIndex: index>2?6-index:'auto'}">
           <MButton type="1" :txt="item.type" :hasDialog="true" position="bottom" :dialogTxt="item.name" />
         </div>
       </div>
