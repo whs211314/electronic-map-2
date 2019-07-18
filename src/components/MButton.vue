@@ -65,6 +65,7 @@ export default {
   background-position: center center;
   background-repeat: no-repeat;
   font-weight: bold;
+  cursor: pointer;
   &.small {
     top: -50%;
     right: -50%;

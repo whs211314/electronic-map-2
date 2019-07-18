@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <div class="dashboard-bg position-space"></div>
-    <div class="logo"></div>
+    <!-- <div class="logo"></div> -->
     <!-- 便民服务 -->
     <div class="show-top">
       <div class="title-show flex-center">
