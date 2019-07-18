@@ -64,8 +64,8 @@
     <div class="map-bk"></div>
     <div class="map-transform"></div>
     <div class="map">
-      <ChartDeploy @popup="handlePopup" @goDown="handleGoDown" v-if="!isdeal"/>
-      <ChartDeal v-if="isdeal"/>
+      <ChartDeploy @popup="handlePopup" @goDown="handleGoDown" v-if="isdeal"/>
+      <ChartDeal v-else />
       <MPopup v-show="popupVisible"
         :popup="popup"
         :visible.sync="popupVisible"
@@ -73,8 +73,8 @@
     </div>
     <!-- 地图操作 -->
     <div class="map-operation">
-      <div class="deal fl flex-center" :class="isdeal?'active':''" @click="dealClick"><div class="txt">交易地图</div></div>
-      <div class="deploy fr flex-center"  :class="isdeal?'':'active'" @click="deployClick"><div class="txt">分布地图</div></div>
+      <div class="deal fr flex-center" :class="isdeal?'':'active'" @click="deployClick"><div class="txt">交易地图</div></div>
+      <div class="deploy fl flex-center"  :class="isdeal?'active':''" @click="dealClick"><div class="txt">分布地图</div></div>
     </div>
     <!-- 合作视图 -->
     <div class="teamview">
