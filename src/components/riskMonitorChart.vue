@@ -2,7 +2,7 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center">风险预警数量：10000   在终端占比：10%</div>
+        <div class="item active flex-center">预警点数量：10000  占比：10%</div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -16,10 +16,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr :key="index" v-for="(item, index) in bodys">
-              <td>{{item.type}}</td>
-              <td>{{item.money}}</td>
-              <td>{{item.dealStatus}}</td>
+            <tr>
+              <td>{{echarTable[5]}}</td>
+              <td>{{echarTable[3]}}</td>
+              <td>{{echarTable[4]}}</td>
             </tr>
           </tbody>
         </table>
@@ -30,10 +30,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr :key="index" v-for="(item, index) in bodys">
-              <td>{{item.type}}</td>
-              <td>{{item.money}}</td>
-              <td>{{item.dealStatus}}</td>
+            <tr>
+              <td>{{echarTable[2]}}</td>
+              <td>{{echarTable[1]}}</td>
+              <td>{{echarTable[0]}}</td>
             </tr>
           </tbody>
         </table>
@@ -54,7 +54,8 @@ export default {
       bodys: [
         { type: '1500个', money: '2500个', dealStatus: '3500个' }
       ],
-      echartsList: []
+      echartsList: [],
+      echarTable: []
     }
   },
   methods: {
@@ -72,7 +73,12 @@ export default {
               this.echartsList.push(el)
             }
           })
-          console.log(this.echartsList)
+          item.data.forEach((el, index) => {
+            if (index > 0) {
+              this.echarTable.push(el.classNum)
+            }
+          })
+          console.log(this.echarTable)
           let myChart = echarts.init(document.getElementById('line-chart'))
           let option = {
             tooltip: {
@@ -182,7 +188,7 @@ export default {
       @extend .flex-center;
       justify-content: start;
       .item {
-        width: 46%;
+        width: 36%;
         cursor: pointer;
         &.active {
           background: #00b7b4;

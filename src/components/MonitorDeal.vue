@@ -109,7 +109,7 @@ export default {
     text-align: center;
   }
   .anim{
-    transition: all 0.5s;
+    transition: all 1s;
     margin-top: 0%;
   }
 }
