@@ -7,23 +7,24 @@
     </div>
     <div class="chart">
       <div class="header items">
-      <div class="item flex-center" :key="index" :class="index===1?'flex-2':''"
-        v-for="(item, index) in headers">
-        <div class="txt">{{item}}</div>
-      </div>
-    </div>
-    <div class="content" :class="{anim:animate==true}">
-      <div class="row" :key="index"
-          v-for="(item, index) in items">
-        <div class="items">
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.type}}</div></div>
-          <div class="item flex-center flex-2"><div :class="index === 2?txt01:txt">{{item.money}}</div></div>
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.dealStatus}}</div></div>
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.riskStatus}}</div></div>
-          <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.isChange}}</div></div>
+        <div class="item flex-center" :key="index" :class="index===1?'flex-2':''"
+          v-for="(item, index) in headers">
+          <div class="txt">{{item}}</div>
         </div>
       </div>
-    </div>
+      <div class="empty"></div>
+      <div class="content" :class="{animation:animate}">
+        <div class="row" :key="index"
+            v-for="(item, index) in items">
+          <div class="items">
+            <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.type}}</div></div>
+            <div class="item flex-center flex-2"><div :class="index === 2?txt01:txt">{{item.money}}</div></div>
+            <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.dealStatus}}</div></div>
+            <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.riskStatus}}</div></div>
+            <div class="item flex-center"><div :class="index === 2?txt01:txt">{{item.isChange}}</div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,14 +49,13 @@ export default {
     }
   },
   created () {
-    setInterval(this.scroll, 1000)
+    setInterval(this.scroll, 2000)
   },
   methods: {
     scroll () {
       this.animate = true // 因为在消息向上滚动的时候需要添加css3过渡动画，所以这里需要设置true
       setTimeout(() => { //  这里直接使用了es6的箭头函数，省去了处理this指向偏移问题，代码也比之前简化了很多
-        this.items.push(this.items[0]) // 将数组的第一个元素添加到数组的
-        this.items.shift() // 删除数组的第一个元素
+        this.items.push(this.items.shift()) // 将数组的第一个元素添加到数组的
         this.animate = false // margin-top 为0 的时候取消过渡动画，实现无缝滚动
       }, 2000)
     }
@@ -103,18 +103,18 @@ export default {
   }
   }
   .empty {
-    height: 2%;
+    height: 3%;
   }
   .header {
     height: 16%;
     font-weight: bold;
   }
   .content {
-    height: 70%;
+    height: 78%;
     line-height: 1;
     overflow: hidden;
     .row {
-      height: 20%;
+      height: 17%;
     }
   }
   .txt01 {
@@ -128,7 +128,7 @@ export default {
     text-align: center;
     font-size: var(--fontSize-8);
   }
-  .anim{
+  .animation {
     transition: all 0.5s;
     margin-top: 0%;
   }
