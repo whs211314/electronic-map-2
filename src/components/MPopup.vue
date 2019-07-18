@@ -44,9 +44,10 @@ export default {
     position: absolute;
     width: 0;
     height: 0;
-    padding: 15%;
+    padding: 30%;
     @include bgImage('../assets/images/popup-w.png');
-    transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0) scale(.4);
+    transform-origin: center center;
   }
   .item {
     position: absolute;
@@ -56,7 +57,7 @@ export default {
     background-color: #01BDBA;
     border-radius: 50%;
     border: 1px solid #00D7D4;
-    font-size: var(--fontSize-12);
+    font-size: var(--fontSize-20);
     cursor: pointer;
     &:hover {
       color: #FC7D12;
