@@ -39,12 +39,12 @@ export default {
       txt01: 'txt01',
       headers: ['地市', '金湘通服务点名称', '时间', '结果', '方式'],
       items: [
-        { type: '长治市', money: '长沙市某某服务网点', dealStatus: '02:22:54', riskStatus: '异常', isChange: '现场' },
-        { type: '长沙市', money: '长沙市某某服务网点', dealStatus: '12:32:43', riskStatus: '正常', isChange: '现场' },
-        { type: '永州市', money: '长沙市某某服务网点', dealStatus: '16:43:2', riskStatus: '异常', isChange: '现场' },
-        { type: '怀化市', money: '长沙市某某服务网点', dealStatus: '07:20:21', riskStatus: '正常', isChange: '现场' },
-        { type: '衡阳市', money: '长沙市某某服务网点', dealStatus: '09:14:23', riskStatus: '异常', isChange: '现场' },
-        { type: '邵阳市', money: '长沙市某某服务网点', dealStatus: '23:32:32', riskStatus: '正常', isChange: '现场' }
+        { type: '长治市', money: '长沙市某某服务网点', dealStatus: '2019-06-12', riskStatus: '异常', isChange: '现场' },
+        { type: '长沙市', money: '长沙市某某服务网点', dealStatus: '2019-06-21', riskStatus: '正常', isChange: '现场' },
+        { type: '永州市', money: '长沙市某某服务网点', dealStatus: '2019-06-25', riskStatus: '异常', isChange: '现场' },
+        { type: '怀化市', money: '长沙市某某服务网点', dealStatus: '2019-07-02', riskStatus: '正常', isChange: '现场' },
+        { type: '衡阳市', money: '长沙市某某服务网点', dealStatus: '2019-07-04', riskStatus: '异常', isChange: '现场' },
+        { type: '邵阳市', money: '长沙市某某服务网点', dealStatus: '2019-07-12', riskStatus: '正常', isChange: '现场' }
       ]
     }
   },
