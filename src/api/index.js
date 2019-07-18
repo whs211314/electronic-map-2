@@ -42,3 +42,14 @@ export function getTransLog (mchId) {
     })
   })
 }
+
+// 视图接口
+export function getClassInfo (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpJxtClass/getClassInfo', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}

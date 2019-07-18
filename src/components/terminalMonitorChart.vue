@@ -31,6 +31,7 @@
 
 <script>
 import echarts from 'echarts'
+import * as api from '@/api'
 
 export default {
   data () {
@@ -38,98 +39,112 @@ export default {
       headers: ['缺纸', '维修中', '模块故障', '通讯异常'],
       bodys: [
         { type: '1500个', money: '2500个', dealStatus: '3500个', riskStatus: '2500个' }
-      ]
+      ],
+      echartsList: []
     }
   },
   methods: {
     chartInit () {
-      let myChart = echarts.init(document.getElementById('line-chart'))
-      let option = {
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        title: {
-          text: '10000',
-          left: '23%',
-          top: '50%',
-          textStyle: {
-            color: '#fff',
-            fontSize: 12,
-            align: 'center'
-          }
-        },
-        graphic: {
-          type: 'text',
-          left: '24.5%',
-          top: '43%',
-          style: {
-            text: '总数量',
-            textAlign: 'center',
-            fill: '#fff',
-            fontSize: 12
-          }
-        },
-        color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0'],
-        series: [
-          {
-            name: '',
-            type: 'pie',
-            radius: ['30%', '70%'],
-            center: ['30%', '50%'],
-            label: {
-              normal: {
-                formatter: '{a|{b}}\n{hr|}\n{per|{d}%}',
-                show: true,
-                padding: [0, -25],
-                rich: {
-                  a: {
-                    color: '#ffffff',
-                    fontSize: 11,
-                    lineHeight: 20,
-                    align: 'center'
+      let classType = {
+        classType: 7
+      }
+      let className = {
+        classType: 7
+      }
+      api.getClassInfo(classType).then(res => {
+        api.getClassInfo(className).then(item => {
+          res.data.forEach((el, index) => {
+            if (index > 0) {
+              this.echartsList.push(el)
+            }
+          })
+          let myChart = echarts.init(document.getElementById('line-chart'))
+          let option = {
+            tooltip: {
+              trigger: 'item',
+              formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            title: {
+              text: res.data[0].classNum,
+              left: '25%',
+              top: '52%',
+              textStyle: {
+                color: '#fff',
+                fontSize: 12,
+                align: 'center'
+              }
+            },
+            graphic: {
+              type: 'text',
+              left: '24.5%',
+              top: '45%',
+              style: {
+                text: res.data[0].className,
+                textAlign: 'center',
+                fill: '#fff',
+                fontSize: 12
+              }
+            },
+            color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0'],
+            series: [
+              {
+                name: '',
+                type: 'pie',
+                radius: ['30%', '70%'],
+                center: ['30%', '55%'],
+                label: {
+                  normal: {
+                    formatter: '{a|{b}}\n{hr|}\n{per|{d}%}',
+                    show: true,
+                    padding: [0, -25],
+                    rich: {
+                      a: {
+                        color: '#ffffff',
+                        fontSize: 11,
+                        lineHeight: 20,
+                        align: 'center'
+                      },
+                      hr: {
+                        width: '100%',
+                        height: 0,
+                        alien: 'center'
+                      },
+                      per: {
+                        color: '#ffffff',
+                        align: 'center',
+                        fontSize: 12
+                      }
+                    }
                   },
-                  hr: {
-                    width: '100%',
-                    height: 0,
-                    alien: 'center'
-                  },
-                  per: {
-                    color: '#ffffff',
-                    align: 'center',
-                    fontSize: 12
+                  emphasis: {
+                    show: true,
+                    textStyle: {
+                      fontSize: '12'
+                    }
+                  }
+                },
+                labelLine: {
+                  normal: {
+                    show: false
+                  }
+                },
+                data: this.echartsList.map(item => Object.assign(item, {
+                  value: item.classNum,
+                  name: item.className
+                })),
+                itemStyle: {
+                  emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
                   }
                 }
-              },
-              emphasis: {
-                show: true,
-                textStyle: {
-                  fontSize: '12'
-                }
               }
-            },
-            labelLine: {
-              normal: {
-                show: false
-              }
-            },
-            data: [
-              { value: 25, name: '维修中' },
-              { value: 25, name: '通讯异常' },
-              { value: 35, name: '模块故障' },
-              { value: 15, name: '缺纸' }
-            ],
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
-            }
+            ]
           }
-        ]
-      }
-      myChart.setOption(option, true)
+          myChart.setOption(option, true)
+        })
+      })
     }
   },
   mounted () {

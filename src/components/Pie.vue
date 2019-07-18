@@ -20,145 +20,146 @@ export default {
       pieList: {
         taCountryYearCount: '',
         taCountryCount: ''
-      } // 饼图数据
+      }
     }
   },
   methods: {
     chartInit () {
-      let myChart1 = echarts.init(document.getElementById('line01-chart'))
-      let myChart2 = echarts.init(document.getElementById('line02-chart'))
-      let option1 = {
-        title: {
-          subtext: '年度总交易笔数占比75%',
-          left: 'center',
-          bottom: '0',
-          subtextStyle: {
-            fontSize: fontSize,
-            color: '#00FFF0'
-          }
-        },
-        tooltip: {
-          trigger: 'axis',
-          formatter: '{a} <br/>{b} : {c} ({d}%)',
-          showContent: false
-        },
-        series: [
-          {
-            name: '',
-            type: 'pie',
-            radius: ['50%', '20%'],
-            center: ['50%', '50%'],
-            hoverAnimation: false,
-            label: {
-              normal: {
-                show: false
+      console.log(this.pieList)
+      api.getPieData().then(res => {
+        this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
+        this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
+        console.log(this.pieList)
+        let myChart1 = echarts.init(document.getElementById('line01-chart'))
+        let myChart2 = echarts.init(document.getElementById('line02-chart'))
+        let option1 = {
+          title: {
+            subtext: '年度总交易笔数占比' + this.pieList.taCountryYearCount + '%',
+            left: 'center',
+            bottom: '0',
+            subtextStyle: {
+              fontSize: fontSize,
+              color: '#00FFF0'
+            }
+          },
+          tooltip: {
+            trigger: 'axis',
+            formatter: '{a} <br/>{b} : {c} ({d}%)',
+            showContent: false
+          },
+          series: [
+            {
+              name: '',
+              type: 'pie',
+              radius: ['50%', '20%'],
+              center: ['50%', '50%'],
+              hoverAnimation: false,
+              label: {
+                normal: {
+                  show: false
+                },
+                emphasis: {
+                  show: true,
+                  position: 'center'
+                }
               },
-              emphasis: {
-                show: true,
-                position: 'center'
-              }
-            },
-            labelLine: {
-              normal: {
-                show: false
-              }
-            },
-            data: [
-              { value: 75 },
-              { value: 25 }
-            ],
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              labelLine: {
+                normal: {
+                  show: false
+                }
               },
-              normal: {
-                color: function (params) {
+              data: [
+                { value: this.pieList.taCountryYearCount },
+                { value: 100 - this.pieList.taCountryYearCount }
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+                normal: {
+                  color: function (params) {
                   // 自定义颜色
-                  var colorList = [
-                    '#FFA500', '#132C33'
-                  ]
-                  return colorList[params.dataIndex]
+                    var colorList = [
+                      '#FFA500', '#132C33'
+                    ]
+                    return colorList[params.dataIndex]
+                  }
                 }
               }
             }
-          }
-        ]
-      }
-      myChart1.setOption(option1, true)
-      let option2 = {
-        title: {
-          subtext: '服务点数量占比35%',
-          left: 'center',
-          bottom: '0',
-          subtextStyle: {
-            fontSize: fontSize,
-            color: '#00FFF0'
-          }
-        },
-        tooltip: {
-          trigger: 'axis',
-          formatter: '{a} <br/>{b} : {c} ({d}%)',
-          showContent: false
-        },
-        series: [
-          {
-            name: '',
-            type: 'pie',
-            radius: ['50%', '20%'],
-            center: ['50%', '50%'],
-            hoverAnimation: false,
-            label: {
-              normal: {
-                show: false
+          ]
+        }
+        myChart1.setOption(option1, true)
+        let option2 = {
+          title: {
+            subtext: '服务点数量占比' + this.pieList.taCountryCount + '%',
+            left: 'center',
+            bottom: '0',
+            subtextStyle: {
+              fontSize: fontSize,
+              color: '#00FFF0'
+            }
+          },
+          tooltip: {
+            trigger: 'axis',
+            formatter: '{a} <br/>{b} : {c} ({d}%)',
+            showContent: false
+          },
+          series: [
+            {
+              name: '',
+              type: 'pie',
+              radius: ['50%', '20%'],
+              center: ['50%', '50%'],
+              hoverAnimation: false,
+              label: {
+                normal: {
+                  show: false
+                },
+                emphasis: {
+                  show: true,
+                  position: 'center'
+                }
               },
-              emphasis: {
-                show: true,
-                position: 'center'
-              }
-            },
-            labelLine: {
-              normal: {
-                show: false
-              }
-            },
-            data: [
-              { value: 35 },
-              { value: 65 }
-            ],
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              labelLine: {
+                normal: {
+                  show: false
+                }
               },
-              normal: {
-                color: function (params) {
+              data: [
+                { value: this.pieList.taCountryCount },
+                { value: 100 - this.pieList.taCountryCount }
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+                normal: {
+                  color: function (params) {
                   // 自定义颜色
-                  var colorList = [
-                    '#FFA500', '#132C33'
-                  ]
-                  return colorList[params.dataIndex]
+                    var colorList = [
+                      '#FFA500', '#132C33'
+                    ]
+                    return colorList[params.dataIndex]
+                  }
                 }
               }
             }
-          }
-        ]
-      }
-      myChart2.setOption(option2, true)
+          ]
+        }
+        myChart2.setOption(option2, true)
+      })
     }
   },
   created () {
-
+    console.log(this.pieList)
   },
   mounted () {
     this.chartInit()
-    api.getPieData().then(res => {
-      this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
-      this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
-      console.log(this.pieList)
-    })
   }
 }
 </script>

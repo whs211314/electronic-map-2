@@ -78,6 +78,7 @@
 
 <script>
 import echarts from 'echarts'
+import * as api from '@/api'
 
 export default {
   data () {
@@ -85,6 +86,12 @@ export default {
       isChart: true,
       isGrade: false,
       isActivity: false,
+      strokeCount: [], // 笔数列表
+      strokeMoney: [], // 笔数列表
+      strokeTime: [], // 商户时间
+      strokeGrade: [], // 等级
+      strokeTrain: [], // 培训
+      strokeSem: [], // 营销
       headers: ['', '一档', '二档', '三档', '四档'],
       bodys: [
         { type: '培训', money: '20万内', dealStatus: '20万内', riskStatus: '20万内', isChange: '20万内' },
@@ -103,94 +110,104 @@ export default {
       }, 500)
     },
     chartInit () {
-      let myChart = echarts.init(document.getElementById('line-chart'))
-      let option = {
-        color: ['#22E7E4', '#EE7343'],
-        legend: {
-          data: ['交易笔数(笔)', '交易金额(万元)'],
-          position: 'absolute',
-          align: 'left', // 水平方向位置
-          verticalAlign: 'top', // 垂直方向位置
-          x: 200, // 距离x轴的距离
-          y: 0, // 距离Y轴的距离
-          textStyle: {
-            color: '#ffffff'
-          }
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-          }
-        },
-        grid: {
-          top: '20%',
-          left: '3%',
-          right: '44%',
-          bottom: '10%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: ['一档', '二档', '三档', '四档'],
-            axisTick: {
-              alignWithLabel: true,
-              lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
-            },
-            axisLabel: { color: '#D2FBFE' }, // x轴字体颜色
-            axisLine: {
-              lineStyle: { color: '#CAF7FF' } // x轴坐标轴颜色
-            }
-          }
-        ],
-        yAxis: [
-          {
-            name: '',
-            type: 'value',
-            axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
-            axisLine: {
-              show: false,
-              lineStyle: {
-                color: '#D2FBFE'
+      api.getClassInfo({ 'classType': 1 }).then(res => {
+        api.getClassInfo({ 'classType': 2 }).then(item => {
+          res.data.forEach((el, index) => {
+            this.strokeCount.push(el.classNum)
+          })
+          item.data.forEach((el, index) => {
+            this.strokeMoney.push(el.classNum)
+          })
+          let myChart = echarts.init(document.getElementById('line-chart'))
+          let option = {
+            color: ['#22E7E4', '#EE7343'],
+            legend: {
+              data: ['交易笔数(笔)', '交易金额(万元)'],
+              position: 'absolute',
+              align: 'left', // 水平方向位置
+              verticalAlign: 'top', // 垂直方向位置
+              x: 200, // 距离x轴的距离
+              y: 0, // 距离Y轴的距离
+              textStyle: {
+                color: '#ffffff'
               }
             },
-            axisTick: {
-              show: false
-            },
-            splitLine: {
-              lineStyle: {
-                color: 'rgba(202,247,255,0.51)'
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
               }
-            }
+            },
+            grid: {
+              top: '20%',
+              left: '3%',
+              right: '44%',
+              bottom: '10%',
+              containLabel: true
+            },
+            xAxis: [
+              {
+                type: 'category',
+                data: ['一档', '二档', '三档', '四档'],
+                axisTick: {
+                  alignWithLabel: true,
+                  lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
+                },
+                axisLabel: { color: '#D2FBFE' }, // x轴字体颜色
+                axisLine: {
+                  lineStyle: { color: '#CAF7FF' } // x轴坐标轴颜色
+                }
+              }
+            ],
+            yAxis: [
+              {
+                name: '',
+                type: 'value',
+                axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
+                axisLine: {
+                  show: false,
+                  lineStyle: {
+                    color: '#D2FBFE'
+                  }
+                },
+                axisTick: {
+                  show: false
+                },
+                splitLine: {
+                  lineStyle: {
+                    color: 'rgba(202,247,255,0.51)'
+                  }
+                }
+              }
+            ],
+            series: [
+              {
+                name: '交易笔数(笔)',
+                type: 'bar',
+                barWidth: '20%',
+                itemStyle: { // 柱样式
+                  normal: {
+                    barBorderRadius: [10, 10, 10, 10]
+                  }
+                },
+                data: this.strokeCount
+              },
+              {
+                name: '交易金额(万元)',
+                type: 'bar',
+                barWidth: '20%',
+                itemStyle: { // 柱样式
+                  normal: {
+                    barBorderRadius: [10, 10, 10, 10]
+                  }
+                },
+                data: this.strokeMoney
+              }
+            ]
           }
-        ],
-        series: [
-          {
-            name: '交易笔数(笔)',
-            type: 'bar',
-            barWidth: '20%',
-            itemStyle: { // 柱样式
-              normal: {
-                barBorderRadius: [10, 10, 10, 10]
-              }
-            },
-            data: [ 1000, 1300, 1800, 1599 ]
-          },
-          {
-            name: '交易金额(万元)',
-            type: 'bar',
-            barWidth: '20%',
-            itemStyle: { // 柱样式
-              normal: {
-                barBorderRadius: [10, 10, 10, 10]
-              }
-            },
-            data: [ 600, 1700, 1000, 699 ]
-          }
-        ]
-      }
-      myChart.setOption(option, true)
+          myChart.setOption(option, true)
+        })
+      })
     },
     gradeClick () {
       this.isChart = false
@@ -202,94 +219,104 @@ export default {
     },
     // 等级
     grade () {
-      let myChart = echarts.init(document.getElementById('line-grade'))
-      let option = {
-        color: ['#22E7E4', '#EE7343'],
-        legend: {
-          data: ['开业时间(年)', '商户等级'],
-          position: 'absolute',
-          align: 'left', // 水平方向位置
-          verticalAlign: 'top', // 垂直方向位置
-          x: 200, // 距离x轴的距离
-          y: 0, // 距离Y轴的距离
-          textStyle: {
-            color: '#ffffff'
-          }
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-          }
-        },
-        grid: {
-          top: '20%',
-          left: '3%',
-          right: '44%',
-          bottom: '10%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: ['一档', '二档', '三档', '四档'],
-            axisTick: {
-              alignWithLabel: true,
-              lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
-            },
-            axisLabel: { color: '#D2FBFE' }, // x轴字体颜色
-            axisLine: {
-              lineStyle: { color: '#CAF7FF' } // x轴坐标轴颜色
-            }
-          }
-        ],
-        yAxis: [
-          {
-            name: '',
-            type: 'value',
-            axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
-            axisLine: {
-              show: false,
-              lineStyle: {
-                color: '#D2FBFE'
+      api.getClassInfo({ 'classType': 3 }).then(res => {
+        api.getClassInfo({ 'classType': 4 }).then(item => {
+          res.data.forEach((el, index) => {
+            this.strokeTime.push(el.classNum)
+          })
+          item.data.forEach((el, index) => {
+            this.strokeGrade.push(el.classNum)
+          })
+          let myChart = echarts.init(document.getElementById('line-grade'))
+          let option = {
+            color: ['#22E7E4', '#EE7343'],
+            legend: {
+              data: ['开业时间(年)', '商户等级'],
+              position: 'absolute',
+              align: 'left', // 水平方向位置
+              verticalAlign: 'top', // 垂直方向位置
+              x: 200, // 距离x轴的距离
+              y: 0, // 距离Y轴的距离
+              textStyle: {
+                color: '#ffffff'
               }
             },
-            axisTick: {
-              show: false
-            },
-            splitLine: {
-              lineStyle: {
-                color: 'rgba(202,247,255,0.51)'
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
               }
-            }
+            },
+            grid: {
+              top: '20%',
+              left: '3%',
+              right: '44%',
+              bottom: '10%',
+              containLabel: true
+            },
+            xAxis: [
+              {
+                type: 'category',
+                data: ['一档', '二档', '三档', '四档'],
+                axisTick: {
+                  alignWithLabel: true,
+                  lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
+                },
+                axisLabel: { color: '#D2FBFE' }, // x轴字体颜色
+                axisLine: {
+                  lineStyle: { color: '#CAF7FF' } // x轴坐标轴颜色
+                }
+              }
+            ],
+            yAxis: [
+              {
+                name: '',
+                type: 'value',
+                axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
+                axisLine: {
+                  show: false,
+                  lineStyle: {
+                    color: '#D2FBFE'
+                  }
+                },
+                axisTick: {
+                  show: false
+                },
+                splitLine: {
+                  lineStyle: {
+                    color: 'rgba(202,247,255,0.51)'
+                  }
+                }
+              }
+            ],
+            series: [
+              {
+                name: '开业时间(年)',
+                type: 'bar',
+                barWidth: '20%',
+                itemStyle: { // 柱样式
+                  normal: {
+                    barBorderRadius: [10, 10, 10, 10]
+                  }
+                },
+                data: this.strokeTime
+              },
+              {
+                name: '商户等级',
+                type: 'bar',
+                barWidth: '20%',
+                itemStyle: { // 柱样式
+                  normal: {
+                    barBorderRadius: [10, 10, 10, 10]
+                  }
+                },
+                data: this.strokeGrade
+              }
+            ]
           }
-        ],
-        series: [
-          {
-            name: '开业时间(年)',
-            type: 'bar',
-            barWidth: '20%',
-            itemStyle: { // 柱样式
-              normal: {
-                barBorderRadius: [10, 10, 10, 10]
-              }
-            },
-            data: [ 1000, 1300, 1800, 1599 ]
-          },
-          {
-            name: '商户等级',
-            type: 'bar',
-            barWidth: '20%',
-            itemStyle: { // 柱样式
-              normal: {
-                barBorderRadius: [10, 10, 10, 10]
-              }
-            },
-            data: [ 600, 1700, 1000, 699 ]
-          }
-        ]
-      }
-      myChart.setOption(option, true)
+          myChart.setOption(option, true)
+        })
+      })
     },
     // 营销活动
     activityClick () {
@@ -301,94 +328,104 @@ export default {
       }, 500)
     },
     activity () {
-      let myChart = echarts.init(document.getElementById('line-activity'))
-      let option = {
-        color: ['#22E7E4', '#EE7343'],
-        legend: {
-          data: ['培训(次)', '营销活动(次)'],
-          position: 'absolute',
-          align: 'left', // 水平方向位置
-          verticalAlign: 'top', // 垂直方向位置
-          x: 200, // 距离x轴的距离
-          y: 0, // 距离Y轴的距离
-          textStyle: {
-            color: '#ffffff'
-          }
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-          }
-        },
-        grid: {
-          top: '20%',
-          left: '3%',
-          right: '44%',
-          bottom: '10%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: ['一档', '二档', '三档', '四档'],
-            axisTick: {
-              alignWithLabel: true,
-              lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
-            },
-            axisLabel: { color: '#D2FBFE' }, // x轴字体颜色
-            axisLine: {
-              lineStyle: { color: '#CAF7FF' } // x轴坐标轴颜色
-            }
-          }
-        ],
-        yAxis: [
-          {
-            name: '',
-            type: 'value',
-            axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
-            axisLine: {
-              show: false,
-              lineStyle: {
-                color: '#D2FBFE'
+      api.getClassInfo({ 'classType': 1 }).then(res => {
+        api.getClassInfo({ 'classType': 2 }).then(item => {
+          res.data.forEach((el, index) => {
+            this.strokeTrain.push(el.classNum)
+          })
+          item.data.forEach((el, index) => {
+            this.strokeSem.push(el.classNum)
+          })
+          let myChart = echarts.init(document.getElementById('line-activity'))
+          let option = {
+            color: ['#22E7E4', '#EE7343'],
+            legend: {
+              data: ['培训(次)', '营销活动(次)'],
+              position: 'absolute',
+              align: 'left', // 水平方向位置
+              verticalAlign: 'top', // 垂直方向位置
+              x: 200, // 距离x轴的距离
+              y: 0, // 距离Y轴的距离
+              textStyle: {
+                color: '#ffffff'
               }
             },
-            axisTick: {
-              show: false
-            },
-            splitLine: {
-              lineStyle: {
-                color: 'rgba(202,247,255,0.51)'
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
               }
-            }
+            },
+            grid: {
+              top: '20%',
+              left: '3%',
+              right: '44%',
+              bottom: '10%',
+              containLabel: true
+            },
+            xAxis: [
+              {
+                type: 'category',
+                data: ['一档', '二档', '三档', '四档'],
+                axisTick: {
+                  alignWithLabel: true,
+                  lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
+                },
+                axisLabel: { color: '#D2FBFE' }, // x轴字体颜色
+                axisLine: {
+                  lineStyle: { color: '#CAF7FF' } // x轴坐标轴颜色
+                }
+              }
+            ],
+            yAxis: [
+              {
+                name: '',
+                type: 'value',
+                axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
+                axisLine: {
+                  show: false,
+                  lineStyle: {
+                    color: '#D2FBFE'
+                  }
+                },
+                axisTick: {
+                  show: false
+                },
+                splitLine: {
+                  lineStyle: {
+                    color: 'rgba(202,247,255,0.51)'
+                  }
+                }
+              }
+            ],
+            series: [
+              {
+                name: '培训(次)',
+                type: 'bar',
+                barWidth: '20%',
+                itemStyle: { // 柱样式
+                  normal: {
+                    barBorderRadius: [10, 10, 10, 10]
+                  }
+                },
+                data: this.strokeTrain
+              },
+              {
+                name: '营销活动(次)',
+                type: 'bar',
+                barWidth: '20%',
+                itemStyle: { // 柱样式
+                  normal: {
+                    barBorderRadius: [10, 10, 10, 10]
+                  }
+                },
+                data: this.strokeSem
+              }
+            ]
           }
-        ],
-        series: [
-          {
-            name: '培训(次)',
-            type: 'bar',
-            barWidth: '20%',
-            itemStyle: { // 柱样式
-              normal: {
-                barBorderRadius: [10, 10, 10, 10]
-              }
-            },
-            data: [ 1000, 1300, 1800, 1599 ]
-          },
-          {
-            name: '营销活动(次)',
-            type: 'bar',
-            barWidth: '20%',
-            itemStyle: { // 柱样式
-              normal: {
-                barBorderRadius: [10, 10, 10, 10]
-              }
-            },
-            data: [ 600, 1700, 1000, 699 ]
-          }
-        ]
-      }
-      myChart.setOption(option, true)
+          myChart.setOption(option, true)
+        })
+      })
     }
 
   },
