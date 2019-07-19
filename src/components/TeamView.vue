@@ -4,25 +4,45 @@
       <div class="txt">合作视图</div>
     </div>
     <div class="empty"></div>
-    <div class="items">
-      <ViewButton class="item" v-for="(item, index) in items" :key="index" />
+    <div class="items" v-if="Object.keys(items).length === 9">
+      <ViewButton class="item"
+        v-for="(item, index) in items"
+        :key="index"
+        :item="item"
+        @itemClick="handleClick(item)" />
     </div>
   </div>
 </template>
 
 <script>
 import ViewButton from './ViewButton'
+import * as api from '@/api'
+const labels = ['政务', '卫健', '扶贫', '退伍军人', '通讯', '商超', '餐饮', '快递', '电商']
+
 export default {
-  props: {
-    items: {
-      type: Array,
-      default: () => ([])
+  components: { ViewButton },
+  data () {
+    return {
+      items: {}
     }
   },
   created () {
-    console.log(this.items)
+    api.getTrade({ areaType: 0 }).then(res => {
+      const { data } = res
+      labels.forEach(item => {
+        this.$set(this.items, item, {
+          tradeName: item,
+          mix: data[item] ? data[item][0].mix : 0,
+          count: data[item] ? data[item][0].count : 0
+        })
+      })
+    })
   },
-  components: { ViewButton }
+  methods: {
+    handleClick (item) {
+      this.$emit('teamview', item.tradeName)
+    }
+  }
 }
 </script>
 

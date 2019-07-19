@@ -76,3 +76,14 @@ export function getAreaServies ({ areaType, cityName = '' }) {
     })
   })
 }
+
+// 合作视图  地区类型0省，1市，2区县，3乡镇
+export function getTrade ({ areaType, cityName = '', tradeName = '' }) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpJxtTrade/getTrade', {
+      params: { areaType, cityName, areaName: '', streetName: '', tradeName }
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}

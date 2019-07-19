@@ -1,10 +1,10 @@
 <template>
-  <div class="view-button">
+  <div class="view-button" @click.stop="$emit('itemClick', item)">
     <div class="top position-center">
-      <div class="name fl">{{item.name}}</div>
-      <div class="rate fr">{{item.rate}}%</div>
+      <div class="name fl">{{item.tradeName}}</div>
+      <div class="rate fr">{{item.mix}}%</div>
     </div>
-    <div class="bottom">{{item.num}}个</div>
+    <div class="bottom">{{item.count}}个</div>
   </div>
 </template>
 
@@ -13,15 +13,8 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => ({
-        name: '块存储',
-        rate: '50',
-        num: 1200
-      })
+      default: () => ({})
     }
-  },
-  created () {
-    console.log(this.item)
   }
 }
 </script>
@@ -31,18 +24,19 @@ export default {
 
 .view-button {
   position: relative;
+  cursor: pointer;
   @include bgImage('../assets/images/btn-4.png');
   .top {
-    width: 60%;
+    width: 75%;
     font-weight: bold;
-    font-size: var(--fontSize-16);
+    font-size: var(--fontSize-18);
   }
   .bottom {
     position: absolute;
-    bottom: 0;
+    bottom: -5%;
     left: 54%;
     transform: translate3d(-50%, 0, 0);
-    font-size: var(--fontSize-14);
+    font-size: var(--fontSize-16);
     font-weight: bold;
   }
 }

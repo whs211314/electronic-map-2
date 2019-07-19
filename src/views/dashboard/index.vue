@@ -91,7 +91,7 @@
     </div>
     <!-- 合作视图 -->
     <div class="teamview">
-      <TeamView :items="teamviews" />
+      <TeamView @teamview="handleTeamview" />
     </div>
     <!-- 实时监控 -->
     <div class="monitor-top-r">
@@ -239,19 +239,6 @@ export default {
         { },
         { }
       ],
-      teamviews: Array.from({ length: 10 }, () => '农产品进城'),
-      //  [
-      //    { name: '政务合作', rate: '50', num: 1200 },
-      //    { name: '卫健', rate: '50', num: 1200 },
-      //    { name: '退役军人', rate: '50', num: 1200 },
-      //    { name: '通讯', rate: '50', num: 1200 },
-      //    { name: '商超', rate: '50', num: 1200 },
-      //    { name: '餐饮', rate: '50', num: 1200 },
-      //    { name: '快递', rate: '50', num: 1200 },
-      //    { name: '电商', rate: '50', num: 1200 },
-      //    {},
-      //    {}
-      //  ],
       monitors: [{ type: '服务点视图' }, { type: '异常终端视图' }, { type: '交易视图' }, { type: '风险预警' }, { type: '巡检' }],
       monitorDealList: []
     }
@@ -404,6 +391,12 @@ export default {
       this.topItem = item
       this.$nextTick(() => {
         this.$refs[this.chartType].mapChart()
+      })
+    },
+    handleTeamview (tradeName) {
+      this.chartType = 'ChartDeploy'
+      this.$nextTick(() => {
+        this.$refs[this.chartType].handleFilter(tradeName)
       })
     }
   }

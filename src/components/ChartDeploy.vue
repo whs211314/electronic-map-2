@@ -15,7 +15,8 @@ export default {
       myChart: null,
       currID: '4300',
       jpmData: [],
-      regionNetMap: {}
+      regionNetMap: {},
+      currentLevel: 1
     }
   },
   mounted () {
@@ -53,7 +54,8 @@ export default {
                 type: 'FeatureCollection',
                 features: this.currJson.features.filter(e => e.id === this.currID)
               }
-              this.$emit('goDown', { id, name, allName })
+              this.currentLevel = 4
+              this.$emit('goDown', { id, name, allName, level: this.currentLevel })
               this.registerAndsetOption(this.myChart, param.name, townJson)
               api.getMchInfoList({ allName }).then(res => {
                 this.jpmData = res.data
@@ -66,24 +68,26 @@ export default {
               // 县一级服务点
               if (this.currID.split('_').length === 1) {
                 api.getAreaServies({ areaType: 2, cityName: name }).then(res => {
-                  console.log('====', res)
+                  this.currentLevel = 2
                   res.data.forEach(e => {
                     this.regionNetMap[`${e.jrCity}_${e.jrArea}`] = e.jrServerCount
                   })
                   this.currJson = mapJson
-                  this.$emit('goDown', { id, name, allName })
+                  this.$emit('goDown', { id, name, allName, level: this.currentLevel })
                   this.registerAndsetOption(this.myChart, param.name, mapJson)
                 })
               } else {
+                this.currentLevel = 3
                 this.currJson = mapJson
-                this.$emit('goDown', { id, name, allName })
+                this.$emit('goDown', { id, name, allName, level: this.currentLevel })
                 this.registerAndsetOption(this.myChart, param.name, mapJson)
               }
             })
           } else {
+            this.currentLevel = 1
             // 没有下级地图，回到一级中国地图，并将mapStack清空
             this.registerAndsetOption(this.myChart, this.chinaName, this.chinaJson)
-            this.$emit('goDown', { id: '4300', name: '湖南省', allName: '' })
+            this.$emit('goDown', { id: '4300', name: '湖南省', allName: '', level: this.currentLevel })
           }
         })
       })
@@ -186,7 +190,7 @@ export default {
         }]
       }, true)
     },
-    initMapData (mapJson, level) {
+    initMapData (mapJson) {
       var mapData = []
       for (var i = 0; i < mapJson.features.length; i++) {
         mapData.push({
@@ -197,6 +201,34 @@ export default {
         })
       }
       return mapData
+    },
+    // 合作视图筛选
+    handleFilter (tradeName) {
+      if (this.currentLevel > 2) return
+      api.getTrade({ areaType: this.currentLevel, tradeName }).then(res => {
+        const map = res.data
+        function getCount (params) {
+          if (!map[params.data.name]) return 0
+          return map[params.data.name][0].count
+        }
+        this.myChart.setOption({
+          series: [{
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            animation: false,
+            data: this.initMapData(this.currJson),
+            label: {
+              show: true,
+              position: 'bottom',
+              color: '#fff',
+              formatter: params => params.data.allName.split('_').length < 3 ? getCount(params) : ''
+            },
+            itemStyle: {
+              color: 'transparent'
+            }
+          }]
+        })
+      })
     }
   }
 }
