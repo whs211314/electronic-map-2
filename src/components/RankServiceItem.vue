@@ -1,23 +1,23 @@
 <template>
-<div class="rank-service-item">
+<div class="rank-service-item" @click.stop="$emit('itemClick')">
   <div class="content">
     <div class="left">
       <div class="name flex-center"><div class="txt">金湘通</div></div>
       <div class="rank flex-center"><div class="txt center">NO {{rank}}</div></div>
     </div>
     <div class="right">
-      <div class="network flex-center"><div class="txt">金湘通服务网点1</div></div>
+      <div class="network flex-center"><div class="txt oh">{{item.jpmMchName}}</div></div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">笔数</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">3082万笔</div> </div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{item.transAllCount}}笔</div> </div>
       </div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">金额</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">3082万元</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{item.transAllSum | money}}元</div></div>
       </div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">返佣</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">4082万元</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{item.inComeSum | money}}元</div></div>
       </div>
     </div>
   </div>
@@ -27,7 +27,24 @@
 <script>
 export default {
   props: {
+    item: {
+      type: Object,
+      default: () => ({})
+    },
     rank: Number
+  },
+  filters: {
+    money (value) {
+      const str = String(value)
+      const len = str.length
+      if (len < 6) {
+        return str
+      } else if (len < 10) {
+        return str.slice(0, -4) + '万'
+      } else {
+        return str.slice(0, -8) + '亿'
+      }
+    }
   }
 }
 </script>
@@ -36,6 +53,9 @@ export default {
 @import '../assets/style/index.scss';
 .rank-service-item {
   @include bgImage('../assets/images/rank.png');
+  .oh {
+    overflow: hidden;
+  }
   .content {
     position: absolute;
     left: -50%;
@@ -47,6 +67,7 @@ export default {
     .txt:not(.center) {
       width: 100%;
       text-align: left;
+      white-space: nowrap;
     }
     .left {
       position: absolute;
@@ -73,13 +94,13 @@ export default {
       position: absolute;
       top: 12%;
       left: 48%;
-      width: 38%;
+      width: 39%;
       height: 72%;
       font-size: var(--fontSize-16);
       .item {
-        height: 25%;
+        height: 26%;
         &:not(:first-child) {
-          padding-left: 4%;
+          padding-left: 2%;
         }
         > div {
           height: 100%;

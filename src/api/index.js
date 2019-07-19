@@ -53,3 +53,15 @@ export function getClassInfo (mchId) {
     })
   })
 }
+
+// 视图接口
+export function getTop ({ allName = '' } = {}) {
+  const [cityName = '', areaName = '', streetName = ''] = allName.split('_')
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpJxtMchTop/getTop', {
+      params: { cityName, areaName, streetName, pageIndex: 1 }
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}

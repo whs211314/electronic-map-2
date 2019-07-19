@@ -1,56 +1,72 @@
 <template>
   <div class="rank-service position-space">
     <div class="title flex-center"><div class="txt">综合排名TOP100</div></div>
-    <div class="swiper">
-      <swipe class="swipe"
-        ref="swipe"
-        :auto="5000"
-        :disabled="true"
-        :show-indicators="false"
-        @change="handleSwipeChange">
-        <swipe-item class="items">
-          <RankServiceItem class="item" :rank="1" />
-          <RankServiceItem class="item" :rank="2" />
-          <RankServiceItem class="item" :rank="3" />
-        </swipe-item>
-        <swipe-item class="items">
-          <RankServiceItem class="item" :rank="4" />
-          <RankServiceItem class="item" :rank="5" />
-          <RankServiceItem class="item" :rank="6" />
-        </swipe-item>
-        <swipe-item class="items">
-          <RankServiceItem class="item" :rank="7" />
-          <RankServiceItem class="item" :rank="8" />
-          <RankServiceItem class="item" :rank="9" />
-        </swipe-item>
-      </swipe>
-    </div>
-    <div class="indicator flex-center">
-      <div class="indicator-item"
-        :class="{active: currentIndex===i}"
-        v-for="(_, i) in 3" :key="i"
-        @click="handleSwipeGo(i)"></div>
+    <div class="swiper" v-if="items.length">
+      <div class="items" :class="{move: move}"
+        @transitionend="handleTrnasitionEnd"
+        @mouseenter="handlePause"
+        @mouseleave="handleRun">
+        <RankServiceItem class="item"
+          v-for="item in items"
+          :key="item.rank"
+          :item="item"
+          :rank="item.rank"
+          @itemClick="handleClick(item)" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Swipe, SwipeItem } from 'vue-swipe'
 import RankServiceItem from './RankServiceItem'
+import * as api from '@/api'
 
 export default {
-  components: { Swipe, SwipeItem, RankServiceItem },
+  components: { RankServiceItem },
   data () {
     return {
-      currentIndex: 0
+      originItems: [],
+      items: [],
+      move: false,
+      index: 0
     }
   },
+  created () {
+    api.getTop().then(res => {
+      this.originItems = res.data.map((e, i) => Object.assign(e, { rank: i + 1 }))
+      this.getItems(this.index)
+      this.$nextTick(() => {
+        this.handleRun()
+      })
+    })
+  },
+  destroyed () {
+    this.handlePause()
+  },
   methods: {
-    handleSwipeChange (index) {
-      this.currentIndex = index
+    handleRun () {
+      this.timer = setInterval(() => {
+        this.move = true
+      }, 1000)
     },
-    handleSwipeGo (index) {
-      this.$refs.swipe.goto(index)
+    handlePause () {
+      this.timer && clearInterval(this.timer)
+    },
+    handleTrnasitionEnd () {
+      this.move = false
+      this.getItems(++this.index)
+    },
+    getItems (start) {
+      const len = this.originItems.length
+      if (start + 5 <= len - 1) {
+        this.items = this.originItems.slice(start, start + 5)
+      } else {
+        this.items = [...this.originItems.slice(start, len - 1), ...this.originItems.slice(0, start + 6 - len)]
+      }
+      if (start === len - 1) this.index = 0
+    },
+    handleClick (item) {
+      this.$emit('topEvent', item)
     }
   }
 }
@@ -70,33 +86,28 @@ export default {
     }
   }
   .swiper {
-    pointer-events: none;
     position: absolute;
     left: 0;
-    bottom: 12%;
+    bottom: 8%;
     width: 100%;
     height: 62%;
+    overflow: hidden;
   }
-  .items .item {
-    display: inline-block;
+  .items {
     height: 100%;
-    width: 33%;
-    position: relative;
-  }
-  .indicator {
-    position: absolute;
-    left: 0;
-    bottom: 0;
     width: 100%;
-    height: 12%;
-    .indicator-item {
-      @include bgImage('../assets/images/indicator.png');
+    white-space: nowrap;
+    margin-left: 0;
+    &.move {
+      margin-left: -33%;
+      transition: margin 1s;
+    }
+    .item {
+      display: inline-block;
+      height: 100%;
+      width: 33%;
+      position: relative;
       cursor: pointer;
-      width: 6%;
-      height: 50%;
-      &.active {
-        @include bgImage('../assets/images/indicator-active.png');
-      }
     }
   }
 }

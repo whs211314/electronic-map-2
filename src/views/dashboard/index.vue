@@ -113,7 +113,7 @@
     </div>
     <!-- 服务点交易排名 -->
     <div class="monitor-bottom">
-      <RankService />
+      <RankService @topEvent="handleTopEvent" />
     </div>
   </div>
 </template>
@@ -327,6 +327,10 @@ export default {
       var date = new Date(+new Date(dateee)).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
 
       return date
+    },
+    // 点击排行榜
+    handleTopEvent (item) {
+      console.log(item)
     }
   }
 }

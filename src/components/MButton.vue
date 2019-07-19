@@ -25,7 +25,10 @@ export default {
       type: Boolean,
       default: false
     },
-    txt: String,
+    txt: {
+      type: String,
+      default: ''
+    },
     dialogTxt: String
   },
   data () {
