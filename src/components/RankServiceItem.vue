@@ -9,15 +9,15 @@
       <div class="network flex-center"><div class="txt">金湘通服务网点1</div></div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">笔数</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#E77641;">3082万笔</div> </div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">3082万笔</div> </div>
       </div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">金额</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#E77641;">3082万元</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">3082万元</div></div>
       </div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">占总比</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#E77641;">50%</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">50%</div></div>
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@ export default {
         width: 100%;
         color: $light-blue;
         font-size: calc(var(--fontSize-16) * 2);
-        color:#E77641;
+        color:#feb901;
       }
     }
     .right {

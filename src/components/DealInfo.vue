@@ -14,8 +14,12 @@
         <div class="value">{{sum.number2}} 万元</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">手机银行签约客户款</div></div>
+        <div class="label"><div class="txt">手机银行签约客户数</div></div>
         <div class="value">{{sum.number3}} 万元</div>
+      </div>
+      <div class="item">
+        <div class="label"><div class="txt">建行物理网点数</div></div>
+        <div class="value">{{sum.number}} 个</div>
       </div>
     </div>
     <div class="right fr">
@@ -34,6 +38,10 @@
       <div class="item">
         <div class="label"><div class="txt">同步率</div></div>
         <div class="value orange">{{sum.number7}} %</div>
+      </div>
+      <div class="item">
+        <div class="label"><div class="txt">金湘通服务点数</div></div>
+        <div class="value orange">{{sum.number}} 个</div>
       </div>
     </div>
   </div>
@@ -67,7 +75,7 @@ export default {
     height: 100%;
   }
   .item {
-    height: 24%;
+    height: 20%;
     .label {
       height: 30%;
     }

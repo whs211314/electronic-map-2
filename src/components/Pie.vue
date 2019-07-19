@@ -167,12 +167,20 @@ export default {
 <style scoped lang="scss">
 @import '../assets/style/index.scss';
 #line01-chart {
+  background-image: url(../assets/images/piebg.png);
+  background-repeat: no-repeat;
+  background-position:50%;
+  background-size: 50%;
   height: 100%;
   position: relative;
   left: -23%;
   top: -8%;
 }
 #line02-chart {
+  background-image: url(../assets/images/piebg.png);
+  background-repeat: no-repeat;
+  background-position:50%;
+  background-size: 50%;
   height: 100%;
   position: relative;
   right: -27%;
