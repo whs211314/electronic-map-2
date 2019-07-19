@@ -51,8 +51,8 @@ export default {
             {
               name: '',
               type: 'pie',
-              radius: ['50%', '20%'],
-              center: ['50%', '50%'],
+              radius: ['55%', '15%'],
+              center: ['50%', '49%'],
               hoverAnimation: false,
               label: {
                 normal: {
@@ -69,8 +69,8 @@ export default {
                 }
               },
               data: [
-                { value: this.pieList.taCountryYearCount },
-                { value: 100 - this.pieList.taCountryYearCount }
+                { value: 75 }, // this.pieList.taCountryYearCount
+                { value: 25 } // 100 - this.pieList.taCountryYearCount
               ],
               itemStyle: {
                 emphasis: {
@@ -82,7 +82,7 @@ export default {
                   color: function (params) {
                   // 自定义颜色
                     var colorList = [
-                      '#FFA500', '#132C33'
+                      '#fe7e12', '#132C33'
                     ]
                     return colorList[params.dataIndex]
                   }
@@ -111,8 +111,8 @@ export default {
             {
               name: '',
               type: 'pie',
-              radius: ['50%', '20%'],
-              center: ['50%', '50%'],
+              radius: ['55%', '15%'],
+              center: ['50%', '49%'],
               hoverAnimation: false,
               label: {
                 normal: {
