@@ -27,18 +27,21 @@ export default {
     }
   },
   created () {
-    api.getTrade({ areaType: 0 }).then(res => {
-      const { data } = res
-      labels.forEach(item => {
-        this.$set(this.items, item, {
-          tradeName: item,
-          mix: data[item] ? data[item][0].mix : 0,
-          count: data[item] ? data[item][0].count : 0
-        })
-      })
-    })
+    this.getData()
   },
   methods: {
+    getData (areaType = 0, cityName = '') {
+      api.getTrade({ areaType, cityName }).then(res => {
+        const { data } = res
+        labels.forEach(item => {
+          this.$set(this.items, item, {
+            tradeName: item,
+            mix: data[item] ? data[item][0].mix : 0,
+            count: data[item] ? data[item][0].count : 0
+          })
+        })
+      })
+    },
     handleClick (item) {
       this.$emit('teamview', item.tradeName)
     }

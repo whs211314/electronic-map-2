@@ -91,7 +91,7 @@
     </div>
     <!-- 合作视图 -->
     <div class="teamview">
-      <TeamView @teamview="handleTeamview" />
+      <TeamView @teamview="handleTeamview" ref="teamviewRef" />
     </div>
     <!-- 实时监控 -->
     <div class="monitor-top-r">
@@ -329,6 +329,10 @@ export default {
       console.info(JSON.stringify(e))
       // 事实监控
       this.monitorTask(e)
+      const { level, name } = e
+      // 合作视图仅在市县级更新
+      if (level === 2) this.$refs.teamviewRef.getData(1, name)
+      if (level === 1) this.$refs.teamviewRef.getData()
     },
     MonitorDeal (e) {
       let page = {
