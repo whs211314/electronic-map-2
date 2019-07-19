@@ -73,15 +73,15 @@
       <div class="right">
         <div class="item extra">
           <div class="label"><div class="txt">返佣金额</div></div>
-          <div class="value orange">{{data.jpmMeloonId}}</div>
+          <div class="value orange">{{data.jpmMeloonId}}元</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">交易金额</div></div>
-          <div class="value">{{data.jpmMeloonId}}</div>
+          <div class="value">{{data.jpmMeloonId}}元</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">交易笔数</div></div>
-          <div class="value orange">{{data.jpmOwnerName}}</div>
+          <div class="value orange">{{data.jpmOwnerName}}笔</div>
         </div>
       </div>
     </div>
