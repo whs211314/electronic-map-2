@@ -3,7 +3,9 @@
     <!-- 服务点信息 -->
     <div v-if="basicInfo" style="height:100%;">
       <div class="left fl">
-        <div class="picture"></div>
+        <div class="picture">
+          <img src="assets/jingli/9188025.png" alt="">
+        </div>
       </div>
       <div class="right fr">
         <div class="item r1 extra">
@@ -23,7 +25,9 @@
     <!-- 客户经理 -->
     <div v-if="client" style="height:100%;" >
       <div class="left fl">
-        <div class="picture"></div>
+        <div class="picture">
+          <img :src="home_url" alt="" width="100%">
+        </div>
       </div>
       <div class="right fr">
         <div class="item r1 extra">
@@ -110,7 +114,8 @@ export default {
       type: Boolean,
       default: false
     },
-    dialogTxt: String
+    dialogTxt: String,
+    home_url: Number
   },
   data () {
     return {

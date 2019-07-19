@@ -58,7 +58,7 @@
     <div class="summary">
       <DealInfo v-if="!internalNetwork" :sum='sum'/>
       <!-- 商户画像 -->
-      <merchantsPortrait :basicInfo="basicInfo" :client="client" :patrol="patrol" :record="record" :deal="deal" :data="currJmpInfo" v-if="internalNetwork" />
+      <merchantsPortrait :home_url="home_url" :basicInfo="basicInfo" :client="client" :patrol="patrol" :record="record" :deal="deal" :data="currJmpInfo" v-if="internalNetwork" />
     </div>
     <!-- 地图 -->
     <div class="map-bk"></div>
@@ -179,6 +179,8 @@ export default {
       record: false, // 巡检记录
       deal: false, // 交易
       chartType: 'ChartDeploy', // 地图类型
+      numberId: '',
+      home_url: '',
       popupVisible: false,
       popup: {},
       topItem: {},
@@ -266,6 +268,7 @@ export default {
     popupVisible (val) {
       if (!val) {
         this.internalNetwork = false
+        this.numberId = ''
       }
     }
   },
@@ -283,7 +286,12 @@ export default {
       this.popup = popup
     },
     handleDeployEvent (data, code) {
+      let arr = [81072069, 86617567, 90231567, 93538191, 97778229, 98662928, 99593687, 99901760, 68729821, 68758978, 68988123, 69366959, 69830902, 72018175, 72317666, 71303370, 79658960, 80915399, 79976903, 83026812, 92665315, 93008812, 91368263, 97702962]
       console.warn('--点击部署选项触发--', data, code)
+      if (this.numberId === '') {
+        this.numberId = data.id
+        this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
+      }
       this.currJmpInfo = data
       this.internalNetwork = true
       switch (code) {
@@ -295,11 +303,16 @@ export default {
           this.deal = false
           break
         case 2:
-          this.client = true // 客户信息
+          this.client = true // 客户信息 home_url
           this.basicInfo = false
           this.patrol = false
           this.record = false
           this.deal = false
+          if (Number(this.numberId) === data.id) {
+            this.home_url = this.home_url
+          } else {
+            this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
+          }
           break
         case 3:
           this.deal = true // 交易
