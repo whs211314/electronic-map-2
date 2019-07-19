@@ -87,3 +87,14 @@ export function getTrade ({ areaType, cityName = '', tradeName = '' }) {
     })
   })
 }
+
+// 获取地市下面的区县网点
+export function getAreaNet (cityName) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/bankpoint/getAreaNet', {
+      params: { cityName }
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
