@@ -1,79 +1,79 @@
 <template>
   <div class="deal-info">
     <!-- 服务点信息 -->
-    <div v-if="basicInfo">
-      <div v-if="isPicture" class="left fl">
+    <div v-if="basicInfo" style="height:100%;">
+      <div class="left fl">
         <div class="picture"></div>
       </div>
       <div class="right fr">
         <div class="item r1 extra">
           <div class="label"><div class="txt">业主姓名</div></div>
-          <div class="value orange">{{(+data.jpmLat).toFixed(2)}}, {{(+data.jpmLon).toFixed(2)}}</div>
+          <div class="value orange">{{data.jpmOwnerName}}</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">服务点名称</div></div>
-          <div class="value">某某范围~某某范围</div>
+          <div class="value">{{data.jpmStreet}}</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">服务点状态</div></div>
-          <div class="value orange">{{data.jpmOwnerName}}</div>
+          <div class="value orange">{{data.jpmStreet}}</div>
         </div>
       </div>
     </div>
     <!-- 客户经理 -->
-    <div v-if="client">
-      <div v-if="isPicture" class="left fl">
+    <div v-if="client" style="height:100%;" >
+      <div class="left fl">
         <div class="picture"></div>
       </div>
       <div class="right fr">
         <div class="item r1 extra">
           <div class="label"><div class="txt">姓名</div></div>
-          <div class="value orange">{{(+data.jpmLat).toFixed(2)}}, {{(+data.jpmLon).toFixed(2)}}</div>
+          <div class="value orange">{{data.jpmOwnerName}}</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">电话</div></div>
-          <div class="value">某某范围~某某范围</div>
+          <div class="value">{{data.jpmBlgBoId}}</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">员工编号</div></div>
-          <div class="value orange">{{data.jpmOwnerName}}</div>
+          <div class="value orange">{{data.jpmMchType}}</div>
         </div>
       </div>
     </div>
     <!-- 远程巡检 -->
-    <div v-if="patrol">
-      <div v-if="isPicture" class="left fl">
+    <div v-if="patrol"  style="height:100%;">
+      <div class="left fl">
       </div>
       <div class="right fr">
       </div>
     </div>
     <!-- 巡检记录 -->
-    <div v-if="record">
+    <div v-if="record"  style="height:100%;">
       <div class="right">
         <div class="item extra">
           <div class="label"><div class="txt">巡检时间</div></div>
-          <div class="value orange">{{(+data.jpmLat).toFixed(2)}}, {{(+data.jpmLon).toFixed(2)}}</div>
+          <div class="value orange">{{data.jpmCreateTime.split("T")[0]+' '+data.jpmCreateTime.split("T")[1]}}</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">巡检结果</div></div>
-          <div class="value">某某范围~某某范围</div>
+          <div class="value">{{data.jpmMenuName}}</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">巡检方式</div></div>
-          <div class="value orange">{{data.jpmOwnerName}}</div>
+          <div class="value orange">{{data.jpmEqcompanyName}}</div>
         </div>
       </div>
     </div>
     <!-- 交易 -->
-    <div v-if="deal">
+    <div v-if="deal"  style="height:100%;">
       <div class="right">
         <div class="item extra">
           <div class="label"><div class="txt">返佣金额</div></div>
-          <div class="value orange">{{(+data.jpmLat).toFixed(2)}}, {{(+data.jpmLon).toFixed(2)}}</div>
+          <div class="value orange">{{data.jpmMeloonId}}</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">交易金额</div></div>
-          <div class="value">某某范围~某某范围</div>
+          <div class="value">{{data.jpmMeloonId}}</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">交易笔数</div></div>
@@ -86,15 +86,34 @@
 
 <script>
 export default {
-  props: ['data'],
+  props: {
+    data: {
+      type: Object
+    },
+    basicInfo: { // 基本信息
+      type: Boolean,
+      default: false
+    },
+    client: { // 客户经理
+      type: Boolean,
+      default: false
+    },
+    patrol: { // 远程巡检
+      type: Boolean,
+      default: false
+    },
+    record: { // 巡检记录
+      type: Boolean,
+      default: false
+    },
+    deal: { // 交易
+      type: Boolean,
+      default: false
+    },
+    dialogTxt: String
+  },
   data () {
     return {
-      isPicture: false,
-      basicInfo: false, // 服务点信息
-      client: false, // 客户经理
-      patrol: false, // 远程巡检
-      record: false, // 巡检记录
-      deal: true // 交易
     }
   }
 }

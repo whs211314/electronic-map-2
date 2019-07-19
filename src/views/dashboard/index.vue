@@ -58,7 +58,7 @@
     <div class="summary">
       <DealInfo v-if="!internalNetwork" :sum='sum'/>
       <!-- 商户画像 -->
-      <merchantsPortrait :data="currJmpInfo" v-if="internalNetwork" />
+      <merchantsPortrait :basicInfo="basicInfo" :client="client" :patrol="patrol" :record="record" :deal="deal" :data="currJmpInfo" v-if="internalNetwork" />
     </div>
     <!-- 地图 -->
     <div class="map-bk"></div>
@@ -156,8 +156,13 @@ export default {
   },
   data () {
     return {
-      internalNetwork: true, // 是否内部网点弹窗
+      internalNetwork: false, // 是否内部网点弹窗
       monitorIndex: 0, // 监控按钮初始化索引
+      basicInfo: false, // 基本信息
+      client: false, // 客户信息
+      patrol: false, // 远程巡检
+      record: false, // 巡检记录
+      deal: false, // 交易
       isdeal: true,
       popupVisible: false,
       popup: {},
@@ -265,10 +270,47 @@ export default {
       this.popupVisible = true
       this.popup = popup
     },
-    handleDeployEvent (data) {
-      console.warn('--点击部署选项触发--')
+    handleDeployEvent (data, code) {
+      console.warn('--点击部署选项触发--', data, code)
       this.currJmpInfo = data
       this.internalNetwork = true
+      switch (code) {
+        case 1:
+          this.basicInfo = true // 基本信息
+          this.client = false
+          this.patrol = false
+          this.record = false
+          this.deal = false
+          break
+        case 2:
+          this.client = true // 客户信息
+          this.basicInfo = false
+          this.patrol = false
+          this.record = false
+          this.deal = false
+          break
+        case 3:
+          this.deal = true // 交易
+          this.client = false
+          this.basicInfo = false
+          this.patrol = false
+          this.record = false
+          break
+        case 4:
+          this.patrol = true // 巡检信息
+          this.client = false
+          this.basicInfo = false
+          this.record = false
+          this.deal = false
+          break
+        case 5:
+          this.record = true
+          this.patrol = false // 巡检记录
+          this.client = false
+          this.basicInfo = false
+          this.deal = false
+          break
+      }
     },
     handleGoDown (e) {
       console.warn('--部署地图下钻触发--')

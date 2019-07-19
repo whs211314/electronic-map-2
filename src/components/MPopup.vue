@@ -3,7 +3,7 @@
     <div class="center" :style="{left:`${popup.x}px`,top:`${popup.y}px`}">
       <div class="item" :class="item.position"
         v-for="item in items" :key="item.id"
-        @click.stop="$emit('deployEvent', popup.data)">
+        @click.stop="$emit('deployEvent', popup.data,item.id)">
         <div class="icon" :class="item.icon"></div>
         <div class="label">{{item.label}}</div>
       </div>
@@ -20,12 +20,11 @@ export default {
   data () {
     return {
       items: [
-        { id: 1, label: '服务点', icon: 'fuwudian', position: 'top' },
+        { id: 1, label: '基本信息', icon: 'fuwudian', position: 'top' },
         { id: 2, label: '客户经理', icon: 'jingli', position: 'top-r' },
-        { id: 3, label: '佣金', icon: 'yongjin', position: 'bottom-r' },
-        { id: 4, label: '交易', icon: 'jiaoyi', position: 'bottom' },
-        { id: 5, label: '远程巡检', icon: 'xunjian', position: 'bottom-l' },
-        { id: 6, label: '现场巡检', icon: 'xunjian1', position: 'top-l' }
+        { id: 3, label: '交易', icon: 'jiaoyi', position: 'bottom' },
+        { id: 4, label: '远程巡检', icon: 'xunjian', position: 'bottom-l' },
+        { id: 5, label: '巡检记录', icon: 'xunjian1', position: 'top-l' }
       ]
     }
   }
