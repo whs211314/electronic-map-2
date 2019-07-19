@@ -18,7 +18,7 @@
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">服务点状态</div></div>
-          <div class="value orange">{{data.jpmStreet}}</div>
+          <div class="value orange">{{}}</div>
         </div>
       </div>
     </div>
@@ -36,11 +36,11 @@
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">电话</div></div>
-          <div class="value">{{data.jpmBlgBoId}}</div>
+          <div class="value">{{15029931994}}</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">员工编号</div></div>
-          <div class="value orange">{{data.jpmMchType}}</div>
+          <div class="value orange">{{2-3122}}</div>
         </div>
       </div>
     </div>
@@ -60,11 +60,11 @@
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">巡检结果</div></div>
-          <div class="value">{{data.jpmMenuName}}</div>
+          <div class="value">{{}}</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">巡检方式</div></div>
-          <div class="value orange">{{data.jpmEqcompanyName}}</div>
+          <div class="value orange">{{}}</div>
         </div>
       </div>
     </div>
@@ -81,7 +81,7 @@
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">交易笔数</div></div>
-          <div class="value orange">{{data.jpmOwnerName}}笔</div>
+          <div class="value orange">{{2134}}笔</div>
         </div>
       </div>
     </div>
