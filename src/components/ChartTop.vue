@@ -5,7 +5,7 @@
 <script>
 import echarts from 'echarts'
 import map from '@/assets/js/map'
-import { getRandom } from '@/assets/js/utils'
+import { getRandom, serverIcon } from '@/assets/js/utils'
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {
@@ -102,7 +102,8 @@ export default {
           type: 'scatter',
           coordinateSystem: 'geo',
           data: this.getCoordinate(mapJson),
-          symbolSize: fontSize,
+          symbolSize: fontSize * 1.5,
+          symbol: `image://${serverIcon}`,
           animation: false,
           label: {
             normal: {
