@@ -6,11 +6,11 @@
         <div class="value">{{sum.number}} 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">总金湘通发卡数量</div></div>
+        <div class="label"><div class="txt">金湘通发卡数</div></div>
         <div class="value">{{sum.number1}} 张</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">总金湘通卡存款</div></div>
+        <div class="label"><div class="txt">金湘通卡存款</div></div>
         <div class="value">{{sum.number2}} 亿元</div>
       </div>
       <div class="item">
@@ -28,7 +28,7 @@
         <div class="value">{{sum.number}} 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">金湘通发卡本年数量</div></div>
+        <div class="label"><div class="txt">本年金湘通发卡数</div></div>
         <div class="value orange">{{sum.number5}} 张</div>
       </div>
       <div class="item">
@@ -36,7 +36,7 @@
         <div class="value orange">{{sum.number6}} 万元</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">同步率</div></div>
+        <div class="label"><div class="txt">签约客户同步率</div></div>
         <div class="value orange">{{sum.number7}} %</div>
       </div>
     </div>

@@ -156,7 +156,7 @@ export default {
   },
   data () {
     return {
-      internalNetwork: false, // 是否内部网点弹窗
+      internalNetwork: true, // 是否内部网点弹窗
       monitorIndex: 0, // 监控按钮初始化索引
       isdeal: true,
       popupVisible: false,
