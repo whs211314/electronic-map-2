@@ -43,6 +43,50 @@ export function getTransLog (mchId) {
   })
 }
 
+// 客户经理信息
+export function getManagerInfo (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpJxtCustomerManager/getManagerInfo', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
+
+// 巡检记录
+export function getCheckInfo (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpCheck/getCheckInfo', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
+
+// 交易
+export function getMchTrans (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpJxtMchTop/getMchTrans', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
+
+// 饼图下数据
+export function getDataSum (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpJxtDataSum/getDataSum', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
+
 // 视图接口
 export function getClassInfo (mchId) {
   return new Promise((resolve, reject) => {

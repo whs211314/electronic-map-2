@@ -3,41 +3,41 @@
     <div class="left fl">
       <div class="item">
         <div class="label"><div class="txt">建行物理网点数</div></div>
-        <div class="value">{{sum.number}} 个</div>
+        <div class="value">{{sum.netSum}} 个</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">金湘通发卡数</div></div>
-        <div class="value">{{sum.number1}} 张</div>
+        <div class="value">{{sum.cardAllSum}} 张</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">金湘通卡存款</div></div>
-        <div class="value">{{sum.number2}} 亿元</div>
+        <div class="value">{{sum.transAllSum}} 亿元</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">手机银行签约客户数</div></div>
-        <div class="value">{{sum.number3}} 万个</div>
+        <div class="value">{{sum.phoneCustomerCount}} 个</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">行政区数量</div></div>
-        <div class="value">{{sum.number4}} 个</div>
+        <div class="value">{{sum.areaCount}} 个</div>
       </div>
     </div>
     <div class="right fr">
       <div class="item">
         <div class="label"><div class="txt">金湘通服务点数</div></div>
-        <div class="value">{{sum.number}} 个</div>
+        <div class="value">{{sum.serverAllCount}} 个</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">本年金湘通发卡数</div></div>
-        <div class="value orange">{{sum.number5}} 张</div>
+        <div class="value orange">{{sum.yearCardCount}} 张</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">金湘通卡存款本年增长</div></div>
-        <div class="value orange">{{sum.number6}} 万元</div>
+        <div class="value orange">{{sum.yearAddCardMoney}} 万元</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">签约客户同步率</div></div>
-        <div class="value orange">{{sum.number7}} %</div>
+        <div class="value orange">{{sum.rate}} %</div>
       </div>
     </div>
   </div>

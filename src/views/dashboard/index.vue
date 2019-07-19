@@ -191,15 +191,15 @@ export default {
         taCountryCount: ''
       }, // 饼图数据
       sum: {
-        number: 29000,
-        number1: 89000,
-        number2: 128,
-        number3: 780,
-        number4: 102,
-        number5: 20000,
-        number6: 20000,
-        number7: 3,
-        number8: 528
+        netSum: '',
+        serverAllCount: '',
+        cardAllSum: '',
+        transAllSum: '',
+        phoneCustomerCount: '',
+        areaCount: '',
+        yearCardCount: '',
+        yearAddCardMoney: '',
+        rate: ''
       },
       services1: [
         { type: '现金业务', name: '个人客户小额存取现服务，累计交易笔数为5632，交易金额3.2，占总交易量3%' },
@@ -250,6 +250,7 @@ export default {
       console.log(this.pieList)
     })
     this.monitorTask()
+    this.pieBotton()
   },
   watch: {
     popupVisible (val) {
@@ -295,6 +296,9 @@ export default {
           this.patrol = false
           this.record = false
           this.deal = false
+          api.getManagerInfo({ 'mchId': data.id }).then(res => {
+            console.log(res)
+          })
           if (Number(this.numberId) === data.id) {
             this.home_url = this.home_url
           } else {
@@ -307,6 +311,9 @@ export default {
           this.basicInfo = false
           this.patrol = false
           this.record = false
+          api.getMchTrans({ 'mchId': data.id }).then(res => {
+            console.log(res)
+          })
           break
         case 4:
           this.patrol = true // 巡检信息
@@ -321,6 +328,9 @@ export default {
           this.client = false
           this.basicInfo = false
           this.deal = false
+          api.getCheckInfo({ 'mchId': data.id }).then(res => {
+            console.log(res)
+          })
           break
       }
     },
@@ -333,6 +343,34 @@ export default {
       // 合作视图仅在市县级更新
       if (level === 2) this.$refs.teamviewRef.getData(1, name)
       if (level === 1) this.$refs.teamviewRef.getData()
+      // 饼图下数据
+      this.pieBotton(e)
+    },
+    pieBotton (e) {
+      let pieBotton = {
+        areaType: 0,
+        cityName: e ? e.name : '',
+        areaName: '',
+        pageIndex: this.monitorPageNo
+      }
+      if (e && e.allName.split('_').length > 1) {
+        pieBotton.cityName = e.allName.split('_')[0]
+        pieBotton.areaName = e.allName.split('_')[1]
+        pieBotton.pageIndex = this.monitorPageNo
+        pieBotton.areaType = this.monitorPageNo
+      }
+      // 饼图下数据
+      api.getDataSum(pieBotton).then(res => {
+        this.sum.cardAllSum = res.data[0].cardAllSum
+        this.sum.netSum = res.data[0].netSum
+        this.sum.serverAllCount = res.data[0].serverAllCount
+        this.sum.transAllSum = String(res.data[0].transAllSum).substring(0, 3)
+        this.sum.phoneCustomerCount = res.data[0].phoneCustomerCount
+        this.sum.areaCount = res.data[0].areaCount
+        this.sum.yearCardCount = res.data[0].yearCardCount
+        this.sum.yearAddCardMoney = Math.round(res.data[0].yearAddCardMoney / 10000)
+        this.sum.rate = res.data[0].rate
+      })
     },
     MonitorDeal (e) {
       let page = {
@@ -340,31 +378,12 @@ export default {
         areaName: '',
         pageIndex: this.monitorPageNo
       }
-      if (e) {
-        this.sum.number = Math.floor(Math.random() * (2500 - 3000) + 3000)
-        this.sum.number1 = Math.floor(Math.random() * (6000 - 7000) + 7000)
-        this.sum.number2 = Math.floor(Math.random() * (8 - 10) + 10)
-        this.sum.number3 = Math.floor(Math.random() * (60 - 80) + 80)
-        // this.sum.number4 = Math.floor(Math.random() * (6 - 8) + 8)
-        this.sum.number5 = Math.floor(Math.random() * (1500 - 2000) + 2000)
-        this.sum.number6 = Math.floor(Math.random() * (1500 - 2100) + 2100)
-        this.sum.number7 = Math.floor(Math.random() * (1 - 7) + 7)
-        this.sum.number8 = Math.floor(Math.random() * (30 - 50) + 50)
-      }
       if (e && e.allName.split('_').length > 1) {
         page.cityName = e.allName.split('_')[0]
         page.areaName = e.allName.split('_')[1]
         page.pageIndex = this.monitorPageNo
-        this.sum.number = Math.floor(Math.random() * (250 - 300) + 300)
-        this.sum.number1 = Math.floor(Math.random() * (600 - 700) + 700)
-        this.sum.number2 = Math.floor(Math.random() * (1 - 2) + 2)
-        this.sum.number3 = Math.floor(Math.random() * (6 - 8) + 8)
-        // this.sum.number4 = Math.floor(Math.random() * (1 - 3) + 3)
-        this.sum.number5 = Math.floor(Math.random() * (150 - 200) + 200)
-        this.sum.number6 = Math.floor(Math.random() * (150 - 210) + 210)
-        this.sum.number7 = Math.floor(Math.random() * (1 - 7) + 7)
-        this.sum.number8 = Math.floor(Math.random() * (3 - 5) + 5)
       }
+      // 实施监控
       api.getTransLog(page).then(res => {
         this.monitorDealList = res.data.map(item => Object.assign(item, {
           txnDtTm: item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
