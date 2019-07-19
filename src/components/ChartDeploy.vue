@@ -65,7 +65,7 @@ export default {
           } else {
             // 没有下级地图，回到一级中国地图，并将mapStack清空
             this.registerAndsetOption(this.myChart, this.chinaName, this.chinaJson)
-            this.$emit('goDown', { id: '4300', name: '湖南省' })
+            this.$emit('goDown', { id: '4300', name: '湖南省', allName: '' })
           }
         })
       })

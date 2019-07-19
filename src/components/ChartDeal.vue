@@ -5,10 +5,8 @@
 <script>
 import echarts from 'echarts'
 import coordinate from '@/assets/js/coordinate'
+import { getRandom } from '@/assets/js/utils'
 
-function getRandom (len, start = 0) {
-  return Math.floor(Math.random() * len) + start
-}
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {

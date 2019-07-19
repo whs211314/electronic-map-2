@@ -64,8 +64,13 @@
     <div class="map-bk"></div>
     <div class="map-transform"></div>
     <div class="map">
-      <ChartDeploy @popup="handlePopup" @goDown="handleGoDown" v-if="isdeal"/>
-      <ChartDeal v-else />
+      <component
+        :ref="chartType"
+        :is="chartType"
+        :topData="topItem"
+        @popup="handlePopup"
+        @goDown="handleGoDown"
+        @showDeploy="chartType='ChartDeploy'" />
       <MPopup v-show="popupVisible"
         :popup="popup"
         :visible.sync="popupVisible"
@@ -73,8 +78,16 @@
     </div>
     <!-- 地图操作 -->
     <div class="map-operation">
-      <div class="deal fr flex-center" :class="isdeal?'':'active'" @click="deployClick"><div class="txt">交易地图</div></div>
-      <div class="deploy fl flex-center"  :class="isdeal?'active':''" @click="dealClick"><div class="txt">分布地图</div></div>
+      <div class="deal fr flex-center"
+        :class="{active:chartType==='ChartDeal'}"
+        @click="handleChart('ChartDeal')">
+        <div class="txt">交易地图</div>
+      </div>
+      <div class="deploy fl flex-center"
+        :class="{active:chartType!=='ChartDeal'}"
+        @click="handleChart('ChartDeploy')">
+        <div class="txt">分布地图</div>
+      </div>
     </div>
     <!-- 合作视图 -->
     <div class="teamview">
@@ -133,6 +146,7 @@ import riskMonitorChart from '@/components/riskMonitorChart'
 import patrolMonitorChart from '@/components/patrolMonitorChart'
 import ChartDeploy from '@/components/ChartDeploy'
 import ChartDeal from '@/components/ChartDeal'
+import ChartTop from '@/components/ChartTop'
 import MPopup from '@/components/MPopup'
 import * as api from '@/api'
 
@@ -152,6 +166,7 @@ export default {
     patrolMonitorChart,
     ChartDeploy,
     ChartDeal,
+    ChartTop,
     MPopup
   },
   data () {
@@ -163,9 +178,10 @@ export default {
       patrol: false, // 远程巡检
       record: false, // 巡检记录
       deal: false, // 交易
-      isdeal: true,
+      chartType: 'ChartDeploy', // 地图类型
       popupVisible: false,
       popup: {},
+      topItem: {},
       currJmpInfo: {}, // 当前服务点数据
       monitorPageNo: 1,
       pieList: {
@@ -258,13 +274,9 @@ export default {
     monitorClick (index) {
       this.monitorIndex = index
     },
-    // 交易地图
-    dealClick () {
-      this.isdeal = true
-    },
-    // 部署地图
-    deployClick () {
-      this.isdeal = false
+    // 地图切换
+    handleChart (type) {
+      this.chartType = type
     },
     handlePopup (popup) {
       this.popupVisible = true
@@ -375,6 +387,11 @@ export default {
     // 点击排行榜
     handleTopEvent (item) {
       console.log(item)
+      this.chartType = 'ChartTop'
+      this.topItem = item
+      this.$nextTick(() => {
+        this.$refs[this.chartType].mapChart()
+      })
     }
   }
 }
