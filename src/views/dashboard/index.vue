@@ -191,15 +191,92 @@ export default {
         taCountryCount: ''
       }, // 饼图数据
       sum: {
-        number: 29000,
-        number1: 89000,
-        number2: 128,
-        number3: 780,
-        number4: 102,
-        number5: 20000,
-        number6: 20000,
-        number7: 3,
-        number8: 528
+        netSum: '',
+        serverAllCount: '',
+        cardAllSum: '',
+        transAllSum: '',
+        phoneCustomerCount: '',
+        areaCount: '',
+        yearCardCount: '',
+        yearAddCardMoney: '',
+        rate: ''
+      },
+      // 交易种类字典
+      transactionTypes: {
+        助农终端参数下载: '参数下载',
+        获取流水号: '获取流水号',
+        公交IC卡信息查询: '公交IC',
+        公交IC卡充值: '公交IC',
+        公交IC卡写卡确认: '公交IC',
+        通讯缴费查询: '电信缴费',
+        信用卡还款验证: '信用卡',
+        转账验证: '转账验证',
+        转账: '转账',
+        郴电国际费用查询: '郴电国际',
+        郴电国际缴费: '郴电国际',
+        水电煤欠费查询: '水电煤',
+        联通保证金充值确认: '联通保证金',
+        获取读卡密钥: '获取读卡密钥',
+        水电煤缴费: '水电煤',
+        卡表充值: '卡表充值',
+        写卡日志更新: '写卡日志更新',
+        水电煤缴费撤销: '水电煤',
+        电费收据打印: '电费',
+        电费明细单打印: '电费',
+        现金汇款: '现金汇款',
+        转账汇款: '转账汇款',
+        国税参保查询: '国税',
+        国税缴费基数或档次查询: '国税',
+        国税灵活就业查询: '国税',
+        国税城乡居民查询: '国税',
+        国税社保缴费: '国税',
+        国网电力缴费信息查询: '国网电力',
+        国网电力缴费: '国网电力',
+        查询补打: '查询补打',
+        国网电力票据打印请求: '国网电力',
+        国税社保缴费撤销: '国税',
+        衡阳燃气普表查询: '衡阳燃气',
+        衡阳燃气普表缴费: '衡阳燃气',
+        衡阳燃气IC表用户信息查询: '衡阳燃气',
+        衡阳燃气IC表缴费: '衡阳燃气',
+        衡阳燃气明细查询: '衡阳燃气',
+        批上送: '批上送',
+        灵活医保缴费查询: '灵活医保',
+        灵活医保缴费: '灵活医保',
+        灵活医保个人账户查询: '灵活医保',
+        灵活医保撤销: '灵活医保',
+        扫码付消费撤销: '扫码消费',
+        内部报文错误: '内部报文错误',
+        参数信息查询: '参数查询',
+        银行卡余额查询: '余额查询',
+        结算: '结算',
+        消费: '消费',
+        消费冲正: '消费冲正',
+        消费撤销: '消费撤销',
+        本省通讯缴费: '通讯缴费',
+        保证金手续费查询: '手续费查询',
+        保证金确认: '保证金确认',
+        卡表充值查询: '卡表查询',
+        中燃燃气查询: '燃气查询',
+        被扫: '被扫',
+        中燃燃气缴费: '燃气缴费',
+        有线电视查询: '有线电视',
+        有线电视缴费: '有线电视',
+        建行卡转账查询: '转账查询',
+        建行卡转账通知: '转账通知',
+        建行卡转账确认: '转账确认',
+        建行卡转账查询二: '转账查询',
+        助农取款冲正: '冲正',
+        未裁决违法缴费: '违法缴费',
+        未裁决违法查询: '违法查询',
+        已裁决违法缴费: '违法缴费',
+        已裁决违法查询: '违法查询',
+        缴费结果查询: '缴费查询',
+        交通罚款注册: '交通罚款',
+        预约登记: '预约登记',
+        新卡首笔交易: '新卡首笔交易',
+        湘西花垣电力查询: '花垣电力',
+        湘西花垣电力缴费: '花垣电力'
       },
       services1: [
         { type: '现金业务', name: '个人客户小额存取现服务，累计交易笔数为5632，交易金额3.2，占总交易量3%' },
@@ -250,6 +327,7 @@ export default {
       console.log(this.pieList)
     })
     this.monitorTask()
+    this.pieBotton()
   },
   watch: {
     popupVisible (val) {
@@ -295,6 +373,9 @@ export default {
           this.patrol = false
           this.record = false
           this.deal = false
+          api.getManagerInfo({ 'mchId': data.id }).then(res => {
+            console.log(res)
+          })
           if (Number(this.numberId) === data.id) {
             this.home_url = this.home_url
           } else {
@@ -307,6 +388,9 @@ export default {
           this.basicInfo = false
           this.patrol = false
           this.record = false
+          api.getMchTrans({ 'mchId': data.id }).then(res => {
+            console.log(res)
+          })
           break
         case 4:
           this.patrol = true // 巡检信息
@@ -321,6 +405,9 @@ export default {
           this.client = false
           this.basicInfo = false
           this.deal = false
+          api.getCheckInfo({ 'mchId': data.id }).then(res => {
+            console.log(res)
+          })
           break
       }
     },
@@ -333,6 +420,34 @@ export default {
       // 合作视图仅在市县级更新
       if (level === 2) this.$refs.teamviewRef.getData(1, name)
       if (level === 1) this.$refs.teamviewRef.getData()
+      // 饼图下数据
+      this.pieBotton(e)
+    },
+    pieBotton (e) {
+      let pieBotton = {
+        areaType: 0,
+        cityName: e ? e.name : '',
+        areaName: '',
+        pageIndex: this.monitorPageNo
+      }
+      if (e && e.allName.split('_').length > 1) {
+        pieBotton.cityName = e.allName.split('_')[0]
+        pieBotton.areaName = e.allName.split('_')[1]
+        pieBotton.pageIndex = this.monitorPageNo
+        pieBotton.areaType = this.monitorPageNo
+      }
+      // 饼图下数据
+      api.getDataSum(pieBotton).then(res => {
+        this.sum.cardAllSum = res.data[0].cardAllSum
+        this.sum.netSum = res.data[0].netSum
+        this.sum.serverAllCount = res.data[0].serverAllCount
+        this.sum.transAllSum = String(res.data[0].transAllSum).substring(0, 3)
+        this.sum.phoneCustomerCount = res.data[0].phoneCustomerCount
+        this.sum.areaCount = res.data[0].areaCount
+        this.sum.yearCardCount = res.data[0].yearCardCount
+        this.sum.yearAddCardMoney = Math.round(res.data[0].yearAddCardMoney / 10000)
+        this.sum.rate = String(res.data[0].rate).substring(0, 3)
+      })
     },
     MonitorDeal (e) {
       let page = {
@@ -340,35 +455,17 @@ export default {
         areaName: '',
         pageIndex: this.monitorPageNo
       }
-      if (e) {
-        this.sum.number = Math.floor(Math.random() * (2500 - 3000) + 3000)
-        this.sum.number1 = Math.floor(Math.random() * (6000 - 7000) + 7000)
-        this.sum.number2 = Math.floor(Math.random() * (8 - 10) + 10)
-        this.sum.number3 = Math.floor(Math.random() * (60 - 80) + 80)
-        // this.sum.number4 = Math.floor(Math.random() * (6 - 8) + 8)
-        this.sum.number5 = Math.floor(Math.random() * (1500 - 2000) + 2000)
-        this.sum.number6 = Math.floor(Math.random() * (1500 - 2100) + 2100)
-        this.sum.number7 = Math.floor(Math.random() * (1 - 7) + 7)
-        this.sum.number8 = Math.floor(Math.random() * (30 - 50) + 50)
-      }
       if (e && e.allName.split('_').length > 1) {
         page.cityName = e.allName.split('_')[0]
         page.areaName = e.allName.split('_')[1]
         page.pageIndex = this.monitorPageNo
-        this.sum.number = Math.floor(Math.random() * (250 - 300) + 300)
-        this.sum.number1 = Math.floor(Math.random() * (600 - 700) + 700)
-        this.sum.number2 = Math.floor(Math.random() * (1 - 2) + 2)
-        this.sum.number3 = Math.floor(Math.random() * (6 - 8) + 8)
-        // this.sum.number4 = Math.floor(Math.random() * (1 - 3) + 3)
-        this.sum.number5 = Math.floor(Math.random() * (150 - 200) + 200)
-        this.sum.number6 = Math.floor(Math.random() * (150 - 210) + 210)
-        this.sum.number7 = Math.floor(Math.random() * (1 - 7) + 7)
-        this.sum.number8 = Math.floor(Math.random() * (3 - 5) + 5)
       }
+      // 实施监控
       api.getTransLog(page).then(res => {
         this.monitorDealList = res.data.map(item => Object.assign(item, {
           txnDtTm: item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
-          genproffinTxnamt: item.genproffinTxnamt / 100
+          genproffinTxnamt: item.genproffinTxnamt / 100,
+          tradeName: this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName
         }))
         this.monitorPageNo += 1
       })
