@@ -44,7 +44,7 @@ export default {
     width: 0;
     height: 0;
     padding: 30%;
-    @include bgImage('../assets/images/popup-w.png');
+    @include bgImage('../assets/images/tanchuang.png');
     transform: translate3d(-50%, -50%, 0) scale(.4);
     transform-origin: center center;
   }
@@ -119,27 +119,27 @@ export default {
     &.top {
       top: 0;
       left: 50%;
-      transform: translate3d(-50%, -62%, 0);
+      transform: translate3d(47%, -52%, 0);
     }
     &.bottom {
       bottom: 0;
       left: 50%;
-      transform: translate3d(-50%, 66%, 0);
+      transform: translate3d(-50%, 78%, 0);
     }
     &.top-l {
       top: 0;
       left: 0;
-      transform: translate3d(-44%, 10%, 0);
+      transform: translate3d(-73%, 135%, 0);
     }
     &.top-r {
       top: 0;
       right: 0;
-      transform: translate3d(42%, 12%, 0);
+      transform: translate3d(70%, 137%, 0);
     }
     &.bottom-l {
       bottom: 0;
       left: 0;
-      transform: translate3d(-44%, -8%, 0);
+      transform: translate3d(-12%, -222%, 0);
     }
     &.bottom-r {
       bottom: 0;
