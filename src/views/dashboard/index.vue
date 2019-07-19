@@ -216,18 +216,19 @@ export default {
         { },
         { }
       ],
-      teamviews: [
-        { name: '政务合作', rate: '50', num: 1200 },
-        { name: '卫健', rate: '50', num: 1200 },
-        { name: '退役军人', rate: '50', num: 1200 },
-        { name: '通讯', rate: '50', num: 1200 },
-        { name: '商超', rate: '50', num: 1200 },
-        { name: '餐饮', rate: '50', num: 1200 },
-        { name: '快递', rate: '50', num: 1200 },
-        { name: '电商', rate: '50', num: 1200 },
-        {},
-        {}
-      ],
+      teamviews: Array.from({ length: 10 }, () => '农产品进城'),
+      //  [
+      //    { name: '政务合作', rate: '50', num: 1200 },
+      //    { name: '卫健', rate: '50', num: 1200 },
+      //    { name: '退役军人', rate: '50', num: 1200 },
+      //    { name: '通讯', rate: '50', num: 1200 },
+      //    { name: '商超', rate: '50', num: 1200 },
+      //    { name: '餐饮', rate: '50', num: 1200 },
+      //    { name: '快递', rate: '50', num: 1200 },
+      //    { name: '电商', rate: '50', num: 1200 },
+      //    {},
+      //    {}
+      //  ],
       monitors: [{ type: '服务点视图' }, { type: '异常终端视图' }, { type: '交易视图' }, { type: '风险预警' }, { type: '巡检' }],
       monitorDealList: []
     }
@@ -308,7 +309,8 @@ export default {
       }
       api.getTransLog(page).then(res => {
         this.monitorDealList = res.data.map(item => Object.assign(item, {
-          txnDtTm: item.txnDtTm ? item.txnDtTm.split('T')[0] : ''
+          txnDtTm: item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
+          genproffinTxnamt: item.genproffinTxnamt / 100
         }))
         this.monitorPageNo += 1
       })
