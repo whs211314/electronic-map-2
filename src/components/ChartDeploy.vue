@@ -13,7 +13,8 @@ export default {
       chinaJson: null,
       myChart: null,
       currID: '4300',
-      jpmData: []
+      jpmData: [],
+      regionNetMap: {}
     }
   },
   mounted () {
@@ -25,7 +26,13 @@ export default {
         this.chinaJson = mapJson
         this.currJson = mapJson
         this.myChart = echarts.init(document.getElementById(divid))
-        this.registerAndsetOption(this.myChart, '湖南省', mapJson)
+        // 获取市的所有服务点数
+        api.getAreaServies({ areaType: 1 }).then(res => {
+          res.data.forEach(e => {
+            this.regionNetMap[e.jrRegionNo] = e.jrServerCount
+          })
+          this.registerAndsetOption(this.myChart, '湖南省', mapJson)
+        })
         this.myChart.on('click', param => {
           if (param.seriesType === 'scatter') {
             const data = this.jpmData.find(e => e.id === param.data.id)
@@ -37,7 +44,6 @@ export default {
             return
           }
           const { id, name, allName } = param.region
-          console.log(this.currID, id, name)
           if (id !== this.currID) {
             this.currID = id
             // 点击到乡级地图
@@ -48,9 +54,7 @@ export default {
               }
               this.$emit('goDown', { id, name, allName })
               this.registerAndsetOption(this.myChart, param.name, townJson)
-              // this.myChart.showLoading()
               api.getMchInfoList({ allName }).then(res => {
-                // this.myChart.hideLoading()
                 this.jpmData = res.data
                 this.setTownPointer(townJson, res.data)
               })
@@ -58,9 +62,22 @@ export default {
             }
             // 代表有下级地图
             import(`../../public/map/${this.currID}.json`).then(mapJson => {
-              this.currJson = mapJson
-              this.$emit('goDown', { id, name, allName })
-              this.registerAndsetOption(this.myChart, param.name, mapJson)
+              // 县一级服务点
+              if (this.currID.split('_').length === 1) {
+                api.getAreaServies({ areaType: 2, cityName: name }).then(res => {
+                  console.log('====', res)
+                  res.data.forEach(e => {
+                    this.regionNetMap[`${e.jrCity}_${e.jrArea}`] = e.jrServerCount
+                  })
+                  this.currJson = mapJson
+                  this.$emit('goDown', { id, name, allName })
+                  this.registerAndsetOption(this.myChart, param.name, mapJson)
+                })
+              } else {
+                this.currJson = mapJson
+                this.$emit('goDown', { id, name, allName })
+                this.registerAndsetOption(this.myChart, param.name, mapJson)
+              }
             })
           } else {
             // 没有下级地图，回到一级中国地图，并将mapStack清空
@@ -150,16 +167,32 @@ export default {
             }
           },
           regions: this.initMapData(mapJson)
-        }
+        },
+        series: [{
+          type: 'scatter',
+          coordinateSystem: 'geo',
+          animation: false,
+          data: this.initMapData(mapJson),
+          label: {
+            show: true,
+            position: 'bottom',
+            color: '#fff',
+            formatter: params => params.data.allName.split('_').length < 3 ? this.regionNetMap[params.data.id] : ''
+          },
+          itemStyle: {
+            color: 'transparent'
+          }
+        }]
       }, true)
     },
-    initMapData (mapJson) {
+    initMapData (mapJson, level) {
       var mapData = []
       for (var i = 0; i < mapJson.features.length; i++) {
         mapData.push({
           name: mapJson.features[i].properties.name,
           id: mapJson.features[i].id,
-          allName: mapJson.features[i].allName
+          allName: mapJson.features[i].allName,
+          value: mapJson.features[i].properties.cp
         })
       }
       return mapData

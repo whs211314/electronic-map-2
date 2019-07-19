@@ -21,8 +21,8 @@ export function getMchInfo ({ mchId }) {
 }
 
 // 乡镇下所有服务点
-export function getMchInfoList ({ allName }) {
-  const [cityName, areaName, streetName] = allName.split('_')
+export function getMchInfoList ({ allName = '' } = {}) {
+  const [cityName = '', areaName = '', streetName = ''] = allName.split('_')
   return new Promise((resolve, reject) => {
     http.get('/february/front/mchInfo/getMchInfoList', {
       params: { cityName, areaName, streetName }
@@ -54,12 +54,23 @@ export function getClassInfo (mchId) {
   })
 }
 
-// 视图接口
+// top100
 export function getTop ({ allName = '' } = {}) {
   const [cityName = '', areaName = '', streetName = ''] = allName.split('_')
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpJxtMchTop/getTop', {
       params: { cityName, areaName, streetName, pageIndex: 1 }
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
+
+// 获取地区服务点数量 地区类型areaType，1市，2县
+export function getAreaServies ({ areaType, cityName = '' }) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpJxtRegion/getArea', {
+      params: { areaType, cityName, areaName: '', streetName: '' }
     }).then(res => {
       resolve(res)
     })
