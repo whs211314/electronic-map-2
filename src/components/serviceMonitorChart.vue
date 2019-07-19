@@ -40,7 +40,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr :key="index" v-for="(item, index) in bodys">
+            <tr :key="index" v-for="(item, index) in bodys1">
               <td>{{item.type}}</td>
               <td>{{item.money}}</td>
               <td>{{item.dealStatus}}</td>
@@ -62,7 +62,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr :key="index" v-for="(item, index) in bodys">
+            <tr :key="index" v-for="(item, index) in bodys2">
               <td>{{item.type}}</td>
               <td>{{item.money}}</td>
               <td>{{item.dealStatus}}</td>
@@ -94,8 +94,16 @@ export default {
       strokeSem: [], // 营销
       headers: ['', '一档', '二档', '三档', '四档'],
       bodys: [
-        { type: '培训', money: '20万内', dealStatus: '20万内', riskStatus: '20万内', isChange: '20万内' },
-        { type: '活动', money: '20万内', dealStatus: '20万内', riskStatus: '20万内', isChange: '20万内' }
+        { type: '笔数', money: '≥100笔', dealStatus: '100<笔数≤200', riskStatus: '200<笔数≤600', isChange: '>600笔' },
+        { type: '金额', money: '≤1万元', dealStatus: '1<金额≤5万元', riskStatus: '5<金额≤10万元', isChange: '>10万元' }
+      ],
+      bodys2: [
+        { type: '培训', money: '≥3次', dealStatus: '2次', riskStatus: '1次', isChange: '0次' },
+        { type: '活动', money: '≥3次', dealStatus: '2次', riskStatus: '1次', isChange: '0次' }
+      ],
+      bodys1: [
+        { type: '时间', money: '>3年', dealStatus: '2<时间<3年', riskStatus: '1<时间≤2年', isChange: '≤1年' },
+        { type: '等级', money: '≥1000', dealStatus: '700<等级<1000', riskStatus: '500<等级≤700', isChange: '≤500' }
       ]
     }
   },

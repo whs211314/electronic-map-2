@@ -19,6 +19,9 @@ export default {
         num: 1200
       })
     }
+  },
+  created () {
+    console.log(this.item)
   }
 }
 </script>

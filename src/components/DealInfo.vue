@@ -2,7 +2,7 @@
   <div class="deal-info">
     <div class="left fl">
       <div class="item">
-        <div class="label"><div class="txt">总网点/服务点数量</div></div>
+        <div class="label"><div class="txt">建行物理网点数</div></div>
         <div class="value">{{sum.number}} 个</div>
       </div>
       <div class="item">
@@ -18,14 +18,14 @@
         <div class="value">{{sum.number3}} 万个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">建行物理网点数</div></div>
-        <div class="value">{{sum.number8}} 个</div>
+        <div class="label"><div class="txt">行政区数量</div></div>
+        <div class="value">{{sum.number4}} 个</div>
       </div>
     </div>
     <div class="right fr">
       <div class="item">
-        <div class="label"><div class="txt">行政区数量</div></div>
-        <div class="value">{{sum.number4}} 个</div>
+        <div class="label"><div class="txt">金湘通服务点数</div></div>
+        <div class="value">{{sum.number}} 个</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">金湘通发卡本年数量</div></div>
@@ -38,10 +38,6 @@
       <div class="item">
         <div class="label"><div class="txt">同步率</div></div>
         <div class="value orange">{{sum.number7}} %</div>
-      </div>
-      <div class="item">
-        <div class="label"><div class="txt">金湘通服务点数</div></div>
-        <div class="value">{{sum.number}} 个</div>
       </div>
     </div>
   </div>

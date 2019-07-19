@@ -2,7 +2,7 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center">异常终端数量：10000   在终端占比：50%</div>
+        <div class="item active flex-center">异常终端数量：678 在终端占比：50%</div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -38,7 +38,7 @@ export default {
     return {
       headers: ['缺纸', '维修中', '模块故障', '通讯异常'],
       bodys: [
-        { type: '1500个', money: '2500个', dealStatus: '3500个', riskStatus: '2500个' }
+        { type: '34个', money: '254个', dealStatus: '160个', riskStatus: '230个' }
       ],
       echartsList: []
     }
@@ -168,7 +168,7 @@ export default {
       @extend .flex-center;
       justify-content: start;
       .item {
-        width: 46%;
+        width: 50%;
         cursor: pointer;
         &.active {
           background: #00b7b4;

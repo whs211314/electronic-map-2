@@ -2,7 +2,7 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center">预警点数量：10000  占比：10%</div>
+        <div class="item active flex-center">预警点数量：6278  占比：10%</div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -17,9 +17,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{echarTable[5]}}</td>
-              <td>{{echarTable[3]}}</td>
-              <td>{{echarTable[4]}}</td>
+              <td>64</td>
+              <td>181</td>
+              <td>543</td>
             </tr>
           </tbody>
         </table>
@@ -31,9 +31,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{echarTable[2]}}</td>
-              <td>{{echarTable[1]}}</td>
-              <td>{{echarTable[0]}}</td>
+              <td>651</td>
+              <td>430</td>
+              <td>108</td>
             </tr>
           </tbody>
         </table>

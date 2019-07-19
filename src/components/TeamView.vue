@@ -19,6 +19,9 @@ export default {
       default: () => ([])
     }
   },
+  created () {
+    console.log(this.items)
+  },
   components: { ViewButton }
 }
 </script>

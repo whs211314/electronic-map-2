@@ -272,7 +272,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['助农取款(T45)', '水电缴费(T22)', '转账汇款(T44)', '通讯缴费(T08+T02)', '现金转账', '消费', '税务代缴'],
+            data: ['助农取款', '行政代收付', '转账汇款', '现金转账', '水电缴费', '通讯缴费', '消费'],
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
