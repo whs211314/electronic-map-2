@@ -8,7 +8,7 @@
 <script>
 import echarts from 'echarts'
 import * as api from '@/api'
-const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
+const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-mapPie')
 export default {
   props: {
     // pieList: {

@@ -54,7 +54,7 @@
     <!-- 营销活动 -->
     <div v-show="isActivity" class="chart">
       <div id="line-activity"></div>
-      <div class="monitor-table">
+      <div class="monitor-table1">
         <table>
           <thead>
             <tr>
@@ -452,7 +452,7 @@ export default {
     left: 20%;
     width: 100%;
     height: 12%;
-    font-size: var(--fontSize-12);
+    font-size: var(--fontSize-8);
     font-weight: bold;
     .tab {
       @extend .flex-center;
@@ -484,6 +484,33 @@ export default {
         border-collapse:collapse;
         text-align: center;
         font-size: var(--fontSize-8);
+        thead {
+          tr {
+            height: 20px;
+          }
+        }
+        tbody{
+          td {
+            width: 21%;
+            border: 1px solid #00C6D9;
+          }
+          td:nth-child(1){
+            border-left: 0;
+            border-top: 0;
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+    .monitor-table1 {
+      @include bgImage('../assets/images/tc-bg01.png');
+      @include position(302, -500, 156, 2235);
+      font-size: var(--fontSize-12);
+      padding: 2%;
+      table {
+        border-collapse:collapse;
+        text-align: center;
+        font-size: var(--fontSize-12);
         thead {
           tr {
             height: 20px;
