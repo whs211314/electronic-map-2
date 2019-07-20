@@ -106,7 +106,7 @@ export default {
           type: 'scatter',
           coordinateSystem: 'geo',
           data: this.getCoordinate(jpmData),
-          symbolSize: fontSize * 1.5,
+          symbolSize: fontSize,
           symbol: `image://${serverIcon}`,
           animation: false,
           label: {
@@ -280,7 +280,7 @@ export default {
             type: 'scatter',
             coordinateSystem: 'geo',
             animation: false,
-            symbolSize: fontSize * 1.5,
+            symbolSize: fontSize,
             symbol: `image://${netIcon}`,
             data: netData,
             label: {

@@ -1,5 +1,6 @@
 <template>
-  <div class="m-button position-space" :class="btnCls"
+  <div class="m-button position-space"
+    :class="btnCls"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave">
     <span class="txt position-center">{{txt}}</span>
@@ -25,6 +26,10 @@ export default {
       type: Boolean,
       default: false
     },
+    noBg: {
+      type: Boolean,
+      default: false
+    },
     txt: {
       type: String,
       default: ''
@@ -38,8 +43,10 @@ export default {
   },
   computed: {
     btnCls () {
-      if (this.txt.length > 5) return `small btn-${this.type}`
-      return `btn-${this.type}`
+      let ret = `btn-${this.type}`
+      if (this.txt.length > 5) ret += ' small'
+      if (this.noBg) ret += ' no-bg'
+      return ret
     }
   },
   methods: {
@@ -116,6 +123,10 @@ export default {
       bottom: 0;
     }
   }
+}
+
+.no-bg {
+  background: none !important;
 }
 
 .btn-1 {
