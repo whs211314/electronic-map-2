@@ -58,7 +58,7 @@
     <div class="summary">
       <DealInfo v-if="!internalNetwork" :sum='sum'/>
       <!-- 商户画像 -->
-      <merchantsPortrait :home_url="home_url" :basicInfo="basicInfo" :client="client" :patrol="patrol" :record="record" :deal="deal" :essential='essential' :data="currJmpInfo" v-if="internalNetwork" />
+      <merchantsPortrait :home_url="home_url" :basicInfo="basicInfo" :client="client" :patrol="patrol" :record="record" :deal="deal" :data="currJmpInfo" v-if="internalNetwork" />
     </div>
     <!-- 地图 -->
     <div class="map-bk"></div>
@@ -187,7 +187,6 @@ export default {
       popup: {},
       topItem: {},
       currJmpInfo: {}, // 当前服务点数据
-      essential: {}, // 基本信息数据
       monitorPageNo: 1,
       pieList: {
         taCountryYearCount: '',
@@ -367,8 +366,8 @@ export default {
         this.numberId = data.id
         this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
       }
-      this.currJmpInfo = data
-      this.essential = data
+      this.currJmpInfo.essential = data // 基础信息
+      console.log(this.currJmpInfo)
       switch (code) {
         case 1:
           this.basicInfo = true // 基本信息
@@ -378,14 +377,13 @@ export default {
           this.deal = false
           break
         case 2:
-          this.client = true // 客户信息 home_url
           this.basicInfo = false
           this.patrol = false
           this.record = false
           this.deal = false
           api.getManagerInfo({ 'mchId': data.jpmMchId }).then(res => {
-            console.log(res)
-            this.currJmpInfo = res.data
+            this.currJmpInfo.client = res.data[0]
+            this.client = true // 客户信息 home_url
           })
           if (Number(this.numberId) === data.id) {
             this.home_url = this.home_url
@@ -394,14 +392,14 @@ export default {
           }
           break
         case 3:
-          this.deal = true // 交易
           this.client = false
           this.basicInfo = false
           this.patrol = false
           this.record = false
           api.getMchTrans({ 'mchId': data.jpmMchId }).then(res => {
             console.log(res)
-            this.currJmpInfo = res.data
+            this.currJmpInfo.deal = res.data
+            this.deal = true // 交易
           })
           break
         case 4:
@@ -412,14 +410,14 @@ export default {
           this.deal = false
           break
         case 5:
-          this.record = true
           this.patrol = false // 巡检记录
           this.client = false
           this.basicInfo = false
           this.deal = false
           api.getCheckInfo({ 'mchId': data.jpmMchId }).then(res => {
             console.log(res)
-            this.currJmpInfo = res.data
+            this.currJmpInfo.record = res.data
+            this.record = true
           })
           break
       }
@@ -427,6 +425,9 @@ export default {
     handleGoDown (e) {
       console.warn('--部署地图下钻触发--')
       console.info(JSON.stringify(e))
+      if (e.level === 1) {
+        this.proportion = 110
+      }
       // 事实监控
       this.monitorTask(e)
       const { level, name } = e

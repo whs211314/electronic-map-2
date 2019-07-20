@@ -13,11 +13,11 @@
       </div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">金额</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{item.transAllSum | money}}元</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{parseInt(item.transAllSum / 1000000)}}万元</div></div>
       </div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">返佣</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{item.inComeSum | money}}元</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{parseInt(item.transAllSum / 1000000 * 0.003)}}万元</div></div>
       </div>
     </div>
   </div>
@@ -34,17 +34,17 @@ export default {
     rank: Number
   },
   filters: {
-    money (value) {
-      const str = String(value)
-      const len = str.length
-      if (len < 6) {
-        return str
-      } else if (len < 10) {
-        return str.slice(0, -4) + '万'
-      } else {
-        return str.slice(0, -8) + '亿'
-      }
-    }
+    // money (value) {
+    //   const str = String(value)
+    //   const len = str.length
+    //   if (len < 6) {
+    //     return str
+    //   } else if (len < 10) {
+    //     return str.slice(0, -4) + '万'
+    //   } else {
+    //     return str.slice(0, -8) + '亿'
+    //   }
+    // }
   }
 }
 </script>

@@ -56,6 +56,7 @@ export default {
       } else {
         this.items = [...this.originItems.slice(start, len), ...this.originItems.slice(0, start + 5 - len)]
       }
+      console.log(this.items)
       // console.log(this.items.map(e => e.rank))
       if (start === len - 1) this.index = 0
     },

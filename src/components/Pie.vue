@@ -23,7 +23,11 @@ export default {
   },
   watch: {
     proportion (val) {
-      this.chartInit(0)
+      if (val === 110) {
+        this.chartInit(10)
+      } else {
+        this.chartInit(0)
+      }
     }
   },
   methods: {
