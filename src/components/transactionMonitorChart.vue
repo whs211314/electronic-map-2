@@ -49,7 +49,7 @@ export default {
         color: ['#22E7E4', '#EE7343'],
         title: {
           left: '30%',
-          text: '2018年6月到2019年6月',
+          text: '2018年7月到2019年6月',
           textStyle: {
             color: '#ffffff',
             fontSize: 8
@@ -75,14 +75,14 @@ export default {
         grid: {
           top: '20%',
           left: '',
-          right: '20%',
-          bottom: '10%',
+          right: '21%',
+          bottom: '',
           containLabel: true
         },
         xAxis: [
           {
             type: 'category',
-            data: ['2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12', '2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06'],
+            data: ['2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12', '2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06'],
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -98,7 +98,7 @@ export default {
             name: '交易笔数(笔)',
             type: 'value',
             scale: true,
-            max: 12000000,
+            max: 400000,
             min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
@@ -116,10 +116,10 @@ export default {
               }
             }
           }, {
-            name: '交易金额(元)',
+            name: '交易金额(万元)',
             type: 'value',
             scale: true,
-            max: 12000000,
+            max: 30000,
             min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
@@ -148,7 +148,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
-            data: [ 1003350, 1208449, 1395990, 1578529, 1764168, 1976702, 2250079, 358.170, 559341, 791677, 1025686, 1286511.00, 1569823 ]
+            data: [ 199052, 180712, 182496, 185639, 214062, 273379, 358170, 201171, 228013, 233997, 260643, 283312 ]
           },
           {
             // name: '交易金额(万元)',
@@ -159,7 +159,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
-            data: [ 200188.24, 240988.59, 277756.51, 316362.77, 316362.77, 389604.17, 433252.30, 56.079, 89968, 131402.61, 169303.93, 205977.11, 242410.36 ]
+            data: [ 35643.57, 36767.92, 39961.55, 36555.09, 38284.09, 43918.13, 56079.01, 33889.10, 40573.43, 37881.13, 36673.25, 36433.18 ]
           }
         ]
       }
@@ -178,8 +178,16 @@ export default {
       let myChart = echarts.init(document.getElementById('line-grade'))
       let option = {
         color: ['#22E7E4', '#EE7343'],
+        // title: {
+        //   left: '30%',
+        //   text: '2018年7月到2019年6月',
+        //   textStyle: {
+        //     color: '#ffffff',
+        //     fontSize: 8
+        //   }
+        // },
         legend: {
-          data: ['交易笔数(笔)', '交易金额(万元)'],
+          // data: ['交易笔数(笔)', '交易金额(万元)'],
           position: 'absolute',
           align: 'left', // 水平方向位置
           verticalAlign: 'top', // 垂直方向位置
@@ -197,9 +205,9 @@ export default {
         },
         grid: {
           top: '20%',
-          left: '3%',
-          right: '25%',
-          bottom: '10%',
+          left: '',
+          right: '21%',
+          bottom: '',
           containLabel: true
         },
         xAxis: [
@@ -218,8 +226,32 @@ export default {
         ],
         yAxis: [
           {
-            name: '',
+            name: '交易笔数(笔)',
             type: 'value',
+            scale: true,
+            max: 600000,
+            min: 0,
+            axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
+            axisLine: {
+              show: false,
+              lineStyle: {
+                color: '#D2FBFE'
+              }
+            },
+            axisTick: {
+              show: false
+            },
+            splitLine: {
+              lineStyle: {
+                color: 'rgba(202,247,255,0.51)'
+              }
+            }
+          }, {
+            name: '交易金额(万元)',
+            type: 'value',
+            scale: true,
+            max: 100000,
+            min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
               show: false,
@@ -239,7 +271,7 @@ export default {
         ],
         series: [
           {
-            name: '交易笔数(笔)',
+            name: '',
             type: 'bar',
             barWidth: '15%',
             itemStyle: { // 柱样式
@@ -247,10 +279,10 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
-            data: [ 698265, 733354, 579139, 958516, 1118388, 626360, 1433636, 931963, 605743, 2252222, 2771606, 1030707, 2276084, 752674 ]
+            data: [ 137601, 121650, 151597, 113148, 181207, 205524, 281101, 425936, 117021, 107261, 432000, 528152, 217211, 130695 ]
           },
           {
-            name: '交易金额(万元)',
+            name: '',
             type: 'bar',
             barWidth: '15%',
             itemStyle: { // 柱样式
@@ -258,7 +290,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
-            data: [ 142428.58, 97943.77, 264195.40, 244703.65, 136583.85, 113870.23, 428922.86, 66953.70, 129756.24, 474175.21, 458702.67, 260171.75, 106633.13, 144616.13 ]
+            data: [ 27333.50, 26710.28, 18416.42, 52640.04, 49369.49, 26060.31, 91813.30, 19342.85, 22524.67, 25273.82, 93326.60, 90784.93, 55564.81, 7770.19 ]
           }
         ]
       }
@@ -278,7 +310,7 @@ export default {
       let option = {
         color: ['#22E7E4', '#EE7343'],
         legend: {
-          data: ['交易笔数(笔)', '交易金额(万元)'],
+          // data: ['交易笔数(笔)', '交易金额(万元)'],
           position: 'absolute',
           align: 'left', // 水平方向位置
           verticalAlign: 'top', // 垂直方向位置
@@ -296,15 +328,15 @@ export default {
         },
         grid: {
           top: '20%',
-          left: '3%',
-          right: '25%',
-          bottom: '10%',
+          left: '',
+          right: '21%',
+          bottom: '1%',
           containLabel: true
         },
         xAxis: [
           {
             type: 'category',
-            data: ['助农取款', '行政代收付', '转账汇款', '现金转账', '水电缴费', '通讯缴费', '消费'],
+            data: ['助农取款', '行政代收付', '转账汇款', '现金汇款', '水电缴费', '通讯缴费', '消费'],
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -325,8 +357,32 @@ export default {
         ],
         yAxis: [
           {
-            name: '',
+            name: '交易笔数(笔)',
             type: 'value',
+            scale: true,
+            max: 500000,
+            min: 0,
+            axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
+            axisLine: {
+              show: false,
+              lineStyle: {
+                color: '#D2FBFE'
+              }
+            },
+            axisTick: {
+              show: false
+            },
+            splitLine: {
+              lineStyle: {
+                color: 'rgba(202,247,255,0.51)'
+              }
+            }
+          }, {
+            name: '交易金额(万元)',
+            type: 'value',
+            scale: true,
+            max: 500000,
+            min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
               show: false,
@@ -346,7 +402,7 @@ export default {
         ],
         series: [
           {
-            name: '交易笔数(笔)',
+            name: '',
             type: 'bar',
             barWidth: '20%',
             itemStyle: { // 柱样式
@@ -354,10 +410,10 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
-            data: [ 10020, 13020, 18020, 15929, 1020, 13020, 12200 ]
+            data: [ 430341, 96264, 148848, 14095, 1369839, 497268, 928740 ]
           },
           {
-            name: '交易金额(万元)',
+            name: '',
             type: 'bar',
             barWidth: '20%',
             itemStyle: { // 柱样式
@@ -365,7 +421,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
-            data: [ 60076, 17077, 10077, 6997, 60077, 17007, 10007 ]
+            data: [ 41133.20, 1312.26, 32705.16, 935.3364, 42266.35, 2250.15, 489915.33 ]
           }
         ]
       }

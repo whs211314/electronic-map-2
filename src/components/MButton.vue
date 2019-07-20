@@ -130,4 +130,7 @@ export default {
 .btn-4 {
   background-image: url(../assets/images/btn-4.png);
 }
+.btn-5 {
+  background-image: url(../assets/images/btn-5.png);
+}
 </style>

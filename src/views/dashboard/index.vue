@@ -34,7 +34,7 @@
       <div class="empty"></div>
       <div class="items-show">
         <div class="item" v-for="(item, index) in services3" :key="index" :style="{zIndex: index>2?6-index:'auto'}">
-          <MButton type="1" :txt="item.type" :hasDialog="true" position="bottom" :dialogTxt="item.name" />
+          <MButton type="5" :txt="item.type" :hasDialog="true" position="bottom" :dialogTxt="item.name" />
         </div>
       </div>
     </div>
