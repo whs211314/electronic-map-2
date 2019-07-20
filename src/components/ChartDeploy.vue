@@ -182,6 +182,8 @@ export default {
             show: true,
             position: 'bottom',
             color: '#fff',
+            fontSize,
+            fontWeight: 'bold',
             formatter: params => params.data.allName.split('_').length < 3 ? this.regionNetMap[params.data.id] : ''
           },
           itemStyle: {
@@ -223,6 +225,8 @@ export default {
               show: true,
               position: 'bottom',
               color: '#fff',
+              fontSize,
+              fontWeight: 'bold',
               formatter: params => params.data.allName.split('_').length < 3 ? getCount(params) : ''
             },
             itemStyle: {
@@ -296,6 +300,8 @@ export default {
               show: true,
               position: 'bottom',
               color: '#fff',
+              fontSize,
+              fontWeight: 'bold',
               formatter: params => params.data.allName.split('_').length < 3 ? this.regionNetMap[params.data.id] : ''
             },
             itemStyle: {

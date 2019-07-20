@@ -58,11 +58,12 @@ export default {
     },
     getItems (start) {
       const len = this.originItems.length
-      if (start + 5 <= len - 1) {
+      if (start + 5 <= len) {
         this.items = this.originItems.slice(start, start + 5)
       } else {
-        this.items = [...this.originItems.slice(start, len - 1), ...this.originItems.slice(0, start + 6 - len)]
+        this.items = [...this.originItems.slice(start, len), ...this.originItems.slice(0, start + 5 - len)]
       }
+      // console.log(this.items.map(e => e.rank))
       if (start === len - 1) this.index = 0
     },
     handleClick (item) {
@@ -100,7 +101,7 @@ export default {
     margin-left: 0;
     &.move {
       margin-left: -33%;
-      transition: margin 1s;
+      transition: margin linear 1s;
     }
     .item {
       display: inline-block;
