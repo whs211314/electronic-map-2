@@ -2,10 +2,7 @@
   <div class="rank-service position-space">
     <div class="title flex-center"><div class="txt">综合排名TOP100</div></div>
     <div class="swiper" v-if="items.length">
-      <div class="items" :class="{move: move}"
-        @transitionend="handleTrnasitionEnd"
-        @mouseenter="handlePause"
-        @mouseleave="handleRun">
+      <div class="items">
         <RankServiceItem class="item"
           v-for="item in items"
           :key="item.rank"
@@ -46,15 +43,11 @@ export default {
   methods: {
     handleRun () {
       this.timer = setInterval(() => {
-        this.move = true
-      }, 1000)
+        this.getItems(++this.index)
+      }, 3000)
     },
     handlePause () {
       this.timer && clearInterval(this.timer)
-    },
-    handleTrnasitionEnd () {
-      this.move = false
-      this.getItems(++this.index)
     },
     getItems (start) {
       const len = this.originItems.length
@@ -99,10 +92,7 @@ export default {
     width: 100%;
     white-space: nowrap;
     margin-left: 0;
-    &.move {
-      margin-left: -33%;
-      transition: margin linear 1s;
-    }
+    animation: run 3s linear infinite;
     .item {
       display: inline-block;
       height: 100%;
@@ -110,6 +100,14 @@ export default {
       position: relative;
       cursor: pointer;
     }
+  }
+}
+@keyframes run {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-33%, 0, 0);
   }
 }
 </style>
