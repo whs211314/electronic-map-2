@@ -51,6 +51,7 @@ export default {
     //   }, 2 * 1000)
     // }
     handleMouseEnter () {
+      if (!this.txt) return
       this.visible = true
     },
     handleMouseLeave () {
