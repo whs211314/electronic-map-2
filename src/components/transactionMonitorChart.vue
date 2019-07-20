@@ -180,14 +180,14 @@ export default {
       let myChart = echarts.init(document.getElementById('line-grade'))
       let option = {
         color: ['#22E7E4', '#EE7343'],
-        // title: {
-        //   left: '30%',
-        //   text: '2018年7月到2019年6月',
-        //   textStyle: {
-        //     color: '#ffffff',
-        //     fontSize: 8
-        //   }
-        // },
+        title: {
+          left: '30%',
+          text: '2018年7月到2019年6月',
+          textStyle: {
+            color: '#ffffff',
+            fontSize: 8
+          }
+        },
         legend: {
           // data: ['交易笔数(笔)', '交易金额(万元)'],
           position: 'absolute',
@@ -313,6 +313,14 @@ export default {
       let myChart = echarts.init(document.getElementById('line-activity'))
       let option = {
         color: ['#22E7E4', '#EE7343'],
+        title: {
+          left: '30%',
+          text: '2018年7月到2019年6月',
+          textStyle: {
+            color: '#ffffff',
+            fontSize: 8
+          }
+        },
         legend: {
           // data: ['交易笔数(笔)', '交易金额(万元)'],
           position: 'absolute',
@@ -363,7 +371,7 @@ export default {
           {
             name: '交易笔数(笔)',
             type: 'value',
-            max: 1000000,
+            max: 1300000,
             min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
