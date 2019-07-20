@@ -119,7 +119,7 @@ export default {
             name: '交易金额(万元)',
             type: 'value',
             scale: true,
-            max: 30000,
+            max: 60000,
             min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
@@ -148,6 +148,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
+            yAxisIndex: 0,
             data: [ 199052, 180712, 182496, 185639, 214062, 273379, 358170, 201171, 228013, 233997, 260643, 283312 ]
           },
           {
@@ -159,6 +160,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
+            yAxisIndex: 1,
             data: [ 35643.57, 36767.92, 39961.55, 36555.09, 38284.09, 43918.13, 56079.01, 33889.10, 40573.43, 37881.13, 36673.25, 36433.18 ]
           }
         ]
@@ -279,6 +281,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
+            yAxisIndex: 0,
             data: [ 137601, 121650, 151597, 113148, 181207, 205524, 281101, 425936, 117021, 107261, 432000, 528152, 217211, 130695 ]
           },
           {
@@ -290,6 +293,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
+            yAxisIndex: 1,
             data: [ 27333.50, 26710.28, 18416.42, 52640.04, 49369.49, 26060.31, 91813.30, 19342.85, 22524.67, 25273.82, 93326.60, 90784.93, 55564.81, 7770.19 ]
           }
         ]
@@ -359,8 +363,7 @@ export default {
           {
             name: '交易笔数(笔)',
             type: 'value',
-            scale: true,
-            max: 500000,
+            max: 1000000,
             min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
@@ -380,7 +383,6 @@ export default {
           }, {
             name: '交易金额(万元)',
             type: 'value',
-            scale: true,
             max: 500000,
             min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
@@ -410,6 +412,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
+            yAxisIndex: 0,
             data: [ 430341, 96264, 148848, 14095, 1369839, 497268, 928740 ]
           },
           {
@@ -421,6 +424,7 @@ export default {
                 barBorderRadius: [10, 10, 10, 10]
               }
             },
+            yAxisIndex: 1,
             data: [ 41133.20, 1312.26, 32705.16, 935.3364, 42266.35, 2250.15, 489915.33 ]
           }
         ]

@@ -2,7 +2,7 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center">预警点数量：6278  占比：10%</div>
+        <div class="item active flex-center">预警点数量：1494  占比：3.4%</div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -19,7 +19,8 @@
             <tr>
               <td>64</td>
               <td>181</td>
-              <td>543</td>
+              <td>43</td>
+              <td>17</td>
             </tr>
           </tbody>
         </table>
@@ -49,7 +50,7 @@ import * as api from '@/api'
 export default {
   data () {
     return {
-      headers: ['移机', '高额小频', '异常大频'],
+      headers: ['移机', '高额小频', '异常大频', '异常归集'],
       headers1: ['三个月不动户', '半年不动户', '一年不动户'],
       bodys: [
         { type: '1500个', money: '2500个', dealStatus: '3500个' }
@@ -148,10 +149,11 @@ export default {
                     show: false
                   }
                 },
-                data: this.echartsList.map(item => Object.assign(item, {
-                  value: item.classNum,
-                  name: item.className
-                })),
+                data: [64, 181, 43, 17, 651, 430, 108],
+                // this.echartsList.map(item => Object.assign(item, {
+                //   value: item.classNum,
+                //   name: item.className
+                // })),
                 itemStyle: {
                   emphasis: {
                     shadowBlur: 10,

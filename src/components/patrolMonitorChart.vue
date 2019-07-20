@@ -17,11 +17,11 @@
         <div class="row" :key="index"
             v-for="(item, index) in items">
           <div class="items">
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.type}}</div></div>
-            <div class="item flex-center flex-2"><div :class="index === 2?txt:txt">{{item.money}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.dealStatus}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.riskStatus}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.isChange}}</div></div>
+            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.cityName}}</div></div>
+            <div class="item flex-center flex-2"><div :class="index === 2?txt:txt">{{item.mchName}}</div></div>
+            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.jtmChangeDate}}</div></div>
+            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.checkResult}}</div></div>
+            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.checkTypeName}}</div></div>
           </div>
         </div>
       </div>
@@ -32,23 +32,21 @@
 <script>
 
 export default {
+  props: {
+    items: {
+      type: Array
+    }
+  },
   data () {
     return {
       animate: true,
       txt: 'txt',
       txt01: 'txt01',
-      headers: ['地市', '金湘通服务点名称', '时间', '结果', '方式'],
-      items: [
-        { type: '长治市', money: '黄兴镇', dealStatus: '2019-06-12', riskStatus: '正常', isChange: '现场' },
-        { type: '长沙市', money: '', dealStatus: '2019-06-21', riskStatus: '正常', isChange: '现场' },
-        { type: '永州市', money: '星沙街道', dealStatus: '2019-06-25', riskStatus: '正常', isChange: '现场' },
-        { type: '怀化市', money: '黄兴镇', dealStatus: '2019-07-02', riskStatus: '正常', isChange: '现场' },
-        { type: '衡阳市', money: '星沙街道', dealStatus: '2019-07-04', riskStatus: '正常', isChange: '现场' },
-        { type: '邵阳市', money: '安沙镇', dealStatus: '2019-07-12', riskStatus: '正常', isChange: '现场' }
-      ]
+      headers: ['地市', '金湘通服务点名称', '时间', '结果', '方式']
     }
   },
   created () {
+    console.log(this.items)
     setInterval(this.scroll, 2000)
   },
   methods: {

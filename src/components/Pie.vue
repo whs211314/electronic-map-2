@@ -90,7 +90,7 @@ export default {
                   color: function (params) {
                   // 自定义颜色
                     var colorList = [
-                      '#fe7e12', '#132C33'
+                      '#FFA500', '#132C33'
                     ]
                     return colorList[params.dataIndex]
                   }

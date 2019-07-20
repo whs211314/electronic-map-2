@@ -142,3 +142,14 @@ export function getAreaNet (cityName) {
     })
   })
 }
+
+// 巡检
+export function getCheckInfoPage (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpCheck/getCheckInfoPage', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}

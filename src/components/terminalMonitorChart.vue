@@ -16,11 +16,24 @@
             </tr>
           </thead>
           <tbody>
-            <tr :key="index" v-for="(item, index) in bodys">
-              <td>{{item.type}}</td>
-              <td>{{item.money}}</td>
-              <td>{{item.dealStatus}}</td>
-              <td>{{item.riskStatus}}</td>
+            <tr>
+              <td>34</td>
+              <td>89</td>
+              <td>254</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <td :key="index" v-for="(item, index) in headers1">{{item}}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>60</td>
+              <td>100</td>
+              <td>141</td>
             </tr>
           </tbody>
         </table>
@@ -36,7 +49,8 @@ import * as api from '@/api'
 export default {
   data () {
     return {
-      headers: ['缺纸', '维修中', '模块故障', '通讯异常'],
+      headers: ['缺纸', '缺纸预警', '通讯异常'],
+      headers1: ['打印模块异常', '身份证模块异常', '其他'],
       bodys: [
         { type: '34个', money: '254个', dealStatus: '160个', riskStatus: '230个' }
       ],
@@ -128,10 +142,11 @@ export default {
                     show: false
                   }
                 },
-                data: this.echartsList.map(item => Object.assign(item, {
-                  value: item.classNum,
-                  name: item.className
-                })),
+                data: [34, 89, 254, 60, 100, 141],
+                // this.echartsList.map(item => Object.assign(item, {
+                //   value: item.classNum,
+                //   name: item.className
+                // })),
                 itemStyle: {
                   emphasis: {
                     shadowBlur: 10,
@@ -186,8 +201,10 @@ export default {
       height: 100%;
     }
     .monitor-table {
-      @include bgImage('../assets/images/tc-bg01.png');
-      @include position(252, -500, 226, 2235);
+      @include bgImage('../assets/images/tc-bg02.png');
+      @include position(52, -500, 52, 2355);
+      // background: #2C848B;
+      // border-radius: 5px;
       font-size: var(--fontSize-12);
       padding: 2%;
       table {
@@ -203,7 +220,7 @@ export default {
           tr {
             td {
               width: 21%;
-              padding: 10% 0;
+              padding: 8% 0;
               border: 1px solid #00C6D9;
             }
           }

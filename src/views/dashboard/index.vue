@@ -122,7 +122,7 @@
     </div>
     <!-- 巡检 -->
     <div v-if="monitorIndex === 4" class="monitor-middle">
-      <patrolMonitorChart />
+      <patrolMonitorChart :items='monitorIndexList'/>
     </div>
     <!-- 服务点交易排名 -->
     <div class="monitor-bottom">
@@ -180,6 +180,7 @@ export default {
       record: false, // 巡检记录
       deal: false, // 交易
       chartType: 'ChartDeploy', // 地图类型
+      monitorIndexList: [],
       numberId: '',
       home_url: '../../assets/jingli/99901760.png',
       popupVisible: false,
@@ -343,6 +344,14 @@ export default {
     // 监控按钮弹窗
     monitorClick (index) {
       this.monitorIndex = index
+      if (index === 4) {
+        api.getCheckInfoPage({ 'pageIndex': 1 }).then(res => {
+          this.monitorIndexList = res.data.map(item => Object.assign(item, {
+            jtmChangeDate: new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
+          }))
+        })
+        console.log(this.monitorIndexList)
+      }
     },
     // 地图切换
     handleChart (type) {
@@ -474,9 +483,9 @@ export default {
       // 实施监控
       api.getTransLog(page).then(res => {
         this.monitorDealList = res.data.map(item => Object.assign(item, {
-          txnDtTm: item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
+          txnDtTm: new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds(), // item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
           genproffinTxnamt: item.genproffinTxnamt / 100,
-          tradeName: this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName
+          tradeName: this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
         }))
         this.monitorPageNo += 1
       })

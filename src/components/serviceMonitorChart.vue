@@ -208,7 +208,7 @@ export default {
             ]
           }
           let option1 = {
-            color: ['#22E7E4', '#EE7343'],
+            color: ['#EE7343', '#EE7343'],
             legend: {
               // data: ['交易笔数(笔)', '交易金额(万元)'],
               position: 'absolute',
@@ -385,7 +385,7 @@ export default {
             ]
           }
           let option1 = {
-            color: ['#22E7E4', '#EE7343'],
+            color: ['#EE7343', '#EE7343'],
             legend: {
               // data: ['开业时间(年)', '商户等级'],
               position: 'absolute',
@@ -560,7 +560,7 @@ export default {
             ]
           }
           let option1 = {
-            color: ['#22E7E4', '#EE7343'],
+            color: ['#EE7343', '#EE7343'],
             legend: {
               // data: ['培训(次)', '营销活动(次)'],
               position: 'absolute',
