@@ -15,7 +15,7 @@
           v-for="(item, index) in items">
         <div class="items">
           <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.cityName}}</div></div>
-          <div class="item flex-center flex-2"><div :class="index === 2?txt:txt">{{item.streetName}}</div></div>
+          <div class="item flex-center flex-2"><div :class="index === 2?txt:txt">{{item.mchName}}</div></div>
           <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.txnDtTm}}</div></div>
           <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.tradeName}}</div></div>
           <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.genproffinTxnamt}}</div></div>

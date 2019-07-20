@@ -18,7 +18,7 @@
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">服务点状态</div></div>
-          <div class="value orange"></div>
+          <div class="value orange">正常</div>
         </div>
       </div>
     </div>
@@ -36,11 +36,11 @@
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">电话</div></div>
-          <div class="value">{{15029931994}}</div>
+          <div class="value">{{data.jpmMeloonId}}</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">员工编号</div></div>
-          <div class="value orange">{{2-3122}}</div>
+          <div class="value orange">{{3122}}</div>
         </div>
       </div>
     </div>
@@ -56,15 +56,15 @@
       <div class="right">
         <div class="item extra">
           <div class="label"><div class="txt">巡检时间</div></div>
-          <div class="value orange">{{data.jpmCreateTime.split("T")[0]+' '+data.jpmCreateTime.split("T")[1]}}</div>
+          <div class="value orange" style="">{{data.jpmCreateTime.split("T")[0]+' '+data.jpmCreateTime.split("T")[1]}}</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">巡检结果</div></div>
-          <div class="value"></div>
+          <div class="value">正常</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">巡检方式</div></div>
-          <div class="value orange"></div>
+          <div class="value orange">现场</div>
         </div>
       </div>
     </div>
@@ -147,7 +147,7 @@ export default {
     background: #019897;
   }
   .item {
-    height: 20%;
+    height: 24%;
     .label {
       height: 30%;
     }

@@ -47,12 +47,20 @@ export default {
       let myChart = echarts.init(document.getElementById('line-chart'))
       let option = {
         color: ['#22E7E4', '#EE7343'],
+        title: {
+          left: '30%',
+          text: '2018年6月到2019年6月',
+          textStyle: {
+            color: '#ffffff',
+            fontSize: 8
+          }
+        },
         legend: {
-          data: ['交易笔数(笔)', '交易金额(万元)'],
+          // data: ['交易笔数(笔)', '交易金额(万元)'],
           position: 'absolute',
           align: 'left', // 水平方向位置
           verticalAlign: 'top', // 垂直方向位置
-          x: 100, // 距离x轴的距离
+          x: 0, // 距离x轴的距离
           y: 0, // 距离Y轴的距离
           textStyle: {
             color: '#ffffff'
@@ -66,15 +74,15 @@ export default {
         },
         grid: {
           top: '20%',
-          left: '3%',
-          right: '25%',
+          left: '',
+          right: '20%',
           bottom: '10%',
           containLabel: true
         },
         xAxis: [
           {
             type: 'category',
-            data: ['2019-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12', '2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06'],
+            data: ['2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12', '2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06'],
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -87,8 +95,32 @@ export default {
         ],
         yAxis: [
           {
-            name: '',
+            name: '交易笔数(笔)',
             type: 'value',
+            scale: true,
+            max: 12000000,
+            min: 0,
+            axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
+            axisLine: {
+              show: false,
+              lineStyle: {
+                color: '#D2FBFE'
+              }
+            },
+            axisTick: {
+              show: false
+            },
+            splitLine: {
+              lineStyle: {
+                color: 'rgba(202,247,255,0.51)'
+              }
+            }
+          }, {
+            name: '交易金额(元)',
+            type: 'value',
+            scale: true,
+            max: 12000000,
+            min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
               show: false,
@@ -108,7 +140,7 @@ export default {
         ],
         series: [
           {
-            name: '交易笔数(笔)',
+            // name: '交易笔数(笔)',
             type: 'bar',
             barWidth: '15%',
             itemStyle: { // 柱样式
@@ -119,7 +151,7 @@ export default {
             data: [ 1003350, 1208449, 1395990, 1578529, 1764168, 1976702, 2250079, 358.170, 559341, 791677, 1025686, 1286511.00, 1569823 ]
           },
           {
-            name: '交易金额(万元)',
+            // name: '交易金额(万元)',
             type: 'bar',
             barWidth: '15%',
             itemStyle: { // 柱样式
