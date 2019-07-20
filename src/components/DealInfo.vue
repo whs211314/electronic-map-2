@@ -25,7 +25,7 @@
     <div class="right fr">
       <div class="item">
         <div class="label"><div class="txt">金湘通服务点数</div></div>
-        <div class="value">{{sum.serverAllCount}} 个</div>
+        <div class="value">{{sum.serverCount}} 个</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">本年金湘通发卡数</div></div>

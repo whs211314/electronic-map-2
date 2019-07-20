@@ -52,7 +52,7 @@
     </div>
     <!-- 饼图部分 -->
     <div class="pie">
-      <Pie :pieList= 'pieList'/>
+      <Pie :pieList= 'pieList' :proportion='proportion'/>
     </div>
     <!-- 交易信息区 -->
     <div class="summary">
@@ -171,6 +171,7 @@ export default {
   },
   data () {
     return {
+      proportion: 0, // 监听饼图占比是否变化
       internalNetwork: false, // 是否内部网点弹窗
       monitorIndex: 0, // 监控按钮初始化索引
       basicInfo: false, // 基本信息
@@ -192,7 +193,7 @@ export default {
       }, // 饼图数据
       sum: {
         netSum: '',
-        serverAllCount: '',
+        serverCount: '',
         cardAllSum: '',
         transAllSum: '',
         phoneCustomerCount: '',
@@ -430,17 +431,22 @@ export default {
         areaName: '',
         pageIndex: this.monitorPageNo
       }
+      if (e && e.allName) {
+        pieBotton.areaType = 1
+        this.proportion = Math.floor(Math.random() * (75 - 100) + 100)
+      }
       if (e && e.allName.split('_').length > 1) {
         pieBotton.cityName = e.allName.split('_')[0]
         pieBotton.areaName = e.allName.split('_')[1]
         pieBotton.pageIndex = this.monitorPageNo
-        pieBotton.areaType = this.monitorPageNo
+        pieBotton.areaType = 2
+        this.proportion = Math.floor(Math.random() * (75 - 100) + 100)
       }
       // 饼图下数据
       api.getDataSum(pieBotton).then(res => {
         this.sum.cardAllSum = res.data[0].cardAllSum
         this.sum.netSum = res.data[0].netSum
-        this.sum.serverAllCount = res.data[0].serverAllCount
+        this.sum.serverCount = res.data[0].serverCount
         this.sum.transAllSum = String(res.data[0].transAllSum).substring(0, 3)
         this.sum.phoneCustomerCount = res.data[0].phoneCustomerCount
         this.sum.areaCount = res.data[0].areaCount

@@ -11,9 +11,7 @@ import * as api from '@/api'
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-mapPie')
 export default {
   props: {
-    // pieList: {
-    //   type: Object
-    // }
+    proportion: String
   },
   data () {
     return {
@@ -23,12 +21,22 @@ export default {
       }
     }
   },
+  watch: {
+    proportion (val) {
+      this.chartInit(0)
+    }
+  },
   methods: {
-    chartInit () {
+    chartInit (e) {
       console.log(this.pieList)
       api.getPieData().then(res => {
-        this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
-        this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
+        if (e === 0) {
+          this.pieList.taCountryYearCount = Math.floor(Math.random() * (75 - 100) + 100)
+          this.pieList.taCountryCount = Math.floor(Math.random() * (35 - 80) + 80)
+        } else {
+          this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
+          this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
+        }
         console.log(this.pieList)
         let myChart1 = echarts.init(document.getElementById('line01-chart'))
         let myChart2 = echarts.init(document.getElementById('line02-chart'))
