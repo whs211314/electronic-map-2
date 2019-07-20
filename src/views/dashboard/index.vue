@@ -58,7 +58,7 @@
     <div class="summary">
       <DealInfo v-if="!internalNetwork" :sum='sum'/>
       <!-- 商户画像 -->
-      <merchantsPortrait :home_url="home_url" :basicInfo="basicInfo" :client="client" :patrol="patrol" :record="record" :deal="deal" :data="currJmpInfo" v-if="internalNetwork" />
+      <merchantsPortrait :home_url="home_url" :basicInfo="basicInfo" :client="client" :patrol="patrol" :record="record" :deal="deal" :essential='essential' :data="currJmpInfo" v-if="internalNetwork" />
     </div>
     <!-- 地图 -->
     <div class="map-bk"></div>
@@ -171,7 +171,7 @@ export default {
   },
   data () {
     return {
-      proportion: 0, // 监听饼图占比是否变化
+      proportion: '0', // 监听饼图占比是否变化
       internalNetwork: false, // 是否内部网点弹窗
       monitorIndex: 0, // 监控按钮初始化索引
       basicInfo: false, // 基本信息
@@ -181,11 +181,12 @@ export default {
       deal: false, // 交易
       chartType: 'ChartDeploy', // 地图类型
       numberId: '',
-      home_url: '',
+      home_url: '../../assets/jingli/99901760.png',
       popupVisible: false,
       popup: {},
       topItem: {},
       currJmpInfo: {}, // 当前服务点数据
+      essential: {}, // 基本信息数据
       monitorPageNo: 1,
       pieList: {
         taCountryYearCount: '',
@@ -280,10 +281,10 @@ export default {
         湘西花垣电力缴费: '花垣电力'
       },
       services1: [
-        { type: '现金业务', name: '个人客户小额存取现服务，累计交易笔数为5632笔，交易金额32万，占总交易量3%。' },
+        { type: '现金业务', name: '个人客户小额存取现服务，累计交易笔数为265899笔，占总交易笔数17.13%，累计交易金额29111.55万元，占总交易金额12.07%。' },
         { type: '贷款业务', name: '个人商户农商贷金融产品服务9630客户，累计发放贷款金额1060万元。' },
-        { type: '转账业务', name: '银行卡实时转账服务，累计交易笔数为3232笔，交易金额36万。' },
-        { type: '缴费业务', name: '水、电、气、话费等查询缴费服务，累计交易笔数为3267笔，交易金额7亿，占总交易量 6.6%。' },
+        { type: '转账业务', name: '银行卡实时转账服务，累计交易笔数为92098笔，占总交易笔数6%，累计交易金额17360.43万元，占总交易金额7.2%。' },
+        { type: '缴费业务', name: '水、电、气、话费等查询缴费服务，累计交易笔数为469339笔，占总交易笔数30.24%，交易金额21358.92万元，占总交易金额8.85%。' },
         { type: '投资理财', name: '建信人寿意外险、财产险、车险等保险，贵金属、专属理财产品等投资理财产品购买服务，累计交易2.38万人，服务贫困人口138人，金融精准扶贫贷款余额115.09亿元。' },
         { type: '快递代理', name: '顺丰、圆通等快递业务代理服务，累计服务1473人。' },
         { type: '电商业务', name: '农产品进城电商线上产品服务，累计服务6539人，消费金额87.6万。' },
@@ -352,6 +353,7 @@ export default {
       this.popup = popup
     },
     handleDeployEvent (data, code) {
+      this.internalNetwork = true
       let arr = [81072069, 86617567, 90231567, 93538191, 97778229, 98662928, 99593687, 99901760, 68729821, 68758978, 68988123, 69366959, 69830902, 72018175, 72317666, 71303370, 79658960, 80915399, 79976903, 83026812, 92665315, 93008812, 91368263, 97702962]
       console.warn('--点击部署选项触发--', data, code)
       if (this.numberId === '') {
@@ -359,7 +361,7 @@ export default {
         this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
       }
       this.currJmpInfo = data
-      this.internalNetwork = true
+      this.essential = data
       switch (code) {
         case 1:
           this.basicInfo = true // 基本信息
@@ -374,8 +376,9 @@ export default {
           this.patrol = false
           this.record = false
           this.deal = false
-          api.getManagerInfo({ 'mchId': data.id }).then(res => {
+          api.getManagerInfo({ 'mchId': data.jpmMchId }).then(res => {
             console.log(res)
+            this.currJmpInfo = res.data
           })
           if (Number(this.numberId) === data.id) {
             this.home_url = this.home_url
@@ -389,8 +392,9 @@ export default {
           this.basicInfo = false
           this.patrol = false
           this.record = false
-          api.getMchTrans({ 'mchId': data.id }).then(res => {
+          api.getMchTrans({ 'mchId': data.jpmMchId }).then(res => {
             console.log(res)
+            this.currJmpInfo = res.data
           })
           break
         case 4:
@@ -406,8 +410,9 @@ export default {
           this.client = false
           this.basicInfo = false
           this.deal = false
-          api.getCheckInfo({ 'mchId': data.id }).then(res => {
+          api.getCheckInfo({ 'mchId': data.jpmMchId }).then(res => {
             console.log(res)
+            this.currJmpInfo = res.data
           })
           break
       }
@@ -433,14 +438,14 @@ export default {
       }
       if (e && e.allName) {
         pieBotton.areaType = 1
-        this.proportion = Math.floor(Math.random() * (75 - 100) + 100)
+        this.proportion = String(Math.floor(Math.random() * (75 - 100) + 100))
       }
       if (e && e.allName.split('_').length > 1) {
         pieBotton.cityName = e.allName.split('_')[0]
         pieBotton.areaName = e.allName.split('_')[1]
         pieBotton.pageIndex = this.monitorPageNo
         pieBotton.areaType = 2
-        this.proportion = Math.floor(Math.random() * (75 - 100) + 100)
+        this.proportion = String(Math.floor(Math.random() * (75 - 100) + 100))
       }
       // 饼图下数据
       api.getDataSum(pieBotton).then(res => {

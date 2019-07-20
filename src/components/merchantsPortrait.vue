@@ -10,11 +10,11 @@
       <div class="right fr">
         <div class="item r1 extra">
           <div class="label"><div class="txt">业主姓名</div></div>
-          <div class="value orange">{{data.jpmOwnerName}}</div>
+          <div class="value orange">{{essential.jpmMchName}}</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">服务点名称</div></div>
-          <div class="value">{{data.jpmStreet}}</div>
+          <div class="value">{{essential.jpmVillage}}</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">服务点状态</div></div>
@@ -32,39 +32,36 @@
       <div class="right fr">
         <div class="item r1 extra">
           <div class="label"><div class="txt">姓名</div></div>
-          <div class="value orange">{{data.jpmOwnerName}}</div>
+          <div class="value orange">{{data.manager}}</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">电话</div></div>
-          <div class="value">{{data.jpmMeloonId}}</div>
+          <div class="value">{{data.managerPhone}}</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">员工编号</div></div>
-          <div class="value orange">{{3122}}</div>
+          <div class="value orange">{{data.managerCode}}</div>
         </div>
       </div>
     </div>
     <!-- 远程巡检 -->
     <div v-if="patrol"  style="height:100%;">
-      <div class="left fl">
-      </div>
-      <div class="right fr">
-      </div>
+      <div class="transAllCount">连接中。。。</div>
     </div>
     <!-- 巡检记录 -->
     <div v-if="record"  style="height:100%;">
       <div class="right">
         <div class="item extra">
           <div class="label"><div class="txt">巡检时间</div></div>
-          <div class="value orange" style="">{{data.jpmCreateTime.split("T")[0]+' '+data.jpmCreateTime.split("T")[1]}}</div>
+          <div class="value orange">{{data.jtmChangeDate.split("T")[0]+' '+data.jtmChangeDate.split("T")[1]}}</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">巡检结果</div></div>
-          <div class="value">正常</div>
+          <div class="value">{{data.checkResult}}</div>
         </div>
         <div class="item r3 extra">
-          <div class="label"><div class="txt">巡检方式</div></div>
-          <div class="value orange">现场</div>
+          <div class="label"><div class="txt">交易笔数</div></div>
+          <div class="value orange">{{data.transAllCount}}</div>
         </div>
       </div>
     </div>
@@ -81,7 +78,7 @@
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">交易笔数</div></div>
-          <div class="value orange">{{2134}}笔</div>
+          <div class="value orange">{{data.transAllCount}}笔</div>
         </div>
       </div>
     </div>
@@ -92,6 +89,9 @@
 export default {
   props: {
     data: {
+      type: Object
+    },
+    essential: {
       type: Object
     },
     basicInfo: { // 基本信息
@@ -115,11 +115,14 @@ export default {
       default: false
     },
     dialogTxt: String,
-    home_url: Number
+    home_url: String
   },
   data () {
     return {
     }
+  },
+  created () {
+    console.log(this.data)
   }
 }
 </script>
@@ -179,12 +182,18 @@ export default {
     font-size: var(--fontSize-16);
   }
   .value {
-    font-size: calc(var(--fontSize-12) * 2);
+    font-size: calc(var(--fontSize-11) * 2);
     color: $light-blue;
     font-weight: bold;
     &.orange {
       color: #00FFF0;
     }
+  }
+  .connecting{
+    font-size: var(--fontSize-20);
+    text-align: center;
+    margin-top: 25%;
+    color: #00FFF0
   }
 }
 </style>
