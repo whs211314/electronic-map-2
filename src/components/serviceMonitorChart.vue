@@ -124,12 +124,8 @@ export default {
     chartInit () {
       api.getClassInfo({ 'classType': 1 }).then(res => {
         api.getClassInfo({ 'classType': 2 }).then(item => {
-          res.data.forEach((el, index) => {
-            this.strokeCount.push(el.classNum)
-          })
-          item.data.forEach((el, index) => {
-            this.strokeMoney.push(el.classNum)
-          })
+          this.strokeCount = res.data.map(e => e.classNum)
+          this.strokeMoney = item.data.map(e => e.classNum)
           let myChart = echarts.init(document.getElementById('line-chart'))
           let myChart1 = echarts.init(document.getElementById('line-chart1'))
           let option = {

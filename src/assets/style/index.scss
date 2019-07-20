@@ -1,5 +1,6 @@
 body {
   --fontSize-8:8px;
+  --fontSize-10:10px;
   --fontSize-12:12px;
   --fontSize-13:13px;
   --fontSize-14:14px;
@@ -12,6 +13,7 @@ body {
 @media screen and (min-width: 3000px) {
   body {
     --fontSize-8:10px;
+    --fontSize-10:14px;
     --fontSize-12:20px;
     --fontSize-13:22px;
     --fontSize-14:24px;

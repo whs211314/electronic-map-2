@@ -62,7 +62,7 @@ export default {
 @import '../assets/style/index.scss';
 .monitor-deal {
   position: absolute;
-  font-size: var(--fontSize-8);
+  font-size: var(--fontSize-10);
   .title {
     height: 12%;
     line-height: 1;
