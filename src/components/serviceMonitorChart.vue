@@ -157,7 +157,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['100', '100-500', '200-1000', '100以上'],
+                data: ['100', '100-500', '500-1000', '1000以上'],
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色

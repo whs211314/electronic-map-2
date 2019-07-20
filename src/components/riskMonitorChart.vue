@@ -87,7 +87,7 @@ export default {
               formatter: '{a} <br/>{b} : {c} ({d}%)'
             },
             title: {
-              text: res.data[0].classNum,
+              text: 1494, // res.data[0].classNum,
               left: '20%',
               top: '50%',
               textStyle: {

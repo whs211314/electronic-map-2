@@ -126,7 +126,7 @@ export default {
 }
 
 .no-bg {
-  background: none !important;
+  background-image: url(../assets/images/bg-001.png) !important;
 }
 
 .btn-1 {

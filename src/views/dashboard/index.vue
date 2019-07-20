@@ -346,9 +346,7 @@ export default {
       this.monitorIndex = index
       if (index === 4) {
         api.getCheckInfoPage({ 'pageIndex': 1 }).then(res => {
-          this.monitorIndexList = res.data.map(item => Object.assign(item, {
-            jtmChangeDate: new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
-          }))
+          this.monitorIndexList = res.data
         })
         console.log(this.monitorIndexList)
       }
@@ -508,6 +506,7 @@ export default {
     // 点击排行榜
     handleTopEvent (item) {
       console.log(item)
+      this.popupVisible = false
       this.chartType = 'ChartTop'
       this.topItem = item
       this.$nextTick(() => {

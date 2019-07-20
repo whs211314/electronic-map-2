@@ -19,7 +19,7 @@
           <div class="items">
             <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.cityName}}</div></div>
             <div class="item flex-center flex-2"><div :class="index === 2?txt:txt">{{item.mchName}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.jtmChangeDate}}</div></div>
+            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.jtmStartDate}}</div></div>
             <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.checkResult}}</div></div>
             <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.checkTypeName}}</div></div>
           </div>
