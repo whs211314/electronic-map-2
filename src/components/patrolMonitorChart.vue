@@ -17,11 +17,11 @@
         <div class="row" :key="index"
             v-for="(item, index) in items">
           <div class="items">
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.cityName}}</div></div>
-            <div class="item flex-center flex-2"><div :class="index === 2?txt:txt">{{item.mchName}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.jtmStartDate}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.checkResult}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.checkTypeName}}</div></div>
+            <div class="item flex-center"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.cityName}}</div></div>
+            <div class="item flex-center flex-2"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.mchName}}</div></div>
+            <div class="item flex-center"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.jtmStartDate}}</div></div>
+            <div class="item flex-center"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.checkResult}}</div></div>
+            <div class="item flex-center"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.checkTypeName}}</div></div>
           </div>
         </div>
       </div>
@@ -116,9 +116,13 @@ export default {
     }
   }
   .txt01 {
-    width: 100%;
+    color: #ffba00;
     text-align: center;
-    color: #E77641;
+    font-size: var(--fontSize-8);
+  }
+  .txt02 {
+    color: #feb901;
+    text-align: center;
     font-size: var(--fontSize-8);
   }
   .txt {

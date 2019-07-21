@@ -189,6 +189,7 @@ export default {
       topItem: {},
       currJmpInfo: {}, // 当前服务点数据
       monitorPageNo: 1,
+      monitoringIndex: 1, // 监控id
       pieList: {
         taCountryYearCount: '',
         taCountryCount: ''
@@ -331,6 +332,10 @@ export default {
     })
     this.monitorTask()
     this.pieBotton()
+    this.monitoringTimer()
+    // this.timer = setInterval(() => {
+    //     this.MonitorDeal(e)
+    //   }, 10 * 1000)
   },
   watch: {
     popupVisible (val) {
@@ -344,12 +349,15 @@ export default {
     // 监控按钮弹窗
     monitorClick (index) {
       this.monitorIndex = index
-      if (index === 4) {
-        api.getCheckInfoPage({ 'pageIndex': 1 }).then(res => {
-          this.monitorIndexList = res.data
-        })
-        console.log(this.monitorIndexList)
-      }
+      // if (index === 4) {
+      //   // this.monitoring()
+      // }
+    },
+    monitoring () {
+      api.getCheckInfoPage({ 'pageIndex': this.monitoringIndex }).then(res => {
+        this.monitorIndexList = res.data
+        this.monitoringIndex += 1
+      })
     },
     // 地图切换
     handleChart (type) {
@@ -526,6 +534,11 @@ export default {
       this.timer && clearInterval(this.timer)
       this.timer = setInterval(() => {
         this.MonitorDeal(e)
+      }, 10 * 1000)
+    },
+    monitoringTimer () {
+      this.timer = setInterval(() => {
+        this.monitoring()
       }, 10 * 1000)
     },
     fromData (time) {

@@ -145,7 +145,6 @@ export default {
   .picture {
     height: 70%;
     width: 85%;
-    background: #019897;
   }
   .item {
     height: 28%;
