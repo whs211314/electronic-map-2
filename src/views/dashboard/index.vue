@@ -537,7 +537,8 @@ export default {
       }, 10 * 1000)
     },
     monitoringTimer () {
-      this.timer = setInterval(() => {
+      this.timer1 && clearInterval(this.timer1)
+      this.timer1 = setInterval(() => {
         this.monitoring()
       }, 10 * 1000)
     },
