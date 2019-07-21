@@ -181,6 +181,7 @@ export default {
       deal: false, // 交易
       chartType: 'ChartDeploy', // 地图类型
       monitorIndexList: [],
+      tier: [],
       numberId: '',
       home_url: '',
       home_url1: '',
@@ -353,6 +354,13 @@ export default {
     },
     // 地图切换
     handleChart (type) {
+      if (type === 'ChartDeploy') {
+        this.$nextTick(() => {
+          this.$refs.ChartDeploy.goBackInitMap()
+          this.$refs.teamviewRef.getData()
+          this.pieBotton()
+        })
+      }
       this.chartType = type
     },
     handlePopup (popup) {
@@ -431,6 +439,8 @@ export default {
       if (e.level === 1) {
         this.proportion = 110
       }
+      this.tier.push(e)
+      console.log(this.tier)
       // 事实监控
       // this.monitorTask(e)
       const { level, name } = e
@@ -484,18 +494,20 @@ export default {
       }
       // 实施监控
       api.getTransLog(page).then(res => {
-        let list = []
+        // let list = []
         // list.push(res.data[0])
         res.data.forEach((item, index) => {
           if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
-            list.push(item)
+            item.txnDtTm = new Date().getHours() + ':' + new Date().getMinutes()
+            item.tradeName = this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
+            this.monitorDealList.push(item)
           }
         })
-        this.monitorDealList = list.map(item => Object.assign(item, {
-          txnDtTm: new Date().getHours() + ':' + new Date().getMinutes(), // + ':' + new Date().getSeconds(), // item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
-          genproffinTxnamt: item.genproffinTxnamt / 100,
-          tradeName: this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
-        }))
+        // this.monitorDealList = list.map(item => Object.assign(item, {
+        //   txnDtTm: new Date().getHours() + ':' + new Date().getMinutes(), // + ':' + new Date().getSeconds(), // item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
+        //   genproffinTxnamt: item.genproffinTxnamt / 100,
+        //   tradeName: this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
+        // }))
         this.monitorPageNo += 1
       })
     },

@@ -5,7 +5,7 @@
 <script>
 import echarts from 'echarts'
 import * as api from '@/api'
-import { serverIcon, netIcon } from '@/assets/js/utils'
+import { serverIcon } from '@/assets/js/utils' // netIcon
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {
@@ -60,7 +60,7 @@ export default {
             features: this.currJson.features.filter(e => e.id === this.currID)
           }
           this.currentLevel = 4
-          this.$emit('goDown', { id, name, allName, level: this.currentLevel })
+          this.$emit('goDown', { id, name, allName, level: this.currentLevel, serverNum: this.regionNetMap[this.currID] })
           this.registerAndsetOption(this.myChart, param.name, townJson)
           api.getMchInfoList({ allName }).then(res => {
             this.jpmData = res.data
@@ -74,22 +74,25 @@ export default {
           // 县一级服务点
           if (this.currID.split('_').length === 1) {
             this.currentLevel = 2
-            this.$emit('goDown', { id, name, allName, level: this.currentLevel })
+            this.$emit('goDown', { id, name, allName, level: this.currentLevel, serverNum: this.regionNetMap[this.currID] })
             echarts.registerMap(param.name, mapJson)
             this.handleCountyPointer(name)
           } else {
             this.currentLevel = 3
-            this.$emit('goDown', { id, name, allName, level: this.currentLevel })
+            this.$emit('goDown', { id, name, allName, level: this.currentLevel, serverNum: this.regionNetMap[this.currID] })
             this.registerAndsetOption(this.myChart, param.name, mapJson)
           }
         })
       } else {
-        this.currentLevel = 1
-        // 没有下级地图，回到一级中国地图，并将mapStack清空
-        this.currJson = this.chinaJson
-        this.registerAndsetOption(this.myChart, this.chinaName, this.chinaJson)
-        this.$emit('goDown', { id: '4300', name: '湖南省', allName: '', level: this.currentLevel })
+        this.goBackInitMap()
       }
+    },
+    goBackInitMap () {
+      this.currentLevel = 1
+      // 没有下级地图，回到一级中国地图，并将mapStack清空
+      this.currJson = this.chinaJson
+      this.registerAndsetOption(this.myChart, this.chinaName, this.chinaJson)
+      this.$emit('goDown', { id: '4300', name: '湖南省', allName: '', level: this.currentLevel })
     },
     // 服务点标点数据
     getCoordinate (jpmData) {
@@ -239,11 +242,11 @@ export default {
     // 进入县级标记网点和服务点数量
     handleCountyPointer (name) {
       Promise.all([api.getAreaNet(name), api.getAreaServies({ areaType: 2, cityName: name })]).then(([netRes, serverRes]) => {
-        const netData = netRes.data.map(e => ({
-          name: e.jpmBankName,
-          id: e.jpmBankNo,
-          value: [e.jpmLat, e.jpmLon]
-        }))
+        // const netData = netRes.data.map(e => ({
+        //   name: e.jpmBankName,
+        //   id: e.jpmBankNo,
+        //   value: [e.jpmLat, e.jpmLon]
+        // }))
         serverRes.data.forEach(e => {
           this.regionNetMap[`${e.jrCity}_${e.jrArea}`] = e.jrServerCount
         })
@@ -280,17 +283,17 @@ export default {
             regions: this.initMapData()
           },
           series: [{
-            name: 'netStation',
-            type: 'scatter',
-            coordinateSystem: 'geo',
-            animation: false,
-            symbolSize: fontSize,
-            symbol: `image://${netIcon}`,
-            data: netData,
-            label: {
-              show: false
-            }
-          }, {
+          //   name: 'netStation',
+          //   type: 'scatter',
+          //   coordinateSystem: 'geo',
+          //   animation: false,
+          //   symbolSize: fontSize,
+          //   symbol: `image://${netIcon}`,
+          //   data: netData,
+          //   label: {
+          //     show: false
+          //   }
+          // }, {
             name: 'serverStation',
             type: 'scatter',
             coordinateSystem: 'geo',
