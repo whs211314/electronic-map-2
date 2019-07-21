@@ -432,7 +432,7 @@ export default {
         this.proportion = 110
       }
       // 事实监控
-      this.monitorTask(e)
+      // this.monitorTask(e)
       const { level, name } = e
       // 合作视图仅在市县级更新
       if (level === 2) this.$refs.teamviewRef.getData(1, name)
@@ -463,7 +463,7 @@ export default {
         this.sum.cardAllSum = res.data[0].cardAllSum
         this.sum.netSum = res.data[0].netSum
         this.sum.serverCount = res.data[0].serverCount
-        this.sum.transAllSum = String(res.data[0].transAllSum).substring(0, 3)
+        this.sum.transAllSum = String(parseInt(res.data[0].transAllSum / 1000000))
         this.sum.phoneCustomerCount = res.data[0].phoneCustomerCount
         this.sum.areaCount = res.data[0].areaCount
         this.sum.yearCardCount = res.data[0].yearCardCount
@@ -484,8 +484,15 @@ export default {
       }
       // 实施监控
       api.getTransLog(page).then(res => {
-        this.monitorDealList = res.data.map(item => Object.assign(item, {
-          txnDtTm: new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds(), // item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
+        let list = []
+        // list.push(res.data[0])
+        res.data.forEach((item, index) => {
+          if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
+            list.push(item)
+          }
+        })
+        this.monitorDealList = list.map(item => Object.assign(item, {
+          txnDtTm: new Date().getHours() + ':' + new Date().getMinutes(), // + ':' + new Date().getSeconds(), // item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
           genproffinTxnamt: item.genproffinTxnamt / 100,
           tradeName: this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
         }))
@@ -495,7 +502,6 @@ export default {
     monitorTask (e) {
       this.monitorPageNo = 1
       this.timer && clearInterval(this.timer)
-      this.MonitorDeal(e)
       this.timer = setInterval(() => {
         this.MonitorDeal(e)
       }, 10 * 1000)

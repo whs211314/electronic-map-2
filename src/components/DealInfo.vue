@@ -11,7 +11,7 @@
       </div>
       <div class="item">
         <div class="label"><div class="txt">金湘通卡存款</div></div>
-        <div class="value">{{sum.transAllSum}} 亿元</div>
+        <div class="value">{{sum.transAllSum}} 万元</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">手机银行签约客户数</div></div>
