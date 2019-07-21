@@ -307,9 +307,9 @@ export default {
         this.numberId = data.id
         // this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
       }
-      this.currJmpInfo.essential = data // 基础信息
-      this.home_url1 = 'http://54.0.94.84/jxt_image/' + data.jpmDoorHeadImagePath + ''
-      console.log(this.currJmpInfo)
+      // this.currJmpInfo.essential = data // 基础信息
+      // this.home_url1 = 'http://54.0.94.84/jxt_image/' + data.jpmDoorHeadImagePath + ''
+      // console.log(this.home_url1)
       switch (code) {
         case 1:
           this.basicInfo = true // 基本信息
@@ -317,6 +317,16 @@ export default {
           this.patrol = false
           this.record = false
           this.deal = false
+          let allName = {
+            cityName: data.jpmCity,
+            areaName: data.jpmArea,
+            streetName: data.jpmStreet
+          }
+          api.getMchInfoListLog(allName).then(res => {
+            this.currJmpInfo.essential = res.data[0] // 基础信息
+            this.home_url1 = 'http://54.0.94.84/jxt_image/' + res.data[0].jpmDoorHeadImagePath + ''
+            console.log(this.home_url1)
+          })
           break
         case 2:
           this.basicInfo = false

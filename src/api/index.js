@@ -43,6 +43,17 @@ export function getTransLog (mchId) {
   })
 }
 
+// 服务信息
+export function getMchInfoListLog (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/mchInfo/getMchInfoList', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
+
 // 客户经理信息
 export function getManagerInfo (mchId) {
   return new Promise((resolve, reject) => {
