@@ -52,7 +52,7 @@
     </div>
     <!-- 饼图部分 -->
     <div class="pie">
-      <Pie :pieList= 'pieList' :proportion='proportion'/>
+      <Pie :pieList= 'pieList' :tier='tier'/>
     </div>
     <!-- 交易信息区 -->
     <div class="summary">
@@ -171,7 +171,6 @@ export default {
   },
   data () {
     return {
-      proportion: '0', // 监听饼图占比是否变化
       internalNetwork: false, // 是否内部网点弹窗
       monitorIndex: 0, // 监控按钮初始化索引
       basicInfo: false, // 基本信息
@@ -355,6 +354,7 @@ export default {
     // 地图切换
     handleChart (type) {
       if (type === 'ChartDeploy') {
+        this.tier = []
         this.$nextTick(() => {
           this.$refs.ChartDeploy.goBackInitMap()
           this.$refs.teamviewRef.getData()
@@ -436,9 +436,6 @@ export default {
     handleGoDown (e) {
       console.warn('--部署地图下钻触发--')
       console.info(JSON.stringify(e))
-      if (e.level === 1) {
-        this.proportion = 110
-      }
       this.tier.push(e)
       console.log(this.tier)
       // 事实监控
@@ -477,7 +474,7 @@ export default {
         this.sum.phoneCustomerCount = res.data[0].phoneCustomerCount
         this.sum.areaCount = res.data[0].areaCount
         this.sum.yearCardCount = res.data[0].yearCardCount
-        this.sum.yearAddCardMoney = Math.round(res.data[0].yearAddCardMoney / 10000)
+        this.sum.yearAddCardMoney = Math.round(res.data[0].yearAddCardMoney / 1000000)
         this.sum.rate = String(res.data[0].rate).substring(0, 3)
       })
     },
@@ -499,6 +496,7 @@ export default {
         res.data.forEach((item, index) => {
           if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
             item.txnDtTm = new Date().getHours() + ':' + new Date().getMinutes()
+            item.genproffinTxnamt = item.genproffinTxnamt / 100
             item.tradeName = this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
             this.monitorDealList.push(item)
           }

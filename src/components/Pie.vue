@@ -11,35 +11,48 @@ import * as api from '@/api'
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-mapPie')
 export default {
   props: {
-    proportion: String
+    tier: {
+      type: Array
+    }
   },
   data () {
     return {
       pieList: {
         taCountryYearCount: '',
         taCountryCount: ''
-      }
+      },
+      num: 0
     }
   },
   watch: {
-    proportion (val) {
-      if (val === 110) {
-        this.chartInit(10)
-      } else {
-        this.chartInit(0)
-      }
+    tier (val) {
+      this.chartInit(val)
     }
   },
   methods: {
     chartInit (e) {
       console.log(this.pieList)
       api.getPieData().then(res => {
-        if (e === 0) {
-          this.pieList.taCountryYearCount = Math.floor(Math.random() * (75 - 100) + 100)
-          this.pieList.taCountryCount = Math.floor(Math.random() * (35 - 80) + 80)
+        if (e && e[0].level > 1) {
+          // 服务点数占比
+          e.forEach((item, index) => {
+            if (item.level === 2) {
+              this.pieList.taCountryCount = parseInt((Number(e[0].serverNum) / this.num).toFixed(2) * 100)
+              this.num = Number(e[0].serverNum)
+            }
+            if (item.level === 3) {
+              this.pieList.taCountryCount = parseInt((Number(e[1].serverNum) / this.num).toFixed(2) * 100)
+            }
+            if (item.level === 1) {
+              this.pieList.taCountryCount = parseInt((Number(e[1].serverNum) / this.num).toFixed(2) * 100)
+              this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
+              this.num = 44204
+            }
+          })
         } else {
           this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
           this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
+          this.num = 44204
         }
         console.log(this.pieList)
         let myChart1 = echarts.init(document.getElementById('line01-chart'))
