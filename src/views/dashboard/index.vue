@@ -444,8 +444,11 @@ export default {
     handleGoDown (e) {
       console.warn('--部署地图下钻触发--')
       console.info(JSON.stringify(e))
-      this.tier.push(e)
-      console.log(this.tier)
+      if (e.level !== 1) {
+        this.tier.push(e)
+      } else {
+        this.tier = []
+      }
       // 事实监控
       // this.monitorTask(e)
       const { level, name } = e

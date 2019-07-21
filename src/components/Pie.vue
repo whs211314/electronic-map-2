@@ -31,9 +31,8 @@ export default {
   },
   methods: {
     chartInit (e) {
-      console.log(this.pieList)
       api.getPieData().then(res => {
-        if (e && e[0].level > 1) {
+        if (e && e.length > 0 && e[0].level > 1) {
           // 服务点数占比
           e.forEach((item, index) => {
             if (item.level === 2) {
