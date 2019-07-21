@@ -4,7 +4,7 @@
     <div v-if="basicInfo" style="height:100%;">
       <div class="left fl">
         <div class="picture">
-          <img src="http://10.0.2.158:81/kehujingli/68729821.png" alt="" width="100%">
+          <img :src="home_url1" alt="" width="100%">
         </div>
       </div>
       <div class="right fr">
@@ -112,7 +112,8 @@ export default {
       default: false
     },
     dialogTxt: String,
-    home_url: String
+    home_url: String,
+    home_url1: String
   },
   data () {
     return {

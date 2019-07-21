@@ -106,7 +106,7 @@ export default {
     background-size: 100% 100%;
     background-origin: border-box;
     background-repeat: no-repeat;
-    font-size: var(--fontSize-12);
+    font-size: var(--fontSize-10);
     z-index: 12;
     &.large {
       width: 180%;

@@ -58,7 +58,7 @@
     <div class="summary">
       <DealInfo v-if="!internalNetwork" :sum='sum'/>
       <!-- 商户画像 -->
-      <merchantsPortrait :home_url="home_url" :basicInfo="basicInfo" :client="client" :patrol="patrol" :record="record" :deal="deal" :data="currJmpInfo" v-if="internalNetwork" />
+      <merchantsPortrait :home_url="home_url" :home_url1='home_url1' :basicInfo="basicInfo" :client="client" :patrol="patrol" :record="record" :deal="deal" :data="currJmpInfo" v-if="internalNetwork" />
     </div>
     <!-- 地图 -->
     <div class="map-bk"></div>
@@ -183,6 +183,7 @@ export default {
       monitorIndexList: [],
       numberId: '',
       home_url: '',
+      home_url1: '',
       popupVisible: false,
       popup: {},
       topItem: {},
@@ -367,6 +368,7 @@ export default {
         // this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
       }
       this.currJmpInfo.essential = data // 基础信息
+      this.home_url1 = 'http://54.0.94.84/jxt_image/' + data.jpmDoorHeadImagePath + ''
       console.log(this.currJmpInfo)
       switch (code) {
         case 1:
@@ -383,7 +385,7 @@ export default {
           this.deal = false
           api.getManagerInfo({ 'mchId': data.jpmMchId }).then(res => {
             this.currJmpInfo.client = res.data[0]
-            this.home_url = 'http://10.0.2.158/kehujingli/' + res.data[0].managerCode + '.png'
+            this.home_url = 'http://54.0.94.84/kehujingli/' + res.data[0].managerCode + '.png'
             this.client = true // 客户信息 home_url
           })
           // if (Number(this.numberId) === data.id) {
@@ -447,14 +449,14 @@ export default {
       }
       if (e && e.allName) {
         pieBotton.areaType = 1
-        this.proportion = String(Math.floor(Math.random() * (75 - 100) + 100))
+        this.proportion = String(Math.floor(Math.random() * (15 - 56) + 56))
       }
       if (e && e.allName.split('_').length > 1) {
         pieBotton.cityName = e.allName.split('_')[0]
         pieBotton.areaName = e.allName.split('_')[1]
         pieBotton.pageIndex = this.monitorPageNo
         pieBotton.areaType = 2
-        this.proportion = String(Math.floor(Math.random() * (75 - 100) + 100))
+        this.proportion = String(Math.floor(Math.random() * (15 - 56) + 56))
       }
       // 饼图下数据
       api.getDataSum(pieBotton).then(res => {
