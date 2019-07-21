@@ -454,20 +454,27 @@ export default {
         areaName: '',
         pageIndex: this.monitorPageNo
       }
-      if (e && e.allName) {
+      if (e && e.level === 2) {
         pieBotton.areaType = 1
         this.pieApi(pieBotton)
-        return
       }
-      if (e && e.allName.split('_').length > 1) {
+      if (e && e.level === 3) {
         pieBotton.cityName = e.allName.split('_')[0]
         pieBotton.areaName = e.allName.split('_')[1]
         pieBotton.pageIndex = this.monitorPageNo
         pieBotton.areaType = 2
         this.pieApi(pieBotton)
-        return
       }
-      this.pieApi(pieBotton)
+      if (e && e.level === 4) {
+        this.pieApi(pieBotton)
+      }
+      if (e && e.level === 1) {
+        pieBotton.pageIndex = 1
+        this.pieApi(pieBotton)
+      }
+      if (!e) {
+        this.pieApi(pieBotton)
+      }
     },
     pieApi (pieBotton) {
       // 饼图下数据

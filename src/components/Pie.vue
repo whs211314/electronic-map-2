@@ -39,12 +39,56 @@ export default {
             if (item.level === 2) {
               this.pieList.taCountryCount = parseInt((Number(e[0].serverNum) / this.num).toFixed(2) * 100)
               this.num = Number(e[0].serverNum)
+              if (item.name === '长沙市') {
+                this.pieList.taCountryYearCount = 4
+              }
+              if (item.name === '株洲市') {
+                this.pieList.taCountryYearCount = 4
+              }
+              if (item.name === '湘潭市') {
+                this.pieList.taCountryYearCount = 5
+              }
+              if (item.name === '衡阳市') {
+                this.pieList.taCountryYearCount = 4
+              }
+              if (item.name === '邵阳市') {
+                this.pieList.taCountryYearCount = 6
+              }
+              if (item.name === '岳阳市') {
+                this.pieList.taCountryYearCount = 7
+              }
+              if (item.name === '常德市') {
+                this.pieList.taCountryYearCount = 9
+              }
+              if (item.name === '张家界市') {
+                this.pieList.taCountryYearCount = 14
+              }
+              if (item.name === '益阳市') {
+                this.pieList.taCountryYearCount = 3
+              }
+              if (item.name === '郴州市') {
+                this.pieList.taCountryYearCount = 3
+              }
+              if (item.name === '永州市') {
+                this.pieList.taCountryYearCount = 14
+              }
+              if (item.name === '怀化市') {
+                this.pieList.taCountryYearCount = 16
+              }
+              if (item.name === '湘西土家族苗族自治州') {
+                this.pieList.taCountryYearCount = 7
+              }
+              if (item.name === '娄底市') {
+                this.pieList.taCountryYearCount = 4
+              }
             }
             if (item.level === 3) {
               this.pieList.taCountryCount = parseInt((Number(e[1].serverNum) / this.num).toFixed(2) * 100)
+              this.pieList.taCountryYearCount = Math.floor(Math.random() * (4 - 12) + 12)
             }
             if (item.level === 1) {
               this.pieList.taCountryCount = parseInt((Number(e[1].serverNum) / this.num).toFixed(2) * 100)
+              this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
               this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
               this.num = 44204
             }
@@ -94,8 +138,8 @@ export default {
                 }
               },
               data: [
-                { value: 75 }, // this.pieList.taCountryYearCount
-                { value: 25 } // 100 - this.pieList.taCountryYearCount
+                { value: this.pieList.taCountryYearCount }, //
+                { value: 100 - this.pieList.taCountryYearCount } //
               ],
               itemStyle: {
                 emphasis: {
