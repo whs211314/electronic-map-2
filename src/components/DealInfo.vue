@@ -6,8 +6,8 @@
         <div class="value">{{sum.netSum}} 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">金湘通获客数</div></div>
-        <div class="value">{{sum.cardAllSum}} 张</div>
+        <div class="label"><div class="txt">累计获客数</div></div>
+        <div class="value">{{sum.cardAllSum}} 户</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">金湘通客户存款</div></div>
@@ -15,7 +15,7 @@
       </div>
       <div class="item">
         <div class="label"><div class="txt">手机银行签约客户数</div></div>
-        <div class="value">{{sum.phoneCustomerCount}} 个</div>
+        <div class="value">{{sum.phoneCustomerCount}} 户</div>
       </div>
     </div>
     <div class="right fr">
@@ -24,8 +24,8 @@
         <div class="value">{{sum.serverCount}} 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">本年金湘通发卡数</div></div>
-        <div class="value orange">{{sum.yearCardCount}} 张</div>
+        <div class="label"><div class="txt">新增获客数</div></div>
+        <div class="value orange">{{sum.yearCardCount}} 户</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">本年金湘通客户存款增长</div></div>

@@ -376,7 +376,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [21068, 115821, 10957, 598] // this.strokeTime
+                data: [21068, 12821, 10957, 598] // this.strokeTime
               }
             ]
           }

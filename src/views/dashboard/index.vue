@@ -460,24 +460,27 @@ export default {
         areaType: 0,
         cityName: e ? e.name : '',
         areaName: '',
-        pageIndex: this.monitorPageNo
+        pageIndex: 1
       }
       if (e && e.level === 2) {
         pieBotton.areaType = 1
+        pieBotton.pageIndex = 1
         this.pieApi(pieBotton)
       }
       if (e && e.level === 3) {
         pieBotton.cityName = e.allName.split('_')[0]
         pieBotton.areaName = e.allName.split('_')[1]
-        pieBotton.pageIndex = this.monitorPageNo
+        pieBotton.pageIndex = 1
         pieBotton.areaType = 2
         this.pieApi(pieBotton)
       }
-      if (e && e.level === 4) {
-        this.pieApi(pieBotton)
-      }
       if (e && e.level === 1) {
-        pieBotton.pageIndex = 1
+        let pieBotton = {
+          areaType: 0,
+          cityName: e ? e.name : '',
+          areaName: '',
+          pageIndex: 1
+        }
         this.pieApi(pieBotton)
       }
       if (!e) {
@@ -490,11 +493,11 @@ export default {
         this.sum.cardAllSum = res.data[0].cardAllSum
         this.sum.netSum = res.data[0].netSum
         this.sum.serverCount = res.data[0].serverCount
-        this.sum.transAllSum = String(parseInt(res.data[0].transAllSum / 1000000))
+        this.sum.transAllSum = String(parseInt(res.data[0].transAllSum / 10000))
         this.sum.phoneCustomerCount = res.data[0].phoneCustomerCount
         this.sum.areaCount = res.data[0].areaCount
         this.sum.yearCardCount = res.data[0].yearCardCount
-        this.sum.yearAddCardMoney = Math.round(res.data[0].yearAddCardMoney / 1000000)
+        this.sum.yearAddCardMoney = Math.round(res.data[0].yearAddCardMoney / 10000)
         this.sum.rate = String(res.data[0].rate).substring(0, 3)
       })
     },
@@ -511,16 +514,17 @@ export default {
       }
       // 实施监控
       api.getTransLog(page).then(res => {
-        // let list = []
+        let list = []
         // list.push(res.data[0])
         res.data.forEach((item, index) => {
           if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
             item.txnDtTm = new Date().getHours() + ':' + new Date().getMinutes()
             item.genproffinTxnamt = item.genproffinTxnamt / 100
             item.tradeName = this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
-            this.monitorDealList.push(item)
+            list.push(item)
           }
         })
+        this.monitorDealList = list
         // this.monitorDealList = list.map(item => Object.assign(item, {
         //   txnDtTm: new Date().getHours() + ':' + new Date().getMinutes(), // + ':' + new Date().getSeconds(), // item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
         //   genproffinTxnamt: item.genproffinTxnamt / 100,
