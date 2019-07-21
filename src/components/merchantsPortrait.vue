@@ -70,11 +70,11 @@
       <div class="right">
         <div class="item extra">
           <div class="label"><div class="txt">返佣金额</div></div>
-          <div class="value orange">{{data.deal.transAllSum?parseInt(data.deal.transAllSum/100*0.003): ''}}元</div>
+          <div class="value orange">{{data.deal.inComeSum?parseInt(data.deal.inComeSum): ''}}元</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">交易金额</div></div>
-          <div class="value">{{data.deal.transAllSum?parseInt(data.deal.transAllSum/1000000):''}}万元</div>
+          <div class="value">{{data.deal.transAllSum?parseInt(data.deal.transAllSum):''}}元</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">交易笔数</div></div>

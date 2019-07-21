@@ -1,6 +1,6 @@
 <template>
   <div class="rank-service position-space">
-    <div class="title flex-center"><div class="txt">综合排名TOP100</div></div>
+    <div class="title flex-center"><div class="txt">排名TOP50</div></div>
     <div class="swiper" v-if="items.length">
       <div class="items">
         <RankServiceItem class="item"

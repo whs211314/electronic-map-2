@@ -100,13 +100,13 @@ export default {
     position: absolute;
     left: 100%;
     width: 160%;
-    height: 360%;
+    height: 380%;
     padding: calc(var(--fontSize-16) / 2);
     background-image: url(../assets/images/cpm.png);
     background-size: 100% 100%;
     background-origin: border-box;
     background-repeat: no-repeat;
-    font-size: var(--fontSize-10);
+    font-size: var(--fontSize-12);
     z-index: 12;
     &.large {
       width: 180%;

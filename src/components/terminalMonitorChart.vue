@@ -2,7 +2,7 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center">异常终端数量：678 占比：1.5%</div>
+        <div class="item active flex-center">异常终端数量：518 占比：1.17%</div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -31,8 +31,8 @@
           </thead>
           <tbody>
             <tr>
-              <td>60</td>
-              <td>100</td>
+              <td>2</td>
+              <td>0</td>
               <td>141</td>
             </tr>
           </tbody>

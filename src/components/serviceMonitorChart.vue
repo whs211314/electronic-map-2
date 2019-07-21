@@ -157,7 +157,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['100', '100-500', '500-1000', '1000以上'],
+                data: ['<100', '100-500', '500-1000', '>1000'],
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -191,7 +191,7 @@ export default {
             ],
             series: [
               {
-                name: '交易笔数',
+                name: '交易笔数(笔)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -199,7 +199,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: this.strokeCount
+                data: [10321, 18579, 8257, 4129]// this.strokeCount
               }
             ]
           }
@@ -226,13 +226,13 @@ export default {
               top: '20%',
               left: '0',
               right: '30%',
-              bottom: '',
+              bottom: '10%',
               containLabel: true
             },
             xAxis: [
               {
                 type: 'category',
-                data: ['<1万', '1万-5万', '5万-10万', '>10万'],
+                data: ['<1', '1-5', '5-10', '>10'],
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -268,7 +268,7 @@ export default {
             ],
             series: [
               {
-                name: '交易金额',
+                name: '交易金额(万元)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -276,7 +276,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: this.strokeMoney
+                data: [10072, 16763, 10569, 3882] // this.strokeMoney
               }
             ]
           }
@@ -328,13 +328,13 @@ export default {
               top: '20%',
               left: '3%',
               right: '30%',
-              bottom: '',
+              bottom: '10%',
               containLabel: true
             },
             xAxis: [
               {
                 type: 'category',
-                data: ['<1年', '1年', '2年', '3年'],
+                data: ['<1', '1-2', '2-3', '3'],
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -368,7 +368,7 @@ export default {
             ],
             series: [
               {
-                name: '开业日期',
+                name: '开业日期(年)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -376,7 +376,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [24650, 8450, 5550, 3400] // this.strokeTime
+                data: [21068, 115821, 10957, 598] // this.strokeTime
               }
             ]
           }
@@ -403,7 +403,7 @@ export default {
               top: '20%',
               left: '3%',
               right: '30%',
-              bottom: '',
+              bottom: '10%',
               containLabel: true
             },
             xAxis: [
@@ -443,7 +443,7 @@ export default {
             ],
             series: [
               {
-                name: '商户等级',
+                name: '服务点等级',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -451,7 +451,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [4480, 15550, 13680]// this.strokeGrade
+                data: [13680, 17583, 4480]// this.strokeGrade
               }
             ]
           }
@@ -509,7 +509,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['0次', '1次', '2次', '≥3次'],
+                data: ['0', '1', '2', '≥3'],
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -543,7 +543,7 @@ export default {
             ],
             series: [
               {
-                name: '培训次数',
+                name: '培训次数(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -551,7 +551,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [1000, 6450, 4450, 1550]// this.strokeTrain
+                data: [867, 22102, 13261, 7974]// this.strokeTrain
               }
             ]
           }
@@ -584,7 +584,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['0次', '1次', '2次', '≥3次'],
+                data: ['0', '1', '2', '≥3'],
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -618,7 +618,7 @@ export default {
             ],
             series: [
               {
-                name: '营销活动',
+                name: '营销活动(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -626,7 +626,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [5400, 7500, 9450, 4650]// this.strokeSem
+                data: [1734, 30943, 9725, 1802]// this.strokeSem
               }
             ]
           }

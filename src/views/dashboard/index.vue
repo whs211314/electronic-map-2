@@ -306,8 +306,8 @@ export default {
       services3: [
         { id: 1, type: '惠懂你', name: '扫码注册、贷款申请等线上服务，累计惠懂你下载1.6万户。' },
         { id: 1, type: '特色产业', name: '信贷资源向农业产业化龙头企业和新型农业生产经营主体倾斜，累计在贫困地区普惠金融贷款余额45.84亿元，累计扶持小微企业客户1000多户。' },
-        { type: '预约开户', name: '银行账户预约开户服务。' },
-        { type: '对公客户存取现', name: '单位结算卡小额存取现及缴税服务。' },
+        { type: '预约开户', name: '对公账户预约开户服务。' },
+        { type: '对公客户存取现', name: '单位结算卡小额存取现服务。' },
         { type: '对公客户缴费税', name: '单位结算卡缴税和缴费服务。' },
         { type: '对公客户转账', name: '单位结算卡转账服务。' }
       ],
@@ -456,15 +456,20 @@ export default {
       }
       if (e && e.allName) {
         pieBotton.areaType = 1
-        this.proportion = String(Math.floor(Math.random() * (15 - 56) + 56))
+        this.pieApi(pieBotton)
+        return
       }
       if (e && e.allName.split('_').length > 1) {
         pieBotton.cityName = e.allName.split('_')[0]
         pieBotton.areaName = e.allName.split('_')[1]
         pieBotton.pageIndex = this.monitorPageNo
         pieBotton.areaType = 2
-        this.proportion = String(Math.floor(Math.random() * (15 - 56) + 56))
+        this.pieApi(pieBotton)
+        return
       }
+      this.pieApi(pieBotton)
+    },
+    pieApi (pieBotton) {
       // 饼图下数据
       api.getDataSum(pieBotton).then(res => {
         this.sum.cardAllSum = res.data[0].cardAllSum
