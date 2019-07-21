@@ -15,13 +15,14 @@
       <div class="empty"></div>
       <div class="content" :class="{animation:animate}">
         <div class="row" :key="index"
+            :class="txtCls(item.checkTypeName)"
             v-for="(item, index) in items">
           <div class="items">
-            <div class="item flex-center"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.cityName}}</div></div>
-            <div class="item flex-center flex-2"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.mchName}}</div></div>
-            <div class="item flex-center"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.jtmStartDate}}</div></div>
-            <div class="item flex-center"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.checkResult}}</div></div>
-            <div class="item flex-center"><div :class="item.checkTypeName === '现场'?txt01:txt">{{item.checkTypeName}}</div></div>
+            <div class="item flex-center"><div>{{item.cityName}}</div></div>
+            <div class="item flex-center flex-2"><div>{{item.mchName}}</div></div>
+            <div class="item flex-center"><div>{{item.jtmStartDate}}</div></div>
+            <div class="item flex-center"><div>{{item.checkResult}}</div></div>
+            <div class="item flex-center"><div>{{item.checkTypeName}}</div></div>
           </div>
         </div>
       </div>
@@ -56,6 +57,14 @@ export default {
         this.items.push(this.items.shift()) // 将数组的第一个元素添加到数组的
         this.animate = false // margin-top 为0 的时候取消过渡动画，实现无缝滚动
       }, 2000)
+    },
+    txtCls (name) {
+      const map = {
+        '现场': 'txt01',
+        '远程': 'txt02'
+      }
+      if (map[name]) return map[name]
+      return 'txt'
     }
   }
 }
@@ -113,22 +122,18 @@ export default {
     overflow: hidden;
     .row {
       height: 17%;
+      text-align: center;
+      font-size: var(--fontSize-8);
     }
   }
   .txt01 {
     color: #ffba00;
-    text-align: center;
-    font-size: var(--fontSize-8);
   }
   .txt02 {
-    color: #feb901;
-    text-align: center;
-    font-size: var(--fontSize-8);
+    color: #00e9ff;
   }
   .txt {
-    width: 100%;
-    text-align: center;
-    font-size: var(--fontSize-8);
+    color: #ffffff;
   }
   .animation {
     transition: all 0.5s;

@@ -30,7 +30,7 @@ export default {
   },
   created () {
     api.getTop().then(res => {
-      this.originItems = res.data.map((e, i) => Object.assign(e, { rank: i + 1 }))
+      this.originItems = res.data.map((e, i) => Object.assign(e, { rank: i + 1 })).slice(0, 50)
       this.getItems(this.index)
       this.$nextTick(() => {
         this.handleRun()
@@ -44,7 +44,7 @@ export default {
     handleRun () {
       this.timer = setInterval(() => {
         this.getItems(++this.index)
-      }, 3000)
+      }, 6000)
     },
     handlePause () {
       this.timer && clearInterval(this.timer)
@@ -93,7 +93,7 @@ export default {
     width: 100%;
     white-space: nowrap;
     margin-left: 0;
-    animation: run 3s linear infinite;
+    animation: run 6s linear infinite;
     .item {
       display: inline-block;
       height: 100%;

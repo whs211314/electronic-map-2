@@ -369,6 +369,7 @@ export default {
           this.pieBotton()
         })
       }
+      this.popupVisible = false
       this.chartType = type
     },
     handlePopup (popup) {

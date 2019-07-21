@@ -13,11 +13,11 @@
       </div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">金额</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{parseInt(item.transAllSum / 1000000)}}万元</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{parseInt(item.transAllSum)}}元</div></div>
       </div>
       <div class="item">
         <div class="label fl flex-center"><div class="txt">返佣</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{parseInt(item.transAllSum / 10000 * 0.003)}}元</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{parseInt(item.inComeSum)}}元</div></div>
       </div>
     </div>
   </div>
