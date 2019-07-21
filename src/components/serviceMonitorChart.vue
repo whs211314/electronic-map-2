@@ -136,7 +136,7 @@ export default {
             ],
             series: [
               {
-                name: '服务点数',
+                name: '交易笔数(笔)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -171,7 +171,7 @@ export default {
               top: '20%',
               left: '',
               right: '',
-              bottom: '',
+              bottom: '11%',
               containLabel: true
             },
             xAxis: [
@@ -213,7 +213,7 @@ export default {
             ],
             series: [
               {
-                name: '服务点数',
+                name: '交易金额(万元)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -313,7 +313,7 @@ export default {
             ],
             series: [
               {
-                name: '服务点数',
+                name: '开业日期(年)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -388,7 +388,7 @@ export default {
             ],
             series: [
               {
-                name: '服务点数',
+                name: '服务点等级',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -488,7 +488,7 @@ export default {
             ],
             series: [
               {
-                name: '服务点数',
+                name: '培训次数(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -563,7 +563,7 @@ export default {
             ],
             series: [
               {
-                name: '服务点数',
+                name: '营销活动(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
