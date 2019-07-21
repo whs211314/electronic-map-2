@@ -8,15 +8,15 @@
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
-    <div v-show="isChart" class="chart">
+    <div v-show="isChart" class="chart-wrapper">
       <div id="line-chart"></div>
     </div>
     <!-- 开业时间柱状图 -->
-    <div v-show="isGrade" class="chart">
+    <div v-show="isGrade" class="chart-wrapper">
       <div id="line-grade"></div>
     </div>
     <!-- 营销活动 -->
-    <div v-show="isActivity" class="chart">
+    <div v-show="isActivity" class="chart-wrapper">
       <div id="line-activity"></div>
     </div>
   </div>
@@ -74,8 +74,8 @@ export default {
         },
         grid: {
           top: '20%',
-          left: '',
-          right: '21%',
+          left: '1%',
+          right: '1%',
           bottom: '',
           containLabel: true
         },
@@ -207,8 +207,8 @@ export default {
         },
         grid: {
           top: '20%',
-          left: '',
-          right: '21%',
+          left: '1%',
+          right: '1%',
           bottom: '',
           containLabel: true
         },
@@ -340,9 +340,9 @@ export default {
         },
         grid: {
           top: '20%',
-          left: '',
-          right: '21%',
-          bottom: '1%',
+          left: '1%',
+          right: '1%',
+          bottom: '',
           containLabel: true
         },
         xAxis: [
@@ -450,32 +450,7 @@ export default {
 <style scoped lang="scss">
 @import '../assets/style/index.scss';
 .monitor-chart {
-  .title {
-    position: absolute;
-    top: 1%;
-    left: 20%;
-    width: 100%;
-    height: 12%;
-    font-size: var(--fontSize-12);
-    font-weight: bold;
-    .tab {
-      @extend .flex-center;
-      justify-content: start;
-      .item {
-        width: 22%;
-        cursor: pointer;
-        &.active {
-          background: #00b7b4;
-        }
-      }
-    }
-  }
-  .chart {
-    position: absolute;
-    left: 20%;
-    bottom: 0;
-    height: 86%;
-    width: 100%;
+  .chart-wrapper {
     #line-chart, #line-grade, #line-activity {
       height: 100%;
     }

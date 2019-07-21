@@ -2,80 +2,25 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item flex-center" :class="isChart ? 'active':''" @click="chartClick">交易笔数/交易金额</div>
-        <div class="item flex-center" :class="isGrade ? 'active':''" @click="gradeClick">开业时间/商户等级</div>
-        <div class="item flex-center" :class="isActivity ? 'active':''" @click="activityClick">培训/营销活动</div>
+        <div class="item flex-center" :class="isChart ? 'active':''" @click="chartClick"><div class="txt">交易笔数/交易金额</div></div>
+        <div class="item flex-center" :class="isGrade ? 'active':''" @click="gradeClick"><div class="txt">开业时间/商户等级</div></div>
+        <div class="item flex-center" :class="isActivity ? 'active':''" @click="activityClick"><div class="txt">培训/营销活动</div></div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
-    <div v-show="isChart">
-        <div  class="chart" id="line-chart"></div>
-        <div  class="chart1" id="line-chart1"></div>
-
-      <!-- <div class="monitor-table">
-        <table>
-          <thead>
-            <tr>
-              <td :key="index" v-for="(item, index) in headers">{{item}}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr :key="index" v-for="(item, index) in bodys">
-              <td>{{item.type}}</td>
-              <td>{{item.money}}</td>
-              <td>{{item.dealStatus}}</td>
-              <td>{{item.riskStatus}}</td>
-              <td>{{item.isChange}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div> -->
+    <div v-show="isChart" class="chart-wrapper">
+        <div class="chart" id="line-chart"></div>
+        <div class="chart1" id="line-chart1"></div>
     </div>
     <!-- 开业时间柱状图 -->
-    <div v-show="isGrade">
+    <div v-show="isGrade" class="chart-wrapper">
       <div class="chart" id="line-grade"></div>
       <div class="chart1" id="line-grade1"></div>
-      <!-- <div class="monitor-table">
-        <table>
-          <thead>
-            <tr>
-              <td :key="index" v-for="(item, index) in headers">{{item}}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr :key="index" v-for="(item, index) in bodys1">
-              <td>{{item.type}}</td>
-              <td>{{item.money}}</td>
-              <td>{{item.dealStatus}}</td>
-              <td>{{item.riskStatus}}</td>
-              <td>{{item.isChange}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div> -->
     </div>
     <!-- 营销活动 -->
-    <div v-show="isActivity">
+    <div v-show="isActivity" class="chart-wrapper">
       <div class="chart" id="line-activity"></div>
       <div class="chart1" id="line-activity1"></div>
-      <!-- <div class="monitor-table1">
-        <table>
-          <thead>
-            <tr>
-              <td :key="index" v-for="(item, index) in headers">{{item}}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr :key="index" v-for="(item, index) in bodys2">
-              <td>{{item.type}}</td>
-              <td>{{item.money}}</td>
-              <td>{{item.dealStatus}}</td>
-              <td>{{item.riskStatus}}</td>
-              <td>{{item.isChange}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div> -->
     </div>
   </div>
 </template>
@@ -149,8 +94,8 @@ export default {
             },
             grid: {
               top: '20%',
-              left: '3%',
-              right: '30%',
+              left: '',
+              right: '',
               bottom: '',
               containLabel: true
             },
@@ -224,9 +169,9 @@ export default {
             },
             grid: {
               top: '20%',
-              left: '0',
-              right: '30%',
-              bottom: '10%',
+              left: '',
+              right: '',
+              bottom: '',
               containLabel: true
             },
             xAxis: [
@@ -326,9 +271,9 @@ export default {
             },
             grid: {
               top: '20%',
-              left: '3%',
-              right: '30%',
-              bottom: '10%',
+              left: '',
+              right: '',
+              bottom: '',
               containLabel: true
             },
             xAxis: [
@@ -401,9 +346,9 @@ export default {
             },
             grid: {
               top: '20%',
-              left: '3%',
-              right: '30%',
-              bottom: '10%',
+              left: '',
+              right: '',
+              bottom: '',
               containLabel: true
             },
             xAxis: [
@@ -501,8 +446,8 @@ export default {
             },
             grid: {
               top: '20%',
-              left: '3%',
-              right: '30%',
+              left: '',
+              right: '',
               bottom: '',
               containLabel: true
             },
@@ -576,8 +521,8 @@ export default {
             },
             grid: {
               top: '20%',
-              left: '3%',
-              right: '30%',
+              left: '',
+              right: '',
               bottom: '',
               containLabel: true
             },
@@ -646,32 +591,12 @@ export default {
 <style scoped lang="scss">
 @import '../assets/style/index.scss';
 .monitor-chart {
-  .title {
-    position: absolute;
-    top: 1%;
-    left: 20%;
-    width: 100%;
-    height: 12%;
-    font-size: var(--fontSize-12);
-    font-weight: bold;
-    .tab {
-      @extend .flex-center;
-      justify-content: start;
-      .item {
-        width: 22%;
-        cursor: pointer;
-        &.active {
-          background:#00b7b4;
-        }
-      }
-    }
-  }
   .chart {
     position: absolute;
-    left: 20%;
     bottom: 0;
-    height: 86%;
-    width: 50%;
+    height: 100%;
+    left: 2%;
+    width: 46%;
     #line-chart, #line-grade, #line-activity,#line-chart1,#line-grade1,#line-activity1 {
       height: 100%;
     }
@@ -732,10 +657,10 @@ export default {
   }
   .chart1 {
     position: absolute;
-    left: 60%;
+    width: 46%;
+    right: 2%;
     bottom: 0;
-    height: 86%;
-    width: 50%;
+    height: 100%;
     #line-chart, #line-grade, #line-activity,#line-chart1,#line-grade1,#line-activity1 {
       height: 100%;
     }

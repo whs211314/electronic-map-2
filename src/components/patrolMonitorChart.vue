@@ -5,7 +5,7 @@
         <div class="item active flex-center">巡检记录展示</div>
       </div>
     </div>
-    <div class="chart">
+    <div class="chart-wrapper">
       <div class="header items">
         <div class="item flex-center" :key="index" :class="index===1?'flex-2':''"
           v-for="(item, index) in headers">
@@ -73,33 +73,6 @@ export default {
 <style scoped lang="scss">
 @import '../assets/style/index.scss';
 .monitor-chart {
-  .title {
-    position: absolute;
-    top: 1%;
-    left: 20%;
-    width: 100%;
-    height: 12%;
-    font-size: var(--fontSize-12);
-    font-weight: bold;
-    .tab {
-      @extend .flex-center;
-      justify-content: start;
-      .item {
-        width: 20%;
-        cursor: pointer;
-        &.active {
-          background: #00b7b4;
-        }
-      }
-    }
-  }
-  .chart {
-    position: absolute;
-    left: 20%;
-    bottom: 0;
-    height: 86%;
-    width: 80%;
-  }
   .items {
     display: flex;
     .item {
@@ -115,6 +88,7 @@ export default {
   .header {
     height: 16%;
     font-weight: bold;
+    font-size: var(--fontSize-10);
   }
   .content {
     height: 78%;

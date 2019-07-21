@@ -2,17 +2,29 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center">异常终端数量：518 占比：1.17%</div>
+        <div class="item active flex-center"><span>异常终端数量：518 占比：1.17%</span></div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
-    <div class="chart">
+    <div class="chart-wrapper">
       <div id="line-chart"></div>
       <div class="monitor-table">
-        <table>
+        <div class="row">
+          <div class="col flex-center" :key="index" v-for="(item, index) in headers"><b>{{item}}</b></div>
+        </div>
+        <div class="row border">
+          <div class="col flex-center" :key="index" v-for="(item, index) in [34, 89, 254]"><b>{{item}}</b></div>
+        </div>
+        <div class="row">
+          <div class="col flex-center" :key="index" v-for="(item, index) in headers1"><b>{{item}}</b></div>
+        </div>
+        <div class="row border">
+          <div class="col flex-center" :key="index" v-for="(item, index) in [2, 0, 144]"><b>{{item}}</b></div>
+        </div>
+        <!-- <table>
           <thead>
             <tr>
-              <td :key="index" v-for="(item, index) in headers">{{item}}</td>
+              <td :key="index" v-for="(item, index) in [2, 0, 144]">{{item}}</td>
             </tr>
           </thead>
           <tbody>
@@ -36,7 +48,7 @@
               <td>141</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
     </div>
   </div>
@@ -79,9 +91,9 @@ export default {
               formatter: '{a} <br/>{b} : {c} ({d}%)'
             },
             title: {
-              text: res.data[0].classNum,
-              left: '25%',
-              top: '52%',
+              text: 518,
+              left: '41%',
+              top: '50%',
               textStyle: {
                 color: '#fff',
                 fontSize: 12,
@@ -90,7 +102,7 @@ export default {
             },
             graphic: {
               type: 'text',
-              left: '24.5%',
+              left: '40.5%',
               top: '45%',
               style: {
                 text: res.data[0].className,
@@ -104,8 +116,8 @@ export default {
               {
                 name: '',
                 type: 'pie',
-                radius: ['30%', '70%'],
-                center: ['30%', '55%'],
+                radius: ['30%', '60%'],
+                // center: ['30%', '50%'],
                 label: {
                   normal: {
                     formatter: '{a|{b}}\n{hr|}\n{per|{d}%}',
@@ -114,7 +126,7 @@ export default {
                     rich: {
                       a: {
                         color: '#ffffff',
-                        fontSize: 11,
+                        fontSize: 10,
                         lineHeight: 20,
                         align: 'center'
                       },
@@ -174,7 +186,6 @@ export default {
   .title {
     position: absolute;
     top: 1%;
-    left: 20%;
     width: 100%;
     height: 12%;
     font-size: var(--fontSize-12);
@@ -191,41 +202,58 @@ export default {
       }
     }
   }
-  .chart {
-    position: absolute;
-    left: 20%;
-    bottom: 0;
-    height: 86%;
-    width: 70%;
+  .chart-wrapper {
     #line-chart, #line-grade, #line-activity {
       height: 100%;
+      position: absolute;
+      left: 0;
+      width: 48%;
     }
     .monitor-table {
+      position: absolute;
+      right: 2%;
+      width: 46%;
+      top: 10%;
+      bottom: 10%;
       @include bgImage('../assets/images/tc-bg02.png');
-      @include position(52, -500, 52, 2355);
+      background-size: 100% 100%;
       // background: #2C848B;
       // border-radius: 5px;
-      font-size: var(--fontSize-12);
+      font-size: var(--fontSize-8);
       padding: 2%;
-      table {
-        border-collapse:collapse;
-        text-align: center;
-        font-size: var(--fontSize-8);
-        thead {
-          tr {
-            height: 20px;
-          }
+      .row {
+        height: 25%;
+        display: flex;
+        .col {
+          flex: 1;
         }
-        tbody{
-          tr {
-            td {
-              width: 21%;
-              padding: 8% 0;
-              border: 1px solid #00C6D9;
-            }
+        &.border {
+          border: 1px solid #00C6D9;
+          border-right: 0;
+          .col {
+            border-right: 1px solid #00C6D9;
           }
         }
       }
+      // table {
+      //   border-collapse:collapse;
+      //   text-align: center;
+      //   font-size: var(--fontSize-8);
+      //   thead {
+      //     tr {
+      //       height: 20px;
+      //     }
+      //   }
+      //   tbody{
+      //     tr {
+      //       td {
+      //         width: 21%;
+      //         padding: 8% 0;
+      //         border: 1px solid #00C6D9;
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
 }
