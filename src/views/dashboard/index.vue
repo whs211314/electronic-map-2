@@ -182,7 +182,7 @@ export default {
       chartType: 'ChartDeploy', // 地图类型
       monitorIndexList: [],
       numberId: '',
-      home_url: '../../assets/jingli/99901760.png',
+      home_url: '',
       popupVisible: false,
       popup: {},
       topItem: {},
@@ -360,11 +360,11 @@ export default {
     },
     handleDeployEvent (data, code) {
       this.internalNetwork = true
-      let arr = [81072069, 86617567, 90231567, 93538191, 97778229, 98662928, 99593687, 99901760, 68729821, 68758978, 68988123, 69366959, 69830902, 72018175, 72317666, 71303370, 79658960, 80915399, 79976903, 83026812, 92665315, 93008812, 91368263, 97702962]
+      // let arr = [81072069, 86617567, 90231567, 93538191, 97778229, 98662928, 99593687, 99901760, 68729821, 68758978, 68988123, 69366959, 69830902, 72018175, 72317666, 71303370, 79658960, 80915399, 79976903, 83026812, 92665315, 93008812, 91368263, 97702962]
       console.warn('--点击部署选项触发--', data, code)
       if (this.numberId === '') {
         this.numberId = data.id
-        this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
+        // this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
       }
       this.currJmpInfo.essential = data // 基础信息
       console.log(this.currJmpInfo)
@@ -383,13 +383,14 @@ export default {
           this.deal = false
           api.getManagerInfo({ 'mchId': data.jpmMchId }).then(res => {
             this.currJmpInfo.client = res.data[0]
+            this.home_url = 'http://10.0.2.158/kehujingli/' + res.data[0].managerCode + '.png'
             this.client = true // 客户信息 home_url
           })
-          if (Number(this.numberId) === data.id) {
-            this.home_url = this.home_url
-          } else {
-            this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
-          }
+          // if (Number(this.numberId) === data.id) {
+          //   this.home_url = this.home_url
+          // } else {
+          //   this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
+          // }
           break
         case 3:
           this.client = false

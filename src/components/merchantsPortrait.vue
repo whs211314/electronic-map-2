@@ -4,7 +4,7 @@
     <div v-if="basicInfo" style="height:100%;">
       <div class="left fl">
         <div class="picture">
-          <img src="assets/jingli/9188025.png" alt="">
+          <img src="http://10.0.2.158:81/kehujingli/68729821.png" alt="" width="100%">
         </div>
       </div>
       <div class="right fr">
@@ -70,11 +70,11 @@
       <div class="right">
         <div class="item extra">
           <div class="label"><div class="txt">返佣金额</div></div>
-          <div class="value orange">{{data.deal.inComeSum?data.deal.inComeSum: ''}}元</div>
+          <div class="value orange">{{data.deal.transAllSum?parseInt(data.deal.transAllSum/100*0.003): ''}}元</div>
         </div>
         <div class="item r2">
           <div class="label"><div class="txt">交易金额</div></div>
-          <div class="value">{{data.deal.transAllSum?data.deal.transAllSum:''}}元</div>
+          <div class="value">{{data.deal.transAllSum?parseInt(data.deal.transAllSum/1000000):''}}万元</div>
         </div>
         <div class="item r3 extra">
           <div class="label"><div class="txt">交易笔数</div></div>
