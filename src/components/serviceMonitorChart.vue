@@ -80,7 +80,7 @@ export default {
               text: '交易笔数(笔)',
               textStyle: {
                 color: '#ffffff',
-                fontSize: 10
+                fontSize: 12
               }
             },
             legend: {
@@ -144,7 +144,7 @@ export default {
             ],
             series: [
               {
-                name: '服务点数(次)',
+                name: '服务点数(个)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -163,7 +163,7 @@ export default {
               text: '交易金额(万元)',
               textStyle: {
                 color: '#ffffff',
-                fontSize: 10
+                fontSize: 12
               }
             },
             legend: {
@@ -229,7 +229,7 @@ export default {
             ],
             series: [
               {
-                name: '服务点数(次)',
+                name: '服务点数(个)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -337,7 +337,7 @@ export default {
             ],
             series: [
               {
-                name: '服务次数(次)',
+                name: '服务点数(个)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -356,7 +356,7 @@ export default {
               text: '服务点等级',
               textStyle: {
                 color: '#ffffff',
-                fontSize: 10
+                fontSize: 12
               }
             },
             legend: {
@@ -420,7 +420,7 @@ export default {
             ],
             series: [
               {
-                name: '服务次数(次)',
+                name: '服务点数(个)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -464,7 +464,7 @@ export default {
               text: '培训次数(次)',
               textStyle: {
                 color: '#ffffff',
-                fontSize: 10
+                fontSize: 12
               }
             },
             legend: {
@@ -528,7 +528,7 @@ export default {
             ],
             series: [
               {
-                name: '服务次数(次)',
+                name: '服务点数(个)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -547,7 +547,7 @@ export default {
               text: '营销活动(次)',
               textStyle: {
                 color: '#ffffff',
-                fontSize: 10
+                fontSize: 12
               }
             },
             legend: {
@@ -611,7 +611,7 @@ export default {
             ],
             series: [
               {
-                name: '服务次数(次)',
+                name: '服务点数(个)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
