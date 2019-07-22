@@ -215,7 +215,7 @@ export default {
         const map = res.data
         function getCount (params) {
           if (!map[params.data.name]) return 0
-          return map[params.data.name][0].count
+          return map[params.data.name].reduce((a, b) => (a + b.count), 0)
         }
         this.myChart.setOption({
           series: [{
