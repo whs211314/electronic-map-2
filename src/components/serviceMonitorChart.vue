@@ -2,9 +2,9 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item flex-center" style="width:28%;" :class="isChart ? 'active':''" @click="chartClick"><div class="txt">交易笔数/交易金额</div></div>
-        <div class="item flex-center" style="width:28%;" :class="isGrade ? 'active':''" @click="gradeClick"><div class="txt">开业时间/商户等级</div></div>
-        <div class="item flex-center" style="width:28%;" :class="isActivity ? 'active':''" @click="activityClick"><div class="txt">培训/营销活动</div></div>
+        <div class="item flex-center" :class="isChart ? 'active':''" @click="chartClick"><div class="txt">交易笔数/交易金额</div></div>
+        <div class="item flex-center" :class="isGrade ? 'active':''" @click="gradeClick"><div class="txt">开业时间/商户等级</div></div>
+        <div class="item flex-center" :class="isActivity ? 'active':''" @click="activityClick"><div class="txt">培训/营销活动</div></div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->

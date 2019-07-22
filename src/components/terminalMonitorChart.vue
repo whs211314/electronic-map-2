@@ -183,25 +183,6 @@ export default {
 <style scoped lang="scss">
 @import '../assets/style/index.scss';
 .monitor-chart {
-  .title {
-    position: absolute;
-    top: 1%;
-    width: 100%;
-    height: 12%;
-    font-size: var(--fontSize-12);
-    font-weight: bold;
-    .tab {
-      @extend .flex-center;
-      justify-content: start;
-      .item {
-        width: 50%;
-        cursor: pointer;
-        &.active {
-          background: #00b7b4;
-        }
-      }
-    }
-  }
   .chart-wrapper {
     #line-chart, #line-grade, #line-activity {
       height: 100%;
