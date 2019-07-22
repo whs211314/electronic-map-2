@@ -302,7 +302,7 @@ export default {
     handleDeployEvent (data, code) {
       this.internalNetwork = true
       // let arr = [81072069, 86617567, 90231567, 93538191, 97778229, 98662928, 99593687, 99901760, 68729821, 68758978, 68988123, 69366959, 69830902, 72018175, 72317666, 71303370, 79658960, 80915399, 79976903, 83026812, 92665315, 93008812, 91368263, 97702962]
-      console.warn('--点击部署选项触发--', data, code)
+      console.warn('--点击部署选项触发--', data.rank)
       if (this.numberId === '') {
         this.numberId = data.id
         // this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
@@ -323,7 +323,8 @@ export default {
           }
           api.getMchInfoListLog(allName).then(res => {
             if (!data.jpmDoorHeadImagePath) {
-              this.currJmpInfo.essential = res.data[0] // 基础信息
+              // this.currJmpInfo.essential = res.data[0] // 基础信息
+              this.currJmpInfo = Object.assign({}, this.currJmpInfo, { essential: res.data[0] })
               this.home_url1 = 'http://54.0.94.84/jxt_image/' + res.data[0].jpmDoorHeadImagePath + ''
             }
           })
@@ -334,7 +335,8 @@ export default {
           this.record = false
           this.deal = false
           api.getManagerInfo({ 'mchId': data.jpmMchId }).then(res => {
-            this.currJmpInfo.client = res.data[0]
+            // this.currJmpInfo.client = res.data[0]
+            this.currJmpInfo = Object.assign({}, this.currJmpInfo, { client: res.data[0] })
             this.home_url = 'http://54.0.94.84/kehujingli/' + res.data[0].managerCode + '.png'
             this.client = true // 客户信息 home_url
           })
@@ -350,8 +352,7 @@ export default {
           this.patrol = false
           this.record = false
           api.getMchTrans({ 'mchId': data.jpmMchId }).then(res => {
-            console.log(res)
-            this.currJmpInfo.deal = res.data
+            this.currJmpInfo = Object.assign({}, this.currJmpInfo, { deal: res.data })
             this.deal = true // 交易
           })
           break
@@ -368,8 +369,7 @@ export default {
           this.basicInfo = false
           this.deal = false
           api.getCheckInfo({ 'mchId': data.jpmMchId }).then(res => {
-            console.log(res)
-            this.currJmpInfo.record = res.data
+            this.currJmpInfo = Object.assign({}, this.currJmpInfo, { record: res.data })
             this.record = true
           })
           break
@@ -493,7 +493,6 @@ export default {
     },
     // 点击排行榜
     handleTopEvent (item) {
-      console.log(item)
       this.tier = []
       this.popupVisible = false
       this.chartType = 'ChartTop'
