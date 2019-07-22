@@ -2,7 +2,7 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center"><span>异常终端数量：518 占比：1.17%</span></div>
+        <div class="item active flex-center"><span>异常终端数量：523 占比：1.17%</span></div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -91,7 +91,7 @@ export default {
               formatter: '{a} <br/>{b} : {c} ({d}%)'
             },
             title: {
-              text: 518,
+              text: 523,
               left: '41%',
               top: '50%',
               textStyle: {
