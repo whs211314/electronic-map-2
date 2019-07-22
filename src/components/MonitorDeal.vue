@@ -163,14 +163,17 @@ export default {
       // 实施监控
       api.getTransLog({ pageIndex: this.index }).then(res => {
         this.tranEndTimes = 1
-        res.data.forEach((item, index) => {
-          // if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
-          item.txnDtTm = new Date().getHours() + ':' + new Date().getMinutes()
-          item.genproffinTxnamt = item.genproffinTxnamt / 100
-          item.tradeName = this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
-          this.items.push(item)
-          // }
-        })
+        this.items = res.data.map(item => Object.assign(item, {
+          txnDtTm: new Date().getHours() + ':' + new Date().getMinutes(),
+          genproffinTxnamt: item.genproffinTxnamt / 100,
+          tradeName: this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
+        }))
+        // res.data.forEach((item, index) => {
+        //   // if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
+
+        //   this.items.push(item)
+        //   // }
+        // })
       })
     }
   }

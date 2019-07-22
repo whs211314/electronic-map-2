@@ -75,6 +75,14 @@ export default {
           let myChart1 = echarts.init(document.getElementById('line-chart1'))
           let option = {
             color: ['#22E7E4', '#EE7343'],
+            title: {
+              x: 'right',
+              text: '交易笔数(笔)',
+              textStyle: {
+                color: '#ffffff',
+                fontSize: 10
+              }
+            },
             legend: {
               // data: ['交易笔数(笔)', '交易金额(万元)'],
               position: 'absolute',
@@ -96,7 +104,7 @@ export default {
               top: '20%',
               left: '',
               right: '',
-              bottom: '',
+              bottom: '3%',
               containLabel: true
             },
             xAxis: [
@@ -136,7 +144,7 @@ export default {
             ],
             series: [
               {
-                name: '交易笔数(笔)',
+                name: '服务点数(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -150,6 +158,14 @@ export default {
           }
           let option1 = {
             color: ['#EE7343', '#EE7343'],
+            title: {
+              x: 'right',
+              text: '交易金额(万元)',
+              textStyle: {
+                color: '#ffffff',
+                fontSize: 10
+              }
+            },
             legend: {
               // data: ['交易笔数(笔)', '交易金额(万元)'],
               position: 'absolute',
@@ -171,7 +187,7 @@ export default {
               top: '20%',
               left: '',
               right: '',
-              bottom: '8%',
+              bottom: '11%',
               containLabel: true
             },
             xAxis: [
@@ -213,7 +229,7 @@ export default {
             ],
             series: [
               {
-                name: '交易金额(万元)',
+                name: '服务点数(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -252,6 +268,14 @@ export default {
           let myChart1 = echarts.init(document.getElementById('line-grade1'))
           let option = {
             color: ['#22E7E4', '#EE7343'],
+            title: {
+              x: 'right',
+              text: '开业日期(年)',
+              textStyle: {
+                color: '#ffffff',
+                fontSize: 10
+              }
+            },
             legend: {
               // data: ['开业时间(年)', '商户等级'],
               position: 'absolute',
@@ -273,7 +297,7 @@ export default {
               top: '20%',
               left: '',
               right: '',
-              bottom: '',
+              bottom: '3%',
               containLabel: true
             },
             xAxis: [
@@ -313,7 +337,7 @@ export default {
             ],
             series: [
               {
-                name: '开业日期(年)',
+                name: '服务次数(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -327,6 +351,14 @@ export default {
           }
           let option1 = {
             color: ['#EE7343', '#EE7343'],
+            title: {
+              x: 'right',
+              text: '服务点等级',
+              textStyle: {
+                color: '#ffffff',
+                fontSize: 10
+              }
+            },
             legend: {
               // data: ['开业时间(年)', '商户等级'],
               position: 'absolute',
@@ -348,7 +380,7 @@ export default {
               top: '20%',
               left: '',
               right: '',
-              bottom: '',
+              bottom: '3%',
               containLabel: true
             },
             xAxis: [
@@ -388,7 +420,7 @@ export default {
             ],
             series: [
               {
-                name: '服务点等级',
+                name: '服务次数(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -427,6 +459,14 @@ export default {
           let myChart1 = echarts.init(document.getElementById('line-activity1'))
           let option = {
             color: ['#22E7E4', '#EE7343'],
+            title: {
+              x: 'right',
+              text: '培训次数(次)',
+              textStyle: {
+                color: '#ffffff',
+                fontSize: 10
+              }
+            },
             legend: {
               // data: ['培训(次)', '营销活动(次)'],
               position: 'absolute',
@@ -448,7 +488,7 @@ export default {
               top: '20%',
               left: '',
               right: '',
-              bottom: '',
+              bottom: '3%',
               containLabel: true
             },
             xAxis: [
@@ -488,7 +528,7 @@ export default {
             ],
             series: [
               {
-                name: '培训次数(次)',
+                name: '服务次数(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
@@ -502,6 +542,14 @@ export default {
           }
           let option1 = {
             color: ['#EE7343', '#EE7343'],
+            title: {
+              x: 'right',
+              text: '营销活动(次)',
+              textStyle: {
+                color: '#ffffff',
+                fontSize: 10
+              }
+            },
             legend: {
               // data: ['培训(次)', '营销活动(次)'],
               position: 'absolute',
@@ -523,7 +571,7 @@ export default {
               top: '20%',
               left: '',
               right: '',
-              bottom: '',
+              bottom: '3%',
               containLabel: true
             },
             xAxis: [
@@ -563,7 +611,7 @@ export default {
             ],
             series: [
               {
-                name: '营销活动(次)',
+                name: '服务次数(次)',
                 type: 'bar',
                 barWidth: '20%',
                 itemStyle: { // 柱样式
