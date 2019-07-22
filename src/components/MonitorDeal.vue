@@ -164,12 +164,12 @@ export default {
       api.getTransLog({ pageIndex: this.index }).then(res => {
         this.tranEndTimes = 1
         res.data.forEach((item, index) => {
-          if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
-            item.txnDtTm = new Date().getHours() + ':' + new Date().getMinutes()
-            item.genproffinTxnamt = item.genproffinTxnamt / 100
-            item.tradeName = this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
-            this.items.push(item)
-          }
+          // if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
+          item.txnDtTm = new Date().getHours() + ':' + new Date().getMinutes()
+          item.genproffinTxnamt = item.genproffinTxnamt / 100
+          item.tradeName = this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
+          this.items.push(item)
+          // }
         })
       })
     }
