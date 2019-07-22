@@ -300,6 +300,7 @@ export default {
       this.popup = popup
     },
     handleDeployEvent (data, code) {
+      debugger
       this.internalNetwork = true
       // let arr = [81072069, 86617567, 90231567, 93538191, 97778229, 98662928, 99593687, 99901760, 68729821, 68758978, 68988123, 69366959, 69830902, 72018175, 72317666, 71303370, 79658960, 80915399, 79976903, 83026812, 92665315, 93008812, 91368263, 97702962]
       console.warn('--点击部署选项触发--', data, code)
@@ -307,9 +308,8 @@ export default {
         this.numberId = data.id
         // this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
       }
-      // this.currJmpInfo.essential = data // 基础信息
-      // this.home_url1 = 'http://54.0.94.84/jxt_image/' + data.jpmDoorHeadImagePath + ''
-      // console.log(this.home_url1)
+      this.currJmpInfo.essential = data // 基础信息
+      this.home_url1 = 'http://54.0.94.84/jxt_image/' + data.jpmDoorHeadImagePath + ''
       switch (code) {
         case 1:
           this.basicInfo = true // 基本信息
@@ -323,9 +323,10 @@ export default {
             streetName: data.jpmStreet
           }
           api.getMchInfoListLog(allName).then(res => {
-            this.currJmpInfo.essential = res.data[0] // 基础信息
-            this.home_url1 = 'http://54.0.94.84/jxt_image/' + res.data[0].jpmDoorHeadImagePath + ''
-            console.log(this.home_url1)
+            if (!data.jpmDoorHeadImagePath) {
+              this.currJmpInfo.essential = res.data[0] // 基础信息
+              this.home_url1 = 'http://54.0.94.84/jxt_image/' + res.data[0].jpmDoorHeadImagePath + ''
+            }
           })
           break
         case 2:
