@@ -12,7 +12,7 @@
   color: $wihte;
   overflow: hidden;
   .dashboard-bg {
-    @include bgImage('../../assets/images/bg03.png');
+    @include bgImage('../../assets/images/bg04.png');
     z-index: -2;
   }
   .logo {
@@ -48,12 +48,12 @@
       height: 2%;
     }
     .item {
-      padding-top: calc(30% / 2.1);
+      padding-top: calc(32% / 2.1);
       font-size: var(--fontSize-14);
     }
   }
   .show-middle {
-    @include position(528, 3104, 400, 225);
+    @include position(598, 3104, 400, 225);
     .items-show {
       height: 70%;
     }
