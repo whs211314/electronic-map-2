@@ -76,6 +76,8 @@
         :visible.sync="popupVisible"
         @deployEvent="handleDeployEvent" />
     </div>
+    <!-- 百度地图 -->
+    <BDMap v-show="!isShowBdMap" :lng='lng' :lat='lat'></BDMap>
     <!-- 地图操作 -->
     <div class="map-operation">
       <div class="deal fr flex-center"
@@ -148,6 +150,7 @@ import ChartDeploy from '@/components/ChartDeploy'
 import ChartDeal from '@/components/ChartDeal'
 import ChartTop from '@/components/ChartTop'
 import MPopup from '@/components/MPopup'
+import BDMap from '@/components/BDMap'
 import * as api from '@/api'
 
 export default {
@@ -167,10 +170,14 @@ export default {
     ChartDeploy,
     ChartDeal,
     ChartTop,
+    BDMap,
     MPopup
   },
   data () {
     return {
+      lng: 113.60391832870096,
+      lat: 28.689210462569086,
+      isShowBdMap: false, // 是否显示百度地图
       internalNetwork: false, // 是否内部网点弹窗
       monitorIndex: 0, // 监控按钮初始化索引
       basicInfo: false, // 基本信息
@@ -320,6 +327,9 @@ export default {
             areaName: data.jpmArea,
             streetName: data.jpmStreet
           }
+          this.lat = Number(data.jpmLat)
+          this.lng = Number(data.jpmLon)
+          this.isShowBdMap = true
           api.getMchInfoListLog(allName).then(res => {
             if (!data.jpmDoorHeadImagePath) {
               // this.currJmpInfo.essential = res.data[0] // 基础信息
@@ -337,7 +347,7 @@ export default {
             // this.currJmpInfo.client = res.data[0]
             this.currJmpInfo = Object.assign({}, this.currJmpInfo, { client: res.data[0] })
             this.home_url = 'http://54.0.94.84/kehujingli/' + res.data[0].managerCode + '.png'
-            this.client = true // 客户信息 home_url
+            this.client = true // 基本信息 home_url
           })
           // if (Number(this.numberId) === data.id) {
           //   this.home_url = this.home_url
