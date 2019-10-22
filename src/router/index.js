@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import Login from '@/views/login'
 import Dashboard from '@/views/dashboard'
-import Test from '@/components/ChartDeploy'
+import BDMap from '@/components/BDMap'
 
 Vue.use(Router)
 
@@ -22,7 +22,7 @@ export default new Router({
       component: Dashboard
     }, {
       path: '/test',
-      component: Test
+      component: BDMap
     }
   ]
 })
