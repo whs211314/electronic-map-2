@@ -77,7 +77,7 @@
         @deployEvent="handleDeployEvent" />
     </div>
     <!-- 百度地图 -->
-    <BDMap v-show="!isShowBdMap" :lng='lng' :lat='lat'></BDMap>
+    <BDMap class="map" v-show="!isShowBdMap" :lng='lng' :lat='lat'></BDMap>
     <!-- 地图操作 -->
     <div class="map-operation">
       <div class="deal fr flex-center"
