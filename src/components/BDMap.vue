@@ -1,6 +1,9 @@
 <template>
   <baidu-map :zoom="zoom" :center="center" @ready="handleReady">
     <bm-marker :position="center" />
+    <bm-control>
+      <div class="back" @click="handleBack">返回</div>
+    </bm-control>
   </baidu-map>
 </template>
 
@@ -39,10 +42,15 @@ export default {
     }
   },
   methods: {
+    handleBack () {
+      this.$emit('back')
+    },
     handleReady ({ BMap, map }) {
       this.map = map
       this.BMap = BMap
-      map.addControl(new BMap.NavigationControl())
+      map.addControl(new BMap.NavigationControl({
+        anchor: global.BMAP_ANCHOR_TOP_RIGHT
+      }))
       this.setMarker(1)
     },
     setMarker (isTranslate = 0) {
@@ -68,3 +76,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.back {
+  margin: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 2px;
+  background-color: #3f51b5;
+  color: rgba(255, 255, 255, .87);
+  box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+}
+</style>

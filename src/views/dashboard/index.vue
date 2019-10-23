@@ -77,7 +77,7 @@
         @deployEvent="handleDeployEvent" />
     </div>
     <!-- 百度地图 -->
-    <BDMap class="map" v-show="isShowBdMap" :lng='lng' :lat='lat'></BDMap>
+    <BDMap class="map" v-show="isShowBdMap" :lng='lng' :lat='lat' @back='closeBdMap'></BDMap>
     <!-- 地图操作 -->
     <div class="map-operation">
       <div class="deal fr flex-center"
@@ -305,6 +305,10 @@ export default {
       this.popupVisible = true
       this.popup = popup
     },
+    // 百度地图返回按钮
+    closeBdMap () {
+      this.isShowBdMap = false
+    },
     handleDeployEvent (data, code) {
       this.internalNetwork = true
       // let arr = [81072069, 86617567, 90231567, 93538191, 97778229, 98662928, 99593687, 99901760, 68729821, 68758978, 68988123, 69366959, 69830902, 72018175, 72317666, 71303370, 79658960, 80915399, 79976903, 83026812, 92665315, 93008812, 91368263, 97702962]
@@ -329,7 +333,6 @@ export default {
           }
           this.lat = Number(data.jpmLon)
           this.lng = Number(data.jpmLat)
-          console.log(this.lat, this.lng)
           this.isShowBdMap = true
           api.getMchInfoListLog(allName).then(res => {
             if (!data.jpmDoorHeadImagePath) {
