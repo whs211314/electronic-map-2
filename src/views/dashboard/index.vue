@@ -77,7 +77,7 @@
         @deployEvent="handleDeployEvent" />
     </div>
     <!-- 百度地图 -->
-    <BDMap class="map" v-show="!isShowBdMap" :lng='lng' :lat='lat'></BDMap>
+    <BDMap class="map" v-show="isShowBdMap" :lng='lng' :lat='lat'></BDMap>
     <!-- 地图操作 -->
     <div class="map-operation">
       <div class="deal fr flex-center"
@@ -175,8 +175,8 @@ export default {
   },
   data () {
     return {
-      lng: 113.60391832870096,
-      lat: 28.689210462569086,
+      lng: 112.66422891165496,
+      lat: 26.880964432436038,
       isShowBdMap: false, // 是否显示百度地图
       internalNetwork: false, // 是否内部网点弹窗
       monitorIndex: 0, // 监控按钮初始化索引
@@ -327,8 +327,9 @@ export default {
             areaName: data.jpmArea,
             streetName: data.jpmStreet
           }
-          this.lat = Number(data.jpmLat)
-          this.lng = Number(data.jpmLon)
+          this.lat = Number(data.jpmLon)
+          this.lng = Number(data.jpmLat)
+          console.log(this.lat, this.lng)
           this.isShowBdMap = true
           api.getMchInfoListLog(allName).then(res => {
             if (!data.jpmDoorHeadImagePath) {

@@ -1,8 +1,6 @@
 <template>
-  <baidu-map :zoom="zoom" :center="{lng, lat}"
-    @ready="handleReady"
-    @moveend="syncCenterAndZoom">
-    <bm-marker :position="position" />
+  <baidu-map :zoom="zoom" :center="center" @ready="handleReady">
+    <bm-marker :position="center" />
   </baidu-map>
 </template>
 
@@ -25,7 +23,19 @@ export default {
   data () {
     return {
       map: null,
-      position: {}
+      center: {}
+    }
+  },
+  watch: {
+    lng () {
+      if (this.map) {
+        this.setMarker(1)
+      }
+    },
+    lat () {
+      if (this.map) {
+        this.setMarker(1)
+      }
     }
   },
   methods: {
@@ -35,15 +45,10 @@ export default {
       map.addControl(new BMap.NavigationControl())
       this.setMarker(1)
     },
-    syncCenterAndZoom () {
-      if (this.map) {
-        this.setMarker(1)
-      }
-    },
     setMarker (isTranslate = 0) {
       if (!isTranslate) {
         const { lng, lat } = this
-        this.position = { lng, lat }
+        this.center = { lng, lat }
         return
       }
       this.setMarkerExt()
@@ -56,7 +61,7 @@ export default {
       pointArr.push(ggPoint)
       convertor.translate(pointArr, 1, 5, (data) => {
         if (data.status === 0) {
-          this.position = data.points[0]
+          this.center = data.points[0]
         }
       })
     }
