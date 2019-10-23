@@ -1,7 +1,9 @@
 <template>
   <baidu-map :zoom="zoom" :center="{lng, lat}"
     @ready="handleReady"
-    @moveend="syncCenterAndZoom"></baidu-map>
+    @moveend="syncCenterAndZoom">
+    <bm-marker :position="position" />
+  </baidu-map>
 </template>
 
 <script>
@@ -22,7 +24,8 @@ export default {
   },
   data () {
     return {
-      map: null
+      map: null,
+      position: {}
     }
   },
   methods: {
@@ -39,30 +42,21 @@ export default {
     },
     setMarker (isTranslate = 0) {
       if (!isTranslate) {
-        const { lng, lat, BMap, map } = this
-        const ggPoint = new BMap.Point(lng, lat)
-        // 添加gps marker和label
-        const markergg = new BMap.Marker(ggPoint)
-        map.addOverlay(markergg) // 添加GPS marker
-        const labelgg = new BMap.Label('原始的GPS坐标', { offset: new BMap.Size(20, -10) })
-        markergg.setLabel(labelgg) // 添加GPS label
+        const { lng, lat } = this
+        this.position = { lng, lat }
         return
       }
       this.setMarkerExt()
     },
     setMarkerExt () {
-      const { lng, lat, BMap, map } = this
+      const { lng, lat, BMap } = this
       const ggPoint = new BMap.Point(lng, lat)
       const convertor = new BMap.Convertor()
       const pointArr = []
       pointArr.push(ggPoint)
       convertor.translate(pointArr, 1, 5, (data) => {
         if (data.status === 0) {
-          const marker = new BMap.Marker(data.points[0])
-          map.addOverlay(marker)
-          const label = new BMap.Label('转换的GPS坐标', { offset: new BMap.Size(20, -10) })
-          marker.setLabel(label) // 添加百度label
-          map.setCenter(data.points[0])
+          this.position = data.points[0]
         }
       })
     }
