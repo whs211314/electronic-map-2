@@ -1,14 +1,7 @@
 <template>
-  <baidu-map
-    class="map"
-    ref="baiduMap"
-    :zoom="zoom"
-    :center="{lng, lat}"
-    @moving="syncCenterAndZoom"
-    @moveend="syncCenterAndZoom"
-    @zoomend="syncCenterAndZoom">
-    <bm-marker :position="center"></bm-marker>
-  </baidu-map>
+  <baidu-map :zoom="zoom" :center="{lng, lat}"
+    @ready="handleReady"
+    @moveend="syncCenterAndZoom"></baidu-map>
 </template>
 
 <script>
@@ -16,11 +9,11 @@ export default {
   props: {
     lng: {
       type: Number,
-      default: 112.0498046875
+      default: 116.232922
     },
     lat: {
       type: Number,
-      default: 27.1484375
+      default: 39.542637
     },
     zoom: {
       type: Number,
@@ -29,31 +22,49 @@ export default {
   },
   data () {
     return {
-      center: {}
+      map: null
     }
   },
-  mounted () {
-    this.$nextTick(() => {
-      // this.handlePointConvert()
-    })
-  },
   methods: {
-    handlePointConvert () {
-      this.BMap = this.$refs.baiduMap.map
-      const ggPoint = new this.BMap.Point(this.lng, this.lat)
-      const convertor = new this.BMap.Convertor()
-      convertor.translate([ggPoint], 1, 5, (data) => {
+    handleReady ({ BMap, map }) {
+      this.map = map
+      this.BMap = BMap
+      map.addControl(new BMap.NavigationControl())
+      this.setMarker(1)
+    },
+    syncCenterAndZoom () {
+      if (this.map) {
+        this.setMarker(1)
+      }
+    },
+    setMarker (isTranslate = 0) {
+      if (!isTranslate) {
+        const { lng, lat, BMap, map } = this
+        const ggPoint = new BMap.Point(lng, lat)
+        // 添加gps marker和label
+        const markergg = new BMap.Marker(ggPoint)
+        map.addOverlay(markergg) // 添加GPS marker
+        const labelgg = new BMap.Label('原始的GPS坐标', { offset: new BMap.Size(20, -10) })
+        markergg.setLabel(labelgg) // 添加GPS label
+        return
+      }
+      this.setMarkerExt()
+    },
+    setMarkerExt () {
+      const { lng, lat, BMap, map } = this
+      const ggPoint = new BMap.Point(lng, lat)
+      const convertor = new BMap.Convertor()
+      const pointArr = []
+      pointArr.push(ggPoint)
+      convertor.translate(pointArr, 1, 5, (data) => {
         if (data.status === 0) {
-          this.markerPosition = data.points[0]
+          const marker = new BMap.Marker(data.points[0])
+          map.addOverlay(marker)
+          const label = new BMap.Label('转换的GPS坐标', { offset: new BMap.Size(20, -10) })
+          marker.setLabel(label) // 添加百度label
+          map.setCenter(data.points[0])
         }
       })
-    },
-    syncCenterAndZoom (e) {
-      const { lng, lat } = e.target.getCenter()
-      this.center.lng = lng
-      this.center.lat = lat
-      console.log(111)
-      this.zoom = e.target.getZoom()
     }
   }
 }

@@ -10,8 +10,8 @@ import BDMap from '../components/BDMap'
 export default {
   data () {
     return {
-      lng: 116.404,
-      lat: 39.915
+      lng: 112.15625,
+      lat: 27.306640625
     }
   },
   methods: {
