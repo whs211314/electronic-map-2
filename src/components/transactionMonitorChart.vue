@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import * as api from '@/api'
 import echarts from 'echarts'
 
 export default {
@@ -30,18 +31,49 @@ export default {
     return {
       isChart: true,
       isGrade: false,
-      isActivity: false
+      isActivity: false,
+      // 月交易量
+      chartList: [],
+      chartStrokeCount: [],
+      chartNum: [],
+      // 地市交易
+      gradeList: [],
+      gradeStrokeCount: [],
+      gradetNum: [],
+      // 交易种类分布
+      activityList: [],
+      activityStrokeCount: [],
+      activityNum: []
     }
   },
   methods: {
     // 交易笔数交易金额
     chartClick () {
-      this.isActivity = false
-      this.isChart = true
-      this.isGrade = false
-      setTimeout(() => {
-        this.chartInit()
-      }, 500)
+      // const list = { 'dataAxis': ['长沙', '株洲', '湘潭', '衡阳', '邵阳', '岳阳', '常德', '张家界', '益阳', '郴州', '永州', '怀化', '自治州', '娄底'], 'data2': ['143193589', '210927236', '165573746', '148498393', '399551593', '293959838', '410724505', '186772210', '143527674', '171968171', '756672763', '842089629', '246434172', '163790509'], 'data1': ['1174286', '1087766', '724476', '1193744', '1717996', '1400677', '2002448', '2101917', '588114', '1397801', '7784269', '5677594', '1093692', '1185870'] }
+      let classType = {
+        reportPlace: 131
+      }
+      api.getClassInfo(classType).then(res => {
+        this.isActivity = false
+        this.isChart = true
+        this.isGrade = false
+        this.chartList = res.data.dataAxis
+        this.chartStrokeCount = res.data.data1
+        this.chartNum = res.data.data2
+        setTimeout(() => {
+          this.chartInit()
+        }, 500)
+      })
+      // const list = { 'dataAxis': ['2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12', '2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06'], 'data1': [ 199052, 180712, 182496, 185639, 214062, 273379, 358170, 201171, 228013, 233997, 260643, 283312 ], 'data2': [ 35643.57, 36767.92, 39961.55, 36555.09, 38284.09, 43918.13, 56079.01, 33889.10, 40573.43, 37881.13, 36673.25, 36433.18 ] }
+      // this.isActivity = false
+      // this.isChart = true
+      // this.isGrade = false
+      // this.chartList = list.dataAxis
+      // this.chartStrokeCount = list.data1
+      // this.chartNum = list.data2
+      // setTimeout(() => {
+      //   this.chartInit()
+      // }, 500)
     },
     chartInit () {
       let myChart = echarts.init(document.getElementById('line-chart'))
@@ -82,7 +114,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12', '2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06'],
+            data: this.chartList,
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -149,7 +181,7 @@ export default {
               }
             },
             yAxisIndex: 0,
-            data: [ 199052, 180712, 182496, 185639, 214062, 273379, 358170, 201171, 228013, 233997, 260643, 283312 ]
+            data: this.chartStrokeCount
           },
           {
             // name: '交易金额(万元)',
@@ -161,19 +193,33 @@ export default {
               }
             },
             yAxisIndex: 1,
-            data: [ 35643.57, 36767.92, 39961.55, 36555.09, 38284.09, 43918.13, 56079.01, 33889.10, 40573.43, 37881.13, 36673.25, 36433.18 ]
+            data: this.chartNum
           }
         ]
       }
       myChart.setOption(option, true)
     },
     gradeClick () {
-      this.isChart = false
-      this.isGrade = true
-      this.isActivity = false
-      setTimeout(() => {
-        this.grade()
-      }, 500)
+      let classType = {
+        reportPlace: 132
+      }
+      api.getClassInfo(classType).then(res => {
+        this.gradeList = res.data.dataAxis
+        this.gradeStrokeCount = res.data.data1
+        this.gradeNum = res.data.data2
+        this.isChart = false
+        this.isGrade = true
+        this.isActivity = false
+        setTimeout(() => {
+          this.grade()
+        }, 500)
+      })
+      // this.isChart = false
+      // this.isGrade = true
+      // this.isActivity = false
+      // setTimeout(() => {
+      //   this.grade()
+      // }, 500)
     },
     // 等级
     grade () {
@@ -215,7 +261,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['长沙', '株洲', '湘潭', '衡阳', '邵阳', '岳阳', '常德', '张家界', '益阳', '彬州', '永州', '怀化', '自治州', '娄底'],
+            data: this.gradeList,
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -282,7 +328,7 @@ export default {
               }
             },
             yAxisIndex: 0,
-            data: [ 137601, 121650, 151597, 113148, 181207, 205524, 281101, 425936, 117021, 107261, 432000, 528152, 217211, 130695 ]
+            data: this.gradeStrokeCount
           },
           {
             name: '',
@@ -294,7 +340,7 @@ export default {
               }
             },
             yAxisIndex: 1,
-            data: [ 27333.50, 26710.28, 18416.42, 52640.04, 49369.49, 26060.31, 91813.30, 19342.85, 22524.67, 25273.82, 93326.60, 90784.93, 55564.81, 7770.19 ]
+            data: this.gradeNum
           }
         ]
       }
@@ -302,12 +348,26 @@ export default {
     },
     // 营销活动
     activityClick () {
-      this.isActivity = true
-      this.isChart = false
-      this.isGrade = false
-      setTimeout(() => {
-        this.activity()
-      }, 500)
+      let classType = {
+        reportPlace: 133
+      }
+      api.getClassInfo(classType).then(res => {
+        this.activityList = res.data.dataAxis
+        this.activityStrokeCount = res.data.data1
+        this.activityNum = res.data.data2
+        this.isActivity = true
+        this.isChart = false
+        this.isGrade = false
+        setTimeout(() => {
+          this.activity()
+        }, 500)
+      })
+      // this.isActivity = true
+      // this.isChart = false
+      // this.isGrade = false
+      // setTimeout(() => {
+      //   this.activity()
+      // }, 500)
     },
     activity () {
       let myChart = echarts.init(document.getElementById('line-activity'))
@@ -348,7 +408,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['助农取款', '行政代收付', '转账汇款', '现金汇款', '水电缴费', '通讯缴费', '消费'],
+            data: this.activityList,
             axisTick: {
               alignWithLabel: true,
               lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -421,7 +481,7 @@ export default {
               }
             },
             yAxisIndex: 0,
-            data: [ 430341, 96264, 148848, 14095, 1369839, 497268, 928740 ]
+            data: this.activityStrokeCount
           },
           {
             name: '',
@@ -433,7 +493,7 @@ export default {
               }
             },
             yAxisIndex: 1,
-            data: [ 41133.20, 1312.26, 32705.16, 935.3364, 42266.35, 2250.15, 489915.33 ]
+            data: this.activityNum
           }
         ]
       }
@@ -442,7 +502,15 @@ export default {
 
   },
   mounted () {
-    this.chartInit()
+    let classType = {
+      reportPlace: 131
+    }
+    api.getClassInfo(classType).then(res => {
+      this.chartList = res.data.dataAxis
+      this.chartStrokeCount = res.data.data1
+      this.chartNum = res.data.data2
+      this.chartInit()
+    })
   }
 }
 </script>

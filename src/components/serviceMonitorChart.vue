@@ -35,8 +35,10 @@ export default {
       isChart: true,
       isGrade: false,
       isActivity: false,
+      countName: [],
+      moneyName: [],
       strokeCount: [], // 笔数列表
-      strokeMoney: [], // 笔数列表
+      strokeMoney: [], // 金额列表
       strokeTime: [], // 商户时间
       strokeGrade: [], // 等级
       strokeTrain: [], // 培训
@@ -67,10 +69,12 @@ export default {
       }, 500)
     },
     chartInit () {
-      api.getClassInfo({ 'classType': 1 }).then(res => {
-        api.getClassInfo({ 'classType': 2 }).then(item => {
-          this.strokeCount = res.data.map(e => e.classNum)
-          this.strokeMoney = item.data.map(e => e.classNum)
+      api.getClassInfo({ 'reportPlace': 111 }).then(res => {
+        api.getClassInfo({ 'reportPlace': 112 }).then(item => {
+          const list = { 'dataAxis': ['<100', '100-500', '500-1000', '>1000'], 'data1': [ 199052, 180712, 182496, 185639, 214062, 273379, 358170, 201171, 228013, 233997, 260643, 283312 ], 'data2': [ 35643.57, 36767.92, 39961.55, 36555.09, 38284.09, 43918.13, 56079.01, 33889.10, 40573.43, 37881.13, 36673.25, 36433.18 ] }
+          this.countName = list.dataAxis
+          this.strokeCount = list.data1
+          this.strokeMoney = list.data2
           let myChart = echarts.init(document.getElementById('line-chart'))
           let myChart1 = echarts.init(document.getElementById('line-chart1'))
           let option = {
@@ -110,7 +114,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['<100', '100-500', '500-1000', '>1000'],
+                data: res.data.dataAxis,
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -152,7 +156,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [10321, 18579, 8257, 4129]// this.strokeCount
+                data: res.data.data1// this.strokeCount
               }
             ]
           }
@@ -193,7 +197,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['<1', '1-5', '5-10', '>10'],
+                data: item.data.dataAxis,
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -237,7 +241,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [10072, 16763, 10569, 3882] // this.strokeMoney
+                data: item.data.data2 // this.strokeMoney
               }
             ]
           }
@@ -256,14 +260,14 @@ export default {
     },
     // 等级
     grade () {
-      api.getClassInfo({ 'classType': 3 }).then(res => {
-        api.getClassInfo({ 'classType': 4 }).then(item => {
-          res.data.forEach((el, index) => {
-            this.strokeTime.push(el.classNum)
-          })
-          item.data.forEach((el, index) => {
-            this.strokeGrade.push(el.classNum)
-          })
+      api.getClassInfo({ 'reportPlace': 121 }).then(res => {
+        api.getClassInfo({ 'reportPlace': 122 }).then(item => {
+          // res.data.forEach((el, index) => {
+          //   this.strokeTime.push(el.classNum)
+          // })
+          // item.data.forEach((el, index) => {
+          //   this.strokeGrade.push(el.classNum)
+          // })
           let myChart = echarts.init(document.getElementById('line-grade'))
           let myChart1 = echarts.init(document.getElementById('line-grade1'))
           let option = {
@@ -303,7 +307,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['<1', '1-2', '2-3', '3'],
+                data: res.data.dataAxis,
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -345,7 +349,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [21068, 12821, 10957, 598] // this.strokeTime
+                data: res.data.data1 // this.strokeTime
               }
             ]
           }
@@ -386,7 +390,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['青苗', '绿穗', '金谷'],
+                data: item.data.dataAxis, // ['青苗', '绿穗', '金谷'],
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -428,7 +432,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [13680, 17583, 4480]// this.strokeGrade
+                data: item.data.data2 // [13680, 17583, 4480]// this.strokeGrade
               }
             ]
           }
@@ -447,8 +451,8 @@ export default {
       }, 500)
     },
     activity () {
-      api.getClassInfo({ 'classType': 1 }).then(res => {
-        api.getClassInfo({ 'classType': 2 }).then(item => {
+      api.getClassInfo({ 'reportPlace': 131 }).then(res => {
+        api.getClassInfo({ 'reportPlace': 132 }).then(item => {
           res.data.forEach((el, index) => {
             this.strokeTrain.push(el.classNum)
           })
@@ -494,7 +498,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['0', '1', '2', '≥3'],
+                data: res.data.dataAxis, // ['0', '1', '2', '≥3'],
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -536,7 +540,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [867, 22102, 13261, 7974]// this.strokeTrain
+                data: res.data.data1 // [867, 22102, 13261, 7974]// this.strokeTrain
               }
             ]
           }
@@ -577,7 +581,7 @@ export default {
             xAxis: [
               {
                 type: 'category',
-                data: ['0', '1', '2', '≥3'],
+                data: item.data.dataAxis, // ['0', '1', '2', '≥3'],
                 axisTick: {
                   alignWithLabel: true,
                   lineStyle: { color: '#D2FBFE' } // x轴刻度的颜色
@@ -619,7 +623,7 @@ export default {
                     barBorderRadius: [10, 10, 10, 10]
                   }
                 },
-                data: [1734, 30943, 9725, 1802]// this.strokeSem
+                data: item.data.data2 // [1734, 30943, 9725, 1802]// this.strokeSem
               }
             ]
           }

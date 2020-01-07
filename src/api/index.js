@@ -101,7 +101,7 @@ export function getDataSum (mchId) {
 // 视图接口
 export function getClassInfo (mchId) {
   return new Promise((resolve, reject) => {
-    http.get('/february/front/ecpJxtClass/getClassInfo', {
+    http.get('/february/ecp_jxt_report_place/query', {
       params: mchId
     }).then(res => {
       resolve(res)
@@ -158,6 +158,17 @@ export function getAreaNet (cityName) {
 export function getCheckInfoPage (mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpCheck/getCheckInfoPage', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
+
+// 异常终端视图
+export function query (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/backend/ecp-jxt-term-errors/query', {
       params: mchId
     }).then(res => {
       resolve(res)
