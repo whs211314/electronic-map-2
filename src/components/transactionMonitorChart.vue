@@ -277,8 +277,8 @@ export default {
             name: '交易笔数(笔)',
             type: 'value',
             scale: true,
-            max: 600000,
-            min: 0,
+            // max: 600000,
+            // min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
               show: false,
@@ -298,8 +298,8 @@ export default {
             name: '交易金额(万元)',
             type: 'value',
             scale: true,
-            max: 100000,
-            min: 0,
+            // max: 100000,
+            // min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
               show: false,
@@ -503,7 +503,7 @@ export default {
   },
   mounted () {
     let classType = {
-      reportPlace: 131
+      reportPlace: 311
     }
     api.getClassInfo(classType).then(res => {
       this.chartList = res.data.dataAxis

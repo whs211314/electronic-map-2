@@ -453,12 +453,12 @@ export default {
     activity () {
       api.getClassInfo({ 'reportPlace': 131 }).then(res => {
         api.getClassInfo({ 'reportPlace': 132 }).then(item => {
-          res.data.forEach((el, index) => {
-            this.strokeTrain.push(el.classNum)
-          })
-          item.data.forEach((el, index) => {
-            this.strokeSem.push(el.classNum)
-          })
+          // res.data.forEach((el, index) => {
+          //   this.strokeTrain.push(el.classNum)
+          // })
+          // item.data.forEach((el, index) => {
+          //   this.strokeSem.push(el.classNum)
+          // })
           let myChart = echarts.init(document.getElementById('line-activity'))
           let myChart1 = echarts.init(document.getElementById('line-activity1'))
           let option = {
