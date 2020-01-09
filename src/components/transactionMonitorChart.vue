@@ -51,7 +51,7 @@ export default {
     chartClick () {
       // const list = { 'dataAxis': ['长沙', '株洲', '湘潭', '衡阳', '邵阳', '岳阳', '常德', '张家界', '益阳', '郴州', '永州', '怀化', '自治州', '娄底'], 'data2': ['143193589', '210927236', '165573746', '148498393', '399551593', '293959838', '410724505', '186772210', '143527674', '171968171', '756672763', '842089629', '246434172', '163790509'], 'data1': ['1174286', '1087766', '724476', '1193744', '1717996', '1400677', '2002448', '2101917', '588114', '1397801', '7784269', '5677594', '1093692', '1185870'] }
       let classType = {
-        reportPlace: 131
+        reportPlace: 311
       }
       api.getClassInfo(classType).then(res => {
         this.isActivity = false
@@ -201,7 +201,7 @@ export default {
     },
     gradeClick () {
       let classType = {
-        reportPlace: 132
+        reportPlace: 321
       }
       api.getClassInfo(classType).then(res => {
         this.gradeList = res.data.dataAxis
@@ -349,7 +349,7 @@ export default {
     // 营销活动
     activityClick () {
       let classType = {
-        reportPlace: 133
+        reportPlace: 331
       }
       api.getClassInfo(classType).then(res => {
         this.activityList = res.data.dataAxis

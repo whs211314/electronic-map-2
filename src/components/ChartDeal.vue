@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import * as api from '@/api'
 export default {
   props: {
     lng: {
@@ -65,19 +66,30 @@ export default {
         }
       })
       this.map.enableScrollWheelZoom(true)
-      var mapPoints = [
-        { x: 27.82, y: 112.55 },
-        { x: 27.73, y: 111.5 },
-        { x: 26.13, y: 111.6 },
-        { x: 26.9, y: 112.6 },
-        { x: 28.19, y: 112.6 }
-      ]
-      var i = 0
-      for (;i < mapPoints.length; i++) {
-        var points = new BMap.Point(mapPoints[i].y, mapPoints[i].x)// 创建坐标点
-        var markers = new BMap.Marker(points)
-        this.map.addOverlay(markers)
-      }
+      api.getAllMchInfoList().then(res => {
+        var i = 0
+        for (;i < res.data.length; i++) {
+          var points = new BMap.Point(res.data[i].x, res.data[i].y)// 创建坐标点
+          var markers = new BMap.Marker(points)
+          this.map.addOverlay(markers)
+        }
+      })
+      // var mapPoints = [
+      //   { y: 27.82, x: 112.55 },
+      //   { y: 27.73, x: 111.5 },
+      //   { y: 26.13, x: 111.6 },
+      //   { y: 26.9, x: 112.6 },
+      //   { y: 28.19, x: 112.6 },
+      //   { x: 109.98804490894351, y: 27.54911215611929 },
+      //   { x: 109.98988774833771, y: 27.557991094785056 },
+      //   { x: 110.14803797676342, y: 27.325122562561397 }
+      // ]
+      // var i = 0
+      // for (;i < mapPoints.length; i++) {
+      //   var points = new BMap.Point(mapPoints[i].x, mapPoints[i].y)// 创建坐标点
+      //   var markers = new BMap.Marker(points)
+      //   this.map.addOverlay(markers)
+      // }
     }
   }
 }

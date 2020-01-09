@@ -108,7 +108,16 @@ export function getClassInfo (mchId) {
     })
   })
 }
-
+// 获取所有服务点
+export function getAllMchInfoList (mchId) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/mchInfo/getAllMchInfoList', {
+      params: mchId
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
 // 风险预警视图
 export function countRiskWarn (mchId) {
   return new Promise((resolve, reject) => {
