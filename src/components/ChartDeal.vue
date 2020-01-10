@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import * as api from '@/api'
+// import * as api from '@/api'
 export default {
   props: {
     lng: {
@@ -55,25 +55,54 @@ export default {
     setMarkerExt () {
       const { BMap } = this
       console.log(this)
-      const ggPoint = new BMap.Point('112.0498046875', '27.1484375')
-      this.map.centerAndZoom('娄底', 7) // 控制地图大小比例
-      const convertor = new BMap.Convertor()
-      const pointArr = []
-      pointArr.push(ggPoint)
-      convertor.translate(pointArr, 1, 5, (data) => {
-        if (data.status === 0) {
-          this.center = data.points[0]
-        }
-      })
+      // const ggPoint = new BMap.Point('112.0498046875', '27.1484375')
+      // this.map.centerAndZoom('娄底', 7) // 控制地图大小比例
+      // const convertor = new BMap.Convertor()
+      // const pointArr = []
+      // pointArr.push(ggPoint)
+      // convertor.translate(pointArr, 1, 5, (data) => {
+      //   if (data.status === 0) {
+      //     this.center = data.points[0]
+      //   }
+      // })
       this.map.enableScrollWheelZoom(true)
-      api.getAllMchInfoList().then(res => {
-        var i = 0
-        for (;i < res.data.length; i++) {
-          var points = new BMap.Point(res.data[i].x, res.data[i].y)// 创建坐标点
-          var markers = new BMap.Marker(points)
-          this.map.addOverlay(markers)
-        }
-      })
+      var point = new BMap.Point('112.0498046875', '27.1484375') // 定位的地图视觉中心
+      this.map.centerAndZoom(point, 7) // 设置地图的缩放级别
+      // 加载海量点数据
+      const points = []
+      var mapPoints = [
+        { y: 27.82, x: 112.55 },
+        { y: 27.73, x: 111.5 },
+        { y: 26.13, x: 111.6 },
+        { y: 26.9, x: 112.6 },
+        { y: 28.19, x: 112.6 },
+        { x: 109.98804490894351, y: 27.54911215611929 },
+        { x: 109.98988774833771, y: 27.557991094785056 },
+        { x: 110.14803797676342, y: 27.325122562561397 }
+      ]
+      var i = 0
+      for (;i < mapPoints.length; i++) {
+        points.push(new BMap.Point(mapPoints[i].x, mapPoints[i].y))// 创建坐标点
+      }
+      const options = {
+        size: 13,
+        shape: 3,
+        color: 'red'
+      }
+      console.log(points)
+      const pointCollection = new BMap.PointCollection(points, options)
+      this.map.addOverlay(pointCollection)
+
+      // api.getAllMchInfoList().then(res => {
+      //   var i = 0
+      //   for (;i < res.data.length; i++) {
+      //     var points = new BMap.Point(res.data[i].x, res.data[i].y)// 创建坐标点
+      //     var markers = new BMap.Marker(points)
+      //     this.map.addOverlay(markers)
+      //   }
+      // })
+
+      // 加载多个点
       // var mapPoints = [
       //   { y: 27.82, x: 112.55 },
       //   { y: 27.73, x: 111.5 },
@@ -87,8 +116,8 @@ export default {
       // var i = 0
       // for (;i < mapPoints.length; i++) {
       //   var points = new BMap.Point(mapPoints[i].x, mapPoints[i].y)// 创建坐标点
-      //   var markers = new BMap.Marker(points)
-      //   this.map.addOverlay(markers)
+      // var markers = new BMap.Marker(points)
+      // this.map.addOverlay(markers)
       // }
     }
   }
