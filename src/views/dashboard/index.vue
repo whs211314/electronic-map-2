@@ -1,7 +1,6 @@
 <template>
-  <div class="dashboard">
+  <div class="dashboard" v-if="isReady">
     <div class="dashboard-bg position-space"></div>
-    <!-- <div class="logo"></div> -->
     <!-- 便民服务 -->
     <div class="show-top">
       <div class="title-show flex-center">
@@ -152,8 +151,10 @@ import ChartTop from '@/components/ChartTop'
 import MPopup from '@/components/MPopup'
 import BDMap from '@/components/BDMap'
 import * as api from '@/api'
+import resizeMixin from '@/components/resize'
 
 export default {
+  mixins: [resizeMixin],
   components: {
     MButton,
     TeamView,

@@ -12,12 +12,8 @@
   color: $wihte;
   overflow: hidden;
   .dashboard-bg {
-    @include bgImage('../../assets/images/bg04.png');
+    @include bgImage('../../assets/images/dashboard-bg-large.png');
     z-index: -2;
-  }
-  .logo {
-    @include position(34, 3282, 1020, 43);
-    @include bgImage('../../assets/images/logo.png');
   }
   // 展示区域 START
   .title-show .txt {
@@ -225,5 +221,52 @@
   @keyframes rotation {
     from { transform: rotate(0) }
     to { transform: rotate(360deg) }
+  }
+}
+
+.ratio-small {
+  .dashboard {
+    .dashboard-bg {
+      @include bgImage('../../assets/images/dashboard-bg-small.png');
+    }
+    .show-top,
+    .show-middle,
+    .show-bottom,
+    .show-right {
+      display: none;
+    }
+    .pie {
+      @include position-small(248, 230, 466, 216);
+    }
+    .summary {
+      @include position-small(550, 300, 465, 480);
+    }
+    .map-transform{
+      @include position-small(0, 700, 1240, 1200);
+    }
+    .map-bk {
+      @include position-small(85, 750, 1060, 1080);
+    }
+    .map {
+      @include position-small(100, 870, 900, 920);
+    }
+    .map-operation {
+      @include position-small(1058, 824, 980, 114);
+    }
+    .teamview {
+      @include position-small(76, 1836, 270, 966);
+    }
+    .monitor-top-r {
+      @include position-small(86, 2128, 990, 250);
+    }
+    .monitor-top-l {
+      @include position-small(360, 2128, 175, 370);
+    }
+    .monitor-middle {
+      @include position-small(375, 2335, 782, 370);
+    }
+    .monitor-bottom {
+      @include position-small(762, 2128, 990, 240);
+    }
   }
 }

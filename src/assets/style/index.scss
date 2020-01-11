@@ -40,6 +40,14 @@ $orange: #feb901;
   left: $left/3840 * 100%;
 }
 
+@mixin position-small($top, $left, $width, $height) {
+  position: absolute;
+  top: $top/1200 * 100%;
+  left: $left/3244 * 100%;
+  width: $width/3244 * 100%;
+  height: $height/1200 * 100%;
+}
+
 @mixin bgImage($url) {
   background-image: url($url);
   background-position: center center;

@@ -30,7 +30,6 @@ body {
     transform: translate3d(-50%, -50%, 0);
     width: 0;
     padding-left: 100%;
-    padding-top: calc(100% / 3.2);
   }
   .container,
   .container > div {
@@ -39,6 +38,14 @@ body {
     top: 0;
     bottom: 0;
     right: 0;
+  }
+}
+#app {
+  &.ratio-large {
+    padding-top: calc(100% / 3.2);
+  }
+  &.ratio-small {
+    padding-top: calc(100% / 2.7);
   }
 }
 .toasted {
