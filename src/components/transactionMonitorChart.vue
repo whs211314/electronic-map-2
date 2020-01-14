@@ -130,8 +130,8 @@ export default {
             name: '交易笔数(笔)',
             type: 'value',
             scale: true,
-            max: 400000,
-            min: 0,
+            // max: 400000,
+            // min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
               show: false,
@@ -151,8 +151,8 @@ export default {
             name: '交易金额(万元)',
             type: 'value',
             scale: true,
-            max: 60000,
-            min: 0,
+            // max: 60000,
+            // min: 0,
             axisLabel: { color: '#D2FBFE' }, // y轴字体颜色
             axisLine: {
               show: false,
