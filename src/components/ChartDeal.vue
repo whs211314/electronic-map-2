@@ -70,7 +70,7 @@ export default {
         const options = {
           size: 13,
           shape: 3,
-          color: 'red'
+          color: '#009900'
         }
         const pointCollection = new BMap.PointCollection(points, options)
         this.map.addOverlay(pointCollection)
@@ -96,9 +96,8 @@ export default {
       // const options = {
       //   size: 13,
       //   shape: 3,
-      //   color: 'red'
+      //   color: '#009900'
       // }
-      // console.log(points)
       // const pointCollection = new BMap.PointCollection(points, options)
       // this.map.addOverlay(pointCollection)
       // 加载多个点
