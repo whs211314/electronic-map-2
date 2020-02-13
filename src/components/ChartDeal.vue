@@ -39,7 +39,7 @@ export default {
           var options = {
             size: BMAP_POINT_SIZE_SMALL,
             shape: BMAP_POINT_SHAPE_CIRCLE,
-            color: 'red'
+            color: '#009900'
           }
           var pointCollection = new BMap.PointCollection(points, options) // 初始化PointCollection
           pointCollection.addEventListener('click', function (e) {
@@ -67,7 +67,7 @@ export default {
         // var options = {
         //   size: BMAP_POINT_SIZE_SMALL,
         //   shape: BMAP_POINT_SHAPE_CIRCLE,
-        //   color: 'red'
+        //   color: '#009900'
         // }
         // var pointCollection = new BMap.PointCollection(points, options) // 初始化PointCollection
         // pointCollection.addEventListener('click', function (e) {
