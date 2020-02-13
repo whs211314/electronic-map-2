@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import Login from '@/views/login'
 import Dashboard from '@/views/dashboard'
-import Test from '@/views/Test'
+import Test from '@/views/Test1'
 
 Vue.use(Router)
 
