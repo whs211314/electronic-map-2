@@ -4,7 +4,7 @@
       <div class="txt">合作视图</div>
     </div>
     <div class="empty"></div>
-    <div class="items" v-if="Object.keys(items).length === 9">
+    <div class="items" v-if="Object.keys(items).length === 11">
       <ViewButton class="item"
         v-for="(item, index) in items"
         :key="index"
@@ -17,7 +17,7 @@
 <script>
 import ViewButton from './ViewButton'
 import * as api from '@/api'
-const labels = ['政务', '卫健', '扶贫', '退伍军人', '通讯', '商超', '餐饮', '快递', '电商']
+const labels = ['政务', '卫健', '扶贫', '退伍军人', '通讯', '商超', '餐饮', '快递', '电商', '异常', '风险']
 
 export default {
   components: { ViewButton },
@@ -67,7 +67,7 @@ export default {
     }
   }
   .empty {
-    height: 2%;
+    height: 1%;
   }
   .items {
     width: 68%;
@@ -77,7 +77,7 @@ export default {
     flex-wrap: wrap;
     .item {
       width: 100%;
-      height: 10%;
+      height: 9.4%;
       .top {
         color: $grey;
         font-size: var(--fontSize-18);
