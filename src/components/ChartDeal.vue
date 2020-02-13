@@ -1,5 +1,5 @@
 <template>
-  <div id="multiMap" style="width:100%;height:100%;"></div>
+  <div id="multiMap" style="width:100%;height:100%;border: 3px solid #07B3B1;"></div>
 </template>
 
 <script>
@@ -39,7 +39,7 @@ export default {
           var options = {
             size: BMAP_POINT_SIZE_SMALL,
             shape: BMAP_POINT_SHAPE_CIRCLE,
-            color: '#009900'
+            color: '#23E7E4'
           }
           var pointCollection = new BMap.PointCollection(points, options) // 初始化PointCollection
           pointCollection.addEventListener('click', function (e) {
@@ -67,7 +67,7 @@ export default {
         // var options = {
         //   size: BMAP_POINT_SIZE_SMALL,
         //   shape: BMAP_POINT_SHAPE_CIRCLE,
-        //   color: '#009900'
+        //   color: '#23E7E4'
         // }
         // var pointCollection = new BMap.PointCollection(points, options) // 初始化PointCollection
         // pointCollection.addEventListener('click', function (e) {
