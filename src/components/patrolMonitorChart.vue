@@ -22,7 +22,8 @@
             <div class="item flex-center flex-2"><div>{{item.mchName}}</div></div>
             <div class="item flex-center"><div>{{item.jtmStartDate}}</div></div>
             <div class="item flex-center"><div>{{item.checkResult}}</div></div>
-            <div class="item flex-center"><div>{{item.checkTypeName}}</div></div>
+            <!-- <div class="item flex-center"><div>{{item.checkTypeName}}</div></div> -->
+            <div class="item flex-center"><div>现场</div></div>
           </div>
         </div>
       </div>
@@ -43,7 +44,7 @@ export default {
       animate: true,
       txt: 'txt',
       txt01: 'txt01',
-      headers: ['地市', '金湘通服务点名称', '时间', '结果', '现场']
+      headers: ['地市', '金湘通服务点名称', '时间', '结果', '巡检方式']
     }
   },
   created () {
