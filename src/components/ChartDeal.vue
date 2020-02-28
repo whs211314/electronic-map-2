@@ -26,6 +26,11 @@ export default {
   mounted () {
     this.getMapScript().then(BMap => {
       var map = new BMap.Map('multiMap', {}) // 创建Map实例
+      var mapStyle = {
+        features: ['road', 'building', 'water', 'land'], // 隐藏地图上的"poi",
+        style: 'dark'
+      }
+      map.setMapStyle(mapStyle)
       map.centerAndZoom(new BMap.Point(112.0498046875, 27.1484375), 8) // 初始化地图,设置中心点坐标和地图级别
       map.enableScrollWheelZoom() // 启用滚轮放大缩小
       if (document.createElement('canvas').getContext) { // 判断当前浏览器是否支持绘制海量点
@@ -37,7 +42,7 @@ export default {
             points.push(new BMap.Point(res.data[i].x, res.data[i].y))// 创建坐标点
           }
           var options = {
-            size: BMAP_POINT_SIZE_SMALL,
+            size: BMAP_POINT_SIZE_TINY,
             shape: BMAP_POINT_SHAPE_CIRCLE,
             color: '#23E7E4'
           }
@@ -65,7 +70,7 @@ export default {
         //   points.push(new BMap.Point(mapPoints[i].x, mapPoints[i].y))// 创建坐标点
         // }
         // var options = {
-        //   size: BMAP_POINT_SIZE_SMALL,
+        //   size: BMAP_POINT_SIZE_TINY,
         //   shape: BMAP_POINT_SHAPE_CIRCLE,
         //   color: '#23E7E4'
         // }
