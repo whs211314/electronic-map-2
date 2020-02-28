@@ -166,8 +166,9 @@ export default {
         this.items = res.data.map(item => Object.assign(item, {
           txnDtTm: new Date().getHours() + ':' + new Date().getMinutes(),
           genproffinTxnamt: item.genproffinTxnamt / 100,
-          tradeName: this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
+          tradeName: item.tradeName
         }))
+        // this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
         // res.data.forEach((item, index) => {
         //   // if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
 
