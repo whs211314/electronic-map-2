@@ -1,5 +1,5 @@
 <template>
-  <div class="view-button" @click.stop="$emit('itemClick', item)">
+  <div class="view-button" :class="active?'active':''" @click.stop="$emit('itemClick', item)">
     <div class="top position-center">
       <div class="name fl">{{item.tradeName}}</div>
       <div class="rate fr">{{item.mix}}%</div>
@@ -11,6 +11,9 @@
 <script>
 export default {
   props: {
+    active: {
+      type: Boolean
+    },
     item: {
       type: Object,
       default: () => ({})
@@ -26,6 +29,9 @@ export default {
   position: relative;
   cursor: pointer;
   @include bgImage('../assets/images/btn-4.png');
+  &.active {
+    color: yellow;
+  }
   .top {
     width: 75%;
     font-weight: bold;

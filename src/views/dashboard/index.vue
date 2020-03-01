@@ -67,6 +67,7 @@
         :ref="chartType"
         :is="chartType"
         :topData="topItem"
+        :currentTradeName="currentTradeName"
         @popup="handlePopup"
         @goDown="handleGoDown"
         @showDeploy="chartType='ChartDeploy'" />
@@ -92,7 +93,7 @@
     </div>
     <!-- 合作视图 -->
     <div class="teamview">
-      <TeamView @teamview="handleTeamview" ref="teamviewRef" />
+      <TeamView @teamview="handleTeamview" :currentTradeName="currentTradeName" ref="teamviewRef" />
     </div>
     <!-- 实时监控 -->
     <div class="monitor-top-r">
@@ -176,6 +177,7 @@ export default {
   },
   data () {
     return {
+      currentTradeName: '',
       lng: 112.66422891165496,
       lat: 26.880964432436038,
       isShowBdMap: false, // 是否显示百度地图
@@ -273,6 +275,9 @@ export default {
         this.internalNetwork = false
         this.numberId = ''
       }
+    },
+    chartType () {
+      this.currentTradeName = ''
     }
   },
   methods: {
@@ -517,6 +522,7 @@ export default {
     },
     handleTeamview (tradeName) {
       this.chartType = 'ChartDeploy'
+      this.currentTradeName = tradeName
       this.$nextTick(() => {
         this.$refs[this.chartType].handleFilter(tradeName)
       })

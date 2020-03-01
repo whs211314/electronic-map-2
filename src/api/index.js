@@ -163,6 +163,17 @@ export function getTrade ({ areaType, cityName = '', tradeName = '' }) {
   })
 }
 
+// 合作视图  地区类型0省，1市，2区县，3乡镇
+export function getTradeNew ({ areaType, cityName = '', tradeName = '' }) {
+  return new Promise((resolve, reject) => {
+    http.get('/february/front/ecpJxtTrade/getTradeNew', {
+      params: { areaType, cityName, areaName: '', streetName: '', tradeName }
+    }).then(res => {
+      resolve(res)
+    })
+  })
+}
+
 // 获取地市下面的区县网点
 export function getAreaNet (cityName) {
   return new Promise((resolve, reject) => {

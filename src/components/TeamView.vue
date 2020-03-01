@@ -9,6 +9,7 @@
         v-for="(item, index) in items"
         :key="index"
         :item="item"
+        :active="currentTradeName===item.tradeName"
         @itemClick="handleClick(item)" />
     </div>
   </div>
@@ -21,6 +22,7 @@ const labels = ['政务', '卫健', '扶贫', '退伍军人', '通讯', '商超'
 
 export default {
   components: { ViewButton },
+  props: ['currentTradeName'],
   data () {
     return {
       items: {}
@@ -40,6 +42,7 @@ export default {
             count: data[item] ? data[item][0].count : 0
           })
         })
+        console.log('---getTrade', cityName, this.items)
       })
     },
     handleClick (item) {
