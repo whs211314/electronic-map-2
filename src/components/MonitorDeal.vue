@@ -164,7 +164,7 @@ export default {
       api.getTransLog({ pageIndex: this.index }).then(res => {
         this.tranEndTimes = 1
         this.items = res.data.map(item => Object.assign(item, {
-          txnDtTm: new Date().getHours() + ':' + new Date().getMinutes(),
+          txnDtTm: new Date().getHours() + ':' + String(new Date().getMinutes()).padStart(2,'00'),
           genproffinTxnamt: item.genproffinTxnamt / 100,
           tradeName: item.tradeName
         }))
