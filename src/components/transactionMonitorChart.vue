@@ -87,17 +87,6 @@ export default {
         //     fontSize: 8
         //   }
         // },
-        legend: {
-          // data: ['交易笔数(笔)', '交易金额(万元)'],
-          position: 'absolute',
-          align: 'left', // 水平方向位置
-          verticalAlign: 'top', // 垂直方向位置
-          x: 0, // 距离x轴的距离
-          y: 0, // 距离Y轴的距离
-          textStyle: {
-            color: '#ffffff'
-          }
-        },
         tooltip: {
           trigger: 'axis',
           axisPointer: { // 坐标轴指示器，坐标轴触发有效
@@ -146,6 +135,10 @@ export default {
               lineStyle: {
                 color: 'rgba(202,247,255,0.51)'
               }
+            },
+            nameTextStyle: {
+              color: '#22E7E4',
+              fontWeight: 'bold'
             }
           }, {
             name: '交易金额(万元)',
@@ -157,7 +150,7 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: '#D2FBFE'
+                color: '#EE7343'
               }
             },
             axisTick: {
@@ -167,6 +160,10 @@ export default {
               lineStyle: {
                 color: 'rgba(202,247,255,0.51)'
               }
+            },
+            nameTextStyle: {
+              color: '#EE7343',
+              fontWeight: 'bold'
             }
           }
         ],
@@ -293,6 +290,10 @@ export default {
               lineStyle: {
                 color: 'rgba(202,247,255,0.51)'
               }
+            },
+            nameTextStyle: {
+              color: '#22E7E4',
+              fontWeight: 'bold'
             }
           }, {
             name: '交易金额(万元)',
@@ -304,7 +305,7 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: '#D2FBFE'
+                color: '#EE7343'
               }
             },
             axisTick: {
@@ -314,6 +315,10 @@ export default {
               lineStyle: {
                 color: 'rgba(202,247,255,0.51)'
               }
+            },
+            nameTextStyle: {
+              color: '#EE7343',
+              fontWeight: 'bold'
             }
           }
         ],
@@ -447,6 +452,10 @@ export default {
               lineStyle: {
                 color: 'rgba(202,247,255,0.51)'
               }
+            },
+            nameTextStyle: {
+              color: '#22E7E4',
+              fontWeight: 'bold'
             }
           }, {
             name: '交易金额(万元)',
@@ -457,7 +466,7 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: '#D2FBFE'
+                color: '#EE7343'
               }
             },
             axisTick: {
@@ -467,6 +476,10 @@ export default {
               lineStyle: {
                 color: 'rgba(202,247,255,0.51)'
               }
+            },
+            nameTextStyle: {
+              color: '#EE7343',
+              fontWeight: 'bold'
             }
           }
         ],
