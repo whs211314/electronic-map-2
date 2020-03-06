@@ -5,19 +5,17 @@
 <script>
 import echarts from 'echarts'
 import * as api from '@/api'
-import nameIDMap from '@/assets/js/map'
 import { serverIcon } from '@/assets/js/utils' // netIcon
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {
-  props: ['currentTradeName'],
   data () {
     return {
       chinaJson: null,
       myChart: null,
       currID: '4300',
       jpmData: [],
-      regionNetMap: {}, // { 湘潭市ID: { 卫健: 41 } }
+      regionNetMap: {},
       currentLevel: 1
     }
   },
@@ -30,25 +28,11 @@ export default {
         this.chinaJson = mapJson
         this.currJson = mapJson
         this.myChart = echarts.init(document.getElementById(divid))
-        // 获取市的所有服务点数，首次进入获取全量数据
-        api.getTradeNew({ areaType: 1, tradeName: this.currentTradeName }).then(res => {
-          const citys = Object.keys(res.data)
-          let mapServiceNum = 0
-          citys.forEach(cityName => {
-            const ID = nameIDMap[cityName]
-            let count = 0
-            res.data[cityName].forEach(tradeItem => {
-              count += tradeItem.count
-              this.regionNetMap[ID] = {
-                [tradeItem.tradeName]: tradeItem.count,
-                ...this.regionNetMap[ID]
-              }
-            })
-            this.regionNetMap[ID].all = count
-            mapServiceNum += count
+        // 获取市的所有服务点数
+        api.getAreaServies({ areaType: 1 }).then(res => {
+          res.data.forEach(e => {
+            this.regionNetMap[e.jrRegionNo] = e.jrServerCount
           })
-          this.$emit('serviceNum', mapServiceNum)
-          // console.log('---this.regionNetMap', this.regionNetMap)
           this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         })
         this.myChart.on('click', this.handleClick)
@@ -203,7 +187,7 @@ export default {
             color: '#fff',
             fontSize,
             fontWeight: 'bold',
-            formatter: params => params.data.allName.split('_').length < 3 ? this.regionNetMap[params.data.id].all : ''
+            formatter: params => params.data.allName.split('_').length < 3 ? this.regionNetMap[params.data.id] : ''
           },
           itemStyle: {
             color: 'transparent'
@@ -257,29 +241,15 @@ export default {
     },
     // 进入县级标记网点和服务点数量
     handleCountyPointer (name) {
-      Promise.all([api.getAreaNet(name), api.getTradeNew({ areaType: 2, cityName: name, tradeName: this.currentTradeName })]).then(([netRes, serverRes]) => {
+      Promise.all([api.getAreaNet(name), api.getAreaServies({ areaType: 2, cityName: name })]).then(([netRes, serverRes]) => {
         // const netData = netRes.data.map(e => ({
         //   name: e.jpmBankName,
         //   id: e.jpmBankNo,
         //   value: [e.jpmLat, e.jpmLon]
         // }))
-        let mapServiceNum = 0
-        const citys = Object.keys(serverRes.data)
-        citys.forEach(cityName => {
-          const ID = nameIDMap[cityName]
-          let count = 0
-          serverRes.data[cityName].forEach(tradeItem => {
-            count += tradeItem.count
-            this.regionNetMap[ID] = {
-              [tradeItem.tradeName]: tradeItem.count,
-              ...this.regionNetMap[ID]
-            }
-          })
-          this.regionNetMap[ID].all = count
-          mapServiceNum += count
+        serverRes.data.forEach(e => {
+          this.regionNetMap[`${e.jrCity}_${e.jrArea}`] = e.jrServerCount
         })
-        this.$emit('serviceNum', mapServiceNum)
-        // console.log('-----this.regionNetMap', this.regionNetMap)
 
         this.myChart.setOption({
           geo: {
@@ -335,7 +305,7 @@ export default {
               color: '#fff',
               fontSize,
               fontWeight: 'bold',
-              formatter: params => params.data.allName.split('_').length < 3 ? this.regionNetMap[params.data.id].all : ''
+              formatter: params => params.data.allName.split('_').length < 3 ? this.regionNetMap[params.data.id] : ''
             },
             itemStyle: {
               color: 'transparent'
