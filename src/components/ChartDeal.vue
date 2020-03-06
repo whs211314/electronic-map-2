@@ -68,8 +68,10 @@
       // 获取描点数据
       getPoints() {
         return api.getAllMchInfoList().then(res => {
-          this.pointData = res.data
-          this.pointList = Object.values(res.data)
+          this.pointList = res.data
+          res.data.forEach(e => {
+            this.pointData[`${e.x}_${e.y}`] = e
+          })
         })
       },
       // 描点
@@ -99,7 +101,7 @@
                 ${modalMap.map(e => '<div class="item"><b class="label">' + e.label + '</b><span class="value">' + item[e.key] + '</span></div>').join('')}
               </div>
             `
-            const infoWindow = new BMap.InfoWindow(content) // 创建信息窗口对象 
+            const infoWindow = new BMap.InfoWindow(content) // 创建信息窗口对象
             this.map.openInfoWindow(infoWindow, point) //开启信息窗口
           }
         })
