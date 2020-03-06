@@ -33,6 +33,7 @@ export default {
         // 获取市的所有服务点数，首次进入获取全量数据
         api.getTradeNew({ areaType: 1, tradeName: this.currentTradeName }).then(res => {
           const citys = Object.keys(res.data)
+          let mapServiceNum = 0
           citys.forEach(cityName => {
             const ID = nameIDMap[cityName]
             let count = 0
@@ -44,7 +45,9 @@ export default {
               }
             })
             this.regionNetMap[ID].all = count
+            mapServiceNum += count
           })
+          this.$emit('serviceNum', mapServiceNum)
           // console.log('---this.regionNetMap', this.regionNetMap)
           this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         })
@@ -260,6 +263,7 @@ export default {
         //   id: e.jpmBankNo,
         //   value: [e.jpmLat, e.jpmLon]
         // }))
+        let mapServiceNum = 0
         const citys = Object.keys(serverRes.data)
         citys.forEach(cityName => {
           const ID = nameIDMap[cityName]
@@ -272,7 +276,9 @@ export default {
             }
           })
           this.regionNetMap[ID].all = count
+          mapServiceNum += count
         })
+        this.$emit('serviceNum', mapServiceNum)
         // console.log('-----this.regionNetMap', this.regionNetMap)
 
         this.myChart.setOption({
