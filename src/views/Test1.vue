@@ -1,36 +1,115 @@
 <template>
-  <div id="multiMap"></div>
+  <div
+    id="multiMap"
+    style="width:500px;height:500px;border: 3px solid #07B3B1;"
+  ></div>
 </template>
 
 <script>
-import data from './mockData'
+  import * as api from '@/api'
+  import axios from 'axios'
+
+  const modalMap = [
+    { label: '商户名称', key: 'mchName' },
+    { label: '业主姓名', key: 'managerName' },
+    { label: '经度', key: 'x' },
+    { label: '纬度', key: 'y' }
+  ]
   export default {
+    data() {
+      return {
+        map: null,
+        lastPointCollection: null,
+        center: {},
+        pointData: {},
+        pointList: []
+      }
+    },
     mounted() {
       this.getMapScript().then(BMap => {
-        var map = new BMap.Map("multiMap", {})                        // 创建Map实例
-        map.centerAndZoom(new BMap.Point(112.0498046875, 27.1484375), 8)     // 初始化地图,设置中心点坐标和地图级别
-        map.enableScrollWheelZoom()                        //启用滚轮放大缩小
-        if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
-          var points = []  // 添加海量点数据
-          for (var i = 0; i < data.data.length; i++) {
-            points.push(new BMap.Point(data.data[i][0], data.data[i][1]))
-          }
-          var options = {
-            size: BMAP_POINT_SIZE_SMALL,
-            shape: BMAP_POINT_SHAPE_CIRCLE,
-            color: 'red'
-          }
-          var pointCollection = new BMap.PointCollection(points, options)  // 初始化PointCollection
-          pointCollection.addEventListener('click', function (e) {
-            alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat)  // 监听点击事件
+        this.map = new BMap.Map('multiMap', {
+          minZoom: 7,
+          maxZoom: 13
+        })
+        this.initMap()
+        if (document.createElement('canvas').getContext) {
+          this.getPoints().then(() => {
+            this.addPointers()
           })
-          map.addOverlay(pointCollection);  // 添加Overlay
         } else {
           alert('请在chrome、safari、IE8+以上浏览器查看本示例')
         }
       })
     },
     methods: {
+      initMap() {
+        const self = this
+        const top_right_navigation = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL })
+        const mapStyle = {
+          features: ['road', 'building', 'water', 'land'], // 隐藏地图上的"poi",
+          style: 'dark'
+        }
+        this.map.setMapStyle(mapStyle)
+        this.map.centerAndZoom(new BMap.Point(112.0498046875, 27.1484375), 8) // 初始化地图,设置中心点坐标和地图级别
+        // map.enableScrollWheelZoom() // 启用滚轮放大缩小
+        this.map.addControl(top_right_navigation);
+        this.map.addEventListener("zoomend", function () {
+          console.log(this.getZoom())
+          const zoom = this.getZoom()
+          let size = BMAP_POINT_SIZE_TINY
+          if (zoom >= 12) {
+            size = BMAP_POINT_SIZE_NORMAL
+          } else if (zoom >= 10 && zoom < 12) {
+            size = BMAP_POINT_SIZE_SMALL
+          } else if (zoom >= 9 && zoom < 10) {
+            size = BMAP_POINT_SIZE_SMALLER
+          }
+          self.addPointers(size)
+        })
+      },
+      // 获取描点数据
+      getPoints() {
+        return axios.get('/getAllMchInfoList.json').then(res => {
+          this.pointData = res.data
+          this.pointList = Object.values(res.data)
+        })
+      },
+      // 描点
+      addPointers(size = BMAP_POINT_SIZE_TINY) {
+        const self = this
+        if (this.lastPointCollection) {
+          this.lastPointCollection.clear()
+        }
+        const points = []
+        for (let i = 0; i < this.pointList.length; i++) {
+          points.push(new BMap.Point(this.pointList[i].x, this.pointList[i].y))// 创建坐标点
+        }
+        const options = {
+          size,
+          shape: BMAP_POINT_SHAPE_CIRCLE,
+          color: '#23E7E4'
+        }
+        const pointCollection = new BMap.PointCollection(points, options) // 初始化PointCollection
+        pointCollection.addEventListener('click', function (e) {
+          alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat) // 监听点击事件
+          const key = `${e.point.lng}_${e.point.lat}`
+          const item = self.pointData[key]
+          if (item) {
+            const point = new BMap.Point(e.point.lng, e.point.lat)
+            const marker = new BMap.Marker(point)
+            const content = `
+              <div class="point-modal">
+                ${modalMap.map(e => '<div class="item"><b class="label">' + e.label + '</b><span class="value">' + item[e.key] + '</span></div>').join('')}
+              </div>
+            `
+            const infoWindow = new BMap.InfoWindow(content) // 创建信息窗口对象 
+            this.map.openInfoWindow(infoWindow, point) //开启信息窗口
+          }
+        })
+        this.map.addOverlay(pointCollection) // 添加Overlay
+        this.lastPointCollection = pointCollection
+      },
+      // 获取 map 实例
       getMapScript() {
         if (!global.BMap) {
           const ak = 'O6GKe9A0L4xThRNPHotMrd5YpYlKotDY'
@@ -57,9 +136,17 @@ import data from './mockData'
   }
 </script>
 
-<style>
-  #multiMap {
-    width: 800px;
-    height: 800px;
+<style lang="scss">
+.point-modal {
+  .item {
+    font-size: 14px;
+    display: flex;
+    .label {
+      width: 80px;
+    }
+    .value {
+      flex: 1;
+    }
   }
+}
 </style>
