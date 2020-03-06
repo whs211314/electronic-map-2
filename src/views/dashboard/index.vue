@@ -70,7 +70,6 @@
         :currentTradeName="currentTradeName"
         @popup="handlePopup"
         @goDown="handleGoDown"
-        @serviceNum="handleServiceNum"
         @showDeploy="chartType='ChartDeploy'" />
       <MPopup v-show="popupVisible"
         :popup="popup"
@@ -282,9 +281,6 @@ export default {
     }
   },
   methods: {
-    handleServiceNum (num) {
-      this.sum.serverCount = num
-    },
     // 监控按钮弹窗
     monitorClick (index) {
       this.monitorIndex = index
@@ -452,7 +448,7 @@ export default {
       api.getDataSum(pieBotton).then(res => {
         this.sum.cardAllSum = res.data[0].cardAllSum
         this.sum.netSum = res.data[0].netSum
-        // this.sum.serverCount = res.data[0].serverCount
+        this.sum.serverCount = res.data[0].serverCount
         this.sum.transAllSum = String(parseInt(res.data[0].transAllSum / 10000))
         this.sum.phoneCustomerCount = res.data[0].phoneCustomerCount
         this.sum.areaCount = res.data[0].areaCount
