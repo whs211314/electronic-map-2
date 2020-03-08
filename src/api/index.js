@@ -145,7 +145,7 @@ export function getTop ({ allName = '' } = {}) {
 // 获取地区服务点数量 地区类型areaType，1市，2县
 export function getAreaServies ({ areaType, cityName = '', tradeName = '' }) {
   if (![1, 2].includes(areaType)) {
-    return Promise.reject('areaType 仅支持1、2')
+    return Promise.reject(new Error('areaType 仅支持1、2'))
   }
   if (!tradeName) {
     return new Promise((resolve, reject) => {
@@ -184,7 +184,6 @@ export function getAreaServies ({ areaType, cityName = '', tradeName = '' }) {
     })
   })
 }
-
 
 // 合作视图  地区类型0省，1市，2区县，3乡镇
 export function getTrade ({ areaType, cityName = '', tradeName = '' }) {
