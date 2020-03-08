@@ -6,10 +6,10 @@
 import echarts from 'echarts'
 import * as api from '@/api'
 import { serverIcon } from '@/assets/js/utils' // netIcon
-import mapName2Code from '@/assets/js/map'
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {
+  props: ['currentTradeName'],
   data () {
     return {
       chinaJson: null,
@@ -30,11 +30,8 @@ export default {
         this.currJson = mapJson
         this.myChart = echarts.init(document.getElementById(divid))
         // 获取市的所有服务点数
-        api.getAreaServies({ areaType: 1 }).then(res => {
-          res.data.forEach(e => {
-            const code = mapName2Code[e.jrCityName]
-            this.regionNetMap[code] = e.jrServerCount
-          })
+        api.getAreaServies({ areaType: 1, tradeName: this.currentTradeName }).then(res => {
+          this.regionNetMap = res
           this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         })
         this.myChart.on('click', this.handleClick)
@@ -93,8 +90,12 @@ export default {
       this.currentLevel = 1
       // 没有下级地图，回到一级中国地图，并将mapStack清空
       this.currJson = this.chinaJson
-      this.registerAndsetOption(this.myChart, this.chinaName, this.chinaJson)
-      this.$emit('goDown', { id: '4300', name: '湖南省', allName: '', level: this.currentLevel })
+      // 获取市的所有服务点数
+      api.getAreaServies({ areaType: 1, tradeName: this.currentTradeName }).then(res => {
+        this.regionNetMap = res
+        this.registerAndsetOption(this.myChart, this.chinaName, this.chinaJson)
+        this.$emit('goDown', { id: '4300', name: '湖南省', allName: '', level: this.currentLevel })
+      })
     },
     // 服务点标点数据
     getCoordinate (jpmData) {
@@ -243,16 +244,13 @@ export default {
     },
     // 进入县级标记网点和服务点数量
     handleCountyPointer (name) {
-      Promise.all([api.getAreaNet(name), api.getAreaServies({ areaType: 2, cityName: name })]).then(([netRes, serverRes]) => {
+      Promise.all([api.getAreaNet(name), api.getAreaServies({ areaType: 2, cityName: name, tradeName: this.currentTradeName })]).then(([netRes, serverRes]) => {
         // const netData = netRes.data.map(e => ({
         //   name: e.jpmBankName,
         //   id: e.jpmBankNo,
         //   value: [e.jpmLat, e.jpmLon]
         // }))
-        serverRes.data.forEach(e => {
-          const code = mapName2Code[`${e.jrCityName}_${e.jrAreaName}`]
-          this.regionNetMap[code] = e.jrServerCount
-        })
+        this.regionNetMap = serverRes
 
         this.myChart.setOption({
           geo: {

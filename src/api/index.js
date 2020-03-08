@@ -1,4 +1,5 @@
 import http from '../http'
+import mapName2Code from '@/assets/js/map'
 
 // 饼图数据
 export function getPieData () {
@@ -142,15 +143,48 @@ export function getTop ({ allName = '' } = {}) {
 }
 
 // 获取地区服务点数量 地区类型areaType，1市，2县
-export function getAreaServies ({ areaType, cityName = '' }) {
+export function getAreaServies ({ areaType, cityName = '', tradeName = '' }) {
+  if (![1, 2].includes(areaType)) {
+    return Promise.reject('areaType 仅支持1、2')
+  }
+  if (!tradeName) {
+    return new Promise((resolve, reject) => {
+      http.get('/february/front/ecpJxtRegion/getArea', {
+        params: { areaType, cityName, areaName: '', streetName: '' }
+      }).then(res => {
+        const ret = {}
+        res.data.forEach(e => {
+          let code = ''
+          if (areaType === 1) {
+            code = mapName2Code[e.jrCityName]
+          } else if (areaType === 2) {
+            code = mapName2Code[`${e.jrCityName}_${e.jrAreaName}`]
+          }
+          ret[code] = e.jrServerCount
+        })
+        resolve(ret)
+      })
+    })
+  }
   return new Promise((resolve, reject) => {
-    http.get('/february/front/ecpJxtRegion/getArea', {
-      params: { areaType, cityName, areaName: '', streetName: '' }
+    http.get('/february/front/ecpJxtRegion/getAreaNew', {
+      params: { areaType, cityName, areaName: '', streetName: '', tradeName }
     }).then(res => {
-      resolve(res)
+      const ret = {}
+      res.data.trades.forEach(e => {
+        let code = ''
+        if (areaType === 1) {
+          code = mapName2Code[e.jpmCity]
+        } else if (areaType === 2) {
+          code = mapName2Code[`${e.jpmCity}_${e.jpmArea}`]
+        }
+        ret[code] = e.count
+      })
+      resolve(ret)
     })
   })
 }
+
 
 // 合作视图  地区类型0省，1市，2区县，3乡镇
 export function getTrade ({ areaType, cityName = '', tradeName = '' }) {
