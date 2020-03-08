@@ -6,6 +6,7 @@
 import echarts from 'echarts'
 import * as api from '@/api'
 import { serverIcon } from '@/assets/js/utils' // netIcon
+import mapName2Code from '@/assets/js/map'
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {
@@ -31,7 +32,8 @@ export default {
         // 获取市的所有服务点数
         api.getAreaServies({ areaType: 1 }).then(res => {
           res.data.forEach(e => {
-            this.regionNetMap[e.jrRegionNo] = e.jrServerCount
+            const code = mapName2Code[e.jrCityName]
+            this.regionNetMap[code] = e.jrServerCount
           })
           this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         })
@@ -248,7 +250,8 @@ export default {
         //   value: [e.jpmLat, e.jpmLon]
         // }))
         serverRes.data.forEach(e => {
-          this.regionNetMap[`${e.jrCity}_${e.jrArea}`] = e.jrServerCount
+          const code = mapName2Code[`${e.jrCityName}_${e.jrAreaName}`]
+          this.regionNetMap[code] = e.jrServerCount
         })
 
         this.myChart.setOption({
