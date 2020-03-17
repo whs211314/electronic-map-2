@@ -133,7 +133,7 @@ export default {
           this.echartsList.push(el.count)
           this.abnormalAll = this.abnormalAll + el.count
         })
-        this.proportion = (this.abnormalAll / res.data.allCtInfo).toFixed(2)
+        this.proportion = ((this.abnormalAll / res.data.allCtInfo).toFixed(2)) * 100
         let myChart = echarts.init(document.getElementById('line-chart'))
         let option = {
           tooltip: {
