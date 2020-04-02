@@ -47,8 +47,8 @@ export default {
         this.city.areaName = ''
       }
       api.getPieData(this.city).then(res => {
-        this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
-        this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
+        this.pieList.taCountryYearCount = Math.round((res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100)
+        this.pieList.taCountryCount = Math.round((res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100)
         let myChart1 = echarts.init(document.getElementById('line01-chart'))
         let myChart2 = echarts.init(document.getElementById('line02-chart'))
         let option1 = {
