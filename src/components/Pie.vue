@@ -21,7 +21,11 @@ export default {
         taCountryYearCount: '',
         taCountryCount: ''
       },
-      num: 0
+      num: 0,
+      city: {
+        cityName: '湖南省',
+        areaName: ''
+      }
     }
   },
   watch: {
@@ -31,73 +35,20 @@ export default {
   },
   methods: {
     chartInit (e) {
-      api.getPieData().then(res => {
-        if (e && e.length > 0 && e[0].level > 1) {
-          // 服务点数占比
-          e.forEach((item, index) => {
-            if (item.level === 2) {
-              this.pieList.taCountryCount = parseInt((Number(e[0].serverNum) / this.num).toFixed(2) * 100)
-              this.num = Number(e[0].serverNum)
-              if (item.name === '长沙市') {
-                this.pieList.taCountryYearCount = 4
-              }
-              if (item.name === '株洲市') {
-                this.pieList.taCountryYearCount = 4
-              }
-              if (item.name === '湘潭市') {
-                this.pieList.taCountryYearCount = 5
-              }
-              if (item.name === '衡阳市') {
-                this.pieList.taCountryYearCount = 4
-              }
-              if (item.name === '邵阳市') {
-                this.pieList.taCountryYearCount = 6
-              }
-              if (item.name === '岳阳市') {
-                this.pieList.taCountryYearCount = 7
-              }
-              if (item.name === '常德市') {
-                this.pieList.taCountryYearCount = 9
-              }
-              if (item.name === '张家界市') {
-                this.pieList.taCountryYearCount = 14
-              }
-              if (item.name === '益阳市') {
-                this.pieList.taCountryYearCount = 3
-              }
-              if (item.name === '郴州市') {
-                this.pieList.taCountryYearCount = 3
-              }
-              if (item.name === '永州市') {
-                this.pieList.taCountryYearCount = 14
-              }
-              if (item.name === '怀化市') {
-                this.pieList.taCountryYearCount = 16
-              }
-              if (item.name === '湘西土家族苗族自治州') {
-                this.pieList.taCountryYearCount = 7
-              }
-              if (item.name === '娄底市') {
-                this.pieList.taCountryYearCount = 4
-              }
-            }
-            if (item.level === 3) {
-              this.pieList.taCountryCount = parseInt((Number(e[1].serverNum) / this.num).toFixed(2) * 100)
-              this.pieList.taCountryYearCount = Math.floor(Math.random() * (4 - 12) + 12)
-            }
-            if (item.level === 1) {
-              this.pieList.taCountryCount = parseInt((Number(e[1].serverNum) / this.num).toFixed(2) * 100)
-              this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
-              this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
-              this.num = 44204
-            }
-          })
-        } else {
-          this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
-          this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
-          this.num = 44204
-        }
-        console.log(this.pieList)
+      if (e && e.length === 1 && e[0].level === 2) {
+        this.city.cityName = e[0].allName
+        this.city.areaName = ''
+      }
+      if (e && e.length === 2 && e[1].level === 3) {
+        this.city.areaName = e[1].allName.split('_')[1]
+      }
+      if (e && e.length === 0) {
+        this.city.cityName = '湖南省'
+        this.city.areaName = ''
+      }
+      api.getPieData(this.city).then(res => {
+        this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
+        this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
         let myChart1 = echarts.init(document.getElementById('line01-chart'))
         let myChart2 = echarts.init(document.getElementById('line02-chart'))
         let option1 = {

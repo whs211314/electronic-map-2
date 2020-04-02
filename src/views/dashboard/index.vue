@@ -257,7 +257,10 @@ export default {
     }
   },
   created () {
-    api.getPieData().then(res => {
+    const city = {
+      cityName: '湖南省'
+    }
+    api.getPieData(city).then(res => {
       this.pieList.taCountryYearCount = (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
       this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
       console.log(this.pieList)
@@ -454,7 +457,7 @@ export default {
         this.sum.areaCount = res.data[0].areaCount
         this.sum.yearCardCount = res.data[0].yearCardCount
         this.sum.yearAddCardMoney = Math.round(res.data[0].yearAddCardMoney / 10000)
-        this.sum.rate = String(res.data[0].rate).substring(0, 3)
+        this.sum.rate = res.data[0].cardAllSum === 0 ? 100 : Math.round(res.data[0].phoneCustomerCount / res.data[0].cardAllSum)
       })
     },
     // MonitorDeal (e) {

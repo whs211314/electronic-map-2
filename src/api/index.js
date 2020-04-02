@@ -2,9 +2,11 @@ import http from '../http'
 import mapName2Code from '@/assets/js/map'
 
 // 饼图数据
-export function getPieData () {
+export function getPieData (mchId) {
   return new Promise((resolve, reject) => {
-    http.get('/february/front/ecpJxtTranAll/getList').then(res => {
+    http.get('/february/front/ecpJxtTranAll/getListByparent', {
+      params: mchId
+    }).then(res => {
       resolve(res)
     })
   })
