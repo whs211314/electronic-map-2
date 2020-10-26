@@ -2,7 +2,7 @@ import http from '../http'
 import mapName2Code from '@/assets/js/map'
 
 // 饼图数据
-export function getPieData (mchId) {
+export function getPieData(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpJxtTranAll/getListByparent', {
       params: mchId
@@ -13,7 +13,7 @@ export function getPieData (mchId) {
 }
 
 // 服务点详情
-export function getMchInfo ({ mchId }) {
+export function getMchInfo({ mchId }) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/mchInfo/getMchInfo', {
       params: { mchId }
@@ -24,7 +24,7 @@ export function getMchInfo ({ mchId }) {
 }
 
 // 乡镇下所有服务点
-export function getMchInfoList ({ allName = '' } = {}) {
+export function getMchInfoList({ allName = '' } = {}) {
   const [cityName = '', areaName = '', streetName = ''] = allName.split('_')
   return new Promise((resolve, reject) => {
     http.get('/february/front/mchInfo/getMchInfoList', {
@@ -36,7 +36,7 @@ export function getMchInfoList ({ allName = '' } = {}) {
 }
 
 // 事实监控
-export function getTransLog (mchId) {
+export function getTransLog(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/translog/getTransLog', {
       params: mchId
@@ -47,7 +47,7 @@ export function getTransLog (mchId) {
 }
 
 // 服务信息
-export function getMchInfoListLog (mchId) {
+export function getMchInfoListLog(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/mchInfo/getMchInfoList', {
       params: mchId
@@ -58,7 +58,7 @@ export function getMchInfoListLog (mchId) {
 }
 
 // 客户经理信息
-export function getManagerInfo (mchId) {
+export function getManagerInfo(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpJxtCustomerManager/getManagerInfo', {
       params: mchId
@@ -69,7 +69,7 @@ export function getManagerInfo (mchId) {
 }
 
 // 巡检记录
-export function getCheckInfo (mchId) {
+export function getCheckInfo(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpCheck/getCheckInfo', {
       params: mchId
@@ -80,7 +80,7 @@ export function getCheckInfo (mchId) {
 }
 
 // 交易
-export function getMchTrans (mchId) {
+export function getMchTrans(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpJxtMchTop/getMchTrans', {
       params: mchId
@@ -91,7 +91,7 @@ export function getMchTrans (mchId) {
 }
 
 // 饼图下数据
-export function getDataSum (mchId) {
+export function getDataSum(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpJxtDataSum/getDataSum', {
       params: mchId
@@ -102,7 +102,7 @@ export function getDataSum (mchId) {
 }
 
 // 视图接口
-export function getClassInfo (mchId) {
+export function getClassInfo(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/ecp_jxt_report_place/query', {
       params: mchId
@@ -112,7 +112,7 @@ export function getClassInfo (mchId) {
   })
 }
 // 获取所有服务点
-export function getAllMchInfoList (mchId) {
+export function getAllMchInfoList(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/mchInfo/getAllMchInfoList', {
       params: mchId
@@ -122,7 +122,7 @@ export function getAllMchInfoList (mchId) {
   })
 }
 // 风险预警视图
-export function countRiskWarn (mchId) {
+export function countRiskWarn(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/ecp-jxt-riskwarn/countRiskWarn', { // /february/front/ecpJxtClass/getClassInfo
       params: mchId
@@ -133,7 +133,7 @@ export function countRiskWarn (mchId) {
 }
 
 // top100
-export function getTop ({ allName = '' } = {}) {
+export function getTop({ allName = '' } = {}) {
   const [cityName = '', areaName = '', streetName = ''] = allName.split('_')
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpJxtMchTop/getTop', {
@@ -145,7 +145,7 @@ export function getTop ({ allName = '' } = {}) {
 }
 
 // 获取地区服务点数量 地区类型areaType，1市，2县
-export function getAreaServies ({ areaType, cityName = '', tradeName = '' }) {
+export function getAreaServies({ areaType, cityName = '', tradeName = '' }) {
   if (![1, 2].includes(areaType)) {
     return Promise.reject(new Error('areaType 仅支持1、2'))
   }
@@ -188,7 +188,7 @@ export function getAreaServies ({ areaType, cityName = '', tradeName = '' }) {
 }
 
 // 合作视图  地区类型0省，1市，2区县，3乡镇
-export function getTrade ({ areaType, cityName = '', tradeName = '' }) {
+export function getTrade({ areaType, cityName = '', tradeName = '' }) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpJxtTrade/getTrade', {
       params: { areaType, cityName, areaName: '', streetName: '', tradeName }
@@ -199,7 +199,7 @@ export function getTrade ({ areaType, cityName = '', tradeName = '' }) {
 }
 
 // 合作视图  地区类型0省，1市，2区县，3乡镇
-export function getTradeNew ({ areaType, cityName = '', tradeName = '' }) {
+export function getTradeNew({ areaType, cityName = '', tradeName = '' }) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpJxtTrade/getTradeNew', {
       params: { areaType, cityName, areaName: '', streetName: '', tradeName }
@@ -210,7 +210,7 @@ export function getTradeNew ({ areaType, cityName = '', tradeName = '' }) {
 }
 
 // 获取地市下面的区县网点
-export function getAreaNet (cityName) {
+export function getAreaNet(cityName) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/bankpoint/getAreaNet', {
       params: { cityName }
@@ -221,7 +221,7 @@ export function getAreaNet (cityName) {
 }
 
 // 巡检
-export function getCheckInfoPage (mchId) {
+export function getCheckInfoPage(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/front/ecpCheck/getCheckInfoPage', {
       params: mchId
@@ -232,7 +232,7 @@ export function getCheckInfoPage (mchId) {
 }
 
 // 异常终端视图
-export function query (mchId) {
+export function query(mchId) {
   return new Promise((resolve, reject) => {
     http.get('/february/backend/ecp-jxt-term-errors/query', {
       params: mchId
