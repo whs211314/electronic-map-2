@@ -5,23 +5,39 @@
     </div>
     <div class="empty"></div>
     <div class="header items">
-      <div class="item flex-center" :key="index" :class="index===1?'flex-2':''"
-        v-for="(item, index) in headers">
-        <div class="txt">{{item}}</div>
+      <div
+        class="item flex-center"
+        :key="index"
+        :class="index === 1 ? 'flex-2' : ''"
+        v-for="(item, index) in headers"
+      >
+        <div class="txt">{{ item }}</div>
       </div>
     </div>
     <div class="content">
-      <div class="wrapper" :style="animate?animateStyle:initStyle"
-        @transitionend="handleTransitionEnd">
-        <div class="row" :key="index"
-            v-for="(item, index) in items">
+      <div
+        class="wrapper"
+        :style="animate ? animateStyle : initStyle"
+        @transitionend="handleTransitionEnd"
+      >
+        <div class="row" :key="index" v-for="(item, index) in items">
           <div class="items">
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.cityName}}</div></div>
-            <div class="item flex-center flex-2"><div :class="index === 2?txt:txt">{{item.mchName}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.txnDtTm}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.tradeName}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">{{item.genproffinTxnamt}}</div></div>
-            <div class="item flex-center"><div :class="index === 2?txt:txt">正常</div></div>
+            <div class="item flex-center">
+              <div :class="index === 2 ? txt : txt">{{ item.cityName }}</div>
+            </div>
+            <div class="item flex-center flex-2">
+              <div :class="index === 2 ? txt : txt">{{ item.mchName }}</div>
+            </div>
+            <div class="item flex-center">
+              <div :class="index === 2 ? txt : txt">{{ item.txnDtTm }}</div>
+            </div>
+            <div class="item flex-center">
+              <div :class="index === 2 ? txt : txt">{{ item.tradeName }}</div>
+            </div>
+            <div class="item flex-center">
+              <div :class="index === 2 ? txt : txt">{{ item.genproffinTxnamt }}</div>
+            </div>
+            <div class="item flex-center"><div :class="index === 2 ? txt : txt">正常</div></div>
           </div>
         </div>
       </div>
@@ -33,7 +49,7 @@
 import * as api from '@/api'
 
 export default {
-  data () {
+  data() {
     return {
       items: [],
       index: 1,
@@ -126,19 +142,19 @@ export default {
     }
   },
   computed: {
-    animateStyle () {
+    animateStyle() {
       return {
         transition: `all ${this.getDuration()}s`,
         transform: 'translate3d(0, -20%, 0)'
       }
     }
   },
-  created () {
+  created() {
     this.getData()
     setInterval(this.scroll, 1000)
   },
   watch: {
-    tranEndTimes (val) {
+    tranEndTimes(val) {
       if (val === 10) {
         this.index += 1
         this.getData()
@@ -146,28 +162,31 @@ export default {
     }
   },
   methods: {
-    getDuration () {
+    getDuration() {
       const currHour = new Date().getHours()
       if (currHour >= 8 && currHour <= 22) return 1
       return 30
     },
-    scroll () {
+    scroll() {
       this.animate = true
     },
-    handleTransitionEnd () {
+    handleTransitionEnd() {
       this.animate = false
       this.items.push(this.items.shift())
       this.tranEndTimes += 1
     },
-    getData () {
+    getData() {
       // 实施监控
-      api.getTransLog({ pageIndex: this.index }).then(res => {
+      api.getTransLog({ pageIndex: this.index }).then((res) => {
         this.tranEndTimes = 1
-        this.items = res.data.map(item => Object.assign(item, {
-          txnDtTm: new Date().getHours() + ':' + String(new Date().getMinutes()).padStart(2,'00'),
-          genproffinTxnamt: item.genproffinTxnamt / 100,
-          tradeName: item.tradeName
-        }))
+        this.items = res.data.map((item) =>
+          Object.assign(item, {
+            txnDtTm:
+              new Date().getHours() + ':' + String(new Date().getMinutes()).padStart(2, '00'),
+            genproffinTxnamt: item.genproffinTxnamt / 100,
+            tradeName: item.tradeName
+          })
+        )
         // this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
         // res.data.forEach((item, index) => {
         //   // if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
@@ -231,7 +250,7 @@ export default {
     width: 100%;
     padding-left: 3%;
     text-align: center;
-    color: #E77641;
+    color: #e77641;
   }
   .txt {
     width: 100%;
