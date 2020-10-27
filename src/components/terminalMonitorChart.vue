@@ -247,9 +247,7 @@ export default {
       bottom: 10%;
       @include bgImage('../assets/images/tc-bg02.png');
       background-size: 100% 100%;
-      // background: #2C848B;
-      // border-radius: 5px;
-      font-size: var(--fontSize-8);
+      font-size: var(--fontSize-12);
       padding: 2%;
       .row {
         height: 25%;
@@ -265,25 +263,6 @@ export default {
           }
         }
       }
-      // table {
-      //   border-collapse:collapse;
-      //   text-align: center;
-      //   font-size: var(--fontSize-8);
-      //   thead {
-      //     tr {
-      //       height: 20px;
-      //     }
-      //   }
-      //   tbody{
-      //     tr {
-      //       td {
-      //         width: 21%;
-      //         padding: 8% 0;
-      //         border: 1px solid #00C6D9;
-      //       }
-      //     }
-      //   }
-      // }
     }
   }
 }

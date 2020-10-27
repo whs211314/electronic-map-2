@@ -180,7 +180,7 @@ export default {
       background-size: 100% 100%;
       // background: #2C848B;
       // border-radius: 5px;
-      font-size: var(--fontSize-8);
+      font-size: var(--fontSize-12);
       padding: 2%;
       .row {
         height: 25%;

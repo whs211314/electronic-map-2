@@ -13,13 +13,13 @@ const DEFAULT_SIZE = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       layoutIndex: 0,
       isReady: false
     }
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       this.$app = document.querySelector('#app')
       this.computeScale()
@@ -28,15 +28,25 @@ export default {
     })
   },
   methods: {
-    computeScale () {
-      // let scaleVal = 1
+    computeScale() {
+      let scaleVal = 1
       const { innerHeight: height, innerWidth: width } = window
       // 视口长宽比判断使用哪种布局
       this.layoutIndex = width / height < 3 ? 1 : 0
-      let { className } = this._getSize(this.layoutIndex)
+      let { screenWidth, screenHeight, className } = this._getSize(this.layoutIndex)
+
+      if (height * screenWidth / screenHeight < width) {
+        scaleVal = height / screenHeight
+      } else {
+        scaleVal = width / screenWidth
+      }
+
+      this.$app.style.transform = `scale(${scaleVal}) translate3d(-50%, -50%, 0)`
+      this.$app.style.paddingLeft = `${screenWidth}px`
+      this.$app.style.paddingTop = `${screenHeight}px`
       this.$app.className = `oh ${className}`
     },
-    _getSize (index = 0) {
+    _getSize(index = 0) {
       return DEFAULT_SIZE[index]
     }
   }

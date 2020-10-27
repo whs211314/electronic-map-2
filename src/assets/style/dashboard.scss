@@ -121,7 +121,7 @@
   // 合作视图 END
 
   // 地图相关 START
-  .map-transform{
+  .map-transform {
     @include position(0, 1300, 0, 1300);
     @include bgImage('../../assets/images/dt-bg.png');
     animation: rotation 200s linear infinite;
@@ -201,7 +201,7 @@
           padding: 0 1%;
           cursor: pointer;
           &.active {
-            background:#00b7b4;
+            background: #00b7b4;
           }
         }
       }
@@ -219,8 +219,12 @@
   // 监控 END
 
   @keyframes rotation {
-    from { transform: rotate(0) }
-    to { transform: rotate(360deg) }
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 }
 
@@ -241,7 +245,7 @@
     .summary {
       @include position-small(550, 300, 465, 480);
     }
-    .map-transform{
+    .map-transform {
       @include position-small(0, 700, 1240, 1200);
     }
     .map-bk {

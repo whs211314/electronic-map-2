@@ -89,7 +89,7 @@ export default {
   .header {
     height: 16%;
     font-weight: bold;
-    font-size: var(--fontSize-10);
+    font-size: var(--fontSize-12);
   }
   .content {
     height: 78%;
@@ -98,7 +98,7 @@ export default {
     .row {
       height: 17%;
       text-align: center;
-      font-size: var(--fontSize-8);
+      font-size: var(--fontSize-12);
     }
   }
   .txt01 {
