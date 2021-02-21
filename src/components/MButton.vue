@@ -1,12 +1,15 @@
 <template>
-  <div class="m-button position-space"
+  <div
+    class="m-button position-space"
     :class="btnCls"
+    :style="{ zIndex: visible ? 999 : 'initial' }"
     @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave">
-    <span class="txt position-center">{{txt}}</span>
-    <div class="prompt-dialog"
-      :class="[position, isLarge?'large':'']"
-      v-show="visible">{{dialogTxt}}</div>
+    @mouseleave="handleMouseLeave"
+  >
+    <span class="txt position-center">{{ txt }}</span>
+    <div class="prompt-dialog" :class="[position, isLarge ? 'large' : '']" v-show="visible">
+      {{ dialogTxt }}
+    </div>
   </div>
 </template>
 
@@ -58,7 +61,7 @@ export default {
     //   }, 2 * 1000)
     // }
     handleMouseEnter () {
-      if (!this.txt) return
+      if (!this.txt || !this.dialogTxt) return
       this.visible = true
     },
     handleMouseLeave () {
@@ -82,7 +85,7 @@ export default {
     right: -50%;
     bottom: -50%;
     left: -50%;
-    transform: scale(.5);
+    transform: scale(0.5);
     transform-origin: center;
     .txt {
       font-size: var(--fontSize-20);
@@ -117,7 +120,7 @@ export default {
     }
     &.middle {
       top: 0;
-      transform: translate3d(0, -50%, 0)
+      transform: translate3d(0, -50%, 0);
     }
     &.bottom {
       bottom: 0;
