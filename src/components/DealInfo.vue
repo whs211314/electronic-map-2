@@ -6,34 +6,34 @@
         <div class="value">{{sum.netSum}} 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">累计获客数</div></div>
-        <div class="value">{{sum.cardAllSum}} 户</div>
+        <div class="label"><div class="txt">服务客户</div></div>
+        <div class="value">492.89 万人</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">金湘通客户存款</div></div>
-        <div class="value">{{sum.transAllSum}} 万元</div>
+        <div class="label"><div class="txt">沉淀资金</div></div>
+        <div class="value">281.00 亿</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">手机银行签约客户数</div></div>
-        <div class="value">{{sum.phoneCustomerCount}} 户</div>
+        <div class="label"><div class="txt">交易笔数</div></div>
+        <div class="value">2393.94 万笔</div>
       </div>
     </div>
     <div class="right fr">
       <div class="item">
         <div class="label"><div class="txt">金湘通服务点数</div></div>
-        <div class="value">{{sum.serverCount}} 个</div>
+        <div class="value">60653 个</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">新增获客数</div></div>
         <div class="value orange">{{sum.yearCardCount}} 户</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">本年金湘通客户存款增长</div></div>
+        <div class="label"><div class="txt">本年新增沉淀资金</div></div>
         <div class="value orange">{{sum.yearAddCardMoney}} 万元</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">签约客户同步率</div></div>
-        <div class="value orange">{{sum.rate}} %</div>
+        <div class="label"><div class="txt">交易金额</div></div>
+        <div class="value orange">177.64 亿</div>
       </div>
     </div>
   </div>
