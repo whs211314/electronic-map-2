@@ -25,11 +25,11 @@
       </div>
       <div class="item">
         <div class="label"><div class="txt">新增获客数</div></div>
-        <div class="value orange">{{sum.yearCardCount}} 户</div>
+        <div class="value orange">85.44 万人</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">本年新增沉淀资金</div></div>
-        <div class="value orange">{{sum.yearAddCardMoney}} 万元</div>
+        <div class="value orange">157.49 亿元</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">交易金额</div></div>
