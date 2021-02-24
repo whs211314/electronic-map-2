@@ -3,47 +3,69 @@
     <div class="left fl">
       <div class="item">
         <div class="label"><div class="txt">建行物理网点数</div></div>
-        <div class="value">544 个</div>
+        <div class="value">{{ sum.netSum | amount }} 个</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">服务客户</div></div>
-        <div class="value">492.89 万人</div>
+        <div class="value">{{ sum.cardAllSum | amount }}</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">沉淀资金</div></div>
-        <div class="value">281.00 亿</div>
+        o
+        <div class="value">{{ sum.transAllSum | amount }}</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">交易笔数</div></div>
-        <div class="value">2393.94 万笔</div>
+        <div class="value">{{ sum.phoneCustomerCount | amount }}</div>
       </div>
     </div>
     <div class="right fr">
       <div class="item">
         <div class="label"><div class="txt">金湘通服务点数</div></div>
-        <div class="value">60653 个</div>
+        <div class="value">{{ sum.serverCount | amount }} 个</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">新增获客数</div></div>
-        <div class="value orange">85.44 万人</div>
+        <div class="value orange">{{ sum.yearCardCount | amount }}</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">本年新增沉淀资金</div></div>
-        <div class="value orange">157.49 亿元</div>
+        <div class="value orange">{{ sum.yearAddCardMoney | amount }}</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">交易金额</div></div>
-        <div class="value orange">177.64 亿</div>
+        <div class="value orange">{{ sum.rate | amount }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+function _numFixed (num, dig) {
+  return Number(num / Math.pow(10, dig)).toFixed(2)
+}
 export default {
   props: {
     sum: {
       type: Object
+    }
+  },
+  filters: {
+    amount: (num) => {
+      if (!num) return '-'
+      let str = String(num)
+      // 去除小数
+      str = str.replace(/\.\d+/, '')
+      const len = str.length
+      if (len <= 5) {
+        return num
+      } else if (len <= 9) {
+        return `${_numFixed(num, 4)} 万`
+      } else if (len <= 12) {
+        return `${_numFixed(num, 8)} 亿`
+      } else {
+        return `${_numFixed(num, 12)} 亿亿`
+      }
     }
   }
 }
@@ -62,7 +84,8 @@ export default {
     width: 100%;
     text-align: left;
   }
-  .left, .right {
+  .left,
+  .right {
     width: 50%;
     height: 100%;
   }

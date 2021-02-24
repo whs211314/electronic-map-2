@@ -512,15 +512,15 @@ export default {
     pieApi (pieBotton) {
       // 饼图下数据
       api.getDataSum(pieBotton).then(res => {
-        this.sum.cardAllSum = res.data[0].cardAllSum
-        this.sum.netSum = res.data[0].netSum
-        this.sum.serverCount = res.data[0].serverCount
-        this.sum.transAllSum = String(parseInt(res.data[0].transAllSum / 10000))
-        this.sum.phoneCustomerCount = res.data[0].phoneCustomerCount
-        this.sum.areaCount = res.data[0].areaCount
-        this.sum.yearCardCount = res.data[0].yearCardCount
-        this.sum.yearAddCardMoney = Math.round(res.data[0].yearAddCardMoney / 10000)
-        this.sum.rate = res.data[0].cardAllSum === 0 ? 100 : Math.round(res.data[0].phoneCustomerCount / res.data[0].cardAllSum)
+        if (pieBotton.pageIndex !== 1) {
+          this.sum = {
+            ...res.data[0],
+            rate: '',
+            phoneCustomerCount: ''
+          }
+          return
+        }
+        this.sum = res.data[0]
       })
     },
     // MonitorDeal (e) {
