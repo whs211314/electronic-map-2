@@ -3,7 +3,7 @@
     <div class="left fl">
       <div class="item">
         <div class="label"><div class="txt">建行物理网点数</div></div>
-        <div class="value">{{sum.netSum}} 个</div>
+        <div class="value">544 个</div>
       </div>
       <div class="item">
         <div class="label"><div class="txt">服务客户</div></div>
