@@ -11,7 +11,6 @@
       </div>
       <div class="item">
         <div class="label"><div class="txt">沉淀资金</div></div>
-        o
         <div class="value">{{ sum.transAllSum | amount }}</div>
       </div>
       <div class="item" v-show="sum.phoneCustomerCount">
