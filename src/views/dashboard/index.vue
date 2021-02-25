@@ -515,8 +515,8 @@ export default {
         if (pieBotton.pageIndex !== 1) {
           this.sum = {
             ...res.data[0],
-            rate: '',
-            phoneCustomerCount: ''
+            rate: undefined,
+            phoneCustomerCount: undefined
           }
           return
         }

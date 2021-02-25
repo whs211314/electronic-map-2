@@ -14,7 +14,7 @@
         o
         <div class="value">{{ sum.transAllSum | amount }}</div>
       </div>
-      <div class="item">
+      <div class="item" v-show="sum.phoneCustomerCount">
         <div class="label"><div class="txt">交易笔数</div></div>
         <div class="value">{{ sum.phoneCustomerCount | amount }}</div>
       </div>
@@ -32,7 +32,7 @@
         <div class="label"><div class="txt">本年新增沉淀资金</div></div>
         <div class="value orange">{{ sum.yearAddCardMoney | amount }}</div>
       </div>
-      <div class="item">
+      <div class="item" v-show="sum.rate">
         <div class="label"><div class="txt">交易金额</div></div>
         <div class="value orange">{{ sum.rate | amount }}</div>
       </div>
