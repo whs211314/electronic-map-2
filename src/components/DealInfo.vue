@@ -25,11 +25,11 @@
         <div class="value">{{ sum.serverCount | amount }} 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">新增获客数</div></div>
+        <div class="label"><div class="txt">本年新增</div></div>
         <div class="value orange">{{ sum.yearCardCount | amount }}</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">本年新增沉淀资金</div></div>
+        <div class="label"><div class="txt">本年新增</div></div>
         <div class="value orange">{{ sum.yearAddCardMoney | amount }}</div>
       </div>
       <div class="item" v-show="sum.rate">
