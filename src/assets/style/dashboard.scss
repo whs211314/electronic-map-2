@@ -108,9 +108,15 @@
   }
   // 饼图 END
 
+  // 民生 START
+  .livelihood {
+    @include position(385, 2500, 775, 818);
+  }
+  // 民生 END
+
   // 交易信息区 START
   .summary {
-    @include position(390, 2480, 430, 895);
+    @include position(450, 2480, 430, 895);
   }
   // 交易信息区 NED
 
@@ -243,8 +249,13 @@
     .pie {
       @include position-small(248, 230, 466, 216);
     }
+    // 民生 START
+    .livelihood {
+      @include position-small(495, 212, 525, 40);
+    }
+    // 民生 END
     .summary {
-      @include position-small(550, 300, 465, 480);
+      @include position-small(560, 300, 465, 480);
     }
     .map-transform {
       @include position-small(0, 700, 1240, 1200);

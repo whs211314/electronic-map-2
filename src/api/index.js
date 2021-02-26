@@ -10,6 +10,18 @@ export function getBtList() {
   })
 }
 
+// 民生缴费占比
+export function getOneEcpJxtMsjf() {
+  return http.get('/february/ecpJxtMsjf/getOneEcpJxtMsjf', { params: { jrName: '湖南省' } })
+}
+
+// 饼图下方数据
+export function getDataSumNew(params) {
+  return http.get('/february/backend/indexMapInfo/getDataSumNew', {
+    params: { streetName: '', orgCode: '430000000', ...params }
+  })
+}
+
 // 饼图数据
 export function getPieData(mchId) {
   return new Promise((resolve, reject) => {

@@ -79,6 +79,10 @@
     <div class="pie">
       <Pie :pieList="pieList" :tier="tier" />
     </div>
+    <!-- 民生占比 -->
+    <div class="livelihood">
+      <Livelihood />
+    </div>
     <!-- 交易信息区 -->
     <div class="summary">
       <DealInfo v-if="!internalNetwork" :sum="sum" />
@@ -186,6 +190,7 @@ import MButton from '@/components/MButton'
 import TeamView from '@/components/TeamView'
 import MonitorDeal from '@/components/MonitorDeal'
 import Pie from '@/components/Pie'
+import Livelihood from '@/components/Livelihood'
 import DealInfo from '@/components/DealInfo'
 import merchantsPortrait from '@/components/merchantsPortrait'
 import RankService from '@/components/RankService'
@@ -210,6 +215,7 @@ export default {
     TeamView,
     MonitorDeal,
     Pie,
+    Livelihood,
     DealInfo,
     merchantsPortrait,
     RankService,
@@ -509,18 +515,13 @@ export default {
         this.pieApi(pieBotton)
       }
     },
-    pieApi (pieBotton) {
+    pieApi ({ areaType, cityName, areaName }) {
       // 饼图下数据
-      api.getDataSum(pieBotton).then(res => {
-        this.sum.cardAllSum = res.data[0].cardAllSum
-        this.sum.netSum = res.data[0].netSum
-        this.sum.serverCount = res.data[0].serverCount
-        this.sum.transAllSum = String(parseInt(res.data[0].transAllSum / 10000))
-        this.sum.phoneCustomerCount = res.data[0].phoneCustomerCount
-        this.sum.areaCount = res.data[0].areaCount
-        this.sum.yearCardCount = res.data[0].yearCardCount
-        this.sum.yearAddCardMoney = Math.round(res.data[0].yearAddCardMoney / 10000)
-        this.sum.rate = res.data[0].cardAllSum === 0 ? 100 : Math.round(res.data[0].phoneCustomerCount / res.data[0].cardAllSum)
+      api.getDataSumNew({
+        cityName: areaType === 0 ? '湖南省' : cityName,
+        areaName
+      }).then(res => {
+        this.sum = res.data
       })
     },
     // MonitorDeal (e) {

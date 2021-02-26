@@ -2,48 +2,77 @@
   <div class="deal-info">
     <div class="left fl">
       <div class="item">
-        <div class="label"><div class="txt">建行物理网点数</div></div>
-        <div class="value">{{sum.netSum}} 个</div>
+        <div class="label"><div class="txt">服务点个数</div></div>
+        <div class="value">{{ sum.mchCount | amount }} 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">累计获客数</div></div>
-        <div class="value">{{sum.cardAllSum}} 户</div>
+        <div class="label"><div class="txt">交易笔数</div></div>
+        <div class="value">{{ sum.transcount | amount }}</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">金湘通客户存款</div></div>
-        <div class="value">{{sum.transAllSum}} 万元</div>
+        <div class="label"><div class="txt">交易金额</div></div>
+        <div class="value">{{ sum.transamount | amount }}</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">手机银行签约客户数</div></div>
-        <div class="value">{{sum.phoneCustomerCount}} 户</div>
+        <div class="label"><div class="txt">服务个人客户数</div></div>
+        <div class="value">{{ sum.account_count | amount }}</div>
+      </div>
+      <div class="item">
+        <div class="label"><div class="txt">服务企业客户数</div></div>
+        <div class="value">{{ sum.countAllQykh | amount }}</div>
       </div>
     </div>
     <div class="right fr">
       <div class="item">
-        <div class="label"><div class="txt">金湘通服务点数</div></div>
-        <div class="value">{{sum.serverCount}} 个</div>
+        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="value">{{ sum.mchCountYear | amount }} 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">新增获客数</div></div>
-        <div class="value orange">{{sum.yearCardCount}} 户</div>
+        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="value orange">{{ sum.transcountYear | amount }}</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">本年金湘通客户存款增长</div></div>
-        <div class="value orange">{{sum.yearAddCardMoney}} 万元</div>
+        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="value orange">{{ sum.transamountYear | amount }}</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">签约客户同步率</div></div>
-        <div class="value orange">{{sum.rate}} %</div>
+        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="value orange">{{ sum.account_countYear | amount }}</div>
+      </div>
+      <div class="item">
+        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="value orange">{{ sum.yearCountQykh | amount }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+function _numFixed (num, dig) {
+  return Number(num / Math.pow(10, dig)).toFixed(2)
+}
 export default {
   props: {
     sum: {
       type: Object
+    }
+  },
+  filters: {
+    amount: (num) => {
+      if (!num) return '-'
+      let str = String(num)
+      // 去除小数
+      str = str.replace(/\.\d+/, '')
+      const len = str.length
+      if (len <= 5) {
+        return num
+      } else if (len <= 9) {
+        return `${_numFixed(num, 4)} 万`
+      } else if (len <= 12) {
+        return `${_numFixed(num, 8)} 亿`
+      } else {
+        return `${_numFixed(num, 12)} 亿亿`
+      }
     }
   }
 }
@@ -62,12 +91,13 @@ export default {
     width: 100%;
     text-align: left;
   }
-  .left, .right {
+  .left,
+  .right {
     width: 50%;
     height: 100%;
   }
   .item {
-    height: 25%;
+    height: 20%;
     .label {
       height: 30%;
     }
@@ -97,10 +127,10 @@ export default {
   }
   .label {
     @extend .flex-center;
-    font-size: var(--fontSize-16);
+    font-size: var(--fontSize-14);
   }
   .value {
-    font-size: calc(var(--fontSize-18) * 2);
+    font-size: calc(var(--fontSize-14) * 2);
     color: $light-blue;
     font-weight: bold;
     &.orange {
