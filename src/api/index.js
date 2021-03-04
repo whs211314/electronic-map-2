@@ -22,6 +22,11 @@ export function getDataSumNew(params) {
   })
 }
 
+// 服务点交易视图查询
+export function getMchPhotoInfo(params) {
+  return http.get('/february/backend/ecp-jxt-ct-info/getMchPhotoInfo', { params })
+}
+
 // 饼图数据
 export function getPieData(mchId) {
   return new Promise((resolve, reject) => {

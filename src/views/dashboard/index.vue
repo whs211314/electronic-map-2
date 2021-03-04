@@ -182,6 +182,7 @@
     <div class="monitor-bottom">
       <RankService @topEvent="handleTopEvent" />
     </div>
+    <MDialog :dialogVisible.sync="dialogVisible" :dataObj="dialogData" />
   </div>
 </template>
 
@@ -204,6 +205,7 @@ import ChartDeal from '@/components/ChartDeal'
 import ChartTop from '@/components/ChartTop'
 import MPopup from '@/components/MPopup'
 import BDMap from '@/components/BDMap'
+import MDialog from '@/components/Dialog'
 import * as api from '@/api'
 import resizeMixin from '@/components/resize'
 import { sortBy } from 'lodash'
@@ -228,7 +230,8 @@ export default {
     ChartDeal,
     ChartTop,
     BDMap,
-    MPopup
+    MPopup,
+    MDialog
   },
   data () {
     return {
@@ -271,6 +274,8 @@ export default {
         rate: ''
       },
       services: [],
+      dialogVisible: false,
+      dialogData: {},
       // services1: [
       //   { type: '现金业务', name: '个人客户小额存取现服务，累计交易笔数为265899笔，占总交易笔数17.13%，累计交易金额29111.55万元，占总交易金额12.07%。' },
       //   { type: '贷款业务', name: '个人商户农商贷金融产品服务2500客户，累计发放贷款金额1.4亿元。' },
@@ -379,9 +384,19 @@ export default {
       this.popupVisible = false
       this.chartType = type
     },
-    handlePopup (popup) {
-      this.popupVisible = true
-      this.popup = popup
+    async handlePopup (popup) {
+      console.log('-----popup', popup)
+      const mchId = popup.data.jpmMchId
+      if (!mchId) {
+        console.warn('当前服务点 MchID 不存在')
+        return
+      }
+
+      try {
+        const res = await api.getMchPhotoInfo({ mchId })
+        this.dialogVisible = true
+        this.dialogData = res.data
+      } catch (e) { }
     },
     // 百度地图返回按钮
     closeBdMap () {
