@@ -36,11 +36,11 @@ export default {
     getData (areaType = 0, cityName = '') {
       api.getTrade({ areaType, cityName }).then(res => {
         const { data } = res
-        console.log(data, Object.keys(data))
-        const labels = Object.keys(data)
+        const labels = Object.keys(data).sort((a, b) => Number(data[a][0].tradeType) - Number(data[b][0].tradeType))
         labels.forEach(item => {
           this.$set(this.items, item, {
             tradeName: item,
+            tradeType: Number(data[item][0].tradeType),
             mix: data[item] ? Math.round(data[item][0].mix * 10000) / 100 : 0,
             count: data[item] ? data[item][0].count : 0
           })

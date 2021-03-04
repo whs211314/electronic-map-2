@@ -3,7 +3,7 @@
     <div class="view-dialog">
       <div class="view-dialog-inner">
         <div class="view-dialog-header">
-          <div class="title">试图信息</div>
+          <div class="title">视图信息</div>
           <span class="close" @click="currentVisible = false" />
         </div>
         <div class="cartonType">
