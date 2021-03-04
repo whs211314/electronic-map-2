@@ -4,13 +4,15 @@
       <div class="txt">合作视图</div>
     </div>
     <div class="empty"></div>
-    <div class="items" v-if="Object.keys(items).length === 11">
-      <ViewButton class="item"
+    <div class="items" v-if="Object.keys(items).length">
+      <ViewButton
+        class="item"
         v-for="(item, index) in items"
         :key="index"
         :item="item"
-        :active="currentTradeName===item.tradeName"
-        @itemClick="handleClick(item)" />
+        :active="currentTradeName === item.tradeName"
+        @itemClick="handleClick(item)"
+      />
     </div>
   </div>
 </template>
@@ -18,7 +20,6 @@
 <script>
 import ViewButton from './ViewButton'
 import * as api from '@/api'
-const labels = ['政务', '卫健', '扶贫', '退伍军人', '通讯', '商超', '餐饮', '快递', '电商', '异常', '风险']
 
 export default {
   components: { ViewButton },
@@ -35,10 +36,12 @@ export default {
     getData (areaType = 0, cityName = '') {
       api.getTrade({ areaType, cityName }).then(res => {
         const { data } = res
+        console.log(data, Object.keys(data))
+        const labels = Object.keys(data)
         labels.forEach(item => {
           this.$set(this.items, item, {
             tradeName: item,
-            mix: data[item] ? data[item][0].mix : 0,
+            mix: data[item] ? Math.round(data[item][0].mix * 10000) / 100 : 0,
             count: data[item] ? data[item][0].count : 0
           })
         })
@@ -61,7 +64,7 @@ export default {
   top: -50%;
   bottom: -50%;
   transform: scale(0.5);
-  .title{
+  .title {
     height: 4%;
     font-size: calc(var(--fontSize-13) * 2);
     font-weight: bold;
@@ -70,11 +73,11 @@ export default {
     }
   }
   .empty {
-    height: 1%;
+    height: 3%;
   }
   .items {
     width: 68%;
-    height: 85%;
+    height: 86%;
     margin-left: 14%;
     display: flex;
     flex-wrap: wrap;

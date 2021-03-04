@@ -385,7 +385,7 @@ export default {
       this.chartType = type
     },
     async handlePopup (popup) {
-      console.log('-----popup', popup)
+      // console.log('-----popup', popup)
       const mchId = popup.data.jpmMchId
       if (!mchId) {
         console.warn('当前服务点 MchID 不存在')
