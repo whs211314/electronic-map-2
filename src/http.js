@@ -3,14 +3,14 @@ import router from './router'
 import vue from 'vue'
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     if (response.status === 200 && response.data.code === 0) {
       return Promise.resolve(response.data)
     } else {
       return Promise.reject(response)
     }
   },
-  error => {
+  (error) => {
     if (error.response.status) {
       switch (error.response.status) {
         case 401:

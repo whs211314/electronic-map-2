@@ -1,5 +1,22 @@
+import dayjs from 'dayjs'
 import http from '../http'
 import mapName2Code from '@/assets/js/map'
+
+// 异常终端视图汇总
+export function getTotalErrorsReport() {
+  return http.get('/february/backend/ecp-jxt-term-errors/getTotalErrorsReport', {
+    params: { orgCode: '430000000', orgLevel: 1, status: 2 }
+  })
+}
+
+// 异常终端
+export function getErrorsReportJscT(status) {
+  const beginDateStr = dayjs().format('YYYY-MM-DD hh:mm:ss')
+  const endDateStr = dayjs().format('YYYY-01-01 00:00:00')
+  return http.get('/february/backend/ecp-jxt-term-errors/getErrorsReportJscT', {
+    params: { status, orgCode: '430000000', pageNo: 1, pageSize: 30, beginDateStr, endDateStr }
+  })
+}
 
 // 左导数据
 export function getBtList() {

@@ -2,7 +2,15 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center"><span>异常终端数量：{{abnormalAll}} 占比：{{proportion}}%</span></div>
+        <div
+          class="item flex-center"
+          v-for="tab in tabs"
+          :key="tab.key"
+          :class="active === tab.key ? 'active' : ''"
+          @click="handleTab(tab)"
+        >
+          <div class="txt">{{ tab.label }} {{ tab.count }}</div>
+        </div>
       </div>
     </div>
     <!-- 交易笔数柱状图 -->
@@ -10,45 +18,25 @@
       <div id="line-chart"></div>
       <div class="monitor-table">
         <div class="row">
-          <div class="col flex-center" :key="index" v-for="(item, index) in headers"><b>{{item}}</b></div>
+          <div class="col flex-center" :key="index" v-for="(item, index) in headers">
+            <b>{{ item }}</b>
+          </div>
         </div>
         <div class="row border">
-          <div class="col flex-center" :key="index" v-for="(item, index) in num"><b>{{item}}</b></div>
+          <div class="col flex-center" :key="index" v-for="(item, index) in num">
+            <b>{{ item }}</b>
+          </div>
         </div>
         <div class="row">
-          <div class="col flex-center" :key="index" v-for="(item, index) in headers1"><b>{{item}}</b></div>
+          <div class="col flex-center" :key="index" v-for="(item, index) in headers1">
+            <b>{{ item }}</b>
+          </div>
         </div>
         <div class="row border">
-          <div class="col flex-center" :key="index" v-for="(item, index) in num1"><b>{{item}}</b></div>
+          <div class="col flex-center" :key="index" v-for="(item, index) in num1">
+            <b>{{ item }}</b>
+          </div>
         </div>
-        <!-- <table>
-          <thead>
-            <tr>
-              <td :key="index" v-for="(item, index) in [2, 0, 144]">{{item}}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>34</td>
-              <td>89</td>
-              <td>254</td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <thead>
-            <tr>
-              <td :key="index" v-for="(item, index) in headers1">{{item}}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2</td>
-              <td>0</td>
-              <td>141</td>
-            </tr>
-          </tbody>
-        </table> -->
       </div>
     </div>
   </div>
@@ -57,77 +45,88 @@
 <script>
 import echarts from 'echarts'
 import * as api from '@/api'
+// 暂定前端维护
+const exceptionTypes = {
+  'E01': '缺纸异常',
+  'E02': '通讯异常',
+  'E03': '打印模块',
+  'E04': '非接模块',
+  'E05': '电池模块',
+  'E99': '其他'
+}
+// const mockData = {
+//   code: 0,
+//   msg: null,
+//   count: 0,
+//   data: {
+//     allCtInfo: 74047,
+//     termErrors: [
+//       { errorType: 'E01', count: 863, rate: 1.17 },
+//       { errorType: 'E02', count: 97, rate: 0.13 },
+//       { errorType: 'E03', count: 118, rate: 0.16 },
+//       { errorType: 'E04', count: 129, rate: 0.16999999999999998 },
+//       { errorType: 'E05', count: 4492, rate: 6.069999999999999 }
+//     ]
+//   }
+// }
 
 export default {
   data () {
     return {
-      // 暂定前端维护
-      exceptionTypes: {
-        'E01': '缺纸异常',
-        'E02': '通讯异常',
-        'E03': '打印模块',
-        'E04': '非接模块',
-        'E05': '电池模块',
-        'E99': '其他'
-      },
+      active: 0,
+      tabs: [
+        { key: 0, label: '未处理', count: 0 },
+        { key: 1, label: '已处理', count: 0 },
+        { key: 2, label: '总量', count: 0 }
+      ],
       headers: [],
       num: [],
       headers1: [],
       num1: [],
-      bodys: [
-        { type: '34个', money: '254个', dealStatus: '160个', riskStatus: '230个' }
-      ],
       echartsList: [],
       abnormalAll: 0, // 异常总数
       proportion: 0 // 占比
     }
   },
+  mounted () {
+    this.getTabSum()
+    this.chartInit()
+  },
   methods: {
+    reset () {
+      this.headers = []
+      this.num = []
+      this.headers1 = []
+      this.num1 = []
+      this.echartsList = []
+      this.abnormalAll = 0 // 异常总数
+      this.proportion = 0
+    },
+    handleTab (tab) {
+      this.active = tab.key
+      this.reset()
+      this.chartInit()
+    },
+    getTabSum () {
+      api.getTotalErrorsReport().then(res => {
+        const data = res.data || {}
+        this.tabs = [
+          { key: 1, label: '未处理', count: data.weiCountTotal || 0 },
+          { key: 2, label: '已处理', count: data.yiCountNewTotal || 0 },
+          { key: 3, label: '总量', count: data.countTotal || 0 }
+        ]
+      })
+    },
     chartInit () {
-      api.query().then(res => {
-        // const dataList = {
-        //   'allCtInfo': 44189,
-        //   'termErrors': [
-        //     {
-        //       'errorType': 'E01',
-        //       'count': 49,
-        //       'rate': 0.11
-        //     },
-        //     {
-        //       'errorType': 'E02',
-        //       'count': 46,
-        //       'rate': 0.1
-        //     },
-        //     {
-        //       'errorType': 'E03',
-        //       'count': 47,
-        //       'rate': 0.11
-        //     },
-        //     {
-        //       'errorType': 'E04',
-        //       'count': 46,
-        //       'rate': 0.1
-        //     },
-        //     {
-        //       'errorType': 'E05',
-        //       'count': 47,
-        //       'rate': 0.11
-        //     },
-        //     {
-        //       'errorType': 'E99',
-        //       'count': 47,
-        //       'rate': 0.11
-        //     }
-        //   ]
-        // }
+      api.getErrorsReportJscT(this.active).then(res => {
         res.data.termErrors.forEach((el, index) => {
           console.log(index)
           if (index < 3) {
-            this.headers.push(this.exceptionTypes[el.errorType])
+            this.headers.push(exceptionTypes[el.errorType])
             this.num.push(el.count)
           }
           if (index > 2) {
-            this.headers1.push(this.exceptionTypes[el.errorType] ? this.exceptionTypes[el.errorType] : '其他')
+            this.headers1.push(exceptionTypes[el.errorType] ? exceptionTypes[el.errorType] : '其他')
             this.num1.push(el.count ? el.count : 0)
           }
           this.echartsList.push(el.count)
@@ -222,9 +221,6 @@ export default {
         myChart.setOption(option, true)
       })
     }
-  },
-  mounted () {
-    this.chartInit()
   }
 }
 </script>
@@ -233,7 +229,9 @@ export default {
 @import '../assets/style/index.scss';
 .monitor-chart {
   .chart-wrapper {
-    #line-chart, #line-grade, #line-activity {
+    #line-chart,
+    #line-grade,
+    #line-activity {
       height: 100%;
       position: absolute;
       left: 0;
@@ -256,10 +254,10 @@ export default {
           flex: 1;
         }
         &.border {
-          border: 1px solid #00C6D9;
+          border: 1px solid #00c6d9;
           border-right: 0;
           .col {
-            border-right: 1px solid #00C6D9;
+            border-right: 1px solid #00c6d9;
           }
         }
       }
