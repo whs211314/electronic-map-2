@@ -6,7 +6,7 @@
           class="item flex-center"
           v-for="tab in tabs"
           :key="tab.key"
-          :class="active === tab.key ? 'active' : ''"
+          :class="riskStatus === tab.key ? 'active' : ''"
           @click="handleTab(tab)"
         >
           <div class="txt">{{ tab.label }} {{ tab.count }}</div>
@@ -71,9 +71,9 @@ const exceptionTypes = {
 // }
 
 export default {
+  props: ['riskStatus'],
   data () {
     return {
-      active: 0,
       tabs: [
         { key: 0, label: '未处理', count: 0 },
         { key: 1, label: '已处理', count: 0 },
@@ -103,7 +103,7 @@ export default {
       this.proportion = 0
     },
     handleTab (tab) {
-      this.active = tab.key
+      this.$emit('update:riskStatus', tab.key)
       this.reset()
       this.chartInit()
     },
@@ -118,7 +118,7 @@ export default {
       })
     },
     chartInit () {
-      api.getErrorsReportJscT(this.active).then(res => {
+      api.getErrorsReportJscT(this.riskStatus).then(res => {
         res.data.termErrors.forEach((el, index) => {
           console.log(index)
           if (index < 3) {

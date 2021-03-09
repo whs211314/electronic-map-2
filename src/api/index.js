@@ -9,6 +9,15 @@ export function getTotalErrorsReport() {
   })
 }
 
+// 异常终端地图联动
+export function getErrorsReportJsc(status) {
+  const beginDateStr = dayjs().format('YYYY-MM-DD hh:mm:ss')
+  const endDateStr = dayjs().format('YYYY-01-01 00:00:00')
+  return http.get('/february/backend/ecp-jxt-term-errors/getErrorsReportJsc', {
+    params: { status, orgCode: '430000000', pageNo: 1, pageSize: 30, beginDateStr, endDateStr }
+  })
+}
+
 // 异常终端
 export function getErrorsReportJscT(status) {
   const beginDateStr = dayjs().format('YYYY-MM-DD hh:mm:ss')
