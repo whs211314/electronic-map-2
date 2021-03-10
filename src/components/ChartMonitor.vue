@@ -91,7 +91,10 @@ export default {
             color: '#fff',
             fontSize,
             fontWeight: 'bold',
-            formatter: params => this.regionNetMap[params.data.name]
+            formatter: params => {
+              const obj = this.regionNetMap[params.data.name]
+              return obj ? obj.sum : '-'
+            }
           },
           itemStyle: {
             color: 'transparent'
