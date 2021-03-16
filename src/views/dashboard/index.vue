@@ -152,9 +152,9 @@
       <div
         class="item flex-center"
         :key="index"
-        :class="monitorIndex == index ? 'active' : ''"
+        :class="monitorIndex == item.id ? 'active' : ''"
         v-for="(item, index) in monitors"
-        @click="monitorClick(index)"
+        @click="monitorClick(item.id)"
       >
         <div class="txt">{{ item.type }}</div>
       </div>
@@ -244,7 +244,7 @@ export default {
       lat: 26.880964432436038,
       isShowBdMap: false, // 是否显示百度地图
       internalNetwork: false, // 是否内部网点弹窗
-      monitorIndex: 0, // 监控按钮初始化索引
+      monitorIndex: 2, // 监控按钮初始化索引
       basicInfo: false, // 基本信息
       client: false, // 客户信息
       patrol: false, // 远程巡检
@@ -280,7 +280,13 @@ export default {
       services: [],
       dialogVisible: false,
       dialogData: {},
-      monitors: [{ type: '服务点视图' }, { type: '终端监测' }, { type: '交易视图' }, { type: '风险预警' }, { type: '巡检' }],
+      monitors: [
+        // { id: 0, type: '服务点视图' },
+        { id: 2, type: '交易视图' },
+        { id: 1, type: '终端监测' },
+        { id: 3, type: '风险预警' },
+        { id: 4, type: '巡检' }
+      ],
       monitorDealList: []
     }
   },
@@ -358,6 +364,7 @@ export default {
       this.chartType = type
     },
     async handlePopup (popup) {
+      this.dialogVisible = false
       // console.log('-----popup', popup)
       const mchId = popup.data.jpmMchId
       if (!mchId) {

@@ -6,18 +6,18 @@
       <div class="rank flex-center"><div class="txt center">NO {{rank}}</div></div>
     </div>
     <div class="right">
-      <div class="network flex-center"><div class="txt oh">{{item.jpmMchName}}</div></div>
+      <div class="network flex-center"><div class="txt oh">{{item.mchName}}</div></div>
       <div class="item">
-        <div class="label fl flex-center"><div class="txt">笔数</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{item.transAllCount}}笔</div> </div>
+        <div class="label fl flex-center"><div class="txt">服务点类别</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{item.industryName}}</div> </div>
       </div>
       <div class="item">
-        <div class="label fl flex-center"><div class="txt">金额</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{parseInt(item.transAllSum)}}元</div></div>
+        <div class="label fl flex-center"><div class="txt">本月交易</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{item.countSumMonth}}</div></div>
       </div>
       <div class="item">
-        <div class="label fl flex-center"><div class="txt">返佣</div></div>
-        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{parseInt(item.inComeSum)}}元</div></div>
+        <div class="label fl flex-center"><div class="txt">本年交易</div></div>
+        <div class="value fr flex-center"><div class="txt" style="color:#feb901;">{{item.countSumYear}}</div></div>
       </div>
     </div>
   </div>

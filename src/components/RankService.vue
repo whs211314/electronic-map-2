@@ -1,14 +1,25 @@
 <template>
   <div class="rank-service position-space">
-    <div class="title flex-center"><div class="txt">排名TOP50</div></div>
+    <div class="title flex-center">
+      <div
+        :key="tab.id"
+        v-for="tab in tabs"
+        @click="toggle(tab)"
+        :class="{ txt: true, active: tab.id === active }"
+      >
+        {{ tab.label }}
+      </div>
+    </div>
     <div class="swiper" v-if="items.length">
       <div class="items">
-        <RankServiceItem class="item"
+        <RankServiceItem
+          class="item"
           v-for="item in items"
           :key="item.rank"
           :item="item"
           :rank="item.rank"
-          @itemClick="handleClick(item)" />
+          @itemClick="handleClick(item)"
+        />
       </div>
     </div>
   </div>
@@ -22,32 +33,47 @@ export default {
   components: { RankServiceItem },
   data () {
     return {
+      active: 0,
+      tabs: [
+        { id: 0, label: '本年排名TOP50' },
+        { id: 1, label: '去年排名TOP50' }
+      ],
       originItems: [],
       items: [],
-      move: false,
       index: 0
     }
   },
   created () {
-    api.getTop().then(res => {
-      this.originItems = res.data.map((e, i) => Object.assign(e, { rank: i + 1 })).slice(0, 50)
-      this.getItems(this.index)
-      this.$nextTick(() => {
-        this.handleRun()
-      })
-    })
+    this.getData()
   },
   destroyed () {
-    this.handlePause()
+    this.reset()
   },
   methods: {
+    getData () {
+      this.reset()
+      api.getTop(this.active).then(res => {
+        this.originItems = res.data.map((e, i) => Object.assign(e, { rank: i + 1 })).slice(0, 50)
+        this.getItems(this.index)
+        this.$nextTick(() => {
+          this.handleRun()
+        })
+      })
+    },
+    reset () {
+      this.index = 0
+      this.items = []
+      this.originItems = []
+      this.timer && clearInterval(this.timer)
+    },
+    toggle (tab) {
+      this.active = tab.id
+      this.getData()
+    },
     handleRun () {
       this.timer = setInterval(() => {
         this.getItems(++this.index)
       }, 6000)
-    },
-    handlePause () {
-      this.timer && clearInterval(this.timer)
     },
     getItems (start) {
       const len = this.originItems.length
@@ -72,12 +98,15 @@ export default {
 .rank-service {
   .title {
     height: 19%;
+    justify-content: left;
     .txt {
-      width: 100%;
-      text-align: left;
-      padding-left: 1.2%;
+      padding: 0 1.2%;
       font-size: var(--fontSize-12);
       font-weight: bold;
+      cursor: pointer;
+      &.active {
+        color: yellow;
+      }
     }
   }
   .swiper {

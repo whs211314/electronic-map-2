@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import http from '../http'
 import mapName2Code from '@/assets/js/map'
+// import { mock1, mock2 } from './mock'
 
 // 异常终端视图汇总
 export function getTotalErrorsReport() {
@@ -210,17 +211,14 @@ export function countRiskWarn(mchId) {
 }
 
 // top100
-export function getTop({ allName = '' } = {}) {
-  const [cityName = '', areaName = '', streetName = ''] = allName.split('_')
-  return new Promise((resolve, reject) => {
-    http
-      .get('/february/front/ecpJxtMchTop/getTop', {
-        params: { cityName, areaName, streetName, pageIndex: 1 }
-      })
-      .then((res) => {
-        resolve(res)
-      })
-  })
+export function getTop(key) {
+  const url = {
+    0: '/february/front/ecpJxtMchTop/getTopNew',
+    1: '/february/front/ecpJxtMchTop/getTopByOldYear'
+  }
+  return http.get(url[key])
+  // const a = { 0: mock1, 1: mock2 }
+  // return Promise.resolve(a[key])
 }
 
 // 获取地区服务点数量 地区类型areaType，1市，2县
