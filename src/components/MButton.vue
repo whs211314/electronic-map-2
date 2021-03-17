@@ -7,9 +7,7 @@
     @mouseleave="handleMouseLeave"
   >
     <span class="txt position-center">{{ txt }}</span>
-    <div class="prompt-dialog" :class="[position, isLarge ? 'large' : '']" v-show="visible">
-      {{ dialogTxt }}
-    </div>
+    <div class="prompt-dialog" :class="[position, isLarge ? 'large' : '']" v-show="visible" v-html="dialogTxt" />
   </div>
 </template>
 
@@ -102,22 +100,14 @@ export default {
   .prompt-dialog {
     position: absolute;
     left: 100%;
-    width: 160%;
-    // height: 380%;
+    min-width: 50%;
+    white-space: nowrap;
     padding: calc(var(--fontSize-16) / 2);
-    // background-image: url(../assets/images/cpm.png);
-    // background-size: 100% 100%;
-    // background-origin: border-box;
-    // background-repeat: no-repeat;
     border: 3px solid rgb(1, 255, 211);
     border-radius: 5px;
     background: rgb(32, 70, 70);
     font-size: var(--fontSize-12);
     z-index: 12;
-    // &.large {
-    //   width: 180%;
-    //   height: 450%;
-    // }
     &.top {
       top: 0;
     }
