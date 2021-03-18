@@ -10,7 +10,7 @@
       <div class="items-show">
         <div class="item" v-for="item in services[0].btmapList" :key="item.id">
           <MButton
-            :type="item.isGroup ? 5 : 1"
+            :type="item.isGroup ? 7 : 1"
             :txt="item.txt"
             :hasDialog="Boolean(item.dialogTxt)"
             position="top"
@@ -296,14 +296,9 @@ export default {
     }
     // 获取左导数据
     api.getBtList().then(res => {
-      let arr = []
       const list = res.data || []
       const one = sortBy((list[0].btmapList || []), 'id')
-      one.forEach(e => {
-        if (!arr.find(a => a.txt !== e.group)) {
-          arr.push({ txt: e.group, isGroup: true })
-        }
-      })
+      const arr = one.slice(0, 3).map(e => ({ txt: e.group, isGroup: true }))
       list[0].btmapList = [...arr, ...one]
       this.services = list
     })

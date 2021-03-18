@@ -45,7 +45,7 @@ export default {
   computed: {
     btnCls () {
       let ret = `btn-${this.type}`
-      if (this.txt.length > 5) ret += ' small'
+      if (this.txt.length > 6) ret += ' small'
       if (this.noBg) ret += ' no-bg'
       return ret
     }
@@ -142,5 +142,11 @@ export default {
 }
 .btn-6 {
   background-image: url(../assets/images/btn-6.png);
+}
+.btn-7 {
+  background-image: url(../assets/images/btn-7.png);
+  > .txt {
+    font-size: var(--fontSize-12);
+  }
 }
 </style>
