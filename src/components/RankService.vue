@@ -35,8 +35,8 @@ export default {
     return {
       active: 0,
       tabs: [
-        { id: 0, label: '本年排名TOP50' },
-        { id: 1, label: '去年排名TOP50' }
+        { id: 0, label: '本年排名TOP50' }
+        // { id: 1, label: '去年排名TOP50' }
       ],
       originItems: [],
       items: [],
@@ -104,9 +104,9 @@ export default {
       font-size: var(--fontSize-12);
       font-weight: bold;
       cursor: pointer;
-      &.active {
-        color: yellow;
-      }
+      // &.active {
+      //   color: yellow;
+      // }
     }
   }
   .swiper {
