@@ -5,7 +5,7 @@ import mapName2Code from '@/assets/js/map'
 
 // 异常终端视图汇总
 export function getTotalErrorsReport() {
-  return http.get('/february/backend/ecp-jxt-term-errors/getTotalErrorsReport', {
+  return http.get('/february/backend/ecp-jxt-term-errors/getTotalErrorsReportDay', {
     params: { orgCode: '430000000', orgLevel: 1, status: 2 }
   })
 }
@@ -14,7 +14,7 @@ export function getTotalErrorsReport() {
 export function getErrorsReportJsc(status) {
   const endDateStr = dayjs().format('YYYY-MM-DD hh:mm:ss')
   const beginDateStr = dayjs().format('YYYY-01-01 00:00:00')
-  return http.get('/february/backend/ecp-jxt-term-errors/getErrorsReportJsc', {
+  return http.get('/february/backend/ecp-jxt-term-errors/getErrorsReportJscDay', {
     params: { status, orgCode: '430000000', pageNo: 1, pageSize: 30, beginDateStr, endDateStr }
   })
 }
@@ -23,7 +23,7 @@ export function getErrorsReportJsc(status) {
 export function getErrorsReportJscT(status) {
   const endDateStr = dayjs().format('YYYY-MM-DD hh:mm:ss')
   const beginDateStr = dayjs().format('YYYY-01-01 00:00:00')
-  return http.get('/february/backend/ecp-jxt-term-errors/getErrorsReportJscT', {
+  return http.get('/february/backend/ecp-jxt-term-errors/getErrorsReportJscTDay', {
     params: { status, orgCode: '430000000', pageNo: 1, pageSize: 30, beginDateStr, endDateStr }
   })
 }
