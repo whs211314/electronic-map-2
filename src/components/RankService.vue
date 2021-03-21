@@ -35,7 +35,7 @@ export default {
     return {
       active: 0,
       tabs: [
-        { id: 0, label: '本年排名TOP50' }
+        { id: 0, label: '交易量TOP50' }
         // { id: 1, label: '去年排名TOP50' }
       ],
       originItems: [],
