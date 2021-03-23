@@ -177,7 +177,7 @@
     </div>
     <!-- 巡检 -->
     <div v-if="monitorIndex === 4" class="monitor-middle">
-      <patrolMonitorChart :items="monitorIndexList" />
+      <patrolMonitorChart />
     </div>
     <!-- 服务点交易排名 -->
     <div class="monitor-bottom">
@@ -251,7 +251,6 @@ export default {
       record: false, // 巡检记录
       deal: false, // 交易
       chartType: 'ChartDeploy', // 地图类型
-      monitorIndexList: [],
       tier: [],
       numberId: '',
       home_url: '',
@@ -261,7 +260,6 @@ export default {
       topItem: {},
       currJmpInfo: {}, // 当前服务点数据
       monitorPageNo: 1,
-      monitoringIndex: 1, // 监控id
       pieList: {
         taCountryYearCount: '',
         taCountryCount: ''
@@ -307,12 +305,7 @@ export default {
       this.pieList.taCountryCount = (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
       console.log(this.pieList)
     })
-    // this.monitorTask()
     this.pieBotton()
-    this.monitoringTimer()
-    // this.timer = setInterval(() => {
-    //     this.MonitorDeal(e)
-    //   }, 10 * 1000)
   },
   watch: {
     popupVisible (val) {
@@ -335,15 +328,6 @@ export default {
       } else {
         this.chartType = 'ChartDeploy'
       }
-      // if (index === 4) {
-      //   // this.monitoring()
-      // }
-    },
-    monitoring () {
-      api.getCheckInfoPage({ 'pageIndex': this.monitoringIndex }).then(res => {
-        this.monitorIndexList = res.data
-        this.monitoringIndex += 1
-      })
     },
     // 地图切换
     handleChart (type) {
@@ -464,8 +448,6 @@ export default {
       } else {
         this.tier = []
       }
-      // 事实监控
-      // this.monitorTask(e)
       const { level, name } = e
       // 合作视图仅在市县级更新
       if (level === 2) this.$refs.teamviewRef.getData(1, name)
@@ -513,52 +495,6 @@ export default {
       }).then(res => {
         this.sum = res.data
       })
-    },
-    // MonitorDeal (e) {
-    //   let page = {
-    //     cityName: e ? e.name : '',
-    //     areaName: '',
-    //     pageIndex: this.monitorPageNo
-    //   }
-    //   if (e && e.allName.split('_').length > 1) {
-    //     page.cityName = e.allName.split('_')[0]
-    //     page.areaName = e.allName.split('_')[1]
-    //     page.pageIndex = this.monitorPageNo
-    //   }
-    //   // 实施监控
-    //   api.getTransLog(page).then(res => {
-    //     let list = []
-    //     // list.push(res.data[0])
-    //     res.data.forEach((item, index) => {
-    //       if (index > 1 && (item.mchName !== res.data[index - 1].mchName) && (item.mchName !== res.data[index - 2].mchName)) {
-    //         item.txnDtTm = new Date().getHours() + ':' + new Date().getMinutes()
-    //         item.genproffinTxnamt = item.genproffinTxnamt / 100
-    //         item.tradeName = this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
-    //         list.push(item)
-    //       }
-    //     })
-    //     this.monitorDealList = list
-    //     // this.monitorDealList = list.map(item => Object.assign(item, {
-    //     //   txnDtTm: new Date().getHours() + ':' + new Date().getMinutes(), // + ':' + new Date().getSeconds(), // item.txnDtTm ? item.txnDtTm.split('T')[1] : '',
-    //     //   genproffinTxnamt: item.genproffinTxnamt / 100,
-    //     //   tradeName: this.transactionTypes[item.tradeName] ? this.transactionTypes[item.tradeName] : item.tradeName.split('（')[0]
-    //     // }))
-    //     this.monitorPageNo += 1
-    //   })
-    // },
-    monitorTask (e) {
-      this.MonitorDeal(e)
-      // this.monitorPageNo = 1
-      // this.timer && clearInterval(this.timer)
-      // this.timer = setInterval(() => {
-      //   this.MonitorDeal(e)
-      // }, 10 * 1000)
-    },
-    monitoringTimer () {
-      this.timer1 && clearInterval(this.timer1)
-      this.timer1 = setInterval(() => {
-        this.monitoring()
-      }, 10 * 1000)
     },
     fromData (time) {
       var dateee = new Date(time).toJSON()

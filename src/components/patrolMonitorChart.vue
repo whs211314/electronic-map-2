@@ -2,28 +2,57 @@
   <div class="monitor-chart position-space">
     <div class="title">
       <div class="tab">
-        <div class="item active flex-center">巡检记录展示</div>
+        <div
+          v-for="item in tabs"
+          :key="item.key"
+          class="item flex-center"
+          :class="{ active: item.key === active }"
+          @click="handleTabChange(item.key)"
+        >
+          {{ item.label }}
+        </div>
       </div>
     </div>
     <div class="chart-wrapper">
       <div class="header items">
-        <div class="item flex-center" :key="index" :class="index===1?'flex-2':''"
-          v-for="(item, index) in headers">
-          <div class="txt">{{item}}</div>
+        <div
+          class="item flex-center"
+          :key="index"
+          :class="index === 1 ? 'flex-2' : ''"
+          v-for="(item, index) in headers"
+        >
+          <div class="txt">{{ item }}</div>
         </div>
       </div>
       <div class="empty"></div>
-      <div class="content" :class="{animation:animate}">
-        <div class="row" :key="index"
+      <div class="content" :class="{ animation: animate }">
+        <div
+          class="wrapper"
+          :style="animate ? animateStyle : initStyle"
+          @transitionend="handleTransitionEnd"
+        >
+          <div
+            class="row"
+            :key="index"
             :class="txtCls(item.checkTypeName)"
-            v-for="(item, index) in items">
-          <div class="items">
-            <div class="item flex-center"><div>{{item.cityName}}</div></div>
-            <div class="item flex-center flex-2"><div>{{item.mchName}}</div></div>
-            <div class="item flex-center"><div>{{item.jtmStartDate}}</div></div>
-            <div class="item flex-center"><div>{{item.checkResult}}</div></div>
-            <!-- <div class="item flex-center"><div>{{item.checkTypeName}}</div></div> -->
-            <div class="item flex-center"><div>现场</div></div>
+            v-for="(item, index) in items"
+          >
+            <div class="items">
+              <div class="item flex-center">
+                <div>{{ item.cityName }}</div>
+              </div>
+              <div class="item flex-center flex-2">
+                <div>{{ item.mchName }}</div>
+              </div>
+              <div class="item flex-center">
+                <div>{{ item.changeDate }}</div>
+              </div>
+              <div class="item flex-center">
+                <div>{{ item.checkResult }}</div>
+              </div>
+              <!-- <div class="item flex-center"><div>{{item.checkTypeName}}</div></div> -->
+              <div class="item flex-center"><div>现场</div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -32,32 +61,63 @@
 </template>
 
 <script>
-
+import * as api from '@/api'
 export default {
-  props: {
-    items: {
-      type: Array
-    }
-  },
   data () {
     return {
-      animate: true,
+      items: [],
+      index: 1,
+      animate: false,
+      active: 1,
+      tranEndTimes: 1,
+      tabs: [
+        { key: 1, label: '现场巡检' },
+        { key: 2, label: '远程巡检' }
+      ],
       txt: 'txt',
       txt01: 'txt01',
-      headers: ['地市', '金湘通服务点名称', '时间', '结果', '巡检方式']
+      headers: ['地市', '金湘通服务点名称', '时间', '结果', '巡检方式'],
+      initStyle: {
+        transition: 'none',
+        transform: 'translate3d(0, 0, 0)'
+      },
+      animateStyle: {
+        transition: 'all 1s',
+        transform: 'translate3d(0, -20%, 0)'
+      }
     }
   },
   created () {
-    console.log(this.items)
-    setInterval(this.scroll, 2000)
+    this.getData()
+    this.timer = setInterval(this.scroll, 1000)
+  },
+  watch: {
+    tranEndTimes (val) {
+      if (val === 10) {
+        this.index += 1
+        this.getData()
+      }
+    }
   },
   methods: {
+    handleTabChange (key) {
+      this.active = key
+      this.reset()
+      this.getData()
+      this.timer && clearInterval(this.timer)
+      this.timer = setInterval(this.scroll, 1000)
+    },
     scroll () {
-      this.animate = true // 因为在消息向上滚动的时候需要添加css3过渡动画，所以这里需要设置true
-      setTimeout(() => { //  这里直接使用了es6的箭头函数，省去了处理this指向偏移问题，代码也比之前简化了很多
-        this.items.push(this.items.shift()) // 将数组的第一个元素添加到数组的
-        this.animate = false // margin-top 为0 的时候取消过渡动画，实现无缝滚动
-      }, 2000)
+      this.animate = true
+    },
+    reset () {
+      this.index = 1
+      this.tranEndTimes = 1
+    },
+    handleTransitionEnd () {
+      this.animate = false
+      this.items.push(this.items.shift())
+      this.tranEndTimes += 1
     },
     txtCls (name) {
       const map = {
@@ -66,6 +126,12 @@ export default {
       }
       if (map[name]) return map[name]
       return 'txt'
+    },
+    getData () {
+      api.getCheckInfoPage({ pageIndex: this.index, checkType: this.active }).then(res => {
+        this.tranEndTimes = 1
+        this.items = res.data
+      })
     }
   }
 }
@@ -79,9 +145,9 @@ export default {
     .item {
       flex: 1;
     }
-  .flex-2 {
-    flex: 2;
-  }
+    .flex-2 {
+      flex: 2;
+    }
   }
   .empty {
     height: 3%;
@@ -92,13 +158,16 @@ export default {
     font-size: var(--fontSize-12);
   }
   .content {
-    height: 78%;
+    height: 75%;
     line-height: 1;
     overflow: hidden;
-    .row {
-      height: 17%;
-      text-align: center;
-      font-size: var(--fontSize-12);
+    > .wrapper {
+      height: 100%;
+      .row {
+        height: 20%;
+        text-align: center;
+        font-size: var(--fontSize-12);
+      }
     }
   }
   .txt01 {

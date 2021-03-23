@@ -308,11 +308,11 @@ export function getAreaNet(cityName) {
 }
 
 // 巡检
-export function getCheckInfoPage(mchId) {
+export function getCheckInfoPage(params) {
   return new Promise((resolve, reject) => {
     http
-      .get('/february/front/ecpCheck/getCheckInfoPage', {
-        params: mchId
+      .get('/february/ecpJxtCheckJsc/getCheckInfoPage', {
+        params
       })
       .then((res) => {
         resolve(res)
