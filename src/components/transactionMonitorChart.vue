@@ -24,6 +24,10 @@
     <!-- 营销活动 -->
     <div v-show="isActivity" class="chart-wrapper">
       <div id="line-activity"></div>
+      <div class="title-wrap">
+        <div class="left">笔数</div>
+        <div class="left">金额</div>
+      </div>
     </div>
   </div>
 </template>
@@ -396,7 +400,7 @@ export default {
           {
             type: 'pie',
             radius: ['45%', '60%'],
-            center: ['25%', '50%'],
+            center: ['25%', '40%'],
             data: this.activityList.map((e, i) => ({
               name: e,
               value: this.activityStrokeCount[i]
@@ -425,7 +429,7 @@ export default {
           {
             type: 'pie',
             radius: ['45%', '60%'],
-            center: ['75%', '50%'],
+            center: ['75%', '40%'],
             data: this.activityList.map((e, i) => ({
               name: e,
               value: this.activityNum[i]
@@ -474,10 +478,23 @@ export default {
 @import '../assets/style/index.scss';
 .monitor-chart {
   .chart-wrapper {
+    position: relative;
     #line-chart,
     #line-grade,
     #line-activity {
       height: 100%;
+    }
+    .title-wrap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 7%;
+      display: flex;
+      font-size: var(--fontSize-14);
+      > div {
+        flex: 1;
+        text-align: center;
+      }
     }
   }
 }
