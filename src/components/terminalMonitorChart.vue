@@ -120,7 +120,6 @@ export default {
     chartInit(key) {
       api.getErrorsReportJscT(key).then((res) => {
         res.data.termErrors.forEach((el, index) => {
-          console.log(index)
           if (index < 3) {
             this.headers.push(exceptionTypes[el.errorType])
             this.num.push(el.count)
@@ -150,7 +149,7 @@ export default {
               fontSize: 12
             }
           },
-          color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0'],
+          color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0', '#feb901'],
           series: [
             {
               name: '',

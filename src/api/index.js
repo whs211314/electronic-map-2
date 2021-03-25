@@ -3,6 +3,31 @@ import http from '../http'
 import mapName2Code from '@/assets/js/map'
 // import { mock1, mock2 } from './mock'
 
+// 风险预警汇总
+export function totalRiskSumDay() {
+  return http.get('/february/ecp-jxt-riskwarn/totalRiskSumDay', {
+    params: { organCode: '430000000', orgLevel: 1, pageSize: 1 }
+  })
+}
+
+// 风险视图未处理地图
+export function organJscDay(status) {
+  const endDateStr = dayjs().format('YYYY-MM-DD hh:mm:ss')
+  const beginDateStr = dayjs().format('YYYY-01-01 00:00:00')
+  return http.get('/february/ecp-jxt-riskwarn/organJscDay', {
+    params: { handleStatus: status, organCode: '430000000', pageNo: 1, pageSize: 30, beginDateStr, endDateStr }
+  })
+}
+
+// 风险视图详情
+export function organJscTDay(status) {
+  const endDateStr = dayjs().format('YYYY-MM-DD hh:mm:ss')
+  const beginDateStr = dayjs().format('YYYY-01-01 00:00:00')
+  return http.get('/february/ecp-jxt-riskwarn/organJscTDay', {
+    params: { handleStatus: status, organCode: '430000000', pageNo: 1, pageSize: 30, beginDateStr, endDateStr }
+  })
+}
+
 // 异常终端视图汇总
 export function getTotalErrorsReport() {
   return http.get('/february/backend/ecp-jxt-term-errors/getTotalErrorsReportDay', {

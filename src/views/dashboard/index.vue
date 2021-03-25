@@ -286,7 +286,7 @@ export default {
         // { id: 0, type: '服务点视图' },
         { id: 2, type: '交易视图' },
         { id: 1, type: '终端监测' },
-        { id: 3, type: '风险预警' },
+        { id: 3, type: '风险视图' },
         { id: 4, type: '巡检' }
       ],
       monitorDealList: []

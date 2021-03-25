@@ -21,8 +21,7 @@ export default {
   },
   watch: {
     riskStatus: {
-      handler (val) {
-        console.log('------val', val)
+      handler () {
         this.mapChart()
       },
       immediate: true
@@ -34,7 +33,7 @@ export default {
         this.chinaJson = mapJson
         this.currJson = mapJson
         this.myChart = echarts.init(document.getElementById('mapChart'))
-        api.getErrorsReportJsc(this.riskStatus).then(res => {
+        api.organJscDay(this.riskStatus).then(res => {
           this.regionNetMap = res.data
           this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         })
@@ -48,7 +47,6 @@ export default {
      */
     registerAndsetOption (myChart, name, mapJson) {
       echarts.registerMap(name, mapJson)
-      console.log('-----regionNetMap', this.regionNetMap)
       myChart.setOption({
         geo: {
           show: true,
@@ -114,7 +112,6 @@ export default {
           value: mapJson.features[i].properties.cp
         })
       }
-      console.log('------mapData', mapData)
       return mapData
     }
   }

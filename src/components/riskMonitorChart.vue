@@ -45,30 +45,6 @@
 <script>
 import echarts from 'echarts'
 import * as api from '@/api'
-// 暂定前端维护
-const exceptionTypes = {
-  E01: '缺纸异常',
-  E02: '通讯异常',
-  E03: '打印模块',
-  E04: '非接模块',
-  E05: '电池模块',
-  E99: '其他'
-}
-// const mockData = {
-//   code: 0,
-//   msg: null,
-//   count: 0,
-//   data: {
-//     allCtInfo: 74047,
-//     termErrors: [
-//       { errorType: 'E01', count: 863, rate: 1.17 },
-//       { errorType: 'E02', count: 97, rate: 0.13 },
-//       { errorType: 'E03', count: 118, rate: 0.16 },
-//       { errorType: 'E04', count: 129, rate: 0.16999999999999998 },
-//       { errorType: 'E05', count: 4492, rate: 6.069999999999999 }
-//     ]
-//   }
-// }
 
 export default {
   props: ['riskStatus'],
@@ -103,33 +79,33 @@ export default {
       this.proportion = 0
     },
     handleTab(tab) {
+      if (tab.key !== 0) return
       this.$emit('update:riskStatus', tab.key)
       this.reset()
       this.chartInit(tab.key)
     },
     getTabSum() {
-      api.getTotalErrorsReport().then((res) => {
+      api.totalRiskSumDay().then((res) => {
         const data = res.data || {}
         this.tabs = [
-          { key: 0, label: '未处理', count: data.weiCountTotal || 0 },
-          { key: 1, label: '已处理', count: data.yiCountNewTotal || 0 },
-          { key: 2, label: '总量', count: data.countTotal || 0 }
+          { key: 0, label: '未处理', count: data.unProcessedSize || 0 },
+          { key: 1, label: '已处理', count: data.processedSize || 0 },
+          { key: 2, label: '总量', count: data.cumulative || 0 }
         ]
       })
     },
     chartInit(key) {
-      api.getErrorsReportJscT(key).then((res) => {
-        res.data.termErrors.forEach((el, index) => {
-          console.log(index)
+      api.organJscTDay(key).then((res) => {
+        res.data.forEach((el, index) => {
           if (index < 3) {
-            this.headers.push(exceptionTypes[el.errorType])
+            this.headers.push(el.errorType)
             this.num.push(el.count)
           }
           if (index > 2) {
-            this.headers1.push(exceptionTypes[el.errorType] ? exceptionTypes[el.errorType] : '其他')
+            this.headers1.push(el.errorType)
             this.num1.push(el.count ? el.count : 0)
           }
-          this.echartsList.push({ value: el.count, name: exceptionTypes[el.errorType] })
+          this.echartsList.push({ value: el.count, name: el.errorType })
           this.abnormalAll = this.abnormalAll + el.count
         })
         this.proportion = (this.abnormalAll / res.data.allCtInfo).toFixed(2) * 100
@@ -150,7 +126,7 @@ export default {
               fontSize: 12
             }
           },
-          color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0'],
+          color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0', '#feb901'],
           series: [
             {
               name: '',

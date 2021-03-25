@@ -47,7 +47,6 @@ export default {
      */
     registerAndsetOption (myChart, name, mapJson) {
       echarts.registerMap(name, mapJson)
-      console.log('-----regionNetMap', this.regionNetMap)
       myChart.setOption({
         geo: {
           show: true,
@@ -113,7 +112,6 @@ export default {
           value: mapJson.features[i].properties.cp
         })
       }
-      console.log('------mapData', mapData)
       return mapData
     }
   }
