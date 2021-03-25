@@ -47,12 +47,12 @@ import echarts from 'echarts'
 import * as api from '@/api'
 // 暂定前端维护
 const exceptionTypes = {
-  'E01': '缺纸异常',
-  'E02': '通讯异常',
-  'E03': '打印模块',
-  'E04': '非接模块',
-  'E05': '电池模块',
-  'E99': '其他'
+  E01: '缺纸异常',
+  E02: '通讯异常',
+  E03: '打印模块',
+  E04: '非接模块',
+  E05: '电池模块',
+  E99: '其他'
 }
 // const mockData = {
 //   code: 0,
@@ -72,7 +72,7 @@ const exceptionTypes = {
 
 export default {
   props: ['riskStatus'],
-  data () {
+  data() {
     return {
       tabs: [
         { key: 0, label: '未处理', count: 0 },
@@ -88,12 +88,12 @@ export default {
       proportion: 0 // 占比
     }
   },
-  mounted () {
+  mounted() {
     this.getTabSum()
-    this.chartInit()
+    this.chartInit(this.riskStatus)
   },
   methods: {
-    reset () {
+    reset() {
       this.headers = []
       this.num = []
       this.headers1 = []
@@ -102,23 +102,23 @@ export default {
       this.abnormalAll = 0 // 异常总数
       this.proportion = 0
     },
-    handleTab (tab) {
+    handleTab(tab) {
       this.$emit('update:riskStatus', tab.key)
       this.reset()
-      this.chartInit()
+      this.chartInit(tab.key)
     },
-    getTabSum () {
-      api.getTotalErrorsReport().then(res => {
+    getTabSum() {
+      api.getTotalErrorsReport().then((res) => {
         const data = res.data || {}
         this.tabs = [
-          { key: 1, label: '未处理', count: data.weiCountTotal || 0 },
-          { key: 2, label: '已处理', count: data.yiCountNewTotal || 0 },
-          { key: 3, label: '总量', count: data.countTotal || 0 }
+          { key: 0, label: '未处理', count: data.weiCountTotal || 0 },
+          { key: 1, label: '已处理', count: data.yiCountNewTotal || 0 },
+          { key: 2, label: '总量', count: data.countTotal || 0 }
         ]
       })
     },
-    chartInit () {
-      api.getErrorsReportJscT(this.riskStatus).then(res => {
+    chartInit(key) {
+      api.getErrorsReportJscT(key).then((res) => {
         res.data.termErrors.forEach((el, index) => {
           console.log(index)
           if (index < 3) {
@@ -129,32 +129,22 @@ export default {
             this.headers1.push(exceptionTypes[el.errorType] ? exceptionTypes[el.errorType] : '其他')
             this.num1.push(el.count ? el.count : 0)
           }
-          this.echartsList.push(el.count)
+          this.echartsList.push({ value: el.count, name: exceptionTypes[el.errorType] })
           this.abnormalAll = this.abnormalAll + el.count
         })
-        this.proportion = ((this.abnormalAll / res.data.allCtInfo).toFixed(2)) * 100
+        this.proportion = (this.abnormalAll / res.data.allCtInfo).toFixed(2) * 100
         let myChart = echarts.init(document.getElementById('line-chart'))
         let option = {
           tooltip: {
             trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)'
-          },
-          title: {
-            text: this.abnormalAll,
-            left: '41%',
-            top: '50%',
-            textStyle: {
-              color: '#fff',
-              fontSize: 12,
-              align: 'center'
-            }
+            formatter: '{b} : {c} ({d}%)'
           },
           graphic: {
             type: 'text',
-            left: '40.5%',
-            top: '45%',
+            left: '45%',
+            top: '46%',
             style: {
-              text: '总数量',
+              text: `总数量\n${this.abnormalAll}`,
               textAlign: 'center',
               fill: '#fff',
               fontSize: 12
@@ -169,21 +159,10 @@ export default {
               // center: ['30%', '50%'],
               label: {
                 normal: {
-                  formatter: '{a|{b}}\n{hr|}\n{per|{d}%}',
+                  formatter: '{per|{d}%}',
                   show: true,
                   padding: [0, -25],
                   rich: {
-                    a: {
-                      color: '#ffffff',
-                      fontSize: 10,
-                      lineHeight: 20,
-                      align: 'center'
-                    },
-                    hr: {
-                      width: '100%',
-                      height: 0,
-                      alien: 'center'
-                    },
                     per: {
                       color: '#ffffff',
                       align: 'center',
@@ -204,10 +183,6 @@ export default {
                 }
               },
               data: this.echartsList,
-              // this.echartsList.map(item => Object.assign(item, {
-              //   value: item.classNum,
-              //   name: item.className
-              // })),
               itemStyle: {
                 emphasis: {
                   shadowBlur: 10,

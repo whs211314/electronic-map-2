@@ -238,7 +238,7 @@ export default {
   },
   data () {
     return {
-      riskStatus: 0,
+      riskStatus: 1,
       currentTradeName: '',
       lng: 112.66422891165496,
       lat: 26.880964432436038,
