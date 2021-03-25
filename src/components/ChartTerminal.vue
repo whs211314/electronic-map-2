@@ -8,7 +8,7 @@ import * as api from '@/api'
 const fontSize = getComputedStyle(document.body).getPropertyValue('--fontSize-map')
 
 export default {
-  props: ['status'], // 0=未处理，1=已处理，2=全部
+  props: ['terminalStatus'], // 0=未处理，1=已处理，2=全部
   data () {
     return {
       chinaJson: null,
@@ -20,7 +20,7 @@ export default {
     }
   },
   watch: {
-    status: {
+    terminalStatus: {
       handler () {
         this.mapChart()
       },
@@ -33,7 +33,7 @@ export default {
         this.chinaJson = mapJson
         this.currJson = mapJson
         this.myChart = echarts.init(document.getElementById('mapChart'))
-        api.getErrorsReportJsc(this.status).then(res => {
+        api.getErrorsReportJsc(this.terminalStatus).then(res => {
           this.regionNetMap = res.data
           this.registerAndsetOption(this.myChart, '湖南省', mapJson)
         })

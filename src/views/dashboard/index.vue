@@ -108,7 +108,8 @@
         :is="chartType"
         :topData="topItem"
         :currentTradeName="currentTradeName"
-        :status="riskStatus"
+        :riskStatus="riskStatus"
+        :terminalStatus="terminalStatus"
         @popup="handlePopup"
         @goDown="handleGoDown"
         @showDeploy="chartType = 'ChartDeploy'"
@@ -165,7 +166,7 @@
     </div>
     <!-- 异常终端视图 -->
     <div v-if="monitorIndex === 1" class="monitor-middle">
-      <terminalMonitorChart :riskStatus.sync="riskStatus" />
+      <terminalMonitorChart :riskStatus.sync="terminalStatus" />
     </div>
     <!-- 交易视图 -->
     <div v-if="monitorIndex === 2" class="monitor-middle">
@@ -173,7 +174,7 @@
     </div>
     <!-- 风险预警 -->
     <div v-if="monitorIndex === 3" class="monitor-middle">
-      <riskMonitorChart />
+      <riskMonitorChart :riskStatus.sync="riskStatus"  />
     </div>
     <!-- 巡检 -->
     <div v-if="monitorIndex === 4" class="monitor-middle">
@@ -204,7 +205,8 @@ import patrolMonitorChart from '@/components/patrolMonitorChart'
 import ChartDeploy from '@/components/ChartDeploy'
 import ChartDeal from '@/components/ChartDeal'
 import ChartTop from '@/components/ChartTop'
-import ChartMonitor from '@/components/ChartMonitor'
+import ChartTerminal from '@/components/ChartTerminal'
+import ChartRisk from '@/components/ChartRisk'
 import MPopup from '@/components/MPopup'
 import BDMap from '@/components/BDMap'
 import MDialog from '@/components/Dialog'
@@ -231,14 +233,16 @@ export default {
     ChartDeploy,
     ChartDeal,
     ChartTop,
-    ChartMonitor,
+    ChartTerminal,
+    ChartRisk,
     BDMap,
     MPopup,
     MDialog
   },
   data () {
     return {
-      riskStatus: 1,
+      terminalStatus: 0, // 终端
+      riskStatus: 0, // 风险
       currentTradeName: '',
       lng: 112.66422891165496,
       lat: 26.880964432436038,
@@ -323,7 +327,10 @@ export default {
     monitorClick (index) {
       this.monitorIndex = index
       if (index === 1) {
-        this.chartType = 'ChartMonitor'
+        this.chartType = 'ChartTerminal'
+        this.terminalStatus = 0
+      } else if (index === 3) {
+        this.chartType = 'ChartRisk'
         this.riskStatus = 0
       } else {
         this.chartType = 'ChartDeploy'
