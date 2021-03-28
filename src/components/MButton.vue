@@ -87,6 +87,7 @@ export default {
     transform-origin: center;
     .txt {
       font-size: var(--fontSize-20);
+      max-height: calc(var(--fontSize-20) * 1.5);
     }
     .prompt-dialog {
       padding: var(--fontSize-16);
@@ -96,6 +97,18 @@ export default {
   .txt {
     word-break: keep-all;
     font-size: var(--fontSize-12);
+    min-width: 50%;
+    max-height: calc(var(--fontSize-12) * 1.5);
+    overflow: hidden;
+    text-align: justify;
+    // text-align-last: justify;
+    &:after {
+      content:'';
+      width: 100%;
+      display: inline-block;
+      overflow: hidden;
+      height: 0;
+    }
   }
   .prompt-dialog {
     position: absolute;
@@ -145,6 +158,12 @@ export default {
 }
 .btn-7 {
   background-image: url(../assets/images/btn-7.png);
+  > .txt {
+    font-size: var(--fontSize-12);
+  }
+}
+.btn-8 {
+  background-image: url(../assets/images/goldenFrame.png);
   > .txt {
     font-size: var(--fontSize-12);
   }

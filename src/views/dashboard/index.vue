@@ -10,7 +10,7 @@
       <div class="items-show">
         <div class="item" v-for="item in services[0].btmapList" :key="item.id">
           <MButton
-            :type="item.isGroup ? 7 : 1"
+            :type="item.isGroup ? 7 : 8"
             :txt="item.txt"
             :hasDialog="Boolean(item.dialogTxt)"
             position="top"
@@ -28,7 +28,7 @@
       <div class="items-show" style="height: 70%">
         <div class="item" v-for="item in services[1].btmapList" :key="item.id">
           <MButton
-            :type="1"
+            :type="8"
             :txt="item.txt"
             :hasDialog="true"
             position="top"
@@ -46,7 +46,7 @@
       <div class="items-show">
         <div class="item" v-for="item in services[2].btmapList" :key="item.id">
           <MButton
-            :type="1"
+            :type="8"
             :txt="item.txt"
             :hasDialog="true"
             position="bottom"
@@ -56,7 +56,7 @@
       </div>
     </div>
     <!-- 扶贫能力展示 -->
-    <div class="show-right" v-if="services.length">
+    <!-- <div class="show-right" v-if="services.length">
       <div class="title-show flex-center">
         <div class="txt">{{ services[3].btType }}</div>
       </div>
@@ -64,7 +64,7 @@
       <div class="items-show">
         <div class="item" v-for="item in services[3].btmapList" :key="item.id">
           <MButton
-            type="1"
+            type="8"
             :txt="item.txt"
             :hasDialog="true"
             position="bottom"
@@ -74,6 +74,9 @@
         </div>
         <div class="item" v-for="(item, index) in 6 - services[3].btmapList.length" :key="index" />
       </div>
+    </div> -->
+    <div class="pie-bottom">
+      <PieBottom :pieList="pieList" :tier="tier" />
     </div>
     <!-- 饼图部分 -->
     <div class="pie">
@@ -193,6 +196,7 @@ import MButton from '@/components/MButton'
 import TeamView from '@/components/TeamView'
 import MonitorDeal from '@/components/MonitorDeal'
 import Pie from '@/components/Pie'
+import PieBottom from '@/components/PieBottom'
 import Livelihood from '@/components/Livelihood'
 import DealInfo from '@/components/DealInfo'
 import merchantsPortrait from '@/components/merchantsPortrait'
@@ -221,6 +225,7 @@ export default {
     TeamView,
     MonitorDeal,
     Pie,
+    PieBottom,
     Livelihood,
     DealInfo,
     merchantsPortrait,

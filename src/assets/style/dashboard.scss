@@ -12,7 +12,7 @@
   color: $wihte;
   overflow: hidden;
   .dashboard-bg {
-    @include bgImage('../../assets/images/dashboard-bg-large.png');
+    @include bgImage('../../assets/images/dashboard-bg-large1.png');
     z-index: -2;
   }
   // 展示区域 START
@@ -60,7 +60,7 @@
       height: 4%;
     }
     .item {
-      padding-top: calc(32% / 2.1);
+      padding-top: calc(32% / 2.7);
       font-size: var(--fontSize-14);
     }
   }
@@ -108,6 +108,10 @@
   }
   // 饼图 END
 
+  .pie-bottom {
+    @include position(788, 2536, 197, 838);
+  }
+
   // 民生 START
   .livelihood {
     @include position(385, 2500, 775, 818);
@@ -116,7 +120,7 @@
 
   // 交易信息区 START
   .summary {
-    @include position(450, 2480, 430, 895);
+    @include position(450, 2480, 450, 895);
   }
   // 交易信息区 NED
 
@@ -264,7 +268,8 @@
     .show-top,
     .show-middle,
     .show-bottom,
-    .show-right {
+    .show-right,
+    .pie-bottom {
       display: none;
     }
     .pie {

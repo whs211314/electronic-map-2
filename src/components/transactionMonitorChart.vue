@@ -24,10 +24,8 @@
     <!-- 营销活动 -->
     <div v-show="isActivity" class="chart-wrapper">
       <div id="line-activity"></div>
-      <div class="title-wrap">
-        <div class="left">笔数</div>
-        <div class="left">金额</div>
-      </div>
+      <div class="title-count">笔数(万笔)</div>
+      <div class="title-amount">金额(万元)</div>
     </div>
   </div>
 </template>
@@ -399,8 +397,8 @@ export default {
         series: [
           {
             type: 'pie',
-            radius: ['45%', '60%'],
-            center: ['25%', '40%'],
+            radius: ['35%', '60%'],
+            center: ['25%', '50%'],
             data: this.activityList.map((e, i) => ({
               name: e,
               value: this.activityStrokeCount[i]
@@ -428,8 +426,8 @@ export default {
           },
           {
             type: 'pie',
-            radius: ['45%', '60%'],
-            center: ['75%', '40%'],
+            radius: ['35%', '60%'],
+            center: ['75%', '50%'],
             data: this.activityList.map((e, i) => ({
               name: e,
               value: this.activityNum[i]
@@ -484,17 +482,19 @@ export default {
     #line-activity {
       height: 100%;
     }
-    .title-wrap {
+    .title-count {
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 7%;
-      display: flex;
-      font-size: var(--fontSize-14);
-      > div {
-        flex: 1;
-        text-align: center;
-      }
+      left: 25%;
+      top: 50%;
+      font-size: var(--fontSize-12);
+      transform: translate3d(-50%, -50%, 0);
+    }
+    .title-amount {
+      position: absolute;
+      left: 75%;
+      top: 50%;
+      font-size: var(--fontSize-12);
+      transform: translate3d(-50%, -50%, 0);
     }
   }
 }
