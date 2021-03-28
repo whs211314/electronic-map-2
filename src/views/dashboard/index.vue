@@ -76,16 +76,16 @@
       </div>
     </div> -->
     <div class="pie-bottom">
-      <PieBottom :pieList="pieList" :tier="tier" />
+      <PieBottom />
     </div>
     <!-- 饼图部分 -->
     <div class="pie">
       <Pie :pieList="pieList" :tier="tier" />
     </div>
     <!-- 民生占比 -->
-    <div class="livelihood">
+    <!-- <div class="livelihood">
       <Livelihood />
-    </div>
+    </div> -->
     <!-- 交易信息区 -->
     <div class="summary">
       <DealInfo v-if="!internalNetwork" :sum="sum" />
