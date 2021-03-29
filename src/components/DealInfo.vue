@@ -71,7 +71,7 @@ export default {
       } else if (len <= 12) {
         return `${_numFixed(num, 8)} 亿`
       } else {
-        return `${_numFixed(num, 12)} 亿亿`
+        return `${_numFixed(num, 12)} 兆`
       }
     }
   }

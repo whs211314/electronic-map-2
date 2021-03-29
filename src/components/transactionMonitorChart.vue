@@ -24,8 +24,8 @@
     <!-- 营销活动 -->
     <div v-show="isActivity" class="chart-wrapper">
       <div id="line-activity"></div>
-      <div class="title-count">笔数(万笔)</div>
-      <div class="title-amount">金额(万元)</div>
+      <div class="title-count">笔数(笔)</div>
+      <div class="title-amount">金额(元)</div>
     </div>
   </div>
 </template>
@@ -33,6 +33,10 @@
 <script>
 import * as api from '@/api'
 import echarts from 'echarts'
+
+function _numFixed(num, dig = 0) {
+  return Number(num / Math.pow(10, dig)).toFixed(2)
+}
 
 export default {
   data() {
@@ -393,32 +397,36 @@ export default {
     activity() {
       let myChart = echarts.init(document.getElementById('line-activity'))
       let option = {
-        color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0', '#feb901'],
+        color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0', 'orange'],
+        legend: {
+          top: '5%',
+          left: 'center',
+          textStyle: {
+            color: '#fff'
+          }
+        },
         series: [
           {
             type: 'pie',
             radius: ['35%', '60%'],
-            center: ['25%', '50%'],
+            center: ['25%', '55%'],
             data: this.activityList.map((e, i) => ({
               name: e,
               value: this.activityStrokeCount[i]
             })),
             hoverAnimation: false,
+            avoidLabelOverlap: true,
             label: {
               normal: {
                 formatter: (params) => {
-                  return '{name|' + params.name + '}{value|' + params.value + '}'
+                  return '{value|' + this.amount(params.value) + '}'
                 },
                 rich: {
-                  name: {
-                    fontSize: 14,
-                    padding: [0, 10, 0, 4],
-                    color: '#fff'
-                  },
                   value: {
                     fontSize: 16,
                     fontWeight: 'bold',
-                    color: '#fff'
+                    color: '#fff',
+                    textAlign: 'center'
                   }
                 }
               }
@@ -427,23 +435,19 @@ export default {
           {
             type: 'pie',
             radius: ['35%', '60%'],
-            center: ['75%', '50%'],
+            center: ['75%', '55%'],
             data: this.activityList.map((e, i) => ({
               name: e,
               value: this.activityNum[i]
             })),
             hoverAnimation: false,
+            avoidLabelOverlap: true,
             label: {
               normal: {
                 formatter: (params) => {
-                  return '{name|' + params.name + '}{value|' + params.value + '}'
+                  return '{value|' + this.amount(params.value) + '}'
                 },
                 rich: {
-                  name: {
-                    fontSize: 14,
-                    padding: [0, 10, 0, 4],
-                    color: '#fff'
-                  },
                   value: {
                     fontSize: 16,
                     fontWeight: 'bold',
@@ -456,6 +460,22 @@ export default {
         ]
       }
       myChart.setOption(option, true)
+    },
+    amount(num) {
+      if (!num) return '-'
+      let str = String(num)
+      // 去除小数
+      str = str.replace(/\.\d+/, '')
+      const len = str.length
+      if (len <= 5) {
+        return num
+      } else if (len <= 9) {
+        return `${_numFixed(num, 4)} 万`
+      } else if (len <= 12) {
+        return `${_numFixed(num, 8)} 亿`
+      } else {
+        return `${_numFixed(num, 12)} 兆`
+      }
     }
   },
   mounted() {
@@ -485,14 +505,14 @@ export default {
     .title-count {
       position: absolute;
       left: 25%;
-      top: 50%;
+      top: 55%;
       font-size: var(--fontSize-12);
       transform: translate3d(-50%, -50%, 0);
     }
     .title-amount {
       position: absolute;
       left: 75%;
-      top: 50%;
+      top: 55%;
       font-size: var(--fontSize-12);
       transform: translate3d(-50%, -50%, 0);
     }
