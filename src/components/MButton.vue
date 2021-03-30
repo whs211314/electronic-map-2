@@ -76,7 +76,7 @@ export default {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  font-weight: bold;
+  // font-weight: bold;
   cursor: pointer;
   &.small {
     top: -50%;
