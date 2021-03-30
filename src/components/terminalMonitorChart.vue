@@ -136,7 +136,7 @@ export default {
         let option = {
           tooltip: {
             trigger: 'item',
-            formatter: '{b} : {c} ({d}%)'
+            formatter: '{b}: {c}'
           },
           graphic: {
             type: 'text',
@@ -146,10 +146,10 @@ export default {
               text: `总数量\n${this.abnormalAll}`,
               textAlign: 'center',
               fill: '#fff',
-              fontSize: 12
+              fontSize: 16
             }
           },
-          color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0', '#feb901'],
+          color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0', 'orange'],
           series: [
             {
               name: '',
@@ -165,14 +165,14 @@ export default {
                     per: {
                       color: '#ffffff',
                       align: 'center',
-                      fontSize: 12
+                      fontSize: 16
                     }
                   }
                 },
                 emphasis: {
                   show: true,
                   textStyle: {
-                    fontSize: '12'
+                    fontSize: 16
                   }
                 }
               },

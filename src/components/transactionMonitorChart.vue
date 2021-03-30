@@ -398,6 +398,10 @@ export default {
       let myChart = echarts.init(document.getElementById('line-activity'))
       let option = {
         color: ['#f6da22', '#bbe2e8', '#6cacde', '#00FFF0', 'orange'],
+        tooltip: {
+          trigger: 'item',
+          formatter: (e) => `${e.data.name}: ${this.amount(e.data.value)}`
+        },
         legend: {
           top: '5%',
           left: 'center',
@@ -414,21 +418,29 @@ export default {
               name: e,
               value: this.activityStrokeCount[i]
             })),
-            hoverAnimation: false,
-            avoidLabelOverlap: true,
             label: {
               normal: {
-                formatter: (params) => {
-                  return '{value|' + this.amount(params.value) + '}'
-                },
+                formatter: '{per|{d}%}',
+                show: true,
+                padding: [0, -25],
                 rich: {
-                  value: {
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                    color: '#fff',
-                    textAlign: 'center'
+                  per: {
+                    color: '#ffffff',
+                    align: 'center',
+                    fontSize: 16
                   }
                 }
+              },
+              emphasis: {
+                show: true,
+                textStyle: {
+                  fontSize: 16
+                }
+              }
+            },
+            labelLine: {
+              normal: {
+                show: false
               }
             }
           },
@@ -440,20 +452,29 @@ export default {
               name: e,
               value: this.activityNum[i]
             })),
-            hoverAnimation: false,
-            avoidLabelOverlap: true,
             label: {
               normal: {
-                formatter: (params) => {
-                  return '{value|' + this.amount(params.value) + '}'
-                },
+                formatter: '{per|{d}%}',
+                show: true,
+                padding: [0, -25],
                 rich: {
-                  value: {
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                    color: '#fff'
+                  per: {
+                    color: '#ffffff',
+                    align: 'center',
+                    fontSize: 16
                   }
                 }
+              },
+              emphasis: {
+                show: true,
+                textStyle: {
+                  fontSize: 16
+                }
+              }
+            },
+            labelLine: {
+              normal: {
+                show: false
               }
             }
           }
