@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     mapChart () {
+      if (this.myChart) return
       import(`../../public/map/${this.countyID}.json`).then(mapJson => {
         const townJson = {
           type: 'FeatureCollection',

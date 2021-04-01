@@ -355,6 +355,7 @@ export default {
       this.chartType = type
     },
     async handlePopup (popup) {
+      if (this.dialogVisible) return
       this.dialogVisible = false
       // console.log('-----popup', popup)
       const mchId = popup.data.jpmMchId
