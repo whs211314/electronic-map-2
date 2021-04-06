@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     getImg (src) {
-      return src ? `http://54.0.94.84/jxt_image/${src}` : require('../assets/images/no-img.png')
+      return src ? `http://54.0.94.84:8188/jxt_image/${src}` : require('../assets/images/no-img.png')
     },
     // 点击新增弹窗里面确认按钮处理的数据
     addCheckedCitiesChange () {

@@ -383,7 +383,7 @@ export default {
         // this.home_url = require('../../assets/jingli/' + arr[Math.floor(Math.random() * arr.length)] + '.png')
       }
       this.currJmpInfo.essential = data // 基础信息
-      this.home_url1 = 'http://54.0.94.84/jxt_image/' + data.jpmDoorHeadImagePath + ''
+      this.home_url1 = 'http://54.0.94.84:8188/jxt_image/' + data.jpmDoorHeadImagePath + ''
       switch (code) {
         case 1:
           this.basicInfo = true // 基本信息
@@ -403,7 +403,7 @@ export default {
             if (!data.jpmDoorHeadImagePath) {
               // this.currJmpInfo.essential = res.data[0] // 基础信息
               this.currJmpInfo = Object.assign({}, this.currJmpInfo, { essential: res.data[0] })
-              this.home_url1 = 'http://54.0.94.84/jxt_image/' + res.data[0].jpmDoorHeadImagePath + ''
+              this.home_url1 = 'http://54.0.94.84:8188/jxt_image/' + res.data[0].jpmDoorHeadImagePath + ''
             }
           })
           break
@@ -415,7 +415,7 @@ export default {
           api.getManagerInfo({ 'mchId': data.jpmMchId }).then(res => {
             // this.currJmpInfo.client = res.data[0]
             this.currJmpInfo = Object.assign({}, this.currJmpInfo, { client: res.data[0] })
-            this.home_url = 'http://54.0.94.84/kehujingli/' + res.data[0].managerCode + '.png'
+            this.home_url = 'http://54.0.94.84:8188/kehujingli/' + res.data[0].managerCode + '.png'
             this.client = true // 基本信息 home_url
           })
           // if (Number(this.numberId) === data.id) {
