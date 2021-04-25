@@ -207,8 +207,7 @@ import transactionMonitorChart from '@/components/transactionMonitorChart'
 import riskMonitorChart from '@/components/riskMonitorChart'
 import patrolMonitorChart from '@/components/patrolMonitorChart'
 import ChartDeploy from '@/components/ChartDeploy'
-import ChartDealTmp from '@/components/ChartDeal'
-import ChartDeal from '@/components/ChartDealMock'
+import ChartDeal from '@/components/ChartDeal'
 import ChartTop from '@/components/ChartTop'
 import ChartTerminal from '@/components/ChartTerminal'
 import ChartRisk from '@/components/ChartRisk'
@@ -238,7 +237,6 @@ export default {
     patrolMonitorChart,
     ChartDeploy,
     ChartDeal,
-    ChartDealTmp,
     ChartTop,
     ChartTerminal,
     ChartRisk,
