@@ -158,7 +158,7 @@ export default {
               // center: ['30%', '50%'],
               label: {
                 normal: {
-                  formatter: '{per|{d}%}',
+                  formatter: (o) => o.percent !== 0 ? `{per|${o.percent}%}` : '',
                   show: true,
                   padding: [0, -25],
                   rich: {

@@ -15,7 +15,7 @@ export default {
       type: Array
     }
   },
-  data () {
+  data() {
     return {
       pieList: {
         taCountryYearCount: '',
@@ -29,12 +29,12 @@ export default {
     }
   },
   watch: {
-    tier (val) {
+    tier(val) {
       this.chartInit(val)
     }
   },
   methods: {
-    chartInit (e) {
+    chartInit(e) {
       if (e && e.length === 1 && e[0].level === 2) {
         this.city.cityName = e[0].allName
         this.city.areaName = ''
@@ -46,9 +46,13 @@ export default {
         this.city.cityName = '湖南省'
         this.city.areaName = ''
       }
-      api.getPieData(this.city).then(res => {
-        this.pieList.taCountryYearCount = Math.round((res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100)
-        this.pieList.taCountryCount = Math.round((res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100)
+      api.getPieData(this.city).then((res) => {
+        this.pieList.taCountryYearCount = Math.round(
+          (res.data[0].taProvinceYearCount / res.data[0].taCountryYearCount).toFixed(2) * 100
+        )
+        this.pieList.taCountryCount = Math.round(
+          (res.data[0].taProvinceCount / res.data[0].taCountryCount).toFixed(2) * 100
+        )
         let myChart1 = echarts.init(document.getElementById('line01-chart'))
         let myChart2 = echarts.init(document.getElementById('line02-chart'))
         let option1 = {
@@ -73,22 +77,29 @@ export default {
               radius: ['55%', '15%'],
               center: ['50%', '49%'],
               hoverAnimation: false,
-              label: {
-                normal: {
-                  show: false
-                },
-                emphasis: {
-                  show: true,
-                  position: 'center'
-                }
-              },
               labelLine: {
                 normal: {
                   show: false
                 }
               },
               data: [
-                { value: this.pieList.taCountryYearCount }, //
+                {
+                  value: this.pieList.taCountryYearCount,
+                  label: {
+                    normal: {
+                      show: false,
+                      formatter: '{c}',
+                      position: 'inside',
+                      fontSize: 18,
+                      fontWeight: 'bold',
+                      color: '#fff'
+                    },
+                    emphasis: {
+                      show: true,
+                      position: 'center'
+                    }
+                  }
+                }, //
                 { value: 100 - this.pieList.taCountryYearCount } //
               ],
               itemStyle: {
@@ -98,11 +109,9 @@ export default {
                   shadowColor: 'rgba(0, 0, 0, 0.5)'
                 },
                 normal: {
-                  color: function (params) {
-                  // 自定义颜色
-                    var colorList = [
-                      '#FFA500', '#132C33'
-                    ]
+                  color: function(params) {
+                    // 自定义颜色
+                    var colorList = ['#FFA500', '#132C33']
                     return colorList[params.dataIndex]
                   }
                 }
@@ -133,22 +142,29 @@ export default {
               radius: ['55%', '15%'],
               center: ['50%', '49%'],
               hoverAnimation: false,
-              label: {
-                normal: {
-                  show: false
-                },
-                emphasis: {
-                  show: true,
-                  position: 'center'
-                }
-              },
               labelLine: {
                 normal: {
                   show: false
                 }
               },
               data: [
-                { value: this.pieList.taCountryCount },
+                {
+                  value: this.pieList.taCountryCount,
+                  label: {
+                    normal: {
+                      show: false,
+                      formatter: '{c}',
+                      position: 'inside',
+                      fontSize: 18,
+                      fontWeight: 'bold',
+                      color: '#fff'
+                    },
+                    emphasis: {
+                      show: true,
+                      position: 'center'
+                    }
+                  }
+                },
                 { value: 100 - this.pieList.taCountryCount }
               ],
               itemStyle: {
@@ -158,11 +174,9 @@ export default {
                   shadowColor: 'rgba(0, 0, 0, 0.5)'
                 },
                 normal: {
-                  color: function (params) {
-                  // 自定义颜色
-                    var colorList = [
-                      '#FFA500', '#132C33'
-                    ]
+                  color: function(params) {
+                    // 自定义颜色
+                    var colorList = ['#FFA500', '#132C33']
                     return colorList[params.dataIndex]
                   }
                 }
@@ -174,10 +188,10 @@ export default {
       })
     }
   },
-  created () {
+  created() {
     console.log(this.pieList)
   },
-  mounted () {
+  mounted() {
     this.chartInit()
   }
 }
@@ -188,21 +202,21 @@ export default {
 #line01-chart {
   background-image: url(../assets/images/piebg.png);
   background-repeat: no-repeat;
-  background-position:50%;
-  background-size: 50%;
+  background-position: center;
   height: 100%;
-  position: relative;
-  left: -23%;
-  top: -8%;
+  width: 50%;
+  position: absolute;
+  left: 1%;
+  top: -5%;
 }
 #line02-chart {
   background-image: url(../assets/images/piebg.png);
   background-repeat: no-repeat;
-  background-position:50%;
-  background-size: 50%;
+  background-position: center;
   height: 100%;
-  position: relative;
-  right: -27%;
-  bottom: 108%;
+  width: 50%;
+  position: absolute;
+  right: -1%;
+  top: -5%;
 }
 </style>

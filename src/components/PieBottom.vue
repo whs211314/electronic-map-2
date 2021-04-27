@@ -119,7 +119,12 @@ export default {
             hoverAnimation: false,
             label: {
               normal: {
-                show: false
+                show: false,
+                formatter: '{c}',
+                position: 'inside',
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: '#fff'
               },
               emphasis: {
                 show: true,
@@ -160,22 +165,21 @@ export default {
 #line01-chart-bot {
   background-image: url(../assets/images/piebg.png);
   background-repeat: no-repeat;
-  background-position: 50%;
-  background-size: 50%;
+  background-position: center;
   height: 100%;
-  position: relative;
-  left: -23%;
-  top: -8%;
-  z-index: 1;
+  width: 50%;
+  position: absolute;
+  left: 0;
+  top: -5%;
 }
 #line02-chart-bot {
   background-image: url(../assets/images/piebg.png);
   background-repeat: no-repeat;
-  background-position: 50%;
-  background-size: 50%;
+  background-position: center;
   height: 100%;
-  position: relative;
-  right: -27%;
-  bottom: 108%;
+  width: 50%;
+  position: absolute;
+  right: 0;
+  top: -5%;
 }
 </style>

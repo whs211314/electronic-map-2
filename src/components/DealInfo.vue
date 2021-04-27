@@ -24,23 +24,23 @@
     </div>
     <div class="right fr">
       <div class="item">
-        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="label"><div class="txt">本年新设</div></div>
         <div class="value">{{ sum.mchCountYear | amount }} 个</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="label"><div class="txt">本年新设</div></div>
         <div class="value orange">{{ sum.transcountYear | amount }}</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="label"><div class="txt">本年新设</div></div>
         <div class="value orange">{{ sum.transamountYear | amount }}</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="label"><div class="txt">本年新设</div></div>
         <div class="value orange">{{ sum.account_countYear | amount }}</div>
       </div>
       <div class="item">
-        <div class="label"><div class="txt">本年新增</div></div>
+        <div class="label"><div class="txt">本年新设</div></div>
         <div class="value orange">{{ sum.yearCountQykh | amount }}</div>
       </div>
     </div>
