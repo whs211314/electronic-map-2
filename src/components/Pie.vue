@@ -92,7 +92,7 @@ export default {
                       position: 'inside',
                       fontSize: 18,
                       fontWeight: 'bold',
-                      color: '#fff'
+                      color: '#00fff0'
                     },
                     emphasis: {
                       show: true,
@@ -157,7 +157,7 @@ export default {
                       position: 'inside',
                       fontSize: 18,
                       fontWeight: 'bold',
-                      color: '#fff'
+                      color: '#00fff0'
                     },
                     emphasis: {
                       show: true,
