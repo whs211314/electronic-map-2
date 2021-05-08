@@ -79,7 +79,7 @@ export default {
       this.proportion = 0
     },
     handleTab(tab) {
-      if (tab.key !== 0) return
+      // if (tab.key !== 0) return
       this.$emit('update:riskStatus', tab.key)
       this.reset()
       this.chartInit(tab.key)
