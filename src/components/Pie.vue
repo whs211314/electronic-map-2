@@ -95,7 +95,7 @@ export default {
                       color: '#00fff0'
                     },
                     emphasis: {
-                      show: true,
+                      show: false,
                       position: 'center'
                     }
                   }
@@ -160,7 +160,7 @@ export default {
                       color: '#00fff0'
                     },
                     emphasis: {
-                      show: true,
+                      show: false,
                       position: 'center'
                     }
                   }

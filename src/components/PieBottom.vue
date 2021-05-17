@@ -74,7 +74,7 @@ export default {
                     color: '#00FFF0'
                   },
                   emphasis: {
-                    show: true
+                    show: false
                   }
                 }
               },
@@ -127,7 +127,7 @@ export default {
                 color: '#00FFF0'
               },
               emphasis: {
-                show: true,
+                show: false,
                 position: 'center'
               }
             },
