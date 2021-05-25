@@ -1,6 +1,6 @@
 <template>
   <div class="livelihood-inner">
-    <div class="left">民生缴费笔数及占比</div>
+    <div class="left">民生缴费笔数占比</div>
     <div class="center">{{ livelihood.count }}笔</div>
     <div class="right">{{ livelihood.rate * 100 }}%</div>
   </div>

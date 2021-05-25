@@ -51,7 +51,7 @@
                 <div>{{ item.checkResult }}</div>
               </div>
               <!-- <div class="item flex-center"><div>{{item.checkTypeName}}</div></div> -->
-              <div class="item flex-center"><div>现场</div></div>
+              <div class="item flex-center"><div>{{active === 1 ? '现场': '远程'}}</div></div>
             </div>
           </div>
         </div>

@@ -46,7 +46,7 @@ export default {
       let myChart2 = echarts.init(document.getElementById('line02-chart-bot'))
       let option1 = {
         title: {
-          subtext: '民生缴费笔数及占比' + Math.round(this.livelihood.rate * 100) + '%',
+          subtext: '民生缴费笔数占比' + Math.round(this.livelihood.rate * 100) + '%',
           left: 'center',
           bottom: '0',
           subtextStyle: {
